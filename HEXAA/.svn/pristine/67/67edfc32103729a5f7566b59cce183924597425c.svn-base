@@ -1,0 +1,35 @@
+package com.lms.hexa.command;
+
+public class AttandanceNum {
+	
+	
+	private int totalNum = 1;
+	private int ynNum = 0;
+	private int ynnNum = 0;
+	
+	public int getTotalNum() {
+		return totalNum;
+	}
+	public void setTotalNum(int totalNum) {
+		if(totalNum<1) {
+			this.totalNum=1;
+		}else {
+			this.totalNum = totalNum;
+		}
+	}
+	public int getYnNum() {
+		return ynNum;
+	}
+	public int getYnnNum() {
+		return ynnNum;
+	}
+	
+	public void setYnnNum(int ynnNum) {
+		this.ynnNum = ynnNum;
+	}
+	public void setYnNum(int ynNum) {
+		this.ynNum = ynNum;
+	}
+	
+	
+}

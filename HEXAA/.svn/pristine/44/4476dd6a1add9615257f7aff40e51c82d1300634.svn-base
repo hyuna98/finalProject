@@ -1,0 +1,186 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true"%>
+<style>
+table {
+	border: 2px solid #d2d2d2;
+	border-collapse: collapse;
+	font-size: 0.9em;
+	display: inline-block;
+	text-align: center;
+}
+
+th, td {
+	border: 1px solid #d2d2d2;
+	border-collapse: collapse;
+}
+
+th {
+	height: 5px;
+}
+
+td {
+	width: 65px;
+	height: 45px;
+}
+</style>
+ <!-- stylesheet -->     
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css"/> 
+</head>
+
+<section class="content">
+	<div class="container-fluid">
+		<div class="row">
+
+			<div class="col-md-6">
+				<!-- 강의 시간표 -->
+				<div class="card card-light card-outline">
+					<div class="card-header">
+						<h3 class="card-title">강의 시간표 (3월 4째주)</h3>
+					</div>
+					<div class="card-body">
+						<table style="color: #121212; text-align: center;">
+							<tr>
+								<th style="width: 65px;">요일<br>
+									시간
+									</th>
+								<th>월</th>
+								<th>화</th>
+								<th>수</th>
+								<th>목</th>
+								<th>금</th>
+								<th>토</th>
+							</tr>
+							<tr>
+								<th>1</th>
+								<td></td>
+								<td rowspan="2" style="background-color: #ecc369">
+									국어</td>
+								<td rowspan="2" style="background-color: #f08676">사회</td>
+								<td rowspan="2" style="background-color: #70a5e9">
+									과학</td>
+								<td rowspan="2" style="background-color: #75ca87">영어</td>
+								<td rowspan="4" style="background-color: #70a5e9">특강</td>
+							</tr>
+							<tr>
+								<th>2</th>
+								<td></td>
+							</tr>
+							<tr>
+								<th>3</th>
+								<td rowspan="2" style="background-color: #f08676">수학</td>
+								<td></td>
+								<td rowspan="2" style="background-color: #75ca87">영어</td>
+								<td></td>
+								<td rowspan="2" style="background-color: #d397ed">국어</td>
+							</tr>
+							<tr>
+								<th>4</th>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<!-- 학교 공지사항 -->
+				<div class="card card-light card-outline">
+					<div class="card-header">
+						<h3 class="card-title">학교 공지사항</h3>
+						<a href="https://www.ddit.or.kr/notice/185" style="float: right"><i class="fas fa-solid fa-plus"></i></a>
+					</div>
+						<div class="card-body">
+						<ul class="list-group" style="max-height: 30vh; overflow:auto;">
+					        <li class="list-group-item">
+								<a href="https://www.ddit.or.kr/notice/185" class="board_item ellipsis">
+									대덕인재개발원 코로나19 확진자 발생 시 대응 매뉴얼			</a><br>
+								<span class="date">2022.02.09</span>
+					        </li>
+					        <li class="list-group-item">
+								<a href="https://www.ddit.or.kr/notice/184" class="board_item ellipsis">
+									개발원 이전 안내드립니다.			</a><br>
+								<span class="date">2021.12.20</span>
+					        </li>
+					        <li class="list-group-item">
+								<a href="https://www.ddit.or.kr/notice/183" class="board_item ellipsis">
+									직업훈련기관 방역패스 적용 관련 안내입니다. (일시중단)			</a><br>
+								<span class="date">2021.12.13</span>
+					        </li>
+					        <li class="list-group-item">
+								<a href="https://www.ddit.or.kr/notice/182" class="board_item ellipsis">
+									[10월과정 면접일정] 전자정부 표준 프레임워크 기반 풀-스택 개발자 양…</a><br>
+								<span class="date">2021.09.28</span>
+					        </li>
+        				</ul>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12" style="height: 350px">
+				<div class="card card-light card-outline">
+					<div class="card-header">
+						<h3 class="card-title">나의 학교 성적</h3>
+					</div>
+						<div class="card-body">
+ 						<div id="combochart"></div>
+						</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- 차트 관련 javascript -->     
+<script src="https://d3js.org/d3.v3.min.js"></script>     
+<script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+
+<!-- 차트 스크립트  -->
+<script>
+var chart = c3.generate({
+	  bindto: "#combochart",
+	  data: {
+	    x: "학교 시험",
+	    columns: [
+	      ["학교 시험", "1학기 중간", "1학기 기말", "2학기 중간", "2학기 기말"],
+	      ["국어", 100, 85, 80, 90],
+	      ["영어", 80, 70, 75, 90],
+	      ["수학", 70, 75, 60, 80],
+	      ["사회", 90, 85, 85, 80],
+	      ["과학", 90, 85, 85, 80],
+	      ["평균", 86, 80, 77, 84],
+	    ],
+	    types: {
+	      국어: "area",
+	      영어: "area-spline",
+	      수학: "area",
+	      사회: "area-spline",
+	      과학: "area",
+	      평균: "bar",
+	    },
+	    colors: {
+	      평균: "#0B2161",
+	      국어: "#FE642E",
+	      영어: "#2E64FE",
+	      수학: "#58FA82",
+	      사회: "#F3F781",
+	      과학: "#D358F7"
+	    },
+	  },
+	  bar: {
+	    width: {
+	      ratio: 0.2,
+	    },
+	  },
+	  axis: {
+	    x: {
+	      type: "category",
+	    },
+	  },
+	});
+
+</script>

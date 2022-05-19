@@ -1,0 +1,34 @@
+package com.lms.hexa.service;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.lms.hexa.dao.StudentDAO;
+import com.lms.hexa.dto.StudentVO;
+
+public class StudentServiceImpl implements StudentService {
+	
+	protected StudentDAO studentDAO;
+
+	public void setStudentDAO(StudentDAO studentDAO) {
+		this.studentDAO = studentDAO;
+	}
+
+	@Override
+	public StudentVO getStudent(String id) throws Exception {
+		StudentVO student = studentDAO.selectStudentById(id);
+		return student;
+	}
+
+	@Override
+	public List<StudentVO> selectStudentList() throws Exception {
+		List<StudentVO> student = studentDAO.selectStudentList();
+		return student;
+	}
+
+	@Override
+	public void insertStudent(StudentVO student) throws SQLException {
+		studentDAO.insertStudent(student);
+	}
+
+}

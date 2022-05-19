@@ -1,0 +1,270 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<head>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>	
+<style>
+		* {
+			font-size: 14px;
+		}
+		
+		label {
+			margin-bottom: 0;
+		}
+		
+		div.table1 {
+			max-height: 180px;
+			overflow-y: auto;
+		}
+		
+		div.table2 {
+			max-height: 180px;
+			overflow-y: scroll;
+		}
+		
+		div.table3 {
+			max-height: 568px;
+			overflow-y: scroll;  
+		}
+		
+		.table-head-fixed th {
+			padding-top: 0.3em;
+			padding-bottom: 0.3em;
+		}
+		.table-head-fixed td {
+			padding-top: 0.3em;
+			padding-bottom: 0.3em;
+		}
+		
+ 		.card-body.p-0 .table thead>tr>th:first-of-type {
+			padding-left: 12px;
+		}
+ 		.card-body.p-0 .table tbody>tr>td:first-of-type {
+			padding-left: 12px;
+		}
+		.card-body.p-0 .table thead>tr>th:last-of-type {
+			padding-right: 12px;
+		}
+ 		.card-body.p-0 .table tbody>tr>td:last-of-type {
+			padding-right: 12px;
+		}
+		
+		
+		th, td {
+			text-align: center;
+		}
+		#tb1 td, #td1 th {
+			padding:0;
+		}
+		
+		
+		.alert {
+			text-align: center;
+		}
+		.alert {
+			font-size: 15px;
+		}
+		
+		.alert-dismissible {
+	    	padding-right: 0;
+	    	padding-left: 0;
+		}
+	</style>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+  
+<section class="content-header">
+   <div class="container-fluid">
+        <div class="row md-2">
+           <div class="col-sm-6">
+              <h1>홈페이지이용현황</h1>              
+           </div>
+         
+        </div>
+   </div>
+</section>
+<section class="content">
+		<div class="container-fluid">
+			<div class="row">
+				
+				<!-- 좌측 영역 -->
+				<div class="col-sm-12">
+						
+						<div class="card card-dark card-outline" style="height:45vh;">
+						
+							<div class="card-header">
+							 	<div class="row">
+									<div class="col-sm-12">
+										<h3 class="card-title">
+											<i class="fas fa-check"></i>
+											&nbsp;&nbsp;
+											홈페이지 이용현황
+										</h3>
+									</div>
+								</div>
+								<div class="row" style="margin-top: 1vh;">
+									<div class="col-sm-3 input-group" >
+										<div class="input-group-prepend">
+										<button type="submit" class="btn btn-dark" style="margin-right: 2vh;">
+										<i class="fa-solid fa-angle-left"></i>
+										</button>
+										<button type="submit" class="btn btn-dark">
+											<i class="far fa-calendar-alt"></i>
+										</button>
+										</div>
+										<input type="text" value="년도" class="form-control float-right" id="reservation">
+										<button type="submit" class="btn btn-dark" style="margin-left: 2vh;">
+										<i class="fa-solid fa-angle-right"></i>
+										</button>
+									</div>
+									<div class="col-sm-1" style="margin-top: 1vh;">
+										<button type="button" class="btn btn-block btn-outline-info btn-xs">검색</button>
+										
+									</div>
+									<div class="col-sm-1" style="margin-top: 1vh;">
+										<button type="button" class="btn btn-block btn-outline-info btn-xs">엑셀</button>
+									</div>
+								</div>	
+							</div>
+							<div class="card-body" style="padding-top: 5px; height: 80vh;">
+							
+								<div class="row " >
+									<div class="col-sm-12 table1" style="max-height: 30vh;" >
+									<table class="table table-head-fixed table-bordered" >
+										<thead >
+										
+											<tr>
+												<th style="background-color:rgb(32 73 105); color: white;">구분</th>
+												<th style="background-color:rgb(32 73 105); color: white;">2021-10</th>
+												<th style="background-color:rgb(32 73 105); color: white;">2021-11</th>
+												<th style="background-color:rgb(32 73 105); color: white;">2021-12</th>
+												<th style="background-color:rgb(32 73 105); color: white;">2022-1</th>
+												<th style="background-color:rgb(32 73 105); color: white;">2022-2</th>
+												<th style="background-color:rgb(32 73 105); color: white;">2022-3</th>
+												<th style="background-color:rgb(32 73 105); color: white;">합계</th>
+											</tr>
+										</thead>
+										<tbody>
+										<c:forEach var="i" begin="1" end="25" step="1">
+											<tr>
+												<td>수업페이지</td>
+												<td>3</td>
+												<td>4</td>
+												<td>15</td>
+												<td>86</td>
+												<td>43</td>
+												<td>2</td>
+												<td>153</td>
+												
+											</tr>
+										</c:forEach>
+										</tbody>
+									</table>
+									</div>
+								</div>
+							</div>		
+						</div>
+						<div class="card card-dark card-outline" style="height:85vh;">
+						
+							<div class="card-header">
+								<h3 class="card-title">
+									<i class="fas fa-check"></i>
+									&nbsp;&nbsp;
+									전체 홈페이지 이용현황 -그래프 
+								</h3>
+							</div>
+							<div class="card-body" style="padding-top: 5px; max-height: 50vh;">
+								<div class="row">
+									<div class="col-sm-12" >
+										 <div style="width:600px;height:400px">
+										        <!--버그가 있음, canvas 사이즈로는 차트사이즈가 조절이 안됨 미쳐버림(첫고비)-->
+										        <canvas id="myChart" width="100" height="100"></canvas>
+										 </div>
+										  <input type="button" value="누를거얌" id="id_btn" style="display: none;">
+									</div>
+								</div>
+							</div>		
+						</div>
+				</div>
+			</div>
+		</div>
+</section>							
+   
+<script>
+    var v_btn = document.querySelector("#id_btn");
+    var f_click = function(){
+        
+        //처음 만들때 갯수에 맞추어야 함(현실도 그러함)
+        var v_ranData = [];
+        for(var i=1; i<=8; i++){
+            v_ranData.push(Math.ceil(Math.random()*100));
+        }
+
+       // myChart.data.datasets[0].data = [1,2,3,4,5,6,7,8];  // 쓰기도 가능한 가 확인
+       // 실제 데이터 주는 부분은 나중에 ajax를 이용해서 한번에 넣어 버림
+       myChart.data.datasets[0].data = v_ranData;  // 쓰기도 가능한 가 확인
+       myChart.data.datasets[1] = v_anotherDateSet;
+       myChart.data.labels=['R', 'B', 'Y', 'G', 'P', 'O','T','N'];
+        myChart.update();  // 중요 - 차트 다시 그려랑 명령
+        setTimeout(f_click,500);
+    }
+    v_btn.addEventListener("click",f_click);
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+    //그래픽엔진 가져오기(openGL)  마이크로소프트는 directX를 가지고 있어용
+    var myChart = new Chart(ctx, {
+    type: 'bar', // bar, line,doughnut, pie,radar등이 자주 쓰이는 차트
+    data: {
+        labels: ['수업페이지', '수업페이지', '수업페이지', '수업페이지', '수업페이지', '수업페이지'], // x축 값
+        datasets: [{
+            label: '홈페이지 이용현황',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+/* f_click(); */ 
+// 페이지 접근하자 마자 실행
+
+//요기 데이타에 접근하는 것이 사용 포인트
+//console.log(myChart.data.datasets[0].data);
+</script>
+<script>
+    var v_anotherDateSet =
+    {       
+            type: 'bar',
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3 , 70, 66],
+         
+        };
+
+</script>   
+
+</body>
+</html>

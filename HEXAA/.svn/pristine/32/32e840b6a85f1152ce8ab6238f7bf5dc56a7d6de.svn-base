@@ -1,0 +1,374 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="school" value="${dataMap.school }" />
+
+
+
+
+<head>
+	<style>
+		* {
+			font-size: 14px;
+		}
+		
+		label {
+			margin-bottom: 0;
+		}
+		
+		div.table1 {
+			max-height: 180px;
+			overflow-y: auto;
+		}
+		
+		div.table2 {
+			max-height: 180px;
+			overflow-y: scroll;
+		}
+		
+		div.table3 {
+			max-height: 568px;
+			overflow-y: scroll;  
+		}
+		
+		.table-head-fixed th {
+			padding-top: 0.3em;
+			padding-bottom: 0.3em;
+		}
+		.table-head-fixed td {
+			padding-top: 0.3em;
+			padding-bottom: 0.3em;
+		}
+		
+ 		.card-body.p-0 .table thead>tr>th:first-of-type {
+			padding-left: 12px;
+		}
+ 		.card-body.p-0 .table tbody>tr>td:first-of-type {
+			padding-left: 12px;
+		}
+		.card-body.p-0 .table thead>tr>th:last-of-type {
+			padding-right: 12px;
+		}
+ 		.card-body.p-0 .table tbody>tr>td:last-of-type {
+			padding-right: 12px;
+		}
+		
+		
+		th, td {
+			text-align: center;
+		}
+		#tb1 td, #td1 th {
+			padding:0;
+		}
+		
+		
+		.alert {
+			text-align: center;
+		}
+		.alert {
+			font-size: 15px;
+		}
+		
+		.alert-dismissible {
+	    	padding-right: 0;
+	    	padding-left: 0;
+		}
+	</style>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row md-2">
+				<div class="col-sm-6">
+					<h1>학교정보관리</h1>
+				</div>
+				
+			</div>
+		</div>
+	</section>
+	<section class="content">
+		<div class="container-fluid">
+			<div class="row">
+
+				<!-- 좌측 영역 -->
+				<div class="col-sm-12">
+					<div class="card card-dark card-outline">
+
+						<div class="card-header">
+							<h3 class="card-title">
+								<i class="nav-icon fas fa-search"></i> &nbsp;&nbsp; 학교 정보 검색 옵션
+							</h3>
+						</div>
+
+						<div class="card-body" style="padding-top: 5px;">
+
+							
+							<div class="row">
+								<div class="input-group" style="padding: 5px;">
+
+									
+									<select class="form-control">
+										<option>학교구분</option>
+										<option>초등학교</option>
+										<option>중학교</option>
+										<option>고등학교</option>
+									</select> 
+									<select class="form-control">
+										<option>인원수</option>
+										<option>1~5</option>
+										<option>6~10</option>
+										<option>11이상</option>
+									</select> <input type="text" class="form-control" placeholder="학교명">
+									<div class="input-group-append">
+										<button type="submit" class="btn btn-dark"
+											style="height: 6vh;">
+											<i class="fas fa-search"></i>
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="row"></div>
+						</div>
+						<!-- card body -->
+					</div>
+					<!-- card-outline -->
+					
+					
+					<br />
+					
+				
+					<div class="card card-dark card-outline">
+
+						<div class="card-header">
+							<div class="row">
+								<div class="col-sm-3">
+									<h3 class="card-title">
+										<i class="fas fa-list" aria-hidden="true"></i> &nbsp;&nbsp; 학교 리스트
+									</h3>
+								</div>
+								<div class="col-sm-6">
+								
+								</div>
+								<div class="col-sm-1">
+									<button type="button" id="save" class="btn btn-block btn-outline-info btn-xs">저장</button>
+								</div>
+								<div class="col-sm-1">
+									<button type="button" class="btn btn-block btn-outline-info btn-xs">삭제</button>
+								</div>
+								
+								<div class="col-sm-1">
+									<button type="button" class="btn btn-block btn-outline-info btn-xs">엑셀</button>
+								</div>	
+							</div>
+							<div class="row" style="margin-top: 2vh;">
+								<div class="col-sm-7">
+								
+								</div>
+								<div class="col-sm-3">
+									<input id="pomNum" type="text" class="form-control float-right" placeholder="폼 갯수 입력" style="width: 17vh; height: 4vh;">
+								</div>
+								<div class="col-sm-1">
+									<button type="button" class="btn btn-block btn-outline-info btn-xs" onclick="rowAdd()">폼추가</button>
+								</div>
+								<div class="col-sm-1">
+									<button type="button" class="btn btn-block btn-outline-info btn-xs">폼삭제</button>
+								</div>
+							</div>
+						</div>
+						<div class="card-body" >
+							
+								
+								
+								
+							
+							<div class="row table1" style="max-height: 32vh;">
+								<div class="card-body table p-0">
+									<table id="tb1" class="table table-head-fixed table-bordered" style="height: 30vh;" >
+										<thead >
+										
+											<tr>
+												<th ><input  type="checkbox"  value="option1"></th>
+												<th style="background-color:rgb(32 73 105); color: white;">NO</th>
+												<th style="background-color:rgb(32 73 105); color: white;">이름</th>
+												<th style="background-color:rgb(32 73 105); color: white;">URL</th>
+												<th style="background-color:rgb(32 73 105); color: white;">주소</th>
+												
+												<th style="background-color:rgb(32 73 105); color: white;">구분1</th>
+												<th style="background-color:rgb(32 73 105); color: white;">구분2</th>
+												<th style="background-color:rgb(32 73 105); color: white;">구분3</th>
+												
+											</tr>
+										</thead>
+										<tbody id="body">
+										<c:forEach items="${school}" var="school" varStatus="loop" >
+											<tr>
+												<td class="testd"><input id="${loop.index}"  class="tes"  type="checkbox"  value="option1" style="margin-top: 2vh;"></td>
+												<td style="padding: 0px; margin: 0px;"><input id="scid" class="form-control" type="text" value="${school.schoolId }" width="100%"></td>
+												<td style="padding: 0px; margin: 0px;"><input id="scname"  class="form-control" type="text" value="${school.schoolName }" width="100%"></td>
+												<td style="padding: 0px; margin: 0px;"><input id="scurl" class="form-control" type="text" value="${school.schoolURL }" width="100%"></td>
+												<td style="padding: 0px; margin: 0px;"><input id="scaddr" class="form-control" type="text" value="${school.schoolAddress }" width="100%"></td>
+												
+												<td style="padding: 0px; margin: 0px;"><input id="sctype" class="form-control" type="text" value="${school.schoolType }" width="100%"></td>
+												<td style="padding: 0px; margin: 0px;"><input id="scgrade" class="form-control" type="text" value="${school.schoolGrade }" width="100%"></td>
+												<td style="padding: 0px; margin: 0px;"><input id="scgender" class="form-control" type="text" value="${school.schoolGender }" width="100%"></td>
+												
+											</tr>
+										</c:forEach>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+
+
+
+
+				</div>
+			</div>
+		</div>
+	</section>
+	
+<script>
+var box = document.getElementById('body');
+var boxCount= box.childElementCount;
+function rowAdd() {
+	var schoolListNum = Number($("#pomNum").val());
+	
+	if(schoolListNum < 1){
+		schoolListNum = 1;
+	}
+	
+	var trNum = $("#tb1>tbody tr").length;
+	
+	var test1 = trNum + 1;
+	var test2 = trNum + schoolListNum;
+	
+	for(var i = test1; i <= test2; i++) {
+		$("#tb1>tbody").append("<tr>"
+							 +     "<td><input type='checkbox' class='tes'  value='option1' style='margin-top: 2vh;'></td>"
+							 +     "<td  style='padding: 0px; margin: 0px;'><input id='scid' class='form-control' type='text'  width='100%'></td>"
+							 +     "<td  style='padding: 0px; margin: 0px;'><input id='scname' class='form-control' type='text'  width='100%'></td>"
+							 +     "<td  style='padding: 0px; margin: 0px;'><input id='scurl' class='form-control' type='text'  width='100%'></td>"
+							 +     "<td  style='padding: 0px; margin: 0px;'><input id='scaddr' class='form-control' type='text'  width='100%'></td>"
+							 
+							 +     "<td  style='padding: 0px; margin: 0px;'><input id='sctype'  class='form-control' type='text'  width='100%'></td>"
+							 +     "<td  style='padding: 0px; margin: 0px;'><input id='scgrade' class='form-control' type='text'  width='100%'></td>"
+							 +     "<td  style='padding: 0px; margin: 0px;'><input id='scgender' class='form-control' type='text'  width='100%'></td>"
+							
+							 +    												
+							 + "</tr>");
+		schoolListNum = 1;
+	}
+	box = document.getElementById('body'); 
+	boxCount = box.childElementCount;
+	for(var i =0; i < boxCount; i++){
+		
+		var test =$("#body").children('tr:eq('+i+')').children('td:eq(0)').children().attr("id",i);
+
+		
+	
+	}
+}
+
+
+
+</script>
+<script>
+
+ 
+
+let schoolVOList2 = new Map();
+
+let schoolId2;
+let schoolName2;
+let schoolURL2;
+let schoolAddress2;
+let schoolType2;
+let schoolGrade2;
+let schoolGender2;
+let schoolVOList3 =[];
+let checkNum=0;
+window.onload=function(){
+	
+$(document).delegate('.tes', 'change', function () {
+    // From the other examples
+    
+    let schoolVO ={};
+     
+    if (this.checked) {
+        
+        
+       
+       schoolId2 = $(this).parent().parent().children('td:eq(1)').children().val();
+       schoolName2 = $(this).parent().parent().children('td:eq(2)').children().val();
+       schoolURL2 = $(this).parent().parent().children('td:eq(3)').children().val();
+       schoolAddress2 = $(this).parent().parent().children('td:eq(4)').children().val();
+       schoolType2 = $(this).parent().parent().children('td:eq(5)').children().val(); 
+       schoolGrade2 = $(this).parent().parent().children('td:eq(6)').children().val();
+       schoolGender2 = $(this).parent().parent().children('td:eq(7)').children().val();
+       
+       
+       schoolVO.schoolGender = schoolGender2;
+       schoolVO.schoolId = schoolId2;
+       schoolVO.schoolName = schoolName2;
+       schoolVO.schoolURL = schoolURL2;
+       schoolVO.schoolAddress = schoolAddress2;
+       schoolVO.schoolType = schoolType2;
+       schoolVO.schoolGrade = schoolGrade2;
+       checkNum = $(this).attr('id');
+        
+       schoolVOList2.set(checkNum.toString(),schoolVO);
+    }else{
+    	
+       checkNum = $(this).attr('id');
+       
+       schoolVOList2.delete(checkNum.toString());
+    }
+    console.log(schoolVO);
+    console.log(schoolVOList2);
+});
+	$("#save").click(function(){
+		
+		console.log(schoolVOList2);
+	 	for(let i=0; i< schoolVOList2.size; i++){
+			let value = schoolVOList2.get(checkNum.toString());
+	 		console.log(value);
+	 		schoolVOList3.push(value);
+		} 
+			/* console.log(schoolVOList3); */
+		let dataItem = {
+					schoolVOList : schoolVOList3
+				  
+		};
+		 	console.log(dataItem);
+		 dataItem = JSON.stringify(dataItem);
+		
+		$.ajax({
+	        type: "post"
+	       ,url : "/manager/school/regist.do"
+	       ,contentType: 'application/json'
+	       ,data : dataItem
+	       ,success : function (data){
+	        	location.reload();
+	        }
+	       ,error : function(e){
+	        }
+		});
+	});
+}
+
+
+
+
+
+</script>
+
+</body>
+</html>

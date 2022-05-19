@@ -1,0 +1,522 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+
+<head>
+<meta charset='utf-8' />
+<!-- 화면 해상도에 따라 글자 크기 대응(모바일 대응) -->
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<!-- jquery CDN -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- fullcalendar CDN -->
+<link
+	href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css'
+	rel='stylesheet' />
+<script
+	src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
+<!-- fullcalendar 언어 CDN -->
+<script
+	src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
+<style>
+* {
+	font-size: 14px;
+}
+
+label {
+	margin-bottom: 0;
+}
+
+div.table1 {
+	max-height: 180px;
+	overflow-y: auto;
+}
+
+div.table2 {
+	max-height: 180px;
+	overflow-y: scroll;
+}
+
+div.table3 {
+	max-height: 568px;
+	overflow-y: scroll;
+}
+
+.table-head-fixed th {
+	padding-top: 0.3em;
+	padding-bottom: 0.3em;
+}
+
+.table-head-fixed td {
+	padding-top: 0.3em;
+	padding-bottom: 0.3em;
+}
+
+.card-body.p-0 .table thead>tr>th:first-of-type {
+	padding-left: 12px;
+}
+
+.card-body.p-0 .table tbody>tr>td:first-of-type {
+	padding-left: 12px;
+}
+
+.card-body.p-0 .table thead>tr>th:last-of-type {
+	padding-right: 12px;
+}
+
+.card-body.p-0 .table tbody>tr>td:last-of-type {
+	padding-right: 12px;
+}
+
+th, td {
+	text-align: center;
+}
+
+#tb1 td, #td1 th {
+	padding: 0;
+}
+
+.alert {
+	text-align: center;
+}
+
+.alert {
+	font-size: 15px;
+}
+
+.alert-dismissible {
+	padding-right: 0;
+	padding-left: 0;
+}
+
+/* body 스타일 */
+body {
+	font-size: 14px;
+	font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+}
+
+/* 드래그 박스의 스타일 */
+#external-events {
+	left: 20px;
+	top: 20px;
+	width: 120px;
+	padding: 0 10px;
+	border: 1px solid #ccc;
+	background: #eee;
+}
+
+#external-events h4 {
+	font-size: 16px;
+	margin-top: 0;
+	padding-top: 1em;
+}
+
+#external-events .fc-event {
+	margin: 3px 0;
+	text-align: center;
+	cursor: pointer;
+}
+
+/*  #calendar1 {
+	max-width: 200vh;
+	max-height: 200vh;
+}  */
+
+</style>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row md-2">
+				<div class="col-sm-6" style="display: flex;">
+					<h1 data-userId="${loginUser.id }">상담 일정 관리</h1>
+										<!--                즐겨찾기에 존재 -->
+               <c:if test="${fn:indexOf(favoriteMenuListStr, '상담 일정 관리') != -1}">
+                  <i id="star" class="fa-solid fa-star on fa-2x" ></i>
+               </c:if>
+               
+<!--                즐겨찾기에 존재하지 않음 -->
+               <c:if test="${fn:indexOf(favoriteMenuListStr, '상담 일정 관리') == -1}">
+                  <i id="star" class="fa-regular fa-star off fa-2x" ></i>
+               </c:if>
+				</div>
+
+			</div>
+		</div>
+	</section>
+	<section class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="card card-dark card-outline">
+						<div class="card-header">
+							<h3 class="card-title">
+								<i class="fas fa-check"></i> &nbsp;&nbsp; 상담 스케줄
+							</h3>
+						</div>
+
+		<div class="card-body" style="padding : 0px; margin: 0px; height:610px;  ">
+
+							<div class="row">
+								<div class="col-sm-2">
+								</div>
+								<div class="col-sm-8" style="height: 470px !important;">
+
+									<div
+										style="display: flex; justify-content: center;">
+										<!-- 드래그 박스 -->
+										<!-- <div id='external-events'> -->
+										<!-- 		<h4>Day Events</h4> -->
+										<div id='external-events-list'></div>
+									</div>
+									<!-- calendar 태그 -->
+
+					<div id='calendar1' style="width: 700px; float: inherit; height: 470px !important; padding : 0px; margin: 0px;"></div>
+						
+
+								</div>
+								<div class="col-sm-2">
+								</div>
+							</div>
+						</div>
+						<script>
+							(function() {
+								$(function() {
+									// 드래그 박스 취득
+									var containerEl = $('#external-events-list')[0];
+									// 설정하기
+									new FullCalendar.Draggable(containerEl, {
+										itemSelector : '.fc-event',
+										eventData : function(eventEl) {
+											return {
+												title : eventEl.innerText
+														.trim()
+											}
+										}
+									});
+									// 드래그 아이템 추가하기
+									// 				for (var i = 1; i <= 5; i++) {
+									// 					var $div = $("<div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'></div>");
+									// 					$event = $("<div class='fc-event-main'></div>").text(
+									// 							"Event " + i);
+									// 					$('#external-events-list').append($div.append($event));
+									// 				}
+									/* var $div = $("<div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'></div>");
+									$event = $("<div class='fc-event-main'></div>").text(
+											"출근");
+									$('#external-events-list').append($div.append($event));
+									
+									$div = $("<div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'></div>");
+									$event = $("<div class='fc-event-main'></div>").text(
+											"퇴근");
+									$('#external-events-list').append($div.append($event));
+									
+									$div = $("<div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'></div>");
+									$event = $("<div class='fc-event-main'></div>").text(
+											"연차");
+									$('#external-events-list').append($div.append($event)); */
+									// calendar element 취득
+									var calendarEl = $('#calendar1')[0];
+									// full-calendar 생성하기
+									var calendar = new FullCalendar.Calendar(
+											calendarEl,
+											{
+												  events: [
+													    {
+													      groupId: 'blueEvents', // recurrent events in this group move together
+													      daysOfWeek: [ '4' ],
+													      startTime: '10:45:00',
+													      endTime: '12:45:00'
+													    },
+													    {
+													      daysOfWeek: [ '3' ], // these recurrent events move separately
+													      startTime: '11:00:00',
+													      endTime: '11:30:00',
+													      color: 'red'
+													    }
+													  ],
+													  editable: true,
+											
+												// 해더에 표시할 툴바
+												headerToolbar : {
+													left : 'prev,next today',
+													center : 'title',
+													right : 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+												},
+												//initialDate : '2021-07-15', // 초기 날짜 설정 (설정하지 않으면 오늘 날짜가 보인다.)
+												locale : 'ko', // 한국어 설정
+												editable : true, // 수정 가능
+												droppable : true, // 드래그 가능
+												// 							drop : function(arg) { // 드래그 엔 드롭 성공시
+												// 							// 드래그 박스에서 아이템을 삭제한다.
+												// 								arg.draggedEl.parentNode
+												// 										.removeChild(arg.draggedEl);
+												// 							}
+											});
+									// 캘린더 랜더링
+							/* 		calendar.setOption('height',200); */
+									calendar.render();
+								});
+							})();
+						</script>
+
+					</div>
+
+				</div>
+			</div>
+		
+
+		
+		
+		
+		
+		
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="card card-dark card-outline">
+					<div class="card-header">
+						<div class="row">
+							<div class="col-sm-8" style="height: 20px;">
+								<h3 class="card-title">
+									<i class="fas fa-regular fa-address-card"></i> &nbsp;&nbsp; 상담 신청 상세 정보
+								</h3>
+							</div>
+							<div class="col-sm-4" style="text-align: right">
+								<button type="submit" class="btn btn-dark btn-sm">신청 승인</button>
+								<button type="submit" class="btn btn-dark btn-sm">신청 취소</button>
+							</div>
+						</div>
+					</div>
+			
+						<div class="card-body" style="height: 350px;">
+			
+						   <div class="row">
+						   <div class="row col-sm-12" style="margin: 5px;">
+						      <div class="row">
+						<div class="col-sm-4">
+							<label for="id">상담 구분</label>
+										<input type="text" class="form-control" id="id">
+										
+						
+							</div>
+							<div class="col-sm-4">
+							<label for="id">신청일</label>
+										<input type="text" class="form-control" id="id">
+						
+							</div>
+							<div class="col-sm-4">
+							<label for="id">신청시간</label>
+										<input type="text" class="form-control" id="id">
+						
+							</div>
+								</div>
+							</div>
+								</div>
+						
+						
+						
+						   <div class="row">
+						    <div class="row col-sm-12" style="margin: 5px;">
+						    <div class="row">
+						<div class="col-sm-3">
+							<label for="id">신청자</label>
+							<input type="text" class="form-control" id="id">
+							</div>
+							<div class="col-sm-3">
+							<label for="id">연락처</label>
+							<input type="text" class="form-control" id="id">
+							</div>
+							<div class="col-sm-1"></div>
+							
+							<div class="col-sm-1" style="padding-top: 25px; padding-left:0px; padding-right: 0px; font-weight:bolder;">
+							가족 관계
+							</div>
+							<div class="col-sm-2">
+							<label for="id">보호자</label>
+							<input type="text" class="form-control" id="id">
+							</div>
+							<div class="col-sm-2">
+							<label for="id">자녀</label>
+							<select id="children"class="form-control">
+											<option>김첫째</option>
+											<option>김둘째</option>
+										</select>
+										</div>
+							</div>
+							</div>
+							</div>
+
+
+						   <div class="row">
+						    <div class="row col-sm-12" style="margin: 5px;">
+						     <div class="row">
+						   <div class="col-sm-2">
+							<label for="id">신청대상자</label>
+							<input type="text" class="form-control" id="id">
+							</div>
+							<div class="col-sm-3">
+							<label for="id">연락처</label>
+							<input type="text" class="form-control" id="id">
+							</div>
+							<div class="col-sm-3">
+							<label for="id">학교</label>
+							<input type="text" class="form-control" id="id">
+							</div>
+							<div class="col-sm-2">
+							<label for="id">학년</label>
+							<input type="text" class="form-control" id="id">
+							</div>
+							<div class="col-sm-2">
+							<label for="id">반</label>
+							<input type="text" class="form-control" id="id">
+							</div>
+						
+							</div>
+							</div>			
+								</div>					
+							
+							
+							  <div class="row">
+						    <div class="row col-sm-12" style="margin: 5px;">
+
+							<label for="id">
+							상담 내용<br>
+							</label>
+							<textarea style="width: 900px; height: 80px;"></textarea>
+
+							<br><label for="id">상담 신청 내용</label>
+							<textarea style="width: 900px; height: 100px;"></textarea>
+
+							</div>
+					
+						
+							</div>
+										
+							
+					
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+					
+						</div>
+						</div>
+						</div>
+						
+						
+						
+						
+						
+						<!-- 	<div class="row col-sm-12">
+									<div class="form-group col-sm-4">
+										<label for="id">상담 구분</label>
+										<input type="text" class="form-control" id="id"
+											placeholder="아이디(HP번호)">
+										<div class="input-group-append"></div>
+										<label for="name">이름</label> <input type="text"
+											class="form-control" id="name" placeholder="">
+									</div>
+									<div class="form-group col-sm-4">
+										<label for="gender">성별</label> <select id="gender"
+											class="form-control">
+											<option>남자</option>
+											<option>여자</option>
+										</select> <label for="hp">전화번호</label> <input type="text"
+											class="form-control" id="hp" placeholder="전화번호">
+									</div>
+									<div class="form-group col-sm-4">
+										<label for="school">학교</label> <input type="text"
+											class="form-control" id="school" placeholder="전화번호">
+										<label for="grade">학년</label> <select id="grade"
+											class="form-control">
+											<option>중1</option>
+											<option>중2</option>
+											<option>중3</option>
+										</select>
+									</div>
+						
+								<div class="row col-sm-12" style="padding-top: 5px; height: 30%">
+									<div class="form-group col-sm-4">
+										<label for="status">상태</label> <select id="status"
+											class="form-control">
+											<option>재원</option>
+											<option>휴원</option>
+											<option>퇴원</option>
+										</select> <label for="regDate">등록일</label> <input type="text"
+											class="form-control" id="regDate" placeholder="등록일">
+										<label for="station">승차위치</label> <input type="text"
+											class="form-control" id="station" placeholder="승차위치">
+										<label for="teacher">담임선생님</label> <select id="teacher"
+											class="form-control">
+											<option>김형민</option>
+											<option>이철희</option>
+										</select>
+									</div>
+									<div class="form-group col-sm-4">
+										<label for="class">반</label> <select id="class"
+											class="form-control">
+											<option>중1-1</option>
+											<option>중2-2</option>
+										</select> <label for="brother">형제관계</label> <input type="text"
+											class="form-control" id="brother" placeholder="형제관계">
+										<label for="address1">주소</label> <input type="text"
+											class="form-control" id="address1" placeholder="주소">
+										<label for="address2">상세주소</label> <input type="text"
+											class="form-control" id="address2" placeholder="상세주소">
+									</div>
+									<div class="form-group col-sm-4">
+										<div class="custom-control custom-radio col-xs-3"
+											style="display: inline;">
+											<input class="custom-control-input" type="radio" id="pather"
+												name="parent" checked> <label for="pather"
+												class="custom-control-label">부</label>
+										</div>
+										&nbsp;&nbsp;
+										<div class="custom-control custom-radio"
+											style="display: inline;">
+											<input class="custom-control-input" type="radio" id="mother"
+												name="parent"> <label for="mother"
+												class="custom-control-label">모</label>
+										</div>
+										&nbsp;&nbsp;
+										<div class="custom-control custom-radio"
+											style="display: inline;">
+											<input class="custom-control-input" type="radio" id="other"
+												name="parent"> <label for="other"
+												class="custom-control-label">기타</label>
+										</div>
+										<label for="parent">부모명</label> <input type="text"
+											class="form-control" id="parent" placeholder="부모명"> <label
+											for="parentId">부모아이디</label>
+										<button type="button" class="btn btn-dark btn-xs">
+											중복확인</button>
+										<input type="text" class="form-control" id="parentId"
+											placeholder="부모아이디(HP번호)"> <label for="parentHP">부모
+											연락처</label> <input type="text" class="form-control" id="parentHP"
+											placeholder="부모 연락처">
+									</div>
+							
+								</div> -->
+							
+		
+					
+					</div>
+					</div>
+				
+		
+
+	</section>
+</body>
+</html>

@@ -1,0 +1,30 @@
+package com.lms.hexa.service;
+
+import java.util.HashMap;
+import java.util.List;
+
+import com.lms.hexa.dto.ExamVO;
+import com.lms.hexa.dto.MarkVO;
+import com.lms.hexa.dto.QuestionVO;
+
+public interface ScoreService {
+	
+	// 시험 등록
+	public void examRegist(ExamVO exam) throws Exception;
+	
+	// 시험 조회
+	public ExamVO getExam(int examId) throws Exception;
+	
+	public List<ExamVO> getExamList() throws Exception;
+	
+	public List<QuestionVO> getQuestionList(int examId) throws Exception;
+	
+	public List<QuestionVO> getQuesAreaList(int examId) throws Exception;
+	
+	public int questionUpdate(HashMap<String, Object> params) throws Exception;
+	
+	// 검색
+	List<ExamVO> getSearchExamList(String value) throws Exception;
+	
+	public List<MarkVO> getMarkList(MarkVO mark) throws Exception;
+}

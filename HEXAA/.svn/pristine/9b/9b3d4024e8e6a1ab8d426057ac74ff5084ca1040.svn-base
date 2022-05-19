@@ -1,0 +1,184 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+  
+<section class="content-header">
+   <div class="container-fluid">
+        <div class="row md-2">
+           <div class="col-sm-6">
+              <h1>홈페이지이용현황</h1>              
+           </div>
+           <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                 <li class="breadcrumb-item">
+                    <a href="list.do">
+                       <i class="fa fa-dashboard"></i>홈페이지이용현황
+                    </a>
+                 </li>
+               </ol>
+           </div>
+        </div>
+   </div>
+</section>
+<section class="content">
+   <div class="col-12 card-header" style="background-color:rgba(0, 0, 0, 0.1);  height: 10vh;">
+     	<div class="col-8 form-group" style="float: left; margin-top: 10px;">
+				<label style="margin-right: 2vh;">년도</label> 
+				
+				<span class="fa fa-chevron-left" style="margin-right: 2vh;"></span>
+				<select class="col-3 form-control" style="display: inline;">
+					<option>2021년</option>
+					<option>2022년</option>	
+				</select>
+				<span class="fa fa-chevron-right" style="margin-left: 2vh;"></span>
+				<button type="button" class="col-1 btn btn-block btn-outline-success btn-sm" style="display: inline; margin: 1vh; ">검색</button>
+				<button type="button" class="col-1 btn btn-block btn-outline-secondary btn-sm" style="display: inline; margin: 1vh; ">엑셀</button>
+		</div>
+		
+   </div>
+   <div class="col-12 card-body" style="overflow-y:scroll;  height: 50vh;">
+   			<table class="table table-bordered table-hover dataTable dtr-inline">
+			<tr class="jsgrid-header-row">
+				<th class="jsgrid-header-cell jsgrid-header-sortable" style="background-color:rgba(0, 0, 0, 0.2);">구분</th>
+				<th class="jsgrid-header-cell jsgrid-header-sortable" style="background-color:rgba(0, 0, 0, 0.2);">2021-10</th>
+				<th class="jsgrid-header-cell jsgrid-header-sortable" style="background-color:rgba(0, 0, 0, 0.2);">2021-11</th>
+				<th class="jsgrid-header-cell jsgrid-header-sortable" style="background-color:rgba(0, 0, 0, 0.2);">2021-12</th>
+				<th class="jsgrid-header-cell jsgrid-header-sortable" style="background-color:rgba(0, 0, 0, 0.2);">2022-1</th>
+				<th class="jsgrid-header-cell jsgrid-header-sortable" style="background-color:rgba(0, 0, 0, 0.2);">2022-2</th>
+				<th class="jsgrid-header-cell jsgrid-header-sortable" style="background-color:rgba(0, 0, 0, 0.2);">2022-3</th>
+				<th class="jsgrid-header-cell jsgrid-header-sortable" style="background-color:rgba(0, 0, 0, 0.2);">합계</th>
+			</tr>
+			<tr class="jsgrid-row">
+				<td class="jsgrid-cell" >고객센터 공지사항</td>
+				<td class="jsgrid-cell" >12</td>
+				<td class="jsgrid-cell" >1</td>
+				<td class="jsgrid-cell" >13</td>
+				<td class="jsgrid-cell" >4</td>
+				<td class="jsgrid-cell" >1</td>
+				<td class="jsgrid-cell" >13</td>
+				<td class="jsgrid-cell" >4</td>
+			</tr>
+				<tr class="jsgrid-row">
+				<td class="jsgrid-cell" >고객센터 공지사항</td>
+				<td class="jsgrid-cell" >12</td>
+				<td class="jsgrid-cell" >1</td>
+				<td class="jsgrid-cell" >13</td>
+				<td class="jsgrid-cell" >4</td>
+				<td class="jsgrid-cell" >1</td>
+				<td class="jsgrid-cell" >13</td>
+				<td class="jsgrid-cell" >4</td>
+			</tr>	
+			<tr class="jsgrid-row">
+				<td class="jsgrid-cell" >고객센터 공지사항</td>
+				<td class="jsgrid-cell" >12</td>
+				<td class="jsgrid-cell" >1</td>
+				<td class="jsgrid-cell" >13</td>
+				<td class="jsgrid-cell" >4</td>
+				<td class="jsgrid-cell" >1</td>
+				<td class="jsgrid-cell" >13</td>
+				<td class="jsgrid-cell" >4</td>
+			</tr>	
+			<tr class="jsgrid-row">
+				<td class="jsgrid-cell" >고객센터 공지사항</td>
+				<td class="jsgrid-cell" >12</td>
+				<td class="jsgrid-cell" >1</td>
+				<td class="jsgrid-cell" >13</td>
+				<td class="jsgrid-cell" >4</td>
+				<td class="jsgrid-cell" >1</td>
+				<td class="jsgrid-cell" >13</td>
+				<td class="jsgrid-cell" >4</td>
+			</tr>	
+			<tr class="jsgrid-row">
+				<td class="jsgrid-cell" >고객센터 공지사항</td>
+				<td class="jsgrid-cell" >12</td>
+				<td class="jsgrid-cell" >1</td>
+				<td class="jsgrid-cell" >13</td>
+				<td class="jsgrid-cell" >4</td>
+				<td class="jsgrid-cell" >1</td>
+				<td class="jsgrid-cell" >13</td>
+				<td class="jsgrid-cell" >4</td>
+			</tr>	
+			<tr class="jsgrid-row">
+				<td class="jsgrid-cell" >고객센터 공지사항</td>
+				<td class="jsgrid-cell" >12</td>
+				<td class="jsgrid-cell" >1</td>
+				<td class="jsgrid-cell" >13</td>
+				<td class="jsgrid-cell" >4</td>
+				<td class="jsgrid-cell" >1</td>
+				<td class="jsgrid-cell" >13</td>
+				<td class="jsgrid-cell" >4</td>
+			</tr>	
+			<tr class="jsgrid-row">
+				<td class="jsgrid-cell" >고객센터 공지사항</td>
+				<td class="jsgrid-cell" >12</td>
+				<td class="jsgrid-cell" >1</td>
+				<td class="jsgrid-cell" >13</td>
+				<td class="jsgrid-cell" >4</td>
+				<td class="jsgrid-cell" >1</td>
+				<td class="jsgrid-cell" >13</td>
+				<td class="jsgrid-cell" >4</td>
+			</tr>	
+			<tr class="jsgrid-row">
+				<td class="jsgrid-cell" >고객센터 공지사항</td>
+				<td class="jsgrid-cell" >12</td>
+				<td class="jsgrid-cell" >1</td>
+				<td class="jsgrid-cell" >13</td>
+				<td class="jsgrid-cell" >4</td>
+				<td class="jsgrid-cell" >1</td>
+				<td class="jsgrid-cell" >13</td>
+				<td class="jsgrid-cell" >4</td>
+			</tr>	
+			<tr class="jsgrid-row">
+				<td class="jsgrid-cell" >고객센터 공지사항</td>
+				<td class="jsgrid-cell" >12</td>
+				<td class="jsgrid-cell" >1</td>
+				<td class="jsgrid-cell" >13</td>
+				<td class="jsgrid-cell" >4</td>
+				<td class="jsgrid-cell" >1</td>
+				<td class="jsgrid-cell" >13</td>
+				<td class="jsgrid-cell" >4</td>
+			</tr>	
+			<tr class="jsgrid-row">
+				<td class="jsgrid-cell" >고객센터 공지사항</td>
+				<td class="jsgrid-cell" >12</td>
+				<td class="jsgrid-cell" >1</td>
+				<td class="jsgrid-cell" >13</td>
+				<td class="jsgrid-cell" >4</td>
+				<td class="jsgrid-cell" >1</td>
+				<td class="jsgrid-cell" >13</td>
+				<td class="jsgrid-cell" >4</td>
+			</tr>	
+		</table>	
+   </div>
+   <div class="col-12 card-footer" style=" height: 50vh;">
+		<div class="card card">
+			<div class="card-header">
+				<h3 class="card-title">Bar Chart</h3>
+				<div class="card-tools">
+					<button type="button" class="btn btn-tool" data-card-widget="collapse">
+					<i class="fas fa-minus"></i>
+					</button>
+					<button type="button" class="btn btn-tool" data-card-widget="remove">
+					<i class="fas fa-times"></i>
+					</button>
+				</div>
+			</div>
+			<div class="card-body">
+				<div class="chart"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+					<canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 764px;" width="764" height="250" class="chartjs-render-monitor"></canvas>
+				</div>
+			</div>
+		</div>
+   </div>
+</section>
+   
+   
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+package com.lms.hexa.service;
+
+import com.lms.hexa.dao.TemplateDAO;
+
+public class TemplateServiceImpl implements TemplateService {
+	
+	private TemplateDAO templateDAO;
+
+	public void setTemplateDAO(TemplateDAO templateDAO) {
+		this.templateDAO = templateDAO;
+	}
+	
+	
+
+	
+}

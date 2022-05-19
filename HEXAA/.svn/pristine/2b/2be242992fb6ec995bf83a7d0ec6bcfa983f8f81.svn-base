@@ -1,0 +1,60 @@
+package com.lms.hexa.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+
+import com.lms.hexa.dto.MenuVO;
+
+public class MenuDAOImpl implements MenuDAO{
+
+	private SqlSession session;
+	
+	public void setSession(SqlSession session) {
+		this.session = session;
+	}
+
+	@Override
+	public List<MenuVO> selectMemberMenuList() throws SQLException {
+		List<MenuVO> menuList= session.selectList("Menu-Mapper.selectMemberMainMenu");
+		return menuList;
+	}
+
+	@Override
+	public List<MenuVO> selectMemberSubMenuList(String login_id) throws SQLException {
+		List<MenuVO> menuList= session.selectList("Menu-Mapper.selectMemberSubMenu",login_id);
+		return menuList;
+	}
+
+	@Override
+	public List<MenuVO> selectManagerMenuList() throws SQLException {
+		List<MenuVO> menuList= session.selectList("Menu-Mapper.selectManagerMainMenu");
+		return menuList;
+	}
+
+	@Override
+	public List<MenuVO> selectManagerSubMenuList(String login_id) throws SQLException {
+		List<MenuVO> menuList= session.selectList("Menu-Mapper.selectManagerSubMenu",login_id);
+		return menuList;
+	}
+
+	@Override
+	public List<MenuVO> selectMemberFavoriteMenuList(String login_id) {
+		List<MenuVO> menuList= session.selectList("Menu-Mapper.selectMemberFavoriteMenuList",login_id);
+		return menuList;
+	}
+
+	@Override
+	public List<MenuVO> selectManagerFavoriteMenuList(String login_id) {
+		List<MenuVO> menuList= session.selectList("Menu-Mapper.selectManagerFavoriteMenuList",login_id);
+		return menuList;
+	}
+
+	@Override
+	public String selectMenuId(String menuName) throws SQLException {
+		String menuId = session.selectOne("Menu-Mapper.selectMenuId", menuName);
+		return menuId;
+	}
+	
+}

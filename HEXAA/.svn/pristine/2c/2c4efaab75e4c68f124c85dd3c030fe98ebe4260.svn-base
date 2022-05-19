@@ -1,0 +1,44 @@
+package com.lms.hexa.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+
+import org.apache.ibatis.session.SqlSession;
+
+import com.lms.hexa.dto.ConsultingVO;
+
+
+
+
+
+public class ConsultingDAOImpl implements ConsultingDAO{
+
+	
+	private SqlSession session;
+	
+	
+	public void setSession(SqlSession session) {
+		this.session = session;
+	}
+
+	
+
+
+
+	@Override
+	public List<ConsultingVO> selectDivision() throws SQLException {
+		List<ConsultingVO> list = session.selectList("Consulting-Mapper.selectDivision");
+		return list;
+	}
+
+
+
+
+
+
+
+
+
+	
+}

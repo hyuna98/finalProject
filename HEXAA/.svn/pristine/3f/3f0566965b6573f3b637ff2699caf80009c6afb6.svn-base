@@ -1,0 +1,18 @@
+package com.lms.hexa.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.lms.hexa.command.Criteria;
+import com.lms.hexa.dto.HomeworkVO;
+import com.lms.hexa.dto.LessonVO;
+
+public interface HomeworkService {
+	
+	// 강의정보 검색 list
+	List<LessonVO> getLessonIntegratedSearchList(Criteria cri);
+	
+	// 강의정보등록
+	void regist(HomeworkVO homeworkVO, ArrayList<String> studentIdlist);
+	
+}

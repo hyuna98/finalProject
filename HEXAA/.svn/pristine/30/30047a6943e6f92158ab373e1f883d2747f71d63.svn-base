@@ -1,0 +1,31 @@
+package com.lms.hexa.service;
+
+import java.util.HashMap;
+import java.util.List;
+
+import com.lms.hexa.dao.MessageGroupDAO;
+import com.lms.hexa.dto.MessageGroupVO;
+
+public class MessageGroupServiceImpl implements MessageGroupService {
+		
+	private MessageGroupDAO messageGroupDAO;
+
+	public void setMessageGroupDAO(MessageGroupDAO messageGroupDAO) {
+		this.messageGroupDAO = messageGroupDAO;
+	}
+
+	@Override
+	public List<MessageGroupVO> getMessageGroupByGroupName(String groupName) throws Exception {
+		List<MessageGroupVO> messageGroupList = messageGroupDAO.selectMessageGroupByGroupName(groupName);
+		
+		return messageGroupList;
+	}
+
+	@Override
+	public int registMessageGroup(HashMap<String, Object> params) throws Exception {
+		messageGroupDAO.deleteOldMessageGroup(params);
+		int result = messageGroupDAO.insertMessageGroup(params);
+		return result;
+	}
+	
+}

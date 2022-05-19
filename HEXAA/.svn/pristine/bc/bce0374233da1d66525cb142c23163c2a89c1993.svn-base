@@ -1,0 +1,16 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+
+<footer class="main-footer">
+	<!-- To the right -->
+	<div class="float-right d-none d-sm-inline">
+		<a href="http://www.ddit.or.kr/">대덕인재개발원</a>
+	</div>
+	<!-- Default to the left -->
+	<strong>
+		전자정부 표준 프레임워크 기반 풀-스택 개발자 양성과정&nbsp;&nbsp;
+		2021.10.06 ~ 2022.05.19
+	</strong>
+</footer>
+  

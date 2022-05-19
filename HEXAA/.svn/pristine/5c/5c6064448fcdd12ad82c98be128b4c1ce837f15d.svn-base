@@ -1,0 +1,14 @@
+package com.lms.hexa.service;
+
+import java.sql.SQLException;
+
+import com.lms.hexa.dto.ClassVO;
+
+public interface ClassService {
+
+	ClassVO selectClassById(String classId) throws SQLException;
+
+	ClassVO getClassInfoByStudentId(String studentId);
+	
+	
+}

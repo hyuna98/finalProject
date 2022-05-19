@@ -1,0 +1,34 @@
+package com.lms.hexa.service;
+
+import java.util.List;
+
+import com.lms.hexa.dao.ScoreDAO;
+import com.lms.hexa.dto.ExamVO;
+import com.lms.hexa.dto.QuestionVO;
+
+public class ScoreServiceImpl implements ScoreService {
+	
+	protected ScoreDAO scoreDAO;
+	
+	public void setScoreDAO(ScoreDAO scoreDAO) {
+		this.scoreDAO = scoreDAO;
+	}
+
+	@Override // 시험 등록
+	public void examRegist(ExamVO exam) throws Exception {
+		scoreDAO.insertExam(exam);
+	}
+
+	@Override // 시험 리스트 조회
+	public List<ExamVO> getExamList() throws Exception {
+		List<ExamVO> examList = scoreDAO.selectExamList();
+		return examList;
+	}
+
+	@Override
+	public List<QuestionVO> getQuestionList(int examId) throws Exception {
+		List<QuestionVO> questionList = scoreDAO.selectQuestionList(examId);
+		return questionList;
+	}
+
+}

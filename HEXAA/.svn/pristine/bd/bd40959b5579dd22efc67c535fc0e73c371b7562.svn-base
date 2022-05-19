@@ -1,0 +1,52 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+<section class="content-header">
+   <div class="container-fluid">
+        <div class="row md-2">
+           <div class="col-sm-6">
+              <h1>메인(학생)</h1>              
+           </div>
+           <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                 <li class="breadcrumb-item">
+                    <a href="list.do">
+                       <i class="fa fa-dashboard"></i>학생>메인
+                    </a>
+                 </li>
+               </ol>
+           </div>
+        </div>
+   </div>
+</section>
+<section class="content">
+   <div class="card-header"style="padding:0px; margin:0px; ">
+   	  <div class="row" style="padding:0px; margin:0px; ">
+	      <div class="col-sm-6" style="padding:5px; margin:0px; border: 3px solid rgb(32, 73, 105); border-radius:15px; height:340px;">
+	      </div>
+	      <div class="col-sm-6" style="padding:5px; margin:0px; border: 3px solid rgb(32, 73, 105); border-radius:15px; height:340px;">
+	      </div>
+      </div>
+   </div>
+   <br>
+   
+   <div class="card-body" style="padding:0px; margin:0px; ">
+   	   <div class="row" style="padding:0px; margin:0px; ">
+	      <div class="col-sm-6" style="padding:5px; border: 3px solid rgb(32, 73, 105); border-radius:15px; height:340px;">
+	      </div>
+	      <div class="col-sm-6" style="padding:5px; border: 3px solid rgb(32, 73, 105); border-radius:15px; height:340px;">
+	      </div>
+      </div>
+   </div>
+</section>
+   
+   
+   
+</body>
+</html>

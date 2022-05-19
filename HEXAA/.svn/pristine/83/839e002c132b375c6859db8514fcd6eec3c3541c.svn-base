@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="Parent-Mapper">
+  
+  	<resultMap type="parent" id="parentMap">
+  		<result property="parentId" column="PARENT_ID" />
+  		<result property="parentPw" column="PARENT_PW" />
+  	</resultMap>
+  
+	  	<update id="updatePwd" parameterType="str">
+			UPDATE PARENT
+			SET PARENT_PW = #{emailAddress}
+				WHERE PARENT_ID = #{emailAddress}
+		</update>
+	  
+  
+  </mapper>

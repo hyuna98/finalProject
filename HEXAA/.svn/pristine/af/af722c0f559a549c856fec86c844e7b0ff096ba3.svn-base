@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Score-Mapper">
+	
+	<resultMap type="exam" id="examMap">
+		<result property="examGroup" column="exam_group"/>
+		<result property="examDate" column="exam_date"/>
+		<result property="examGrade" column="exam_grade"/>
+		<result property="examSemester" column="exam_semester"/>
+		<result property="examQuarter" column="exam_quarter"/>
+		<result property="examSeg" column="sub_seg"/>
+		<result property="examName" column="sub_exam_name"/>
+	</resultMap>
+	
+	<update id="insertExam" parameterType="exam">
+		INSERT INTO subject_exam (
+		    sub_exam_id,
+		    sub_seg,
+		    exam_group,
+		    exam_date,
+		    exam_grade,
+		    exam_quarter,
+		    exam_semester,
+		    sub_exam_name
+		) VALUES (
+	    	SUBJECT_EXAM_SEQ.NEXTVAL,
+		    #{examSeg},
+		    #{examGroup},
+		    #{examDate},
+		    #{examGrade},
+		    #{examQuarter},
+		    #{examSemester},
+		    #{examName}
+		)
+	</update>
+	
+	<select id="selectExamList" resultMap="examMap">
+		select *
+		  from subject_exam
+	</select>
+</mapper>

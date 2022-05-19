@@ -1,0 +1,43 @@
+package com.lms.hexa.dto;
+
+public class KakaoSendVO {
+		
+		private String kakaoSendId;
+		private String mngId;
+		private String kakaoSendContent;
+		private String kakaoSendDate;
+		private String kakaoSendGroup;
+		
+		
+		public String getKakaoSendId() {
+			return kakaoSendId;
+		}
+		public void setKakaoSendId(String kakaoSendId) {
+			this.kakaoSendId = kakaoSendId;
+		}
+		public String getMngId() {
+			return mngId;
+		}
+		public void setMngId(String mngId) {
+			this.mngId = mngId;
+		}
+		public String getKakaoSendContent() {
+			return kakaoSendContent;
+		}
+		public void setKakaoSendContent(String kakaoSendContent) {
+			this.kakaoSendContent = kakaoSendContent;
+		}
+		public String getKakaoSendDate() {
+			return kakaoSendDate;
+		}
+		public void setKakaoSendDate(String kakaoSendDate) {
+			this.kakaoSendDate = kakaoSendDate;
+		}
+		public String getKakaoSendGroup() {
+			return kakaoSendGroup;
+		}
+		public void setKakaoSendGroup(String kakaoSendGroup) {
+			this.kakaoSendGroup = kakaoSendGroup;
+		}
+		
+}

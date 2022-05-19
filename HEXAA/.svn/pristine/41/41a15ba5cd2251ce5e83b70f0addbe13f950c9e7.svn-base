@@ -1,0 +1,452 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%--  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<c:set var="pageMaker" value="${dataMap.pageMaker }" />
+<c:set var="cri" value="${dataMap.pageMaker.cri }" />
+<c:set var="boardList" value="${dataMap.boardList }" /> 
+ --%>
+<head>
+<style>
+/*  #tableaccordion { 
+ border-collapse:separate;
+ border-radius: 20px; 
+ }  */
+</style>
+
+</head>
+
+<body>
+
+
+
+
+	<!-- Main content -->
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row md-2">
+				<div class="col-sm-6">
+					<h1>공지사항</h1>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<!-- Main content -->
+	<section class="content">
+		<div class="container-fluid">
+			
+				<div class="row" style="">
+					<div class="col-sm-12">
+						<div class="card card-light card-outline" style="height: 90vh;">
+							<div class="card-header">
+							<div class="row">
+							<div >
+								<button type="button" class="btn btn-light btn-smx"
+									id="registBtn"
+									style="width: 11vh; height: 5vh; font-size: .875rem;"
+									onclick="OpenWindow('/manager/pds/Regist.do','자료등록',800,700);">글등록</button>
+							</div>
+
+							<div class="col-sm-1"></div>
+							<div class="col-sm-4"></div>
+							<div class="col-sm-5">
+								<div id="keyword" class="card-tools" style="width: 77vh;">
+									<div class="input-group ">
+										<select class="form-control col-md-3" name="perPageNum"
+											id="perPageNum" onchange="list_go();">
+											<option value="10">정렬개수</option>
+											<option value="20">2개씩</option>
+											<option value="50">5개씩</option>
+											<option value="100">10개씩</option>
+
+										</select> <select class="form-control col-md-4" name="searchType"
+											id="searchType">
+											<option value="tcw">전 체</option>
+											<option value="t">제 목</option>
+											<option value="w">작성자</option>
+											<option value="c">내 용</option>
+											<option value="tc">제목+내용</option>
+											<option value="cw">작성자+내용</option>
+											<option value="tcw">작성자+제목+내용</option>
+										</select> <input class="form-control" type="text" name="keyword"
+											placeholder="검색어를 입력하세요." size="20px;" value="" /> <span
+											class="input-group-append">
+											<button class="btn btn-light" type="button"
+												onclick="list_go(1);" data-card-widget="search">
+												<i class="fa fa-fw fa-search"></i>
+											</button>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				
+
+							<div class="card-body">
+								<table id="tableaccordion"
+									class="table table-bordered table-hover">
+									<thead>
+										<tr>
+											<th>제목</th>
+											<th >작성일자</th>
+										</tr>
+									</thead>
+									<tbody>
+									
+										<tr data-widget="expandable-table" aria-expanded="false">
+											
+											<td style="text-align: left;">[10월과정 면접일정] 전자정부 표준 프레임워크 기반 풀-스택 개발자 양성과정(15기)</td>
+											<td >11-7-2014</td>
+										</tr>
+										<tr class="expandable-body d-none">
+											<td colspan="5">
+												<p style="text-align: left;display: none; padding-bottom: 0px; margin-bottom: 0px;"><전자정부 표준 프레임워크 기반 풀-스택 개발자 양성과정 면접일정 안내>
+면접일시 : 2021. 09. 30 (목) 오전 10:00, 11:00 (문자로 개별통보 받은 시간에 오시면 됩니다.)
+장     소 : 본원 분임토의 4실</p>
+												<div class="row" style="padding-top: 0px;">
+													<div class="col-sm-10"></div>
+
+													<div class="col-sm-1">
+														<button type="button"
+															class="btn btn-block btn-primary btn-sm">수정</button>
+													</div>
+													<div class="col-sm-1">
+														<button type="button"
+															class="btn btn-block btn-secondary btn-sm">삭제</button>
+													</div>
+												</div>
+											</td>
+										</tr>
+										<tr data-widget="expandable-table" aria-expanded="false">
+										<td style="text-align: left;">직업훈련기관 방역패스 적용 관련 안내입니다. (일시중단)</td>
+											<td >11-7-2014</td>
+										</tr>
+										<tr class="expandable-body d-none">
+											<td colspan="5">
+												<p style="text-align: left;display: none; padding-bottom: 0px; margin-bottom: 0px;">
+													12월 13일부터 직업훈련기관에 방역패스가 적용됩니다.
+
+													이에 따라 모든 방문자에 대하여 백신접종완료 또는 코로나 음성 여부 등을 확인하여야 합니다.
+													
+													출입 시 백신접종 증명서 또는 PCR 검사 음성확인서(48시간 이내)가 확인되셔야 출입이 가능한 점 인지하여 주시기 바랍니다.
+													
+													감사합니다.
+													
+													* 1월 4일 대법원 판결로 인하여 일시중단됨을 알려드립니다. *
+
+															</p>
+												<div class="row" style="padding-top: 0px;">
+													<div class="col-sm-10"></div>
+
+													<div class="col-sm-1">
+														<button type="button"
+															class="btn btn-block btn-primary btn-sm">수정</button>
+													</div>
+													<div class="col-sm-1">
+														<button type="button"
+															class="btn btn-block btn-secondary btn-sm">삭제</button>
+													</div>
+												</div>
+											</td>
+										</tr>
+										<tr data-widget="expandable-table" aria-expanded="false">
+											<td style="text-align: left;">존경하는 훈련생 여러분</td>
+											<td >11-7-2014</td>
+										</tr>
+										<tr class="expandable-body d-none">
+											<td colspan="5">
+												<p
+													style="text-align: left;display: none; padding-bottom: 0px; margin-bottom: 0px;">존경하는 훈련생 여러분
+															
+															하루종일 어려운 과정 공부하느라 힘들 법도 할텐데
+															
+															늦은 밤까지 자율학습에 참여하는 여러분들을 보면
+															
+															너무나 이쁘고, 고맙고, 행복하고, 그리고 아름답게 느껴집니다.
+															
+															그래서 깨물어주고 싶고
+															
+															내 자식들 같아 감사해서 눈물이 나려 합니다.
+															
+															여러분의 부모님께서 이렇게 열심히 공부하는 여러분들을 보신다면
+															
+															얼마나 대견하고 행복하시겠습니까?
+															
+															하루하루 최선을 다하며 “무”에서 “유”를 창출하며 여러분의 미래를 개척하는 여러분이야말로
+															
+															진정한 이 나라의 청년이며, 미래라는 생각이 듭니다.
+															
+															때로는 힘들어 울면서도 슬기롭게 극복하며 프로그램개발자로 성장하는
+															
+															여러분을 보노라면 세상에 불가능은 없다고 생각합니다.
+															
+															또한 여러분을 바라보며 감탄하고 느끼는 바가 너무 많습니다.
+															
+															그래서 고맙다고 이렇게 글을 올립니다.
+															
+															훈련생 여러분
+															
+															
+															정말 감사합니다.</p>
+												<div class="row" style="padding-top: 0px;">
+													<div class="col-sm-10"></div>
+
+													<div class="col-sm-1">
+														<button type="button"
+															class="btn btn-block btn-primary btn-sm">수정</button>
+													</div>
+													<div class="col-sm-1">
+														<button type="button"
+															class="btn btn-block btn-secondary btn-sm">삭제</button>
+													</div>
+												</div>
+											</td>
+										</tr>
+										<tr data-widget="expandable-table" aria-expanded="false">
+											<td style="text-align: left;">[3월과정 면접일정] 전자정부 표준 프레임워크 기반 풀-스택 개발자 양성과정(9기)</td>
+											<td >11-7-2014</td>
+										</tr>
+										<tr class="expandable-body">
+											<td colspan="5">
+												<p
+													style="text-align: left;display: none; padding-bottom: 0px; margin-bottom: 0px;"><전자정부 표준 프레임워크 기반 풀-스택 개발자 양성과정 면접일정 안내>
+
+
+
+													면접일시 : 2021. 03. 05 (금) 오전10시, 11시(문자로 개별통보 받은 시간에 오시면 됩니다.)
+
+
+
+															장     소 : 본원 402호</p>
+												<div class="row" style="padding-top: 0px;">
+													<div class="col-sm-10"></div>
+
+													<div class="col-sm-1">
+														<button type="button"
+															class="btn btn-block btn-primary btn-sm">수정</button>
+													</div>
+													<div class="col-sm-1">
+														<button type="button"
+															class="btn btn-block btn-secondary btn-sm">삭제</button>
+													</div>
+												</div>
+											</td>
+										</tr>
+										<tr data-widget="expandable-table" aria-expanded="false">
+											<td style="text-align: left;">[3월과정 면접일정] 전자정부 표준 프레임워크 기반 풀-스택 개발자 양성과정(9기)</td>
+											<td >11-7-2014</td>
+										</tr>
+										<tr class="expandable-body">
+											<td colspan="5">
+												<p
+													style="text-align: left;display: none; padding-bottom: 0px; margin-bottom: 0px;"><전자정부 표준 프레임워크 기반 풀-스택 개발자 양성과정 면접일정 안내>
+
+
+
+													면접일시 : 2021. 03. 05 (금) 오전10시, 11시(문자로 개별통보 받은 시간에 오시면 됩니다.)
+
+
+
+															장     소 : 본원 402호</p>
+												<div class="row" style="padding-top: 0px;">
+													<div class="col-sm-10"></div>
+
+													<div class="col-sm-1">
+														<button type="button"
+															class="btn btn-block btn-primary btn-sm">수정</button>
+													</div>
+													<div class="col-sm-1">
+														<button type="button"
+															class="btn btn-block btn-secondary btn-sm">삭제</button>
+													</div>
+												</div>
+											</td>
+										</tr>
+										<tr data-widget="expandable-table" aria-expanded="false">
+											<td style="text-align: left;">[3월과정 면접일정] 전자정부 표준 프레임워크 기반 풀-스택 개발자 양성과정(9기)</td>
+											<td >11-7-2014</td>
+										</tr>
+										<tr class="expandable-body">
+											<td colspan="5">
+												<p
+													style="text-align: left;display: none; padding-bottom: 0px; margin-bottom: 0px;"><전자정부 표준 프레임워크 기반 풀-스택 개발자 양성과정 면접일정 안내>
+
+
+
+													면접일시 : 2021. 03. 05 (금) 오전10시, 11시(문자로 개별통보 받은 시간에 오시면 됩니다.)
+
+
+
+															장     소 : 본원 402호</p>
+												<div class="row" style="padding-top: 0px;">
+													<div class="col-sm-10"></div>
+
+													<div class="col-sm-1">
+														<button type="button"
+															class="btn btn-block btn-primary btn-sm">수정</button>
+													</div>
+													<div class="col-sm-1">
+														<button type="button"
+															class="btn btn-block btn-secondary btn-sm">삭제</button>
+													</div>
+												</div>
+											</td>
+										</tr>
+										<tr data-widget="expandable-table" aria-expanded="false">
+											<td style="text-align: left;">[3월과정 면접일정] 전자정부 표준 프레임워크 기반 풀-스택 개발자 양성과정(9기)</td>
+											<td >11-7-2014</td>
+										</tr>
+										<tr class="expandable-body">
+											<td colspan="5">
+												<p
+													style="text-align: left;display: none; padding-bottom: 0px; margin-bottom: 0px;"><전자정부 표준 프레임워크 기반 풀-스택 개발자 양성과정 면접일정 안내>
+
+
+
+													면접일시 : 2021. 03. 05 (금) 오전10시, 11시(문자로 개별통보 받은 시간에 오시면 됩니다.)
+
+
+
+															장     소 : 본원 402호</p>
+												<div class="row" style="padding-top: 0px;">
+													<div class="col-sm-10"></div>
+
+													<div class="col-sm-1">
+														<button type="button"
+															class="btn btn-block btn-primary btn-sm">수정</button>
+													</div>
+													<div class="col-sm-1">
+														<button type="button"
+															class="btn btn-block btn-secondary btn-sm">삭제</button>
+													</div>
+												</div>
+											</td>
+										</tr>
+										<tr data-widget="expandable-table" aria-expanded="false">
+											<div class="col-sm-1"></div>
+											<td style="text-align: left; ">[3월과정 면접일정] 전자정부 표준 프레임워크 기반 풀-스택 개발자 양성과정(9기)</td>
+											<td >11-7-2014</td>
+										</tr>
+										<tr class="expandable-body">
+											<td colspan="5">
+												<p
+													style="text-align: left;display: none; padding-bottom: 0px; margin-bottom: 0px;"><전자정부 표준 프레임워크 기반 풀-스택 개발자 양성과정 면접일정 안내>
+
+
+
+													면접일시 : 2021. 03. 05 (금) 오전10시, 11시(문자로 개별통보 받은 시간에 오시면 됩니다.)
+
+
+
+															장     소 : 본원 402호</p>
+												<div class="row" style="padding-top: 0px;">
+													<div class="col-sm-10"></div>
+
+													<div class="col-sm-1">
+														<button type="button"
+															class="btn btn-block btn-primary btn-sm">수정</button>
+													</div>
+													<div class="col-sm-1">
+														<button type="button"
+															class="btn btn-block btn-secondary btn-sm">삭제</button>
+													</div>
+												</div>
+											</td>
+										</tr>
+										
+									</tbody>
+								</table>
+								<!-- /.content -->
+
+								<div class="card-footer">
+									 <nav aria-label="Navigation">
+              <ul class="pagination justify-content-center m-0">
+                <li class="page-item">
+                  <a class="page-link" href="javascript:list_go(1);">
+                    <i class="fas fa-angle-double-left"></i>
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="javascript:list_go('1');">
+                    <i class="fas fa-angle-left"></i>
+                  </a>
+                </li>
+                <li class="page-item active">
+                  <a class="page-link" href="javascript:list_go('1');">1</a>
+                </li>
+
+                <li class="page-item ">
+                  <a class="page-link" href="javascript:list_go('2');">2</a>
+                </li>
+
+                <li class="page-item">
+                  <a class="page-link" href="javascript:list_go('1');">
+                    <i class="fas fa-angle-right"></i>
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="javascript:list_go('2');">
+                    <i class="fas fa-angle-double-right"></i>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+									</div>
+
+
+									<form id="jobForm">
+										<input type='hidden' name="page" value="" /> <input
+											type='hidden' name="perPageNum" value="" /> <input
+											type='hidden' name="searchType" value="" /> <input
+											type='hidden' name="keyword" value="" />
+									</form>
+
+<script>
+	function list_go(page, url) {
+		if (!url)
+			url = "list.do";
+
+		var jobForm = $('#jobForm');
+
+		jobForm.find("[name='page']").val(
+				page);
+		jobForm
+				.find("[name='perPageNum']")
+				.val(
+						$(
+								'select[name="perPageNum"]')
+								.val());
+		jobForm
+				.find("[name='searchType']")
+				.val(
+						$(
+								'select[name="searchType"]')
+								.val());
+		jobForm
+				.find("[name='keyword']")
+				.val(
+						$(
+								'div.input-group>input[name="keyword"]')
+								.val());
+
+		jobForm.attr({
+			action : url,
+			method : 'get'
+		}).submit();
+	}
+</script>
+								</div>
+								<div class="col-sm-2"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+	</section>

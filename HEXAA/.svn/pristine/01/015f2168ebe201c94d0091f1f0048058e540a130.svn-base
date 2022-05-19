@@ -1,0 +1,134 @@
+package com.lms.hexa.controller;
+
+
+import java.sql.SQLException;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.lms.hexa.command.Criteria;
+import com.lms.hexa.command.CriteriaCommand;
+import com.lms.hexa.command.NoticeModifyCommand;
+import com.lms.hexa.command.NoticeRegistCommand;
+
+import com.lms.hexa.dto.NoticeVO;
+
+import com.lms.hexa.service.NoticeService;
+
+
+@Controller
+@RequestMapping("/manager/board/notice")
+public class NoticeController {
+	
+	
+	@Autowired
+	private NoticeService noticeService;
+	
+	  @RequestMapping() 
+	  public ModelAndView noticeList(CriteriaCommand cricmd,HttpServletRequest request,	ModelAndView mnv) throws SQLException { 
+	  String url ="manager/board/notice"; 
+	  Criteria cri = cricmd.toCriteria();
+	  Map<String, Object> dataMap = noticeService.getList(cri);
+		
+		mnv.addObject("dataMap",dataMap);
+		mnv.setViewName(url);	
+		
+		return mnv;
+	  }
+
+		
+		@RequestMapping("/registForm")
+		public String noticeRegist() {
+			String url = "manager/board/noticeRegist";
+			return url;
+		}
+		
+		@RequestMapping(value="/regist", method = RequestMethod.POST, produces="text/plain;charset=utf-8")
+		public String regist(NoticeRegistCommand registReq, HttpServletRequest request, RedirectAttributes rttr) throws Exception {
+			
+			String url = "manager/board/regist_success";
+			System.out.println(registReq);
+			System.out.println(registReq.getMngId());
+			System.out.println(registReq.getNoticeTitle());
+			System.out.println(registReq.getNoticeContent());
+			NoticeVO notice = registReq.toNoticeVO();
+
+			//pds.setPdsTitle((String)request.getAttribute("XSStitle"));
+			noticeService.regist(notice);
+			
+			rttr.addFlashAttribute("from", "regist");
+			return url;
+		}
+		
+		@RequestMapping("/detail")
+		public String modifyPOST(NoticeModifyCommand modifyReq,int noticeId,RedirectAttributes rttr) throws Exception {
+			
+			String url = "manager/board/noticeDetail";
+      	  
+			NoticeVO notice = modifyReq.toNoticeVO();
+			notice.setNoticeTitle(notice.getNoticeTitle());
+
+			
+			noticeService.detail(noticeId);
+			
+			rttr.addFlashAttribute("from", "detail");
+			rttr.addAttribute("noticeId", notice.getNoticeId());
+			
+			return url;
+			
+		}
+		
+		
+		@RequestMapping("/modifyForm")
+		public ModelAndView noticeModify(ModelAndView mnv, int noticeId) throws Exception {
+			String url = "manager/board/noticeModify";
+			
+			NoticeVO notice = noticeService.getNotice(noticeId);
+			
+			mnv.addObject("notice",notice);
+			mnv.setViewName(url);
+			
+			return mnv;
+		}
+		
+		
+		@RequestMapping("/modify")
+		public String modifyPOST(NoticeModifyCommand modifyReq, HttpServletRequest request, RedirectAttributes rttr) throws Exception {
+			
+			String url = "manager/board/noticeDetail";
+		        	  
+			NoticeVO notice = modifyReq.toNoticeVO();
+			notice.setNoticeTitle(notice.getNoticeTitle());
+
+			
+			noticeService.modify(notice);
+			
+			rttr.addFlashAttribute("from", "modify");
+			rttr.addAttribute("noticeId", notice.getNoticeId());
+			
+			return url;
+			
+		}
+		
+		@RequestMapping("/remove")
+		public String remove(int noticeId, RedirectAttributes rttr) throws Exception {
+			String url = "redirect:/manager/board/notice.do";
+			
+			noticeService.remove(noticeId);
+			
+			rttr.addFlashAttribute("from", "remove");
+			rttr.addAttribute("noticeId", noticeId);
+			
+			return url;
+		}
+			
+
+	
+}

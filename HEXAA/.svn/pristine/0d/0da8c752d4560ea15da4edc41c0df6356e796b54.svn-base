@@ -1,0 +1,324 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+	<aside class="main-sidebar sidebar-dark-primary elevation-4">
+		
+		<!-- 시스템 로고, 시스템 명 -->
+		<a href="index3.html" class="brand-link"> <img
+			src="<%=request.getContextPath() %>/resources/bootstrap/dist/img/HexaLogo.png" alt="HEXA Logo"
+			class="brand-image img-circle elevation-3" style="opacity: .8">
+			<span class="brand-text font-weight-light">HEXA</span>
+		</a>
+	
+		<!-- 사이드바 -->
+		<div class="sidebar">
+			
+			<!-- 사이드바 메뉴리스트 -->
+			<nav class="mt-2">
+				<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+					<!-- 상위메뉴 -->
+					<li class="nav-item">
+						<a href="#" class="nav-link">
+							 &nbsp;<i class="fas fa-solid fa-star"></i>&nbsp;&nbsp;&nbsp;
+							<p>즐겨찾기<i class="fas fa-angle-left right"></i></p>
+						</a>
+ 							<!-- 하위메뉴 -->
+							<ul class="nav nav-treeview subMenuList" style="display: none;">
+								<li class="nav-item">
+									<a href="#" class="nav-link">
+									
+										<p style="margin-left: 3vh;">즐겨찾기1</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="#" class="nav-link" >
+									
+										<p style="margin-left: 3vh;">즐겨찾기2</p>
+									</a>
+								</li>
+								<li class="nav-item" >
+									<a href="#" class="nav-link">
+									
+										<p style="margin-left: 3vh;">즐겨찾기3</p>
+									</a>
+								</li>
+							</ul>
+					</li>
+					<!-- 상위메뉴 -->
+					<li class="nav-item">
+						<a href="#" class="nav-link">
+							  &nbsp;<i class="fas fa-solid fa-user-graduate"></i>&nbsp;&nbsp;
+							&nbsp;<p> 학생관리<i class="fas fa-angle-left right"></i></p>
+						</a>
+ 							<!-- 하위메뉴 -->
+							<ul class="nav nav-treeview subMenuList" style="display: none;">
+								<li class="nav-item">
+									<a href="javascript:goPage('/manager/membermanagement/membermanagement/list.do')" class="nav-link">
+								
+										<p style="margin-left: 3vh;">학생관리</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="javascript:goPage('/manager/membermanagement/attandance/list.do')" class="nav-link">
+									
+										<p style="margin-left: 3vh;">학생출결관리</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="javascript:goPage('/manager/membermanagement/attandance/inmodify.do')" class="nav-link">
+										
+										<p style="margin-left: 3vh;">등원</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="javascript:goPage('/manager/membermanagement/attandance/outmodify.do')" class="nav-link">
+										
+										<p style="margin-left: 3vh;">하원</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="javascript:goPage('/manager/membermanagement/IDApplyList.do')" class="nav-link">
+										
+										<p style="margin-left: 3vh;">ID신청변경확인</p>
+									</a>
+								</li>
+							</ul>
+					</li>
+					<!-- 상위메뉴 -->
+					<li class="nav-item">
+						<a href="#" class="nav-link">
+							&nbsp;<i class="fas fa-solid fa-head-side-cough"></i>&nbsp;&nbsp;
+							<p>상담관리<i class="fas fa-angle-left right"></i></p>
+						</a>
+ 							<!-- 하위메뉴 -->
+							<ul class="nav nav-treeview subMenuList" style="display: none;">
+								<li class="nav-item">
+									<a href="javascript:goPage('/manager/consultation/scheduleManagement.do')" class="nav-link">
+										
+										<p style="margin-left: 3vh;">상담일정관리</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="javascript:goPage('/manager/consultation/list.do')" class="nav-link">
+									
+										<p style="margin-left: 3vh;">상담일지관리</p>
+									</a>
+								</li>
+							</ul>
+					</li>
+					
+					<!-- 상위메뉴 -->
+					<li class="nav-item">
+						<a href="#" class="nav-link">
+							&nbsp;<i class="fas fa-solid fa-user-tie"></i>&nbsp;&nbsp;&nbsp;&nbsp;
+							<p>직원관리<i class="fas fa-angle-left right"></i></p>
+						</a>
+ 							<!-- 하위메뉴 -->
+							<ul class="nav nav-treeview subMenuList" style="display: none;">
+								<li class="nav-item">
+									<a href="javascript:goPage('/manager/managermanagement/managermanagement/list.do')" class="nav-link">
+										
+										<p style="margin-left: 3vh;">직원관리</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="javascript:goPage('/manager/managermanagement/attandance/list.do')" class="nav-link">
+										
+										<p style="margin-left: 3vh;">출근부관리</p>
+									</a>
+								</li>
+							</ul>
+					</li>
+					
+					<!-- 상위메뉴 -->
+					<li class="nav-item">
+						<a href="#" class="nav-link">
+							&nbsp;<i class="fas fa-regular fa-book-open"></i>&nbsp;&nbsp;&nbsp;
+							<p>수업관리<i class="fas fa-angle-left right"></i></p>
+						</a>
+ 							<!-- 하위메뉴 -->
+							<ul class="nav nav-treeview subMenuList" style="display: none;">
+								<li class="nav-item">
+									<a href="javascript:goPage('/manager/lesson/list.do')" class="nav-link">
+										
+										<p style="margin-left: 3vh;">수업관리</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="javascript:goPage('/manager/lesson/listByClassRoom.do')" class="nav-link">
+									
+										<p style="margin-left: 3vh;">강의실별 수업조회</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="javascript:goPage('/manager/homework/list.do')" class="nav-link">
+									
+										<p style="margin-left: 3vh;">과제관리</p>
+									</a>
+								</li>
+							</ul>
+					</li>
+					
+					<!-- 상위메뉴 -->
+					<li class="nav-item">
+						<a href="#" class="nav-link">
+							&nbsp;<i class="fas fa-solid fa-chart-bar"></i>&nbsp;&nbsp;&nbsp;
+							<p>성적관리<i class="fas fa-angle-left right"></i></p>
+						</a>
+ 							<!-- 하위메뉴 -->
+							<ul class="nav nav-treeview subMenuList" style="display: none;">
+								<li class="nav-item">
+									<a href="javascript:goPage('/manager/score/examMngm.do')" class="nav-link">
+									
+										<p style="margin-left: 3vh;">시험관리</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="javascript:goPage('/manager/score/examMark.do')" class="nav-link">
+									
+										<p style="margin-left: 3vh;">성적입력</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="javascript:goPage('/manager/score/gradeCheck.do')" class="nav-link">
+									
+										<p style="margin-left: 3vh;">성적조회</p>
+									</a>
+								</li>
+							</ul>
+					</li>
+					
+					<!-- 상위메뉴 -->
+					<li class="nav-item">
+						<a href="#" class="nav-link">
+							&nbsp;<i class="fas fa-solid fa-wrench"></i>&nbsp;&nbsp;&nbsp;
+							<p>홈페이지관리<i class="fas fa-angle-left right"></i></p>
+						</a>
+ 							<!-- 하위메뉴 -->
+							<ul class="nav nav-treeview subMenuList" style="display: none;">
+								<li class="nav-item">
+									<a href="javascript:goPage('/manager/academyinfo/main.do')" class="nav-link">
+									
+										<p style="margin-left: 3vh;">홈페이지관리</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="javascript:goPage('/manager/academyinfo/uselog.do')" class="nav-link">
+										
+										<p style="margin-left: 3vh;">홈페이지 이용현황</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="javascript:goPage('/manager/popup/Form.do')" class="nav-link">
+									
+										<p style="margin-left: 3vh;">팝업관리</p>
+									</a>
+								</li>
+							</ul>
+					</li>
+					
+					<!-- 상위메뉴 -->
+					<li class="nav-item">
+						<a href="#" class="nav-link">
+							&nbsp;<i class="fas fa-solid fa-landmark"></i>&nbsp;&nbsp;&nbsp;
+							<p>학원관리<i class="fas fa-angle-left right"></i></p>
+						</a>
+ 							<!-- 하위메뉴 -->
+							<ul class="nav nav-treeview subMenuList" style="display: none;">
+								<li class="nav-item">
+									<a href="#" class="nav-link">
+										
+										<p style="margin-left: 3vh;">학원일정관리</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="javascript:goPage('/manager/car/routeList.do')" class="nav-link">
+									
+										<p style="margin-left: 3vh;">운행일정관리</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="javascript:goPage('/manager/academymanagement/kakao/regist.do')" class="nav-link">
+									
+										<p style="margin-left: 3vh;">메세지 발송</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="#" class="nav-link">
+										
+										<p style="margin-left: 3vh;">보낸 메세지 내역</p>
+									</a>
+								</li>
+							</ul>
+					</li>
+					
+					<!-- 상위메뉴 -->
+					<li class="nav-item">
+						<a href="#" class="nav-link">
+							&nbsp;<i class="fas fa-solid fa-credit-card"></i>&nbsp;&nbsp;&nbsp;
+							<p>수납관리<i class="fas fa-angle-left right"></i></p>
+						</a>
+ 							<!-- 하위메뉴 -->
+							<ul class="nav nav-treeview subMenuList" style="display: none;">
+								<li class="nav-item">
+									<a href="javascript:goPage('/manager/unpaid/form.do')" class="nav-link">
+										
+										<p style="margin-left: 3vh;">미납현황</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="javascript:goPage('/manager/refund/form.do')" class="nav-link">
+										
+										<p style="margin-left: 3vh;">환불처리</p>
+									</a>
+								</li>
+							</ul>
+					</li>
+					
+					<!-- 상위메뉴 -->
+					<li class="nav-item">
+						<a href="javascript:goPage('/manager/board/notice.do')" class="nav-link">
+							&nbsp;&nbsp;&nbsp;<i class="fas fa-solid fa-exclamation"></i>&nbsp;&nbsp;&nbsp;&nbsp;
+							<p>공지사항</p>
+						</a>
+					</li>
+					
+					<!-- 상위메뉴 -->
+					<li class="nav-item">
+						<a href="javascript:goPage('/common/pdsForm.do')" class="nav-link">
+							&nbsp;&nbsp;<i class="fas fa-solid fa-file"></i>&nbsp;&nbsp;&nbsp;
+							<p>학습자료실</p>
+						</a>
+					</li>
+					
+					<!-- 상위메뉴 -->
+					<li class="nav-item">
+						<a href="#" class="nav-link">
+							&nbsp;&nbsp;<i class="fas fa-solid fa-user"></i>&nbsp;&nbsp;&nbsp;
+							<p>마이페이지<i class="fas fa-angle-left right"></i></p>
+						</a>
+ 							<!-- 하위메뉴 -->
+							<ul class="nav nav-treeview subMenuList" style="display: none;">
+								<li class="nav-item">
+									<a href="javascript:goPage('/manager/mypage/attandance/list.do')" class="nav-link">
+										
+										<p style="margin-left: 3vh;">나의 출근부</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="#" class="nav-link">
+								
+										<p style="margin-left: 3vh;">비밀번호 변경</p>
+									</a>
+								</li>
+							</ul>
+					</li>
+				</ul>
+				
+			</nav>
+			<!-- /.사이드바 메뉴리스트 -->
+		</div>
+		<!-- /.사이드바 -->
+	</aside>

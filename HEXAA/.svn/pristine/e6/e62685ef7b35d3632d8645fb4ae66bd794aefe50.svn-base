@@ -1,0 +1,23 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+
+<head>
+<meta charset="UTF-8">
+<title>등원</title>
+</head>
+<body>
+<div id="attandance big">
+
+<div id="attandance picture" style="border: 1px solid black; height: 80%; width:50%; margin: 100px;">
+
+</div>
+
+<div id="attandance name" style="border: 1px solid black; height:100px; width:300px;" > 
+
+</div>
+
+</div>
+
+</body>
+</html>

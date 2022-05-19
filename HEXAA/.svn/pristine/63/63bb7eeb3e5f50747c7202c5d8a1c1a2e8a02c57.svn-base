@@ -1,0 +1,31 @@
+package com.lms.hexa.service;
+
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.lms.hexa.dao.SchoolDAO;
+import com.lms.hexa.dao.StudentDAO;
+import com.lms.hexa.dto.SchoolVO;
+import com.lms.hexa.dto.StudentVO;
+
+public class SchoolServiceImpl implements SchoolService {
+	
+	protected SchoolDAO schoolDAO;
+
+	public void setSchoolDAO(SchoolDAO schoolDAO) {
+		this.schoolDAO = schoolDAO;
+	}
+
+	@Override
+	public Map<String, Object> selectSchoolList() throws SQLException {
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		List<SchoolVO> school = schoolDAO.selectschoolList();
+		dataMap.put("school", school);
+		return dataMap;
+	}
+
+	
+
+}

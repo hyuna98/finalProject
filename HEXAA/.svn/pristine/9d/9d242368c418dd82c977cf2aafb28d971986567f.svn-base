@@ -1,0 +1,313 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+ 
+<head>
+	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/summernote/summernote-bs4.min.css">
+
+<style>
+	.btn-light {
+    color: #fdfbd7;
+    background-color: #3ab5eb;
+    border-color: #3ab5eb;
+    box-shadow: none;
+}
+
+	div.table1 {
+		max-height: 230px;
+		overflow-y: auto;
+	}
+	div.table2 {
+		max-height: 230px;
+		overflow-y: auto;
+	}
+</style>
+
+</head>
+
+<title>쪽지쓰기</title> 
+
+<body> 
+   <!-- Content Header (Page header) -->
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>쪽지쓰기</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="content container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card card-default card-outline card-info">
+        <div class="card-header">
+          <div class="card-title" style="display: inline-block; margin-top: 3px;">
+            <h5>쪽지쓰기</h5>
+
+          </div>
+          <div class="card-tools">
+            <button type="button" class="btn btn-sm btn-default" id="registBtn" onclick="regist_go();">등 록</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-sm btn-secondary" id="cancelBtn" onclick="CloseWindow();">취 소</button>
+          </div>
+        </div>
+        <!--end card-header  -->
+        <div class="card-body">
+          <form enctype="multipart/form-data" role="form" method="post" action="regist.do" name="registForm">
+
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="writer">보내는 사람</label>
+                  <input type="text" id="writer" readonly name="writer" class="form-control" value="${loginManager.id }" style="width: 80%;">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="writer">날짜</label>
+                  <div>2022/04/14</div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label>받는 사람</label>
+            </div>
+
+            <div class="col-sm-5">
+              <div class="card-tools" id="keyword">
+                <div class="row">
+                  <div class="input-group row" style="padding: 5px;">
+                    <select class="form-control" name="searchType" id="searchType">
+                      <option value="tcw" ${cri.searchType eq 'tcw' ? 'selected' : '' }>전체</option>
+                      <option value="t" ${cri.searchType eq 't' ? 'selected' : '' }>학생</option>
+                      <option value="c" ${cri.searchType eq 'c' ? 'selected' : '' }>교사</option>
+                      <option value="w" ${cri.searchType eq 'w' ? 'selected' : '' }>학부모</option>
+                    </select>
+                    <input type="text" class="form-control" name="keyword" palceholder="받는이" value="">
+                    <div class="input-group-append">
+                      <button type="button" class="btn btn-warning" onclick="list_go(1);" data-card-widget="search">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-5">
+                <div class="card card-outline card-warning">
+                  <div class="card-header">
+                    <h3 class="card-title">
+                      <i class="fa-solid fa-user"></i>
+                      &nbsp;
+                      전체
+                    </h3>
+                    <!--                <h3 class="card-title"></h3> -->
+                    <!--                <div class="card-tools"> -->
+                    <!--                   <div class="row"> -->
+                    <!-- 				  </div> -->
+                    <!--                </div> -->
+                  </div>
+                  <div class="card-body">
+                    <div class="row table1">
+                      <div class="card-body p-0">
+                        <div id="studentIncludeListTableDiv">
+                          <table id="studentIncludeListTable" class="table table-head-fixed table-bordered">
+                            <thead>
+                              <tr>
+                                <th style="width: 25%">구분</th>
+                                <th style="width: 30%">이름</th>
+                                <th style="width: 45%">아이디</th>
+                              </tr>
+                            </thead>
+                            <tbody id="leftth">
+                              <tr class="leftclickableTr">
+                                <td>교사</td>
+                                <td>정현아</td>
+                                <td>gusdkwjd98@naver.com</td>
+                              </tr>
+                              <tr class="leftclickableTr">
+                                <td>교사</td>
+                                <td>정현아</td>
+                                <td>gusdkwjd98@naver.com</td>
+                              </tr>
+                              <tr class="leftclickableTr">
+                                <td>교사</td>
+                                <td>정현아</td>
+                                <td>gusdkwjd98@naver.com</td>
+                              </tr>
+
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-2" style="vertical-align: center;">
+                <div class="row">
+                  <div class="col-sm-1"></div>
+                  <div class="col-sm-10">
+                    <br>
+                    <button id="moveSave" class="btn-lg btn-block btn-warning btn-flat" style="font-size: 12px;">저장</button>
+                    <button id="moveAllLeft" class="btn-lg btn-block btn-warning btn-flat"><i class="fa-solid fa-angles-left"></i></button>
+                    <button id="moveLeft" class="btn-lg btn-block btn-warning btn-flat"><i class="fa-solid fa-angle-left"></i></button>
+                    <button id="moveRight" class="btn-lg btn-block btn-warning btn-flat"><i class="fa-solid fa-angle-right"></i></button>
+                    <button id="moveAllRight" class="btn-lg btn-block btn-warning btn-flat"><i class="fa-solid fa-angles-right"></i></button>
+                  </div>
+                  <div class="col-sm-1"></div>
+                </div>
+              </div>
+              <div class="col-sm-5">
+                <div class="card card-outline card-warning">
+                  <div class="card-header">
+                    <h3 class="card-title">
+                      <i class="fa-solid fa-user"></i>
+                      &nbsp;
+                      회원목록(비수강)
+                    </h3>
+                    <h3 class="card-title"></h3>
+                    <div class="card-tools">
+                      <div class="row">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="row table1">
+                      <div class="card-body p-0">
+                        <div id="studentNotIncludeListTableDiv">
+                          <table id="studentNotIncludeListTable" class="table table-head-fixed table-bordered">
+                            <thead>
+                              <tr>
+                                <th style="width: 25%">구분</th>
+                                <th style="width: 30%">이름</th>
+                                <th style="width: 45%">아이디</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr class="rightclickableTr">
+                                <td>교사</td>
+                                <td>정현아</td>
+                                <td>gusdkwjd98@naver.com</td>
+                              </tr>
+                              <tr class="rightclickableTr">
+                                <td>교사</td>
+                                <td>정현아</td>
+                                <td>gusdkwjd98@naver.com</td>
+                              </tr>
+                              <tr class="rightclickableTr">
+                                <td>교사</td>
+                                <td>정현아</td>
+                                <td>gusdkwjd98@naver.com</td>
+                              </tr>
+                              <tr class="rightclickableTr">
+                                <td>교사</td>
+                                <td>정현아</td>
+                                <td>gusdkwjd98@naver.com</td>
+                              </tr>
+                              <tr class="rightclickableTr">
+                                <td>교사</td>
+                                <td>정현아</td>
+                                <td>gusdkwjd98@naver.com</td>
+                              </tr>
+                              <tr class="rightclickableTr">
+                                <td>교사</td>
+                                <td>정현아</td>
+                                <td>gusdkwjd98@naver.com</td>
+                              </tr>
+                              <tr class="rightclickableTr">
+                                <td>교사</td>
+                                <td>정현아</td>
+                                <td>gusdkwjd98@naver.com</td>
+                              </tr>
+
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="title">제 목</label>
+              <input type="text" id="title" name='title' class="form-control" placeholder="제목을 쓰세요">
+            </div>
+
+            <div class="form-group">
+              <label for="content">내 용</label>
+              <textarea class="form-control" name="content" id="content" rows="5" placeholder="1000자 내외로 작성하세요."></textarea>
+            </div>
+          </form>
+        </div>
+        <!--end card-body  -->
+      </div><!-- end col-md-12 -->
+    </div><!-- end row -->
+  </div>
+
+</section>
+
+<script>
+window.onload=function(){
+	summernote_go($('#content'),'<%=request.getContextPath()%>');		
+}	
+	
+	
+	
+</script>    
+ 
+<script>
+var dataNum=0;
+
+function regist_go(){
+	
+	var files = $('input[name="uploadFile"]');
+	for(var file of files){
+		console.log(file.name+" : "+file.value);
+		if(file.value==""){
+			alert("파일을 선택하세요.");
+			file.focus();
+			file.click();
+			return;
+		}
+	}	
+	
+	if($("input[name='title']").val()==""){ //form.title.value
+		alert("제목은 필수입니다.");
+		$("input[name='title']").focus();
+		return;
+	}
+	
+	$("form[role='form']").submit()
+
+	
+}
+
+</script> 
+
+
+<script>
+// 	window.onload = function(){
+		
+// 	}
+	
+	
+</script>
+
+
+</body>
+
+
+
+
+
+

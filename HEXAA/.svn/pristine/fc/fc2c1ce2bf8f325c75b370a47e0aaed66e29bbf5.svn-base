@@ -1,0 +1,61 @@
+package com.lms.hexa.dao;
+
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.session.SqlSession;
+
+import com.lms.hexa.dto.StudyPlanVO;
+import com.lms.hexa.dto.SubjectAttendanceVO;
+
+public class SubjectAttandanceDAOImpl implements SubjectAttandanceDAO{
+	
+	private SqlSession session;
+
+	public void setSession(SqlSession session) {
+		this.session = session;
+	}
+	
+	@Override
+	public List<SubjectAttendanceVO> selectBySubjectList(String mngId) throws SQLException {
+		List<SubjectAttendanceVO> list = session.selectList("SubjectAttendance-Mapper.selectBySubjectList", mngId);
+		return list;
+	}
+
+	@Override
+	public void insert(List<SubjectAttendanceVO> subjectAttendanceList) throws SQLException {
+		Map<String,Object> insertMap= new HashMap<String,Object>();
+		insertMap.put("subjectAttendanceList", subjectAttendanceList);
+		session.insert("SubjectAttendance-Mapper.inserSubjectAttList",insertMap);
+		
+	}
+
+	@Override
+	public void update(SubjectAttendanceVO subject) throws SQLException {
+		session.update("SubjectAttendance-Mapper.updateSubjectAttandance",subject);
+		
+	}
+
+	@Override
+	public void updateOut(SubjectAttendanceVO subject) throws SQLException {
+		session.update("SubjectAttendance-Mapper.updateSubjectOutAttandance",subject);
+		
+	}
+
+	@Override
+	public void updateAll(HashMap<String, Object> params) throws SQLException {
+		System.out.println(params);
+		session.update("SubjectAttendance-Mapper.updateSubjectAll",params);
+		
+	}
+	
+	@Override
+	public void updateAllCancle(HashMap<String, Object> params) throws SQLException {
+		System.out.println(params);
+		session.update("SubjectAttendance-Mapper.updateSubjectAllCancle",params);
+		
+	}
+
+}

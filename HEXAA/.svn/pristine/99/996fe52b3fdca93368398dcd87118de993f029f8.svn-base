@@ -1,0 +1,14 @@
+package com.lms.hexa.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/manager/managermanagement")
+public class ManagerManagerManagementController {
+	
+	@RequestMapping("/attandance/list")
+	public void attandanceList() throws Exception {}
+	
+	
+}

@@ -1,0 +1,255 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="tempList" value="${dataMap.tempList }" />
+<c:set var="subjectAttList" value="${dataMap.subjectAttList }" />
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+		* {
+			font-size: 14px;
+		}
+		
+		label {
+			margin-bottom: 0;
+		}
+		
+		div.table1 {
+			max-height: 180px;
+			overflow-y: auto;
+		}
+		
+		div.table2 {
+			max-height: 180px;
+			overflow-y: scroll;
+		}
+		
+		div.table3 {
+			max-height: 568px;
+			overflow-y: scroll;  
+		}
+		
+		.table-head-fixed th {
+			padding-top: 0.3em;
+			padding-bottom: 0.3em;
+		}
+		.table-head-fixed td {
+			padding-top: 0.3em;
+			padding-bottom: 0.3em;
+		}
+		
+ 		.card-body.p-0 .table thead>tr>th:first-of-type {
+			padding-left: 12px;
+		}
+ 		.card-body.p-0 .table tbody>tr>td:first-of-type {
+			padding-left: 12px;
+		}
+		.card-body.p-0 .table thead>tr>th:last-of-type {
+			padding-right: 12px;
+		}
+ 		.card-body.p-0 .table tbody>tr>td:last-of-type {
+			padding-right: 12px;
+		}
+		
+		
+		th, td {
+			text-align: center;
+		}
+		#tb1 td, #td1 th {
+			padding:0;
+		}
+		
+		
+		.alert {
+			text-align: center;
+		}
+		.alert {
+			font-size: 15px;
+		}
+		
+		.alert-dismissible {
+	    	padding-right: 0;
+	    	padding-left: 0;
+		}
+	</style>
+</head>
+<body>
+<section class="content-header">
+   <div class="container-fluid">
+        <div class="row md-2">
+           <div class="col-sm-6">
+              <h1>과목출석부</h1>              
+           </div>
+         
+        </div>
+   </div>
+</section>
+<section class="content">
+		<div class="container-fluid">
+			<div class="row">
+				
+				<!-- 좌측 영역 -->
+				<div class="col-sm-12">
+						
+						<div class="card card-light card-outline" style="height:11vh;">
+							<div class="card-header">
+								<div class="row">
+									<div class="col-sm-5">
+										<h3 class="card-title">
+											<i class="fas fa-check"></i> &nbsp;&nbsp; 검색 옵션
+										</h3>
+									</div>
+									<div class="col-sm-4">
+									</div>
+									<div class="col-sm-3">
+									
+									</div>
+								</div>
+							</div>
+							<div class="card-body" style="padding-top: 5px;">
+								
+							<div class="row" style="max-height: 20vh;">
+								<div class="col-sm-3">
+								
+									<select class="form-control">
+											<option>수강반</option>
+											<option>수학1</option>
+											<option>수학2</option>
+									</select>
+								</div>
+								<div class="col-sm-5">
+								
+								</div>
+								<div class="col-sm-4">
+									<div class="input-group-append">
+									<input type="text" class="form-control" placeholder="이름">
+										<button type="submit" class="btn btn-dark"
+											style="height: 4vh;">
+											<i class="fas fa-search"></i>
+										</button>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+						</div>
+						<div class="card card-dark card-outline" style="height:75vh;">
+							<div class="card-header">
+								<div class="row">
+									<div class="col-sm-10">
+										<h3 class="card-title">
+											<i class="fas fa-check"></i> &nbsp;&nbsp; 출석 상세 리스트
+										</h3>
+									</div>
+									<div class="col-sm-1">
+									<button type="button" class="btn btn-block btn-outline-info btn-xs">전체출석</button>
+								</div>
+								<div class="col-sm-1">
+									<button type="button" class="btn btn-block btn-outline-info btn-xs">전체취소</button>
+								</div>	
+								</div>
+							</div>
+							<div class="card-body" style="padding-top: 5px;">
+						
+							<div class="row table1" style="max-height: 60vh;">
+								<table class="table table-head-fixed table-bordered" style="height: 20vh;" >
+							
+										<thead >
+										
+											<tr>
+												<th style="background-color:rgb(32 73 105); color: white;">과목명</th>
+												<th style="background-color:rgb(32 73 105); color: white;">이름</th>
+												<th style="background-color:rgb(32 73 105); color: white;">학교명</th>
+												<th style="background-color:rgb(32 73 105); color: white;">전화번호</th>
+												<th style="background-color:rgb(32 73 105); color: white;">출석시간</th>												
+												<th style="background-color:rgb(32 73 105); color: white;">출석여부</th>
+						
+											</tr>
+										</thead>
+										<tbody>
+										<c:forEach items="${tempList }" var="tempList" varStatus="status">
+											<tr>
+												
+												<td>${tempList.lessonName}</td>
+												<td>${tempList.studentName}</td>
+												<td>${tempList.schoolName}</td>
+												<td>${tempList.phone}</td>
+												<td>${tempList.sattTime}</td>
+												<td style="display: none">${status.end} </td>
+												<td style="display: none">${tempList.studentId}</td>
+												<td>
+													<div class="row">
+														<div class="col-sm-6">
+															<button  type="button" class="btn btn-block btn-outline-info btn-xs gunOne">출석</button>
+														</div>
+														<div class="col-sm-6">
+															<button id="two" type="button" class="btn btn-block btn-outline-info btn-xs two out">결석</button>
+														</div>
+													</div>	
+												</td>
+												
+											</tr>
+										</c:forEach>	
+										</tbody>
+									
+									</table>
+							</div>
+							
+						</div>
+						</div>
+						
+						
+						
+				</div>
+			</div>
+		</div>
+</section>
+<form role="form" class="form-horizontal" action="subjectInmodify.do"  method="post" >
+		<input id="stIdGun" type="hidden" value="" name="studentId">
+</form>	
+	
+ <script>
+ window.onload=function(){
+$(".gunOne").click(function(){
+	let studentId = $(this).parent().parent().parent().prev().text();
+		console.log(studentId);
+		$("#stIdGun").val(studentId);
+
+		alert("전송");
+	 	var form=$('form[role="form"]');	
+		form.submit();
+		
+	
+ });
+ console.log("dd");
+
+	var mem_att_check = '';
+	console.log(mem_att_check);
+	var index = [];
+	index =	$('.two out').parent().parent().parent().prev().prev().text();
+	console.log(index[0]);
+	if(mem_att_check ==='Y'){
+		
+		
+		for(var i =0; i<index; i++){
+			
+			document.getElementsByClassName("btn btn-block btn-outline-info btn-xs one go")[i].style.borderColor ="#17a2b8";	
+			document.getElementsByClassName("btn btn-block btn-outline-info btn-xs one go")[i].style.backgroundColor ="#17a2b8";	
+			document.getElementsByClassName("btn btn-block btn-outline-info btn-xs one go")[i].style.color ="#fff";	
+		}	
+	}else{
+		for(var i =0; i<index; i++){
+			document.getElementsByClassName("btn btn-block btn-outline-info btn-xs two out")[i].style.borderColor ="#17a2b8";	
+			document.getElementsByClassName("btn btn-block btn-outline-info btn-xs two out")[i].style.backgroundColor ="#17a2b8";	
+			document.getElementsByClassName("btn btn-block btn-outline-info btn-xs two out")[i].style.color ="#fff";
+		}
+		
+	}
+
+ }
+</script>	  
+</body>
+</html>

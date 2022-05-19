@@ -1,0 +1,27 @@
+package com.lms.hexa.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+
+import com.lms.hexa.dto.SchoolVO;
+
+
+
+public class SchoolDAOImpl implements SchoolDAO {
+
+	private SqlSession session;
+
+	public void setSession(SqlSession session) {
+		this.session = session;
+	}
+
+	@Override
+	public List<SchoolVO> selectschoolList() throws SQLException {
+		List<SchoolVO> student = session.selectList("School-Mapper.selectschool");
+		return student;
+	}
+
+	
+}

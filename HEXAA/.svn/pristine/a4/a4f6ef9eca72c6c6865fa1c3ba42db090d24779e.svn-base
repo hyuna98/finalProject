@@ -1,0 +1,27 @@
+package com.lms.hexa.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.lms.hexa.dto.MenuVO;
+
+public interface MenuDAO {
+
+	// Member 1depth 메뉴 리스트 조회
+	List<MenuVO> selectMemberMenuList() throws SQLException;
+	// Member 2depth 메뉴 리스트 조회
+	List<MenuVO> selectMemberSubMenuList(String login_id) throws SQLException;
+	// Manager 1depth 메뉴 리스트 조회
+	List<MenuVO> selectManagerMenuList() throws SQLException;
+	// Manager 2depth 메뉴 리스트 조회
+	List<MenuVO> selectManagerSubMenuList(String login_id) throws SQLException;
+	
+	// Member 1depth 즐겨찾기 메뉴 리스트 조회
+	List<MenuVO> selectMemberFavoriteMenuList(String login_id);
+	// Manager 1depth 메뉴 리스트 조회
+	List<MenuVO> selectManagerFavoriteMenuList(String login_id);
+	
+	// menuId 가져오기
+	String selectMenuId(String menuName) throws SQLException;
+	
+}

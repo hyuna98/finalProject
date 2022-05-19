@@ -1,0 +1,20 @@
+package com.lms.hexa.service;
+
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
+
+import com.lms.hexa.dto.AcademyinfoVO;
+import com.lms.hexa.dto.NoticeVO;
+
+public interface AcademyinfoService {
+
+	Map<String, Object> selectAcademyinfoList() throws SQLException;
+	
+	 void modify(AcademyinfoVO academyinfo) throws SQLException;
+	 
+	 // 학생 메뉴
+	 Map<String, Object> selectMainMenu() throws SQLException;
+	 
+	 Map<String, Object> selectInfoList() throws SQLException;
+}

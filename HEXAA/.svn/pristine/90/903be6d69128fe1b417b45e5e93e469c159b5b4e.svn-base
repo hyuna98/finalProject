@@ -1,0 +1,45 @@
+package com.lms.hexa.dto;
+
+public class AcademyHomepageUseVO {
+
+	   private String acaHuseId;
+	   private String acaHuseIp;
+	   private String acaHuseRefer;
+	   private String acaHuseDate;
+	   private String acaHuseAgent;
+	   
+	   
+	public String getAcaHuseId() {
+		return acaHuseId;
+	}
+	public void setAcaHuseId(String acaHuseId) {
+		this.acaHuseId = acaHuseId;
+	}
+	public String getAcaHuseIp() {
+		return acaHuseIp;
+	}
+	public void setAcaHuseIp(String acaHuseIp) {
+		this.acaHuseIp = acaHuseIp;
+	}
+	public String getAcaHuseRefer() {
+		return acaHuseRefer;
+	}
+	public void setAcaHuseRefer(String acaHuseRefer) {
+		this.acaHuseRefer = acaHuseRefer;
+	}
+	public String getAcaHuseDate() {
+		return acaHuseDate;
+	}
+	public void setAcaHuseDate(String acaHuseDate) {
+		this.acaHuseDate = acaHuseDate;
+	}
+	public String getAcaHuseAgent() {
+		return acaHuseAgent;
+	}
+	public void setAcaHuseAgent(String acaHuseAgent) {
+		this.acaHuseAgent = acaHuseAgent;
+	}
+	
+	   
+	   
+}

@@ -1,0 +1,120 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+<section class="content-header">
+   <div class="container-fluid">
+        <div class="row md-2">
+           <div class="col-sm-6">
+              <h1>출석내역확인</h1>              
+           </div>
+           <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                 <li class="breadcrumb-item">
+                    <a href="list.do">
+                       <i class="fa fa-dashboard"></i>출석내역확인
+                    </a>
+                 </li>
+               </ol>
+           </div>
+        </div>
+   </div>
+</section>
+<section class="content">
+   <div  style=" height: 37vh; margin: 5vh;">
+   		<div style=" height: 6vh;" >
+ 			<div class="col-3 form-group" style="float: right; margin-top: 10px;">
+				<label>자녀선택</label> 
+				<select class="col-8 form-control" style="display: inline; ">
+					<option>김요셉</option>
+					<option>방진호</option>	
+				</select>
+			</div>
+   		</div>
+     	<table class="table table-bordered table-hover dataTable dtr-inline">
+			<tr class="jsgrid-header-row">
+				<th class="jsgrid-header-cell jsgrid-header-sortable" style="background-color:rgba(0, 0, 0, 0.1);">출석</th>
+				<th class="jsgrid-header-cell jsgrid-header-sortable" style="background-color:rgba(0, 0, 0, 0.1);">결석</th>
+				<th class="jsgrid-header-cell jsgrid-header-sortable" style="background-color:rgba(0, 0, 0, 0.1);">지각</th>
+				<th class="jsgrid-header-cell jsgrid-header-sortable" style="background-color:rgba(0, 0, 0, 0.1);">조퇴</th>
+				<th class="jsgrid-header-cell jsgrid-header-sortable" style="background-color:rgba(0, 0, 0, 0.1);">외출</th>
+			</tr>
+			<tr class="jsgrid-row">
+				<td class="jsgrid-cell" >123일</td>
+				<td class="jsgrid-cell" >2일</td>
+				<td class="jsgrid-cell" >1일</td>
+				<td class="jsgrid-cell" >0일</td>
+				<td class="jsgrid-cell" >1일</td>
+			</tr>
+			<tr class="jsgrid-header-row">
+				<th class="jsgrid-header-cell jsgrid-header-sortable" style="background-color:rgba(0, 0, 0, 0.1);">지각@조퇴</th>
+				<th class="jsgrid-header-cell jsgrid-header-sortable" style="background-color:rgba(0, 0, 0, 0.1);">지각@외출</th>
+				<th class="jsgrid-header-cell jsgrid-header-sortable" style="background-color:rgba(0, 0, 0, 0.1);">외출@조퇴</th>
+				<th class="jsgrid-header-cell jsgrid-header-sortable" style="background-color:rgba(0, 0, 0, 0.1);">지각@외출@조회</th>
+				<th class="jsgrid-header-cell jsgrid-header-sortable" style="background-color:rgba(0, 0, 0, 0.1);">100분의 50미만 출석</th>
+			</tr>
+			<tr class="jsgrid-row">
+				<td class="jsgrid-cell" >1일</td>
+				<td class="jsgrid-cell" >1일</td>
+				<td class="jsgrid-cell" >1일</td>
+				<td class="jsgrid-cell" >1일</td>
+				<td class="jsgrid-cell" >1일</td>
+			</tr>		
+		</table>	
+  
+   </div>
+ 
+   <div  style=" height: 40vh; margin: 5vh;">
+   		<div style=" height: 6vh;" >
+   			<div class="col-3 form-group" style="float: right; margin-top: 10px;">
+				<label>자녀선택</label> 
+				<select class="col-8 form-control" style="display: inline; ">
+					<option>김요셉</option>
+					<option>방진호</option>	
+				</select>
+			</div>
+   		</div>
+   			<table class="table table-bordered table-hover dataTable dtr-inline">
+			<tr class="jsgrid-header-row">
+				<th class="jsgrid-header-cell jsgrid-header-sortable" style="background-color:rgba(0, 0, 0, 0.1);">일자</th>
+				<th class="jsgrid-header-cell jsgrid-header-sortable" style="background-color:rgba(0, 0, 0, 0.1);">입실시간</th>
+				<th class="jsgrid-header-cell jsgrid-header-sortable" style="background-color:rgba(0, 0, 0, 0.1);">퇴실시간</th>
+				<th class="jsgrid-header-cell jsgrid-header-sortable" style="background-color:rgba(0, 0, 0, 0.1);">수업시간</th>
+				<th class="jsgrid-header-cell jsgrid-header-sortable" style="background-color:rgba(0, 0, 0, 0.1);">출결상태</th>
+			</tr>
+			<tr class="jsgrid-row">
+				<td class="jsgrid-cell" >2021-10-16</td>
+				<td class="jsgrid-cell" >09:50</td>
+				<td class="jsgrid-cell" >18:55</td>
+				<td class="jsgrid-cell" >08:00</td>
+				<td class="jsgrid-cell" >출석</td>
+			</tr>	
+			<tr class="jsgrid-row">
+				<td class="jsgrid-cell" >2021-10-16</td>
+				<td class="jsgrid-cell" >09:50</td>
+				<td class="jsgrid-cell" >18:55</td>
+				<td class="jsgrid-cell" >08:00</td>
+				<td class="jsgrid-cell" >출석</td>
+			</tr>	
+			<tr class="jsgrid-row">
+				<td class="jsgrid-cell" >2021-10-16</td>
+				<td class="jsgrid-cell" >09:50</td>
+				<td class="jsgrid-cell" >18:55</td>
+				<td class="jsgrid-cell" >08:00</td>
+				<td class="jsgrid-cell" >출석</td>
+			</tr>	
+		</table>	
+  
+   </div>
+   
+</section>
+   
+   
+   
+</body>
+</html>

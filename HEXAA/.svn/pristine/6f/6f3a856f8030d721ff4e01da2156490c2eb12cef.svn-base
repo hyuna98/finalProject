@@ -1,0 +1,15 @@
+package com.lms.hexa.service;
+
+import java.sql.SQLException;
+import java.util.Map;
+
+import com.lms.hexa.dto.AcademyinfoVO;
+import com.lms.hexa.dto.ClassVO;
+import com.lms.hexa.dto.NoticeVO;
+
+public interface ClassService {
+
+	ClassVO selectClassById(String classId) throws SQLException;
+	
+	
+}

@@ -1,0 +1,298 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+	div.table2 {
+		max-height: 230px;
+		overflow-y: auto;
+	}
+	div #lessonList{
+		height: 400px;
+	}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"  ></script>
+<script type="text/javascript">
+        
+        // 헬퍼함수 만들기
+        // 헬퍼함수는 Handlebars.registerHelper()를 사용해서 등록할 수 있다.
+        // 헬퍼함수는 스크립트 상단에 선언하자 (호이스팅)
+        // Handlebars.registerHelper("선언함수명", function(args..., option){ ... }
+        // args 매개변수 인자보다.. 그냥 this.변수명 으로 접근은 편하다.
+ 
+        Handlebars.registerHelper("dateFormat", function(targetStr) {
+//             console.log(this); // this == jQuery에서 el과 같다. (반복문에서 현재 컨텐스트)
+            var result = targetStr.substr(0,4)+"-"+targetStr.substr(4,2)+"-"+targetStr.substr(6,2);
+            
+ 	        return result;
+        });
+        
+        Handlebars.registerHelper("ifs", function(condition, trueResult, falseResult) {
+//             console.log(this); // this == jQuery에서 el과 같다. (반복문에서 현재 컨텐스트)
+			if(condition){
+				return trueResult-1;
+			} else {
+				return falseResult;
+			}
+        });
+        Handlebars.registerHelper("ife", function(condition, trueResult, falseResult) {
+//             console.log(this); // this == jQuery에서 el과 같다. (반복문에서 현재 컨텐스트)
+			if(condition){
+				return trueResult+1;
+			} else {
+				return falseResult;
+			}
+        });
+ 
+</script>
+</head>
+<body>
+<section class="content-header">
+   <div class="container-fluid">
+        <div class="row md-2">
+           <div class="col-sm-6">
+              <h1>수업정보변경</h1>              
+           </div>
+           <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                 <li class="breadcrumb-item">
+                 </li>
+               </ol>
+           </div>
+        </div>
+   </div>
+</section>
+<section class="content">
+   <div class="card-header">
+      <div class="row">
+        <div class="col-sm-12">
+<!--       member -->
+<!--       <div class="card card-outline card-light"> -->
+<!--       manager -->
+          <div class="card card-outline card-dark">
+            <div class="card-header">
+               <h3 class="card-title">
+					<i class="fa-solid fa-chalkboard-user"></i>
+					&nbsp;
+					수업목록
+			   </h3>
+               <h3 class="card-title"></h3>
+               <div class="card-tools">
+                  <div class="row">
+					<div class="input-group" style="padding: 5px;">
+						<input id="searchKeyword" type="text" placeholder="검색어를 입력하세요" name="searchkeyword" class="form-control">
+						<div class="input-group-append">
+							<button id="searchBtn" type="submit" class="btn btn-dark">
+								<i class="fas fa-search"></i>
+							</button>
+						</div>
+					</div>
+				  </div>
+               </div>
+            </div>
+           	<div id="ghostDiv"></div>
+            <div id="lessonList">
+	            <div class="card-body">
+	            	<div class="row table1">
+						<div class="card-body p-0">
+							<table class="table table-head-fixed table-bordered">
+								<thead>
+									<tr>
+										<th style="width: 9%">수업번호</th>
+										<th style="width: 8%">과목</th>
+										<th style="width: 28%">수업명</th>
+										<th style="width: 8%">강의실</th>
+										<th style="width: 9%">선생님</th>
+										<th style="width: 18%">강의기간</th>
+										<th style="width: 10%">강의상태</th>
+										<th style="width: 10%">상세보기</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${lessonList}" var="lsList">
+									<tr class="line">
+										<td>${lsList.lessonId}</td>
+										<td>${lsList.lessonSubjectType}</td>
+										<td style="text-align:left;max-width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">&nbsp;&nbsp;${lsList.lessonName}</td>
+										<td>${lsList.lessonRoom}</td>
+										<td>${lsList.mngId}T</td>
+										<td>
+	<%-- 									<fmt:formatDate value="${lsList.lessonStartDate}" pattern="yyyy-MM-dd"/>~ --%>
+	<%-- 									<fmt:formatDate value="${lsList.lessonEndDate}" pattern="yyyy-MM-dd"/> --%>
+										${fn:substring(lsList.lessonStartDate,0,4)}-${fn:substring(lsList.lessonStartDate,4,6)}-${fn:substring(lsList.lessonStartDate,6,8)}~
+										${fn:substring(lsList.lessonEndDate,0,4)}-${fn:substring(lsList.lessonEndDate,4,6)}-${fn:substring(lsList.lessonEndDate,6,8)}
+										</td>
+										<td>${lsList.lessonStateCode}</td>
+										<td>
+											<button  type="button" class="btn btn-sm btn-dark viewDetailBtn" >상세보기</button>
+										</td>
+									</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+					</div>
+	            </div>
+	            <div>
+	            	<div class="card-footer">
+		            	<nav aria-label="Navigation">
+							<ul class="pagination justify-content-center m-0">
+								<li class="page-item">
+									<a class="page-link" href="javascript:list_go(1);">
+										<i class="fas fa-angle-double-left"></i>
+									</a>
+								</li>
+								<li class="page-item">
+									<a class="page-link" href="javascript:list_go('${pageMaker.prev ? pageMaker.startPage-1 : pageMaker.cri.page}');">
+										<i class="fas fa-angle-left"></i>
+									</a>
+								</li>
+								<c:forEach var="pageNum" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" >
+										
+									<li class="page-item ${pageMaker.cri.page == pageNum?'active':''}">
+										<a class="page-link" href="javascript:list_go('${pageNum}');" >${pageNum }</a>
+									</li>
+									
+								</c:forEach>
+								<li class="page-item">
+									<a class="page-link" href="javascript:list_go('${pageMaker.next ? pageMaker.endPage+1 :pageMaker.cri.page}');">
+										<i class="fas fa-angle-right" ></i>
+									</a>
+								</li>
+								<li class="page-item">
+									<a class="page-link" href="javascript:list_go('${pageMaker.realEndPage}');">
+										<i class="fas fa-angle-double-right"></i>
+									</a>
+								</li>	
+							</ul>
+						</nav>
+		            </div>
+	            </div>
+            </div>
+         </div>
+		</div>         
+      </div>
+   </div>
+   <div class="card-body">
+   </div>
+   
+</section>
+
+<script>
+     window.onload=function(){
+    	 
+   	 }
+     
+   	 function list_go(page){
+   		let keyword = $("#searchKeyword").val(); 
+   		console.log(keyword); 
+		$.ajax({
+	        type: "post"
+	       ,url : "/manager/lesson/search.do"
+	       ,data : {
+	    	   "page" : page
+	    	  ,"keyword" : keyword
+	    	  ,"perPageNum" : 6
+	       }
+	       ,success : function (data){
+	    	   console.log(data);
+	    	   printData(data,$('#lessonList'),$('#ghostDiv'),$('#lessonList-template'));
+	        }
+	       ,error : function(e){
+	        }
+		});
+   	}
+</script>
+<script>
+function printData(data,delArea,target,templateObject){
+	var template=Handlebars.compile(templateObject.html());
+	var html = template(data);	
+	delArea.remove();
+	target.after(html);
+}
+</script>
+<script type="text/x-handlebars-template"  id="lessonList-template" >
+<div id="lessonList">
+	            <div class="card-body">
+	            	<div class="row table1">
+						<div class="card-body p-0">
+							<table class="table table-head-fixed table-bordered">
+								<thead>
+									<tr>
+										<th style="width: 9%">수업번호</th>
+										<th style="width: 8%">과목</th>
+										<th style="width: 28%">수업명</th>
+										<th style="width: 8%">강의실</th>
+										<th style="width: 9%">선생님</th>
+										<th style="width: 18%">강의기간</th>
+										<th style="width: 10%">강의상태</th>
+										<th style="width: 10%">상세보기</th>
+									</tr>
+								</thead>
+								<tbody>
+{{#each lessonList}}
+									<tr class="line">
+										<td>{{lessonId}}</td>
+										<td>{{lessonSubjectType}}</td>
+										<td style="text-align:left;max-width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">&nbsp;&nbsp;{{lessonName}}</td>
+										<td>{{lessonRoom}}</td>
+										<td>{{mngId}}T</td>
+										<td>
+										{{dateFormat lessonStartDate}}~{{dateFormat lessonEndDate}}
+										</td>
+										<td>{{lessonStateCode}}</td>
+										<td>
+											<button  type="button" class="btn btn-sm btn-dark viewDetailBtn" >상세보기</button>
+										</td>
+									</tr>
+{{/each}}
+								</tbody>
+							</table>
+						</div>
+					</div>
+	            </div>
+	            <div>
+	            	<div class="card-footer">
+		            	<nav aria-label="Navigation">
+							<ul class="pagination justify-content-center m-0">
+								<li class="page-item">
+									<a class="page-link" href="javascript:list_go(1);">
+										<i class="fas fa-angle-double-left"></i>
+									</a>
+								</li>
+								<li class="page-item">
+									<a class="page-link" href="javascript:list_go('{{ifs pageMaker.prev pageMaker.startPage pageMaker.cri.page}}');">
+										<i class="fas fa-angle-left"></i>
+									</a>
+								</li>
+								<c:forEach var="pageNum" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" >
+										
+									<li class="page-item ${pageMaker.cri.page == pageNum?'active':''}">
+										<a class="page-link" href="javascript:list_go('${pageNum}');" >${pageNum }</a>
+									</li>
+									
+								</c:forEach>
+								<li class="page-item">
+									<a class="page-link" href="javascript:list_go('{{ife pageMaker.next pageMaker.endPage pageMaker.cri.page}}');">
+										<i class="fas fa-angle-right" ></i>
+									</a>
+								</li>
+								<li class="page-item">
+									<a class="page-link" href="javascript:list_go('{{pageMaker.realEndPage}}');">
+										<i class="fas fa-angle-double-right"></i>
+									</a>
+								</li>	
+							</ul>
+						</nav>
+		            </div>
+	            </div>
+            </div>
+</script>   
+</body>
+</html>

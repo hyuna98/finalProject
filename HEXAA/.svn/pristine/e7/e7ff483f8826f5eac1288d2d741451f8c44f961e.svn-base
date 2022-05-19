@@ -1,0 +1,21 @@
+package com.lms.hexa.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class MemberConsultingController {
+	
+	@RequestMapping("/member/consulting/request")
+	public String consultationRequest() {
+		String url="/member/consulting/request";
+		return url;
+	}
+	
+	@RequestMapping("/member/consulting/history")
+	public String consultationHistory() {
+		String url="/member/consulting/history";
+		return url;
+	}
+	
+}

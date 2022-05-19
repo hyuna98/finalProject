@@ -1,0 +1,27 @@
+package com.lms.hexa.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class StudyPlanController {
+	
+	@RequestMapping("/manager/studyPlan/list")
+	public String managerList() {
+		String url = "manager/studyPlan/list";
+		return url;
+	}
+	
+	@RequestMapping("/member/studyPlan/list")
+	public String memberList() {
+		String url = "member/studyPlan/list";
+		return url;
+	}
+	
+	@RequestMapping("/member/studyPlan/registForm")
+	public String registForm() {
+		String url = "member/studyPlan/registForm";
+		return url;
+	}
+	
+}

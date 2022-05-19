@@ -1,0 +1,19 @@
+package com.lms.hexa.dao;
+
+import java.sql.SQLException;
+
+import com.lms.hexa.dto.UserVO;
+
+public interface UserDAO {
+	
+	UserVO selectUserById(String id) throws Exception;
+	
+	public void insertUser(UserVO user) throws SQLException;
+	
+	int selectUserByEmailAddress(String emailAddress) throws Exception;
+	
+	String selectUserCategory(String emailAddress) throws Exception;
+	
+	// 비밀번호 초기화
+	public void updatePwd(String emailAddress) throws SQLException;
+}

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Manager-Mapper">
+	
+	<resultMap type="manager" id="managerMap">
+		<result property="id" column="mng_id"/>
+		<result property="pw" column="mng_pw"/>
+		<result property="mngName" column="MNG_NAME"/>
+		<result property="mngGender" column="MNG_GENDER"/>
+		<result property="mngEmail" column="MNG_EMAIL"/>
+		<result property="mngAddress2" column="MNG_ADDRESS2"/>
+		<result property="mngAddress" column="MNG_ADDRESS"/>
+		<result property="mngZipCode" column="MNG_ZIP_CODE"/>
+		<result property="mngPicture" column="MNG_PICTURE"/>
+		<result property="mngBirthDate" column="MNG_BIRTH_DATE"/>
+		<result property="mngDelete" column="MNG_DELETE"/>
+		<result property="mngDeleteDate" column="MNG_DELETE_DATE"/>
+		<result property="deptId" column="DEPT_ID"/>
+		<result property="mngEducation" column="MNG_EDUCATION"/>
+		<result property="mngMajor" column="MNG_MAJOR"/>
+		<result property="mngGraduatedYear" column="MNG_GRADUATED_YEAR"/>
+		<result property="mngCarrerYear" column="MNG_CARRER_YEAR"/>
+		<result property="mngMainCarrer" column="MNG_MAIN_CARRER"/>
+		<result property="mngCertificate" column="MNG_CERTIFICATE"/>
+		<result property="mngAccountNo" column="MNG_ACCOUNT_NO"/>
+		<result property="mngSubject" column="MNG_SUBJECT"/>
+	</resultMap>
+	
+	<select id="selectManagerById" parameterType="str" resultMap="managerMap">
+		select
+		*
+		from manager
+		where mng_id=#{id}
+	</select>
+	
+	<select id="selectWorkingTeacherListSearchByName" parameterType="manager" resultType="manager">
+	
+		  SELECT A.MNG_ID AS id,
+		        A.MNG_NAME AS mngName,
+		        A.MNG_GENDER AS mngGender,
+		        A.MNG_EMAIL AS mngEmail,
+		        A.MNG_ADDRESS2 AS mngAddress2,
+		        A.MNG_ADDRESS AS mngAddress,
+		        A.MNG_ZIP_CODE AS mngZipCode,
+		        A.MNG_PICTURE AS mngPicture,
+		        A.MNG_BIRTH_DATE AS mngBirthDate,
+		        C.SCODE_VALUE AS mngDelete,
+		        A.MNG_PW AS pw,
+		        A.MNG_DELETE_DATE AS mngDeleteDate,
+		        A.DEPT_ID AS deptId,
+		        A.MNG_EDUCATION AS mngEducation,
+		        A.MNG_MAJOR AS mngMajor,
+		        A.MNG_GRADUATED_YEAR AS mngGraduatedYear,
+		        A.MNG_CARRER_YEAR AS mngCarrerYear,
+		        A.MNG_MAIN_CARRER AS mngMainCarrer,
+		        A.MNG_CERTIFICATE AS mngCertificate,
+		        A.MNG_ACCOUNT_NO AS mngAccountNo,
+		        B.SCODE_VALUE AS mngSubjectKor,
+		        B.SCODE_KEY AS mngSubject
+		   FROM MANAGER A,
+                (SELECT *
+                   FROM STANDARDCODE
+                  WHERE SCODE_CATEGORY = 'MNG_SUBJECT')B,
+                (SELECT *
+                   FROM STANDARDCODE
+                  WHERE SCODE_CATEGORY = 'MNG_DELETE')C 
+          WHERE A.MNG_SUBJECT = B.SCODE_KEY
+            AND A.MNG_DELETE = C.SCODE_KEY
+		    AND A.MNG_DELETE = 'SRVD'
+		    AND A.DEPT_ID = 'EDU'
+		    AND A.MNG_SUBJECT = #{mngSubject}
+		  <if test="mngName != null">
+		    AND MNG_NAME like '%'||#{mngName}||'%'
+		  </if>
+		  
+	</select>
+	<select id="selectWorkingTeacherList" resultType="manager">
+	
+		  SELECT A.MNG_ID AS id,
+		        A.MNG_NAME AS mngName,
+		        A.MNG_GENDER AS mngGender,
+		        A.MNG_EMAIL AS mngEmail,
+		        A.MNG_ADDRESS2 AS mngAddress2,
+		        A.MNG_ADDRESS AS mngAddress,
+		        A.MNG_ZIP_CODE AS mngZipCode,
+		        A.MNG_PICTURE AS mngPicture,
+		        A.MNG_BIRTH_DATE AS mngBirthDate,
+		        C.SCODE_VALUE AS mngDelete,
+		        A.MNG_PW AS pw,
+		        A.MNG_DELETE_DATE AS mngDeleteDate,
+		        A.DEPT_ID AS deptId,
+		        A.MNG_EDUCATION AS mngEducation,
+		        A.MNG_MAJOR AS mngMajor,
+		        A.MNG_GRADUATED_YEAR AS mngGraduatedYear,
+		        A.MNG_CARRER_YEAR AS mngCarrerYear,
+		        A.MNG_MAIN_CARRER AS mngMainCarrer,
+		        A.MNG_CERTIFICATE AS mngCertificate,
+		        A.MNG_ACCOUNT_NO AS mngAccountNo,
+		        B.SCODE_VALUE AS mngSubjectKor,
+		        B.SCODE_KEY AS mngSubject
+		   FROM MANAGER A,
+                (SELECT *
+                   FROM STANDARDCODE
+                  WHERE SCODE_CATEGORY = 'MNG_SUBJECT')B,
+                (SELECT *
+                   FROM STANDARDCODE
+                  WHERE SCODE_CATEGORY = 'MNG_DELETE')C 
+          WHERE A.MNG_SUBJECT = B.SCODE_KEY
+            AND A.MNG_DELETE = C.SCODE_KEY
+		    AND A.MNG_DELETE = 'SRVD'
+		    AND A.DEPT_ID = 'EDU'
+		  
+	</select>
+	
+	<select id="selectManagerDetailById" parameterType="str" resultType="manager">
+	
+		SELECT A.MNG_ID AS id,
+		        A.MNG_NAME AS mngName,
+		        A.MNG_GENDER AS mngGender,
+		        A.MNG_EMAIL AS mngEmail,
+		        A.MNG_ADDRESS2 AS mngAddress2,
+		        A.MNG_ADDRESS AS mngAddress,
+		        A.MNG_ZIP_CODE AS mngZipCode,
+		        A.MNG_PICTURE AS mngPicture,
+		        A.MNG_BIRTH_DATE AS mngBirthDate,
+		        C.SCODE_VALUE AS mngDelete,
+		        A.MNG_PW AS pw,
+		        A.MNG_DELETE_DATE AS mngDeleteDate,
+		        A.DEPT_ID AS deptId,
+		        A.MNG_EDUCATION AS mngEducation,
+		        A.MNG_MAJOR AS mngMajor,
+		        A.MNG_GRADUATED_YEAR AS mngGraduatedYear,
+		        A.MNG_CARRER_YEAR AS mngCarrerYear,
+		        A.MNG_MAIN_CARRER AS mngMainCarrer,
+		        A.MNG_CERTIFICATE AS mngCertificate,
+		        A.MNG_ACCOUNT_NO AS mngAccountNo,
+		        B.SCODE_VALUE AS mngSubjectKor,
+		        B.SCODE_KEY AS mngSubject
+		   FROM MANAGER A,
+                (SELECT *
+                   FROM STANDARDCODE
+                  WHERE SCODE_CATEGORY = 'MNG_SUBJECT')B,
+                (SELECT *
+                   FROM STANDARDCODE
+                  WHERE SCODE_CATEGORY = 'MNG_DELETE')C 
+          WHERE A.MNG_SUBJECT = B.SCODE_KEY
+            AND A.MNG_DELETE = C.SCODE_KEY
+		    AND MNG_ID = #{value}
+		    
+	</select>
+	
+	
+	<update id="updatePwd" parameterType="str">
+		UPDATE MANAGER
+		SET MNG_PW = #{emailAddress}
+			WHERE MNG_ID = #{emailAddress}
+	</update>
+	
+</mapper>

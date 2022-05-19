@@ -1,0 +1,14 @@
+package com.lms.hexa.service;
+
+import com.lms.hexa.dao.KakaoSendDAO;
+
+public class KakaoSendServiceImpl implements KakaoSendService {
+		
+	private KakaoSendDAO kakaoSendDAO;
+
+	public void setKakaoSendDAO(KakaoSendDAO kakaoSendDAO) {
+		this.kakaoSendDAO = kakaoSendDAO;
+	}
+	
+	
+}

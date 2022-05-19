@@ -1,0 +1,190 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+	div.table1 {
+		max-height: 230px;
+		overflow-y: scroll;
+	}
+	div.table2 {
+		max-height: 230px;
+		overflow-y: scroll;
+	}
+</style>
+</head>
+<body>
+<section class="content-header">
+   <div class="container-fluid">
+        <div class="row md-2">
+           <div class="col-sm-6">
+              <h1>수업개설</h1>              
+           </div>
+           <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                 <li class="breadcrumb-item">
+                 </li>
+               </ol>
+           </div>
+        </div>
+   </div>
+</section>
+<section class="content">
+   <div class="card-header">
+   	<div class="row">
+   		<div class="col-sm-4">
+   			<div class="card card-outline card-dark">
+            <div class="card-header">
+               <h3 class="card-title">
+					<i class="fa-solid fa-person-chalkboard"></i>
+					&nbsp;
+					선생님 선택
+			   </h3>
+               <h3 class="card-title"></h3>
+               <div class="card-tools">
+                  <div class="row">
+                  	<div class="input-group input-group-sm">
+						<input type="text" class="form-control float-right" placeholder="교사명 검색" style="width: 100px;">
+						<div class="input-group-append">
+							<button type="submit" class="btn btn-dark">
+								<i class="fas fa-search"></i>
+							</button>
+						</div>
+					</div>
+				  </div>
+               </div>
+            </div>
+            <div class="card-body">
+            	<div class="row table1">
+					<div class="card-body p-0">
+						<table class="table table-head-fixed table-bordered">
+							<thead>
+								<tr>
+									<th style="width: 30%">과목</th>
+									<th style="width: 40%">선생님</th>
+									<th style="width: 30%">삭제</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="i" begin="1" end="5" step="1">
+								<tr>
+									<td>수학</td>
+									<td>정현아T</td>
+									<td>
+										<button type="button" class="btn btn-sm btn-dark">선택</button>
+									</td>
+									
+								</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+				</div>
+            </div>
+         </div>
+   		</div>
+   		<div class="col-sm-8">
+   			<div class="card card-outline card-dark">
+            <div class="card-header">
+               <h3 class="card-title">
+					<i class="fa-solid fa-pen-to-square"></i>
+					&nbsp;
+					강의정보 입력
+			   </h3>
+               <h3 class="card-title"></h3>
+               <div class="card-tools">
+               </div>
+            </div>
+            <div class="card-body">
+            	
+            </div>
+         </div>
+   		</div>
+   	</div>
+   </div>
+   <div class="card-body">
+    <div class="row">
+		<div class="col-sm-12">
+          <div class="card card-outline card-dark">
+            <div class="card-header">
+               <h3 class="card-title">
+					<i class="fas fa-list" aria-hidden="true"></i>
+					&nbsp;
+					강의 시간선택
+			   </h3>
+               <h3 class="card-title"></h3>
+               <div class="card-tools">
+                  <div class="row">
+					<div class="input-group" style="padding: 5px;">
+						<select class="form-control">
+							<option>학생명</option>
+							<option>반</option>
+							<option>학년</option>
+						</select>
+						<input type="text" class="form-control">
+						<div class="input-group-append">
+							<button type="submit" class="btn btn-dark">
+								<i class="fas fa-search"></i>
+							</button>
+						</div>
+					</div>
+				  </div>
+               </div>
+            </div>
+            <div class="card-body">
+            	<table style="color: #121212; text-align: center;">
+							<tbody><tr>
+								<th style="width: 200px;">요일<br>
+									시간
+									</th>
+								<th>월</th>
+								<th>화</th>
+								<th>수</th>
+								<th>목</th>
+								<th>금</th>
+								<th>토</th>
+							</tr>
+							<tr>
+								<th>1</th>
+								<td></td>
+								<td rowspan="2" style="background-color: #ecc369">
+									국어</td>
+								<td rowspan="2" style="background-color: #f08676">사회</td>
+								<td rowspan="2" style="background-color: #70a5e9">
+									과학</td>
+								<td rowspan="2" style="background-color: #75ca87">영어</td>
+								<td rowspan="4" style="background-color: #70a5e9">특강</td>
+							</tr>
+							<tr>
+								<th>2</th>
+								<td></td>
+							</tr>
+							<tr>
+								<th>3</th>
+								<td rowspan="2" style="background-color: #f08676">수학</td>
+								<td></td>
+								<td rowspan="2" style="background-color: #75ca87">영어</td>
+								<td></td>
+								<td rowspan="2" style="background-color: #d397ed">국어</td>
+							</tr>
+							<tr>
+								<th>4</th>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody></table>
+            </div>
+         </div>
+		</div>        
+      </div>
+   </div>
+</section>
+   
+   
+   
+</body>
+</html>

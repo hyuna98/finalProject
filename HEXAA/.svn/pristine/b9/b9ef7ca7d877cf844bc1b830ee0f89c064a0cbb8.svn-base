@@ -1,0 +1,150 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
+
+<title>상세 보기</title>
+
+<body>
+  <!-- Main content -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-sm-12">
+          <h1></h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main content -->
+  <section class="content container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-sm-12">
+        <div class="card card-default card-outline card-info">
+          <div class="card-header">
+          
+           
+<!--           <div style="display:inline-block"> -->
+          	<div class="card-title" style="display:inline-block;">
+          	<label for="title">제목</label>  &nbsp;&nbsp;&nbsp;&nbsp;
+            <div>${pds.pdsTitle }</div>
+           </div>
+<!--            </div> -->
+            <div class="card-tools">
+              <button type="button" class="btn btn-default" id="modifyBtn" onclick="modify_go(${pds.pdsId});">수 정</button>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <button type="button" class="btn btn-danger" id="removeBtn" onclick="remove_go('${pds.pdsId}');">삭 제</button>
+<!--               &nbsp;&nbsp;&nbsp;&nbsp; -->
+<!--               <button type="button" class="btn btn-warning" id="cancelBtn" onclick="history.go(-1)">목록</button> -->
+            </div>
+          </div>
+          <!--end card-header  -->
+          <div class="card-body pad">
+            <div class="row">
+            
+              <div class="col-sm-12">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="writer">작성자</label>
+                      <div>${pds.mngName }</div>
+                      <%-- 											<input type="text" id="title" value="${notice.title }" name='title' class="form-control" placeholder="000" readonly> --%>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="title">날짜</label>
+                      <div><fmt:formatDate value="${pds.pdsWriteDate }" pattern="yyyy-MM-dd" /></div>
+                      <%-- 											<input type="text" id="title" value="${notice.title }" name='title' class="form-control" placeholder="000" readonly> --%>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+							<div class="col-sm-12">
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="form-group">
+											<label for="content">첨부파일</label>
+											<c:forEach items="${pds.attachList }" var="attach">
+												<div class="col-md-4 col-sm-4 col-xs-12"
+													style="cursor: pointer;"
+													onclick="location.href='/common/getFile.do?attachId=${attach.attachId }';">
+													<div class="info-box">
+														<span class="info-box-icon bg-yellow"> 
+														<i class="fa fa-copy"></i>
+														</span>
+														<div class="info-box-content">
+															<span class="info-box-text"> <fmt:formatDate
+																	value="${attach.attachDate }" pattern="yyyy-MM-dd" />
+															</span> <span class="info-box-number">${attach.attachName }</span>
+														</div>
+													</div>
+												</div>
+											</c:forEach>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+
+							<div class="col-sm-12">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label for="content">내용</label>
+                      <input type="text" id="content" value="${pds.pdsContent }" name='content' class="form-control" readonly>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!--end card-body  -->
+          <div class="card-footer" style="display:none">
+          <button type="button" class="btn btn-warning" id="cancelBtn" onclick="location.href='/common/pdsForm.do'">목록</button>
+
+          </div>
+          <!--end card-footer  -->
+        </div><!-- end card -->
+        
+        
+      </div><!-- end col-md-12 -->
+    </div><!-- end row -->
+  </section>
+  <!-- /.content -->
+
+  <script>
+  function modify_go(pdsId) {
+      location.href = "/manager/pds/modifyForm.do?pdsId=" + pdsId;
+    }
+
+    function remove_go(pdsId) {
+      location.href = "/manager/pds/remove.do?pdsId=" + pdsId;
+    } 
+    
+ </script>
+  
+    <c:if test = "${from eq 'modify' }" >
+    	<script>
+    	alert("수정되었습니다.");
+    	</script>
+    </c:if>
+
+
+<c:if test = "${from eq 'remove' }" >
+	<script>
+	    alert("삭제되었습니다.");
+	  	window.close();
+	  	window.opener.location.reload(); 
+	 </script>
+</c:if>
+
+
+</body>

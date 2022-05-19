@@ -1,0 +1,11 @@
+package com.lms.hexa.service;
+
+import java.util.List;
+
+import com.lms.hexa.dto.AuthorityVO;
+
+public interface AuthorityService {
+	
+	public List<AuthorityVO> getAuthorityListById(String id) throws Exception;
+	
+}

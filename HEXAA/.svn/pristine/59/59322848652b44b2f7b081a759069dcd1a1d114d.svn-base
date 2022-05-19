@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Homework-Mapper">
+	
+	<select id="selectLessonIntegratedSearchList" parameterType="cri" resultType="lesson">
+		 SELECT A.LESSONASSIGNMENT_ID AS lessonId
+		      ,A.LROOM_ID AS lessonRoom
+		      ,B.MNG_NAME AS mngId
+		      ,A.LA_START_DATE AS lessonStartDate
+		      ,A.LA_END_DATE AS lessonEndDate
+              ,A.LA_SYLLABUS AS lessonSyllabus
+              ,G.LROOM_MAXNO AS lessonMaxNo
+		      ,F.LESSON_PRICE AS lessonPrice
+		      ,E.SCODE_VALUE AS lessonSubjectType
+		      ,F.LESSON_GRADE AS lessonGrade
+              ,A.LA_TIME_INFO AS lessonTimeTarget
+		      ,C.SCODE_VALUE AS lessonGradeCategoryCode
+		      ,D.SCODE_VALUE AS lessonStateCode
+              ,F.LESSON_NAME AS lessonName
+              ,F.LESSON_GRADE AS lessonGrade
+              ,F.LESSON_GRADE_INTEGRATE AS lessonGradeInteGrate
+              ,F.LESSON_HOURS AS lessonHours
+		  FROM LESSONASSIGNMENT A,MANAGER B,
+		     (SELECT *
+		        FROM STANDARDCODE
+		       WHERE SCODE_CATEGORY = 'STUDENT_GRADE_CATEGORY_CODE'
+		     )C,
+		     (SELECT *
+		        FROM STANDARDCODE
+		       WHERE SCODE_CATEGORY = 'LA_STATE_CODE'
+		     )D,
+		     (SELECT *
+		        FROM STANDARDCODE
+		       WHERE SCODE_CATEGORY = 'MNG_SUBJECT'
+		     )E, LESSON F, LESSON_ROOM G
+		 WHERE A.MNG_ID = B.MNG_ID
+		   AND F.LESSON_GRADE_CATEGORY_CODE = C.SCODE_KEY
+		   AND A.LA_STATE_CODE = D.SCODE_KEY
+		   AND F.LESSON_SUBJECT_TYPE = E.SCODE_KEY
+           AND A.LESSON_ID = F.LESSON_ID
+           AND G.LROOM_ID = A.LROOM_ID
+           <if test="keyword!=null and !keyword.equals('')">
+		   AND (
+                 E.SCODE_VALUE LIKE '%'||#{keyword}||'%'
+              OR F.LESSON_NAME LIKE '%'||#{keyword}||'%'
+              OR G.LROOM_ID LIKE '%'||#{keyword}||'%'
+              OR B.MNG_NAME LIKE '%'||#{keyword}||'%'
+               )
+		  </if>
+		 ORDER BY 1 DESC
+	</select>
+		
+</mapper>

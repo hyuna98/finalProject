@@ -1,0 +1,48 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<title>시험관리</title>
+
+<head></head>
+
+<body>
+	<div>
+		<section class="content-header">
+		  	<div class="container-fluid">
+		  		<div class="row md-2">
+		  			<div class="col-sm-6">
+		  				<h3>시험관리</h3>  				
+		  			</div>
+		  		</div>
+		  	</div>
+		</section>
+		
+		<section class="content">
+			<div class="card">
+				<div class="card-header">
+					<form>
+						<div class="form-group">
+							<div class="custom-control custom-radio" style="display:inline;">
+								<input class="custom-control-input" type="radio" id="customRadio1" name="customRadio">
+								<label for="customRadio1" class="custom-control-label">학원</label>
+							</div>
+							<div class="custom-control custom-radio">
+								<input class="custom-control-input" type="radio" id="customRadio2" name="customRadio">
+								<label for="customRadio2" class="custom-control-label">학교</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6">
+								<label style="display:inline;">시험일</label>
+								<select class="form-control col-md-2">
+									<option>1학기</option>
+									<option>2학기</option>
+								</select>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</section>
+	</div>
+</body>

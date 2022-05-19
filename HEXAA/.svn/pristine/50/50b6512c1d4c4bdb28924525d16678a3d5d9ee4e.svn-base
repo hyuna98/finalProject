@@ -1,0 +1,16 @@
+package com.lms.hexa.service;
+
+import java.util.List;
+
+import com.lms.hexa.dto.ConsultingVO;
+
+
+
+public interface ConsultingService {
+	
+
+
+   	List<ConsultingVO> getDivision();
+	 
+
+}

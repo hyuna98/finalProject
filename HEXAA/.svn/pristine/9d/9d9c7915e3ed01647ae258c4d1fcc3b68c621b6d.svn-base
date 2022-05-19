@@ -1,0 +1,182 @@
+package com.lms.hexa.service;
+
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.lms.hexa.command.Criteria;
+import com.lms.hexa.command.PageMaker;
+import com.lms.hexa.dao.StudentDAO;
+import com.lms.hexa.dto.StudentVO;
+
+public class StudentServiceImpl implements StudentService {
+	
+	private StudentDAO studentDAO;
+
+	public void setStudentDAO(StudentDAO studentDAO) {
+		this.studentDAO = studentDAO;
+	}
+
+	@Override
+	public StudentVO getStudent(String id) throws Exception {
+		StudentVO student = studentDAO.selectStudentById(id);
+		return student;
+	}
+
+	@Override
+	public Map<String, Object> getStudentList(Criteria cri) throws Exception {
+		List<StudentVO> studentList = studentDAO.selectStudentList(cri);
+		List<StudentVO> genderCodeList = studentDAO.selectGenderCodeList();
+		List<StudentVO> gradeCodeList = studentDAO.selectGradeCodeList();
+		List<StudentVO> gradeCategoryCodeList = studentDAO.selectGradeCategoryCodeList();
+		List<StudentVO> statusCodeList = studentDAO.selectStatusCodeList();
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(studentDAO.selectStudentListTotalCount(cri));
+		
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		dataMap.put("studentList", studentList);
+		dataMap.put("genderCodeList", genderCodeList);
+		dataMap.put("gradeCodeList", gradeCodeList);
+		dataMap.put("gradeCategoryCodeList", gradeCategoryCodeList);
+		dataMap.put("statusCodeList", statusCodeList);
+		dataMap.put("pageMaker", pageMaker);
+		
+		return dataMap;
+	}
+
+	@Override
+	public void insertStudent(StudentVO student) throws SQLException {
+		studentDAO.insertStudent(student);
+	}
+
+	@Override
+	public void updatePwd(String emailAddress) throws Exception {
+		studentDAO.updatePwd(emailAddress);
+		
+	}
+
+
+	@Override
+	public void modifyPwd(StudentVO student) throws SQLException {
+		studentDAO.modifyPwd(student);
+	}
+
+	@Override
+	public List<StudentVO> getStudentClassInfoList() throws Exception {
+		List<StudentVO> studentList = studentDAO.selectStudentClassInfoList();
+		
+		for (StudentVO student : studentList) {
+			String outGrade = student.getGrade();
+			
+			String changeGrade = outGrade.split(" ")[0];
+			
+			if(changeGrade.equals("ELMNT")) {
+				changeGrade = "초";
+			} else if(changeGrade.equals("MDL")) {
+				changeGrade = "중";
+			} else {
+				changeGrade = "고";
+			}
+			
+			String inGrade = changeGrade + " " + outGrade.split(" ")[1];
+			
+			student.setGrade(inGrade);
+			
+		}
+		return studentList;
+	}
+	
+	@Override
+	public List<StudentVO> getStudentScoreInfoList(int examId) throws Exception {
+		List<StudentVO> studentList = studentDAO.selectStudentScoreInfoList(examId);
+		
+		for (StudentVO student : studentList) {
+			String outGrade = student.getGrade();
+			
+			String changeGrade = outGrade.split(" ")[0];
+			
+			if(changeGrade.equals("ELMNT")) {
+				changeGrade = "초";
+			} else if(changeGrade.equals("MDL")) {
+				changeGrade = "중";
+			} else {
+				changeGrade = "고";
+			}
+			
+			String inGrade = changeGrade + " " + outGrade.split(" ")[1];
+			
+			student.setGrade(inGrade);
+			
+		}
+		return studentList;
+	}
+
+	@Override
+	public List<StudentVO> getSearchStudentList(String value) throws Exception {
+		List<StudentVO> studentList = studentDAO.searchStudentList(value);
+		
+		for (StudentVO student : studentList) {
+			String outGrade = student.getGrade();
+			
+			String changeGrade = outGrade.split(" ")[0];
+			
+			if(changeGrade.equals("ELMNT")) {
+				changeGrade = "초";
+			} else if(changeGrade.equals("MDL")) {
+				changeGrade = "중";
+			} else {
+				changeGrade = "고";
+			}
+			
+			String inGrade = changeGrade + " " + outGrade.split(" ")[1];
+			
+			student.setGrade(inGrade);
+			
+		}
+		return studentList;
+	}
+
+	@Override
+	public Map<String, Object> getStudentListAll() throws Exception {
+//		List<StudentVO> studentList = studentDAO.selectStudentList(cri);
+//		List<StudentVO> genderCodeList = studentDAO.selectGenderCodeList();
+//		List<StudentVO> gradeCodeList = studentDAO.selectGradeCodeList();
+//		List<StudentVO> gradeCategoryCodeList = studentDAO.selectGradeCategoryCodeList();
+//		List<StudentVO> statusCodeList = studentDAO.selectStatusCodeList();
+		
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+//		dataMap.put("studentList", studentList);
+//		dataMap.put("genderCodeList", genderCodeList);
+//		dataMap.put("gradeCodeList", gradeCodeList);
+//		dataMap.put("gradeCategoryCodeList", gradeCategoryCodeList);
+//		dataMap.put("statusCodeList", statusCodeList);
+//		dataMap.put("pageMaker", pageMaker);
+		
+		return dataMap;
+	}
+
+	@Override
+	public StudentVO getStudentDetail(String id) throws Exception {
+		StudentVO student = studentDAO.selectStudentDetail(id);
+		
+		String outGrade = student.getGrade();
+		String changeGrade = outGrade.split(" ")[0];
+		
+		if(changeGrade.equals("ELMNT")) {
+			changeGrade = "초";
+		} else if(changeGrade.equals("MDL")) {
+			changeGrade = "중";
+		} else {
+			changeGrade = "고";
+		}
+		
+		String inGrade = changeGrade + " " + outGrade.split(" ")[1];
+		student.setGrade(inGrade);
+		
+		return student;
+	}
+
+}

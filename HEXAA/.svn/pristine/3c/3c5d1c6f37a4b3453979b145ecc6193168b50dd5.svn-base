@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Notice-Mapper">
+
+  <resultMap type="notice" id="noticeMap">
+    	<result property="noticeSeq" column="NOTICE_SEQ"/>
+    	<result property="noticeId" column="NOTICE_ID"/>
+    	<result property="noticeTitle" column="NOTICE_TITLE"/>
+    	<result property="noticeRegdate" column="NOTICE_REGDATE"/>
+    	<result property="noticeContent" column="NOTICE_CONTENT"/>
+    	<result property="mngId" column="MNG_ID"/>
+  </resultMap>
+
+		
+ 	<sql id="search">
+		<if test="searchType == 't'.toString()">
+			and title like '%'||#{keyword}||'%'			
+		</if>
+		<if test="searchType == 'c'.toString()">
+			and content like '%'||#{keyword}||'%'			
+		</if>
+		<if test="searchType == 'tc'.toString()">
+			and (
+			title like '%'||#{keyword}||'%'
+			or
+			content like '%'||#{keyword}||'%'						
+			)			
+		</if>
+	
+	</sql>
+	<select id="selectSearchNoticeList" resultType="notice">	
+			SELECT 
+		       NOTICE_TITLE,
+		       NOTICE_REGDATE,
+		       NOTICE_CONTENT
+		FROM NOTICE
+		WHERE NOTICE_ID IS NOT NULL
+	
+		
+<!-- 		select *
+		from(
+		    select rownum as rnum,SearchNoticeResult.*
+		    from ( 
+		    	select * 
+				from notice
+				where nno is not null
+				<include refid="search" />				
+				order by regDate desc
+		    )  SearchNoticeResult
+		    <![CDATA[
+		    where rownum <= #{endRow}
+		    ]]>
+		)
+		 <![CDATA[
+		where rnum > #{startRow}		
+		 ]]> -->
+	</select>
+	
+	<select id="selectSearchNoticeListCount" resultType="int">
+		select
+		count(*) 
+		from notice
+		where nno is not null
+		<include refid="search" />
+		order by regDate desc
+		
+	</select>
+	<select id="selectNoticeByNno" parameterType="int" resultType="notice">
+		select 
+		* 
+		from notice
+		where nno=#{nno}
+	</select>
+	
+	<select id="selectNoticeSequenceNextValue" resultType="int">
+		select notice_seq.nextVal
+		from dual
+	</select>
+
+	<update id="insertNotice" parameterType="notice">
+		insert into 
+		notice(NOTICE_ID,NOTICE_TITLE,NOTICE_REGDATE,NOTICE_CONTENT,MNG_ID)
+		values(NOTICE_SEQ.nextval,#{noticeTitle},sysdate,#{noticeContent},#{mngId})
+	</update>	
+
+<!-- 		
+	<update id="updateNotice" parameterType="notice">
+		update notice 
+		set 
+		title=#{title},content=#{content}		
+		where nno=#{nno}
+	</update>
+	
+	<update id="deleteNotice" parameterType="int" >
+		delete 
+		from notice 
+		where nno=#{nno}		
+	</update>	 -->
+	
+
+	
+</mapper>

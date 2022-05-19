@@ -1,0 +1,112 @@
+package com.lms.hexa.service;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.lms.hexa.dao.ScoreDAO;
+import com.lms.hexa.dto.ExamVO;
+import com.lms.hexa.dto.FeedBackVO;
+import com.lms.hexa.dto.MarkVO;
+import com.lms.hexa.dto.QuestionVO;
+
+public class ScoreServiceImpl implements ScoreService {
+	
+	protected ScoreDAO scoreDAO;
+	
+	public void setScoreDAO(ScoreDAO scoreDAO) {
+		this.scoreDAO = scoreDAO;
+	}
+
+	@Override // 시험 등록
+	public void examRegist(ExamVO exam) throws Exception {
+		scoreDAO.insertExam(exam);
+	}
+	
+	@Override // 시험 조회
+	public ExamVO getExam(int examId) throws Exception {
+		ExamVO exam = scoreDAO.selectExam(examId);
+		return exam;
+	}
+
+	@Override // 시험 리스트 조회
+	public List<ExamVO> getExamList() throws Exception {
+		List<ExamVO> examList = scoreDAO.selectExamList();
+		return examList;
+	}
+
+	@Override
+	public List<QuestionVO> getQuestionList(int examId) throws Exception {
+		List<QuestionVO> questionList = scoreDAO.selectQuestionList(examId);
+		return questionList;
+	}
+
+	@Override
+	public List<QuestionVO> getQuesAreaList(int examId) throws Exception {
+		List<QuestionVO> quesAreaList = scoreDAO.selectQuesAreaList(examId);
+		return quesAreaList;
+	}
+
+	@Override
+	public int questionUpdate(HashMap<String, Object> params) throws Exception {
+		
+		int result = 0;
+		
+		int examId = (int) params.get("examId");
+		
+		
+		scoreDAO.deleteQuestionList(examId);
+		result = scoreDAO.insertQuestionList(params);
+		
+		return result;
+	}
+
+	@Override
+	public List<ExamVO> getSearchExamList(String value) throws Exception {
+		
+		List<ExamVO> examList = scoreDAO.searchExamList(value);
+		return examList;
+	}
+
+	@Override
+	public List<MarkVO> getMarkList(MarkVO mark) throws Exception {
+		List<MarkVO> markList = scoreDAO.selectMarkList(mark);
+		return markList;
+	}
+
+	@Override
+	public Map<String, Object> getExamByStudent(String studentId) throws Exception {
+//		System.out.println("서비스 : " + studentId);
+		Map<String, Object> examByStudent = new HashMap<String, Object>();
+		List<ExamVO> examByStudentList = scoreDAO.selectExamByStudent(studentId);
+		examByStudent.put("examByStudentList", examByStudentList);
+		return examByStudent;
+	}
+
+	@Override
+	public Map<String, Object> getOverallScore(HashMap<String, Object> params) throws Exception {
+		
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		List<ExamVO> overallScore = scoreDAO.selectOverallScore(params);
+//		List<FeedBackVO> feedbackList = scoreDAO.selectFeedBack(params);
+		
+		dataMap.put("overallScore", overallScore);
+//		dataMap.put("feedbackList", feedbackList);
+		
+		return dataMap;
+	}
+
+	@Override
+	public Map<String, Object> getFeedBack(HashMap<String, Object> params) throws Exception {
+		
+		Map<String, Object> feed = new HashMap<String, Object>();
+		List<FeedBackVO> feedbackList = scoreDAO.selectFeedBack(params);
+		
+		feed.put("feedbackList", feedbackList);
+		
+		return feed;
+	}
+	
+	
+
+}

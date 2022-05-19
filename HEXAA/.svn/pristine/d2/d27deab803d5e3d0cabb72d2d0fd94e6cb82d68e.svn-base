@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Payment-Mapper">
+
+  <resultMap type="payment" id="paymentMap">
+       <result property="paymentId" column="PAYMENT_ID"/>
+       <result property="paymentPrice" column="PAYMENT_PRICE"/>
+       <result property="paymentDate" column="PAYMENT_DATE"/>
+       <result property="parentId" column="PARENT_ID"/>
+       <result property="lessonassignmentId" column="LESSONASSIGNMENT_ID"/>
+       <result property="paymentDuedate" column="PAYMENT_DUEDATE"/>
+       <result property="paymentMonths" column="PAYMENT_MONTHS"/>
+       <result property="studentName" column="STUDENT_NAME"/>
+       <result property="studentId" column="STUDENT_ID"/>
+       <result property="lessonName" column="LESSON_NAME"/>
+       <result property="lessonPrice" column="LESSON_PRICE"/>
+       <result property="lessonId" column="LESSON_ID"/>
+       <result property="mngHp" column="MNG_HP"/>
+  </resultMap>
+  
+
+
+
+
+
+  		      
+  		      
+  	<select id="selectPStudent" parameterType="str" resultMap="paymentMap">
+			SELECT A.STUDENT_NAME
+      			  ,A.STUDENT_ID
+   			 FROM STUDENT A, PARENT B
+			WHERE A.PARENT_ID = B.PARENT_ID
+  		      AND A.PARENT_ID = #{parentId}
+  		      </select>
+
+	<select id="selectPayment" parameterType="str" resultMap="paymentMap">
+       SELECT D.STUDENT_NAME
+             ,B.LESSON_NAME
+             ,A.PAYMENT_DATE
+             ,A.PAYMENT_DUEDATE
+             ,B.LESSON_PRICE
+             ,A.PAYMENT_MONTHS
+             ,A.STUDENT_ID
+             ,C.LESSONASSIGNMENT_ID
+        FROM PAYMENT A,LESSON B, LESSONASSIGNMENT C, STUDENT D
+       WHERE A.LESSONASSIGNMENT_ID = C.LESSONASSIGNMENT_ID
+         AND B.LESSON_ID = C.LESSON_ID
+         AND A.PARENT_ID = D.PARENT_ID
+         AND A.STUDENT_ID = D.STUDENT_ID
+         AND A.PARENT_ID = #{parentId}
+         <if test="studentId!=null and !studentId.equals('')">
+         AND D.STUDENT_ID = #{studentId}
+		</if>
+    </select>
+    
+    
+   	<update id="insertPayment" parameterType="payment">
+   	INSERT INTO PAYMENT(PAYMENT_ID,PAYMENT_PRICE,PAYMENT_DATE,PARENT_ID,LESSONASSIGNMENT_ID,PAYMENT_DUEDATE,PAYMENT_MONTHS,STUDENT_ID)
+	VALUES(#{paymentId},#{paymentPrice},to_date(sysdate,'yyyy/mm/dd hh24:mi:ss'),#{parentId},#{lessonassignmentId},#{paymentDuedate},#{paymentMonths},#{studentId})
+	</update>
+   
+</mapper>

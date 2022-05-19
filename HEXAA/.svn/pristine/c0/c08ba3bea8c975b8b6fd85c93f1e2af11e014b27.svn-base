@@ -1,0 +1,35 @@
+package com.lms.hexa.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.lms.hexa.command.Criteria;
+import com.lms.hexa.dto.StudentVO;
+
+public interface StudentDAO {
+
+	StudentVO selectStudentById(String id) throws SQLException;
+	
+	StudentVO selectStudentByIdForAtt(String id) throws SQLException;
+	
+	List<StudentVO> selectStudentList(Criteria cri) throws Exception;
+	
+	// 자료 전체 개수
+	int selectStudentListTotalCount(Criteria cri) throws SQLException;
+	
+	public void insertStudent(StudentVO student) throws SQLException;
+
+	List<StudentVO> selectStudentIdList() throws SQLException;
+
+	// 비밀번호 초기화
+	public void updatePwd(String emailAddress) throws SQLException;
+	
+	// 비밀번호 수정
+	public void modifyPwd(StudentVO student) throws SQLException;
+	
+	// 반 정보가 담긴 학생 리스트 가져오기
+	public List<StudentVO> selectStudentClassInfoList() throws SQLException;
+	
+	//검색
+	List<StudentVO> searchStudentList(String value) throws SQLException;
+}

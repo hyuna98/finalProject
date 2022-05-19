@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="Pds-Mapper">
+  
+  
+  <resultMap type="pds" id="pdsMap">
+		<result property="pdsId" column="PDS_ID"/>
+		<result property="pdsTitle" column="PDS_TITLE"/>
+		<result property="mngId" column="MNG_ID"/>
+		<result property="pdsContent" column="PDS_CONTENT"/>
+		<result property="pdsViews" column="PDS_VIEWS"/>
+		<result property="pdsWriteDate" column="PDS_WRITE_DATE"/>
+		<result property="pdsModifyDate" column="PDS_MODIFY_DATE"/>
+		<result property="pdsStartDate" column="PDS_START_DATE"/>
+		<result property="pdsEndDate" column="PDS_END_DATE"/>
+		<result property="pdsPoint" column="PDS_POINT"/>
+		<result property="pdsDist" column="PDS_DIST"/>
+	</resultMap>
+  
+  <select id="selectSearchPdsList" parameterType="str" resultMap="pdsMap">
+		SELECT PDS_ID,
+		       MNG_ID,
+		       PDS_TITLE,
+		       PDS_WRITE_DATE,
+		       PDS_VIEWS 
+		FROM PDS
+		WHERE PDS_ID IS NOT NULL
+<!-- 		<include refid="search" /> -->
+<!-- 		order by pno desc -->
+	</select>
+	
+	<select id="selectSearchPdsListCount"  resultType="int">
+		select
+		count(*)
+		from
+		pds
+		where PDS_ID is not null  			  	
+<!-- 		<include refid="search" /> -->
+		order by PDS_ID desc
+	</select>
+	
+	<select id="selectPdsByPno"  parameterType="pds" resultMap="pdsMap">
+		select * 
+		from pds 
+		where pds_id=#{pdsId}
+	</select>
+	
+	<update id="insertPds" parameterType="pds">
+		insert 
+		into 
+		pds(pds_id,pds_title,mng_id,pds_content, pds_write_date)
+		values
+		(PDS_SEQ.nextval,#{pdsTitle},#{mngId},#{pdsContent},sysdate)
+	</update>
+	
+	<update id="updatePds" parameterType="pds">
+		UPDATE pds
+		   SET pds_title=#{pdsTitle}, 
+		       pds_content=#{pdsContent}, 
+		       pds_modify_date=SYSDATE 
+		WHERE pds_id = #{pdsId}
+	</update>
+	
+	<update id="deletePds" parameterType="int">
+		delete 
+		from pds 
+		where pds_id=#{pdsId}
+	</update>
+	
+	<update id="increaseViewCnt" parameterType="int">
+		update 
+		pds 
+		set 
+		viewcnt=viewcnt+1 
+		where pds_id=#{pdsId}
+	</update>
+	
+	<select id="selectPdsSeqNext" resultType="int">
+		select pds_seq.nextval as pds_id from dual
+	</select>
+</mapper>

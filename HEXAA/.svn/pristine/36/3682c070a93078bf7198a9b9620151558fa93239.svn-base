@@ -1,0 +1,172 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+<section class="content-header">
+	<div class="container-fluid">
+	  	<div class="row md-2">
+  			<div class="col-sm-6">
+  				<h1>수업관리</h1>  				
+  			</div>
+  			<div class="col-sm-6">
+  				<ol class="breadcrumb float-sm-right">
+			        <li class="breadcrumb-item">
+			        	<a href="list.do">
+				        	<i class="fa fa-dashboard"></i>수업관리
+				        </a>
+			        </li>
+    	  		</ol>
+  			</div>
+  		</div>
+	</div>
+</section>
+<section class="content">
+	<div class="card-header" style="margin-top : 0px;">
+		<div class="col-sm-6 float-sm-right">
+			<div class="form-group">
+				<div class="col-sm-6 float-sm-right">
+					<div class="input-group">
+						<input type="text" class="form-control">
+						<div class="input-group-append">
+							<span class="input-group-text" role="button"><i class="fas fa-plus"></i></span>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-4 float-sm-right">
+					<select class="form-control" >
+						<option>교사명</option>
+						<option>강의실명</option>
+						<option>과목명</option>
+					</select>
+				</div>
+				<div style="vertical-align:bottom; text-align:right; font-size: 15px;" class="col-sm-2 float-sm-right">
+					<label >교사검색</label>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="card-body">
+		<div class="row" style="height: 30px; ">
+			<table id="example1" class="table table-bordered table-striped dataTable dtr-inline" style="text-align : center">
+				<thead style="background-color:rgb(32 73 105); color: white;">
+				<tr>
+					<th style="padding-bottom:0px;padding-top:0px; margin-bottom:0px; margin-bottom:0px; width:10%">수업번호</th>
+					<th style="padding-bottom:0px;padding-top:0px; margin-bottom:0px; margin-bottom:0px; width:10%">과목</th>
+					<th style="padding-bottom:0px;padding-top:0px; margin-bottom:0px; margin-bottom:0px; width:20%">수업명</th>
+					<th style="padding-bottom:0px;padding-top:0px; margin-bottom:0px; margin-bottom:0px; width:10%">강의실</th>
+					<th style="padding-bottom:0px;padding-top:0px; margin-bottom:0px; margin-bottom:0px; width:10%">교사</th>
+					<th style="padding-bottom:0px;padding-top:0px; margin-bottom:0px; margin-bottom:0px; width:29%">강의기간</th>
+					<th style="padding-bottom:0px;padding-top:0px; margin-bottom:0px; margin-bottom:0px; width:10%">강의상태</th>
+				</tr>
+				</thead>
+			</table>
+		</div>
+		<div class="row" style="height: 150px; overflow: scroll; overflow-x: hidden;">
+			<table id="example1" class="table" style="text-align : center">
+				<tbody>
+					<c:forEach var="i" begin="0" end="5" step="1">
+							<tr class="odd">
+								<td style="width:10%">${i}</td>
+								<td style="width:10%">수학</td>
+								<td style="width:20%">중2 수학 내신 설계</td>
+								<td style="width:10%">404호</td>
+								<td style="width:10%">정현아</td>
+								<td style="width:30%">2022.03.05~2022.05.05</td>
+								<td style="width:10%">대기</td>
+							</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+		<div class="row">
+			<div class="col-md-4" style="padding:0px;">
+				<div class="col-md-12" style="padding:0px; height: 50px;">
+					<table id="example2" class="table table-bordered table-striped dataTable dtr-inline" style="text-align : center">
+						<thead style="background-color:rgb(32 73 105); color: white;">
+						<tr>
+							<th style="width:20%">학생명</th>
+							<th style="width:30%">HP</th>
+							<th style="width:30%">생년월일</th>
+							<th style="width:20%">삭제</th>
+						</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="col-md-12" style="padding:0px; height: 250px; overflow: scroll; overflow-x: hidden;">
+					<table id="example2" class="table" style="text-align : center">
+						<tbody>
+							<c:forEach var="i" begin="0" end="5" step="1">
+								<tr class="odd">
+									<td style="width:20%">정현아${i}</td>
+									<td style="width:30%">010-0000-0000</td>
+									<td style="width:30%">1990.00.00</td>
+									<td style="width:20%"><button type="button" class="btn btn-block btn-outline-info btn-flat">삭제</button></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-md-12" style="padding:0px; height: 190px;">
+					<div class="col-sm-12">
+						<div class="form-group">
+							<div class="col-sm-6 float-sm-right">
+								<div class="input-group">
+									<input type="text" class="form-control">
+									<div class="input-group-append">
+										<span class="input-group-text" role="button"><i class="fas fa-plus"></i></span>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-4 float-sm-right">
+								<select class="form-control" >
+									<option>학생명</option>
+									<option>반</option>
+									<option>학년</option>
+								</select>
+							</div>
+							<div style="vertical-align:bottom; text-align:right; font-size: 15px;" class="col-sm-2 float-sm-right">
+								<label>학생검색</label>
+							</div>
+						</div>
+						<div class="col-md-12" style="padding:0px; height: 50px;">
+							<table id="example2" class="table table-bordered table-striped dataTable dtr-inline" style="text-align : center">
+								<thead style="background-color:rgb(32 73 105); color: white;">
+								<tr>
+									<th style="width:20%">학생명</th>
+									<th style="width:30%">HP</th>
+									<th style="width:30%">생년월일</th>
+									<th style="width:20%">추가</th>
+								</tr>
+								</thead>
+							</table>
+						</div>
+						<div class="col-md-12" style="padding:0px; height: 250px; overflow: scroll; overflow-x: hidden;">
+							<table id="example2" class="table" style="text-align : center">
+								<tbody>
+									<c:forEach var="i" begin="0" end="5" step="1">
+										<tr class="odd">
+											<td style="width:20%">정현아${i}</td>
+											<td style="width:30%">010-0000-0000</td>
+											<td style="width:30%">1990.00.00</td>
+											<td style="width:20%"><button type="button" class="btn btn-block btn-outline-info btn-flat">추가</button></td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-8" style="padding:0px; border: 5px solid black; height: 490px;">
+			</div>
+		</div>
+	</div>
+</section>
+	
+</body>
+</html>

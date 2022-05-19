@@ -1,0 +1,29 @@
+package com.lms.hexa.controller;
+
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.lms.hexa.service.ManagerAttandanceService;
+import com.lms.hexa.service.SchoolService;
+
+@Controller
+@RequestMapping("/manager/school")
+public class SchoolController {
+	
+	@Resource(name="schoolService")
+	private SchoolService service;
+	
+	@RequestMapping("/list")
+	public ModelAndView list(ModelAndView mnv)throws Exception{
+		String url="manager/school/list";
+		Map<String, Object> dataMap = service.selectSchoolList();
+		mnv.addObject("dataMap",dataMap);
+		mnv.setViewName(url);
+		return mnv;
+	}
+}

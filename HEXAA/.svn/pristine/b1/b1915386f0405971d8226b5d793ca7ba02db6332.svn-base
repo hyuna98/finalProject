@@ -1,0 +1,76 @@
+package com.lms.hexa.service;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.lms.hexa.dao.MenuDAO;
+import com.lms.hexa.dto.MenuVO;
+
+public class MenuServiceImpl implements MenuService{
+
+	private MenuDAO menuDAO;
+	public void setMenuDAO(MenuDAO menuDAO) {
+		this.menuDAO = menuDAO;
+	}
+	
+	@Override
+	public List<MenuVO> getMemberMenuList() throws SQLException {
+		List<MenuVO> menuList = menuDAO.selectMemberMenuList();
+		return menuList;
+	}
+
+	@Override
+	public List<MenuVO> getMemberSubMenuList(String login_id) throws SQLException {
+		List<MenuVO> menuList = menuDAO.selectMemberSubMenuList(login_id);
+		return menuList;
+	}
+
+	@Override
+	public List<MenuVO> getManagerMenuList() throws SQLException {
+		List<MenuVO> menuList = menuDAO.selectManagerMenuList();
+		return menuList;
+	}
+
+	@Override
+	public List<MenuVO> getManagerSubMenuList(String login_id) throws SQLException {
+		List<MenuVO> menuList = menuDAO.selectManagerSubMenuList(login_id);
+		return menuList;
+	}
+
+	@Override
+	public List<MenuVO> getMemberFavoriteMenuList(String login_id) {
+		List<MenuVO> menuList = menuDAO.selectMemberFavoriteMenuList(login_id);
+		return menuList;
+	}
+
+	@Override
+	public List<MenuVO> getManagerFavoriteMenuList(String login_id) {
+		List<MenuVO> menuList = menuDAO.selectManagerFavoriteMenuList(login_id);
+		return menuList;
+	}
+
+	@Override
+	public List<MenuVO> selectManagerNotAuthorityMenuList(String id) {
+		List<MenuVO> menuList = menuDAO.selectManagerNotAuthorityMenuList(id);
+		return menuList;
+	}
+
+	@Override
+	public List<MenuVO> selectManagerAuthorityMenuList(String id) {
+		List<MenuVO> menuList = menuDAO.selectManagerAuthorityMenuList(id);
+		return menuList;
+	}
+
+	@Override
+	public String getMenuId(String menuName) throws SQLException {
+		String menuId = menuDAO.selectMenuId(menuName);
+		return menuId;
+	}
+
+	@Override
+	public MenuVO getMemberMenuListByMcode(String mCode) {
+		MenuVO menu = menuDAO.selectMemberMenuListByMcode(mCode);
+		return menu;
+	}
+
+}

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ManagerAttandance-Mapper">
+
+	<resultMap type="attandance" id="attandanceMap">
+		<result property="atnId" column="ATN_ID"/>
+		<result property="atnDate" column="ATN_DATE"/>
+		<result property="atnGoTime" column="ATN_GO_TIME"/>
+		<result property="atnOutTime" column="ATN_OUT_TIME"/>
+		<result property="atnStartDeadlineYn" column="ATN_START_DEADLINE_YN"/>
+		<result property="atnYn" column="ATN_YN"/>
+		<result property="atnYnManager" column="ATN_YN_MANAGER"/>
+		<result property="atnRandomTime" column="ATN_RANDOM_TIME"/>
+		<result property="atnReason" column="ATN_REASON"/>
+		<result property="studentId" column="STUDENT_ID"/>
+	</resultMap>
+		
+	<select id="selectAttandance" parameterType="str" resultMap="attandanceMap">
+		SELECT ATN_ID,
+				ATN_DATE,
+				ATN_GO_TIME,
+				ATN_OUT_TIME,
+				ATN_START_DEADLINE_YN,
+				ATN_YN,
+				ATN_YN_MANAGER,
+				ATN_RANDOM_TIME,
+				ATN_REASON,
+				STUDENT_ID
+		  FROM ATTENDANCE
+		order by ATN_ID desc
+	</select>
+	
+	<select id="selectAtt" parameterType="str" resultMap="attandanceMap">
+		SELECT ATN_YN_MANAGER
+		  FROM ATTENDANCE
+		  where STUDENT_ID = #{studentId}
+		  and (TO_CHAR(ATN_DATE,'YY/MM/DD')) = (SELECT TO_CHAR(SYSDATE, 'YY/MM/DD') FROM DUAL)
+	</select>
+	
+	<select id="selectAttdate" parameterType="str" resultMap="attandanceMap">
+		SELECT ATN_GO_TIME,
+				ATN_OUT_TIME
+		  FROM ATTENDANCE
+		  where STUDENT_ID = #{studentId}
+		  and (TO_CHAR(ATN_DATE,'YY/MM/DD')) = (SELECT TO_CHAR(SYSDATE, 'YY/MM/DD') FROM DUAL)
+	</select>
+	
+	<select id="selectAttandanceGetStudentId" parameterType="str" resultMap="attandanceMap">
+		SELECT STUDENT_ID
+		  FROM ATTENDANCE
+          where atn_yn ='Y'
+          AND ATN_YN_MANAGER = 'N'
+          and (TO_CHAR(ATN_DATE,'YY/MM/DD')) = (SELECT TO_CHAR(SYSDATE, 'YY/MM/DD') FROM DUAL)
+			
+	</select>
+	
+	<select id="selectOutGetStudentId" parameterType="str" resultMap="attandanceMap">
+		SELECT STUDENT_ID
+		  FROM ATTENDANCE
+          where  ATN_START_DEADLINE_YN ='YN'
+          AND ATN_YN = 'Y'
+          AND ATN_YN_MANAGER = 'Y'
+          and (TO_CHAR(ATN_DATE,'YY/MM/DD')) = (SELECT TO_CHAR(SYSDATE, 'YY/MM/DD') FROM DUAL)	
+	</select>
+	
+	<select id="selectAttandanceTotalCount" resultType="int">
+		select count(*) from attendance 
+		where (TO_CHAR(ATN_DATE,'YY/MM/DD')) = (SELECT TO_CHAR(SYSDATE, 'YY/MM/DD') FROM DUAL)
+	</select>
+	
+	<select id="selectAttandanceTotalCount2" resultType="int">
+		select count(*) from attendance 
+		
+	</select>
+	
+	<select id="selectAttandanceYNCount" resultType="int">
+		select count(*) from attendance 
+		where ATN_YN_MANAGER = 'N' 
+		AND (TO_CHAR(ATN_DATE,'YY/MM/DD')) = (SELECT TO_CHAR(SYSDATE, 'YY/MM/DD') FROM DUAL)
+	</select>
+	
+	<update id="updateAttandance" parameterType="str" >
+		  UPDATE ATTENDANCE
+          SET ATN_YN_MANAGER = 'Y'
+          	
+          where STUDENT_ID = #{studentId}
+          AND atn_yn ='Y'
+          AND ATN_YN_MANAGER = 'N'
+	</update>
+	
+	<update id="updateOut" parameterType="str" >
+		  UPDATE ATTENDANCE
+          SET ATN_START_DEADLINE_YN = 'YY',
+          	  ATN_OUT_TIME = sysdate
+          where STUDENT_ID = #{studentId}
+          AND atn_yn ='Y'
+          AND ATN_YN_MANAGER = 'Y'
+	</update>
+	
+	<update id="updateAttandanceQr" parameterType="str" >
+		  UPDATE ATTENDANCE
+          SET atn_yn = 'Y',
+           ATN_GO_TIME = sysdate
+          where STUDENT_ID = #{studentId}
+          AND atn_yn ='N'
+          AND (TO_CHAR(ATN_DATE,'YY/MM/DD')) = (SELECT TO_CHAR(SYSDATE, 'YY/MM/DD') FROM DUAL)
+	</update>
+	
+	<update id="updateAttandanceQrz" parameterType="str" >
+		  UPDATE ATTENDANCE
+          SET ATN_START_DEADLINE_YN = 'YN'
+          where STUDENT_ID = #{studentId}
+          AND ATN_START_DEADLINE_YN ='N'
+          AND (TO_CHAR(ATN_DATE,'YY/MM/DD')) = (SELECT TO_CHAR(SYSDATE, 'YY/MM/DD') FROM DUAL)
+	</update>
+	
+	<insert id="insertDayAtt" parameterType="java.util.Map">
+		<foreach collection="studentList" item="item" index="index" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+			INTO ATTENDANCE(ATN_ID, ATN_DATE, ATN_GO_TIME, ATN_OUT_TIME, ATN_START_DEADLINE_YN, ATN_YN, ATN_YN_MANAGER, ATN_RANDOM_TIME,ATN_REASON,STUDENT_ID)
+			VALUES (ATTENDANCE_SEQ.nextval+#{index}, sysdate, '', '', 'N', 'N','N',sysdate,'None',#{item.id})
+		</foreach>
+	</insert>
+	
+	<select id="selectAttSeqNext" resultType="int">
+		select ATTENDANCE_SEQ.nextval from dual
+
+	</select>
+	
+	
+	
+	
+</mapper>

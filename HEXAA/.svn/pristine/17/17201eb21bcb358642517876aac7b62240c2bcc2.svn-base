@@ -1,0 +1,689 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<title>성적 조회</title>
+
+<head>
+	<style>
+		* {
+			font-size: 14px;
+		}
+		label {
+			margin-bottom: 0;
+		}
+		div.table1 {
+			max-height: 250px;
+			overflow-y: scroll;
+		}
+		div.table2 {
+			max-height: 210px;
+			overflow-y: scroll;
+		}
+		div.table3 {
+			overflow-y: auto;
+		}
+		.table-head-fixed th {
+			padding-top: 0.3em;
+			padding-bottom: 0.3em;
+		}
+		.table-head-fixed td {
+			padding-top: 0.3em;
+			padding-bottom: 0.3em;
+		}
+		
+ 		.card-body.p-0 .table thead>tr>th:first-of-type {
+			padding-left: 12px;
+		}
+ 		.card-body.p-0 .table tbody>tr>td:first-of-type {
+			padding-left: 12px;
+		}
+		.card-body.p-0 .table thead>tr>th:last-of-type {
+			padding-right: 12px;
+		}
+ 		.card-body.p-0 .table tbody>tr>td:last-of-type {
+			padding-right: 12px;
+		}
+		th, td {
+			text-align: center;
+		}
+		#tb1 td, #td1 th {
+			padding:0;
+		}
+	</style>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js" ></script>
+</head>
+
+<body>
+
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1>성적 조회</h1>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="row">
+						<div class="col-sm-5" >
+							<div class="card card-dark card-outline" style="height: 100%;">
+								<div class="card-header" style="vertical-align: center;display: flex;align-items: center;justify-content: space-between;padding: 0.47rem 1.25rem;">
+    						   <div class="row">  
+				               <h3 class="card-title">
+									<i class="fas fa-list"></i>
+				<!-- 					<i class="fa-solid fa-1"></i> -->
+									&nbsp;
+									학생 선택&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							   </h3>
+    						   </div>
+    						   
+				               <div class="card-tools" style="margin: 0;">
+				                  <div class="row">
+				                  	<div class="input-group input-group-sm" style="padding: 0.25rem 0.5rem; font-size: .875rem; line-height: 1.5;">
+										<input id="searchStudent" type="text" class="form-control float-right" placeholder="키워드 검색" style="width: 100px; padding: 0.25rem 0.5rem; font-size: .875rem; line-height: 1.5;">
+										<div class="input-group-append">
+											<button id="searchStudentBtn" type="submit" class="btn btn-dark" style="padding: 0.25rem 0.5rem; font-size: .875rem; line-height: 1.5;">
+												<i class="fas fa-search" aria-hidden="true"></i>
+											</button>
+										</div>
+									</div>
+								  </div>
+				               </div>
+				            </div>
+
+								<div class="card-body" style="padding-top: 5px">
+									<br/>
+									<div class="row table1">
+										<div class="card-body p-0" id="studentListDiv">
+												<table id="studentList" class="table table-head-fixed table-hover table-bordered">
+													<thead>
+														<tr>
+															<th>학년</th>
+															<th>담임교사명</th>
+															<th>반</th>
+															<th>학생명</th>
+														</tr>
+													</thead>
+													<tbody>
+														<c:if test="${empty studentList }" >
+										            		<tr>
+										            			<td colspan="4" class="text-center">
+										            				해당내용이 없습니다.
+										            			</td>
+										            		</tr>
+										            	</c:if>
+										            	<c:if test="${!empty studentList }" >
+						            						<c:forEach items="${studentList }" var="student">
+						            							<tr data-id="${student.id }" style="cursor:pointer;" onclick="examCheckByStudent('${student.id }');">
+						            								<td>${student.grade }</td>
+						            								<td>${student.mngName }</td>
+						            								<td>${student.className }</td>
+						            								<td>${student.name }</td>
+						            							</tr>
+						            						</c:forEach>
+					            						</c:if>
+													</tbody>
+												</table>
+											</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					
+						<div class="col-sm-7">
+							<div class="card card-dark card-outline" style="height: 100%;">
+								<div class="card-header">
+									<h3 class="card-title">
+										<i class="fas fa-check"></i>
+										&nbsp;
+										시험 선택
+									</h3>
+								</div>
+								<div class="card-body" style="padding-top: 5px">
+									<div class="row">
+										<div class="col-sm-3" style="margin-top: 10px;">
+											<div class="form-group" style="margin-bottom: 3px; margin-left: 6px;">
+											<div class="custom-control custom-radio col-xs-3" style="display: inline;">
+												<input class="custom-control-input" type="radio" id="customRadio1" name="customRadio" checked> 
+												<label for="customRadio1" class="custom-control-label">학교</label>
+											</div>
+											&nbsp;&nbsp;
+											<div class="custom-control custom-radio" style="display: inline;">
+												<input class="custom-control-input" type="radio" id="customRadio2" name="customRadio"> 
+												<label for="customRadio2" class="custom-control-label">학원</label>
+											</div>
+										</div>
+										</div>
+										
+										<div class="col-sm-4">
+										<div style="display: flex;">
+											<div class="input-group-prepend">
+												<button type="submit" class="btn btn-dark">
+													<i class="far fa-calendar-alt"></i>
+												</button>
+											</div>
+											<input type="date" class="form-control" id="reservation" style="width: 150px; margin-right: 0px;">
+											</div>
+										</div>
+										
+										
+										<div class="col-sm-5">
+											<div style="display: flex;">
+												<input type="text" class="form-control" style="width: 160px;" placeholder="키워드를 입력하세요.">
+												<div class="input-group-append">
+													<button type="submit" class="btn btn-dark">
+														<i class="fas fa-search"></i>
+													</button>
+												</div>
+											</div>	
+										</div>
+									</div>
+									
+									<br/>
+									<div class="row table2">
+										<div class="card-body table p-0" id="examCheckDiv">
+											<table class="table table-head-fixed table-bordered table-hover" id="examCheckList">
+												<thead>
+													<tr>
+														<th>시험일</th>
+														<th>구분</th>
+														<th>학년</th>
+														<th>학기</th>
+														<th>분기</th>
+													</tr>
+												</thead>
+												<tbody>
+														<tr>
+															<td colspan="5">학생을 선택해주세요</td>
+														</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-sm-12" style="padding-top: 15px;">
+					<div class="row">
+						<div class="col-sm-7">
+							<div class="card card-dark card-outline">
+								
+								<div class="card-header">
+									<h3 class="card-title">
+										<i class="fas fa-table"></i>
+										&nbsp;
+										종합 점수
+									</h3>
+								</div>
+								<div class="card-body" style="padding-top: 5px; padding-bottom: 5px;">
+									<div class="row table3">
+										<div class="card-body table p-0">
+											<table class="table table-head-fixed table-bordered table-hover">
+												<thead>
+													<tr>
+														<th id="sub1">국어</th>
+														<th id="sub2">수학</th>
+														<th id="sub3">사회</th>
+														<th id="sub4">과학</th>
+														<th id="sub5">영어</th>
+														<th id="sub6">평균</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr class="tr">
+														<td id="korean">-</td>
+														<td id="math">-</td>
+														<td id="society">-</td>
+														<td id="science">-</td>
+														<td id="english">-</td>
+														<td id="avg">-</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								
+							</div>
+							
+							<div class="card card-dark card-outline">
+							
+								<div class="card-header">
+									<h3 class="card-title">
+										<i class="fas fa-comment"></i>
+										&nbsp;
+										종합 피드백
+									</h3>
+									<div class="card-tools" style="padding: 3px;">
+										<div class="input-group input-group-sm">
+											<div class="input-group">
+												<button type="button" id="saveFeedback" class="btn btn-dark" style="padding: 0.25rem 0.5rem; font-size: .875rem; line-height: 1.5; display: none;">
+													저장
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="card-body" style="padding: 0;">
+									<div class="direct-chat-messages" style="height: 50%;">
+										<div class="direct-chat-msg">
+											<div class="direct-chat-infos clearfix">
+												<span id="teacher" class="direct-chat-name float-left"></span>
+												<span style="display: none;" id="feedId"></span>
+												<span style="display: none;" id="mngId"></span>
+												<span style="display: none;" id="loginId">${loginUser.id }</span>
+											<div class="direct-chat-text">
+												<textarea id="feedbackArea" class="form-control"></textarea>
+											</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+							</div>
+							
+						</div>
+						<div class="col-sm-5">
+							<div class="card card-dark card-outline">
+								<div class="card-header">
+									<h3 class="card-title">
+										<i class="fas fa-chart-pie"></i>
+										&nbsp;
+										종합 분석 그래프
+									</h3>
+									<div class="card-tools" style="padding: 3px;">
+										<div class="input-group input-group-sm">
+											<div class="input-group">
+												<button type="button" class="btn btn-dark" style="padding: 0.25rem 0.5rem; font-size: .875rem; line-height: 1.5;" onclick="location.href='/manager/score/gradeDetail.do';">
+													성적 분석
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="card-body">
+										<canvas id="radar-chart" width="350" height="250" style="padding-left: 20px;"></canvas>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</section>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+	
+	<script>
+	
+	function printData(dataArr,target,templateObject,removeClass){
+		
+		var template=Handlebars.compile(templateObject.html());
+		
+		var html = template(dataArr);
+		
+		$(removeClass).remove();
+		target.append(html);
+}
+	
+	
+	function examCheckByStudent(studentId){
+// 		console.log(studentId); // 학생 id
+		
+		$.ajax({
+	        type: "post"
+	       ,url : "/manager/score/examCheckByStudent.do"
+	       ,data : {"studentId" : studentId }
+	       ,success : function (data){
+	    	   console.log(data);
+	    	   printData(data,$('#examCheckDiv'),$('#examCheckList-template'),$('#examCheckList'));
+	        }
+	       ,error : function(e){
+	        }
+		});
+		
+		
+	}
+	
+	
+	function Overall(obj){
+		
+		let examDate = obj.children[0].textContent;
+		let examGroup = obj.children[1].textContent;
+		let examGrade = obj.children[2].textContent;
+		let examSemester = obj.children[3].textContent;
+		let examQuarter = obj.children[4].textContent;
+		let studentId = obj.children[5].textContent;
+
+		$.ajax({
+	        type: "post"
+	       ,url : "/manager/score/overall.do"
+	       ,contentType: 'application/json'
+	       ,data : JSON.stringify({
+	    	   		"examDate" : examDate,
+	    	   		"examGroup" : examGroup,
+	    	   		"examGrade" : examGrade,
+	    	   		"examSemester" : examSemester,
+	    	   		"examQuarter" : examQuarter,
+	    	   		"studentId" : studentId
+	    	   		})
+	       ,success : function (data){
+// 	    	   console.log(data);
+	    	   $("#korean").text("-");
+	    	   $("#math").text("-");
+	    	   $("#society").text("-");
+	    	   $("#science").text("-");
+	    	   $("#english").text("-");
+	    	   $("#avg").text("-");
+	    	   
+	    	   for(var i=0; i<data.overallScore.length; i++) {
+	    		   if(data.overallScore[i].examSeg == "국어") {
+		    	  		$("#korean").text(data.overallScore[i].scored);
+		    	  		
+		    	  } else if(data.overallScore[i].examSeg == "수학") {
+		    		  $("#math").text(data.overallScore[i].scored);
+		    		  
+		    	  } else if(data.overallScore[i].examSeg == "사회") {
+		    		  $("#society").text(data.overallScore[i].scored);
+		    		  
+		    	  }  else if(data.overallScore[i].examSeg == "과학") {
+		    		  $("#science").text(data.overallScore[i].scored);
+		    		  
+		    	  } else if(data.overallScore[i].examSeg == "영어") {
+		    		  $("#english").text(data.overallScore[i].scored);
+		    	  } 
+	    	   }
+	    	   		
+	    	   	   let length = data.overallScore.length;
+	    		   let total = parseInt($("#korean").text().replace('-','0'));
+	    		   total +=  parseInt($("#math").text().replace('-','0'));
+	    		   total += parseInt($("#society").text().replace('-','0'));
+	    		   total += parseInt($("#science").text().replace('-','0'));
+	    		   total += parseInt($("#english").text().replace('-','0'));
+	    		   
+				   $("#avg").text(total/length);
+				   
+				   chart.data.datasets[0].data = [
+					   
+					   parseInt($("#korean").text().replace('-','0')),
+					   parseInt($("#math").text().replace('-','0')),
+					   parseInt($("#society").text().replace('-','0')),
+					   parseInt($("#science").text().replace('-','0')),
+					   parseInt($("#english").text().replace('-','0'))
+													   
+													   ];
+				   chart.update();
+				   
+				   
+	        }
+	       ,error : function(e){
+	        }
+		});
+		
+		
+// 		피드백 가져오기
+		$.ajax({
+	        type: "post"
+	       ,url : "/manager/score/feedback.do"
+	       ,contentType: 'application/json'
+	       ,data : JSON.stringify({
+	   	   		"examDate" : examDate,
+		   		"examGroup" : examGroup,
+		   		"examGrade" : examGrade,
+		   		"examSemester" : examSemester,
+		   		"examQuarter" : examQuarter,
+		   		"studentId" : studentId
+	   		})
+	       ,success : function (data){
+
+	    	   $("#feedbackArea").text(" ");
+	    	   $("#teacher").text(" ");
+	    	   $("#feedId").text(" ");
+	    	   $("#mngId").text(" ");
+	    	   
+	    	   if(data.feedbackList.length != 0){
+	    		   console.log("있음");
+		    	   for(var i=0; i<data.feedbackList.length; i++) {
+		    			   alert("피드백 있음");
+		    	   			$("#teacher").text(data.feedbackList[i].mngName + "T");
+		    	   		 	$("#feedbackArea").text(data.feedbackList[i].feedContent);
+		    	   			$("#feedId").text(data.feedbackList[i].feedId);
+		    	   			$("#mngId").text(data.feedbackList[i].mngId);
+		    	   }
+	    	   } else {
+	    		   console.log("없음");
+	    		   saveBtnHide();
+	    	   }
+	    	   
+
+	        }
+	       ,error : function(e){
+	        }
+		});
+		
+		
+
+
+	}
+	
+		function saveBtnHide(){
+			 document.getElementById("saveFeedback").style.display = "block";
+		}
+	
+		window.onload = function(){
+			
+			$(document).on("click", "#searchStudentBtn", function(){
+
+				let value = $("#searchStudent").val();
+				
+// 	 			console.log(value);
+				
+				$.ajax({
+			        type: "post"
+			       ,url : "/manager/score/studentSearch.do"
+			       ,data : {"value" : value,
+			    	   
+			    	   		}
+			       ,success : function (data){
+			    	   console.log(data);
+			    	   printData(data,$('#studentListDiv'),$('#studentList-template'),$('#studentList'));
+			        }
+			       ,error : function(e){
+			        }
+				});
+				
+				
+			});
+			
+			
+			
+			$("#saveFeedback").on("click", function(){
+				
+				let feedback = $("#feedbackArea").val();
+				let feedId = $("#feedId").text();
+				let mngId = $("#mngId").text();
+				let teacher = $("#teacher").text().replace("T"," ");
+				let loginId = $("#loginId").text();
+				
+// 				console.log(loginId);
+				
+				let feedBackInfo = new Object();
+				
+				feedBackInfo.feedback = feedback;
+				feedBackInfo.feedId = feedId;
+				feedBackInfo.mngId = mngId;
+				feedBackInfo.teacher = teacher;
+				
+				
+				// feedId가 없으면 -> 피드백  새로 작성 (insert)
+// 				if(!feedId){
+// 					alert("insert 구현!!!");
+					
+// 				} else {
+// 					$.ajax({
+// 				        type: "post"
+// 				       ,url : "/manager/score/updateFeedback.do"
+// 				       ,contentType: 'application/json'
+// 				       ,data : JSON.stringify({
+// 				    	   		 "feedBackInfo" : feedBackInfo
+// 				    	   		})
+// 				       ,success : function (data){
+// 				    	   alert("성공");
+				    	   
+// 	// 			    	   console.log(data);
+// 	// 			    	   printData(data,$('#studentListDiv'),$('#studentList-template'),$('#studentList'));
+// 				        }
+// 				       ,error : function(e){
+// 				        }
+// 					});
+					
+					
+					
+// 				}
+				
+				
+
+				
+				
+			});
+		}
+	</script>	
+	
+	
+	
+	
+	<script>
+	let chart = new Chart(document.getElementById("radar-chart"), {
+	    type: 'radar',
+	    data: {
+	      labels: ["국어", "수학", "사회", "과학", "영어"],
+	      datasets: [
+	        {
+	          fill: true,
+	          backgroundColor: "rgba(179,181,198,0.2)",
+	          borderColor: "#6c757d",
+	          pointBorderColor: "#6c757d",
+	          pointBackgroundColor: "#6c757d",
+	          data: [
+	        	  
+	        	  		0,0,0,0,0
+	        	  
+	        	  ]
+	        }
+	      ]
+	    },
+	    options: {
+	    	plugins: {
+	    	    legend: {
+	    	      display: false,
+	    	    }
+	    	},
+	      	responsive: false,
+	      	scales: {
+	            r: {
+/* 	                angleLines: {
+	                    display: false
+	                }, */
+	                suggestedMin: 0,
+	                suggestedMax: 100
+	            }
+	        }
+	    }
+	});
+	</script>
+	
+<script type="text/x-handlebars-template"  id="examCheckList-template" >
+
+
+<table id="examCheckList" class="table table-head-fixed table-bordered table-hover" >
+												<thead>
+													<tr>
+														<th>시험일</th>
+														<th>구분</th>
+														<th>학년</th>
+														<th>학기</th>
+														<th>분기</th>
+													</tr>
+												</thead>
+												<tbody>
+												{{#if examByStudentList}}	
+			
+				                                 {{#each examByStudentList}}
+				                                 
+			                                       		<tr style="cursor: pointer;" onclick="Overall(this);">
+															<td id="examDate">{{examDate }}</td>
+															<td id="examGroup">{{examGroup }}</td>
+															<td id="examGrade">{{examGrade }}</td>
+															<td id="examSemester">{{examSemester }}</td>
+															<td id="examQuarter">{{examQuarter }}</td>
+															<td style="display : none;" id="studentId">{{studentId }}</td>
+														</tr>
+			                                       	
+			                                       	{{/each}}
+                                                   
+			                                       	{{else}}
+			                                       		<tr>
+	    	                                       		<td colspan="7" class="text-center">
+	    	                                       			해당내용이 없습니다.
+	    	                                       		</td>
+	    	                                       	</tr>
+			                                       {{/if}}	
+
+
+												</tbody>
+											</table>            
+
+
+</script>
+	
+	
+	<script type="text/x-handlebars-template"  id="studentList-template">
+		<table id="studentList" class="table table-head-fixed table-hover table-bordered">
+		<thead>
+			<tr>
+				<th>학년</th>
+				<th>담임교사명</th>
+				<th>반</th>
+				<th>학생명</th>
+			</tr>
+		</thead>
+		<tbody>
+				{{#if studentList}}	
+			
+				{{#each studentList}}
+				
+					<tr style="cursor:pointer;">
+						<td>{{grade }}</td>
+						<td>{{mngName }}</td>
+						<td>{{className }}</td>
+						<td>{{name }}</td>
+					</tr>
+				
+				{{/each}}
+
+				{{else}}
+					<tr>
+	    			<td colspan="4" class="text-center">
+	    				해당내용이 없습니다.
+	    			</td>
+	    		</tr>
+			{{/if}}	
+			
+		</tbody>
+	</table>
+	</script>
+	
+</body>

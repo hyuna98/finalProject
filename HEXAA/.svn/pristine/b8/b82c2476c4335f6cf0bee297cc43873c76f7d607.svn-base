@@ -1,0 +1,26 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+
+<body>
+
+
+	<script>
+		alert("상담 신청이 완료되었습니다.");
+		location.href="/member/consulting/history.do";
+	</script>
+
+
+
+
+
+<%-- 
+<script>
+
+
+
+	alert("등록이 완료되었습니다.");
+	window.close();
+	window.opener.parent.location.href="<%=request.getContextPath() %>/manager/board/notice.do";
+</script> --%>
+</body>

@@ -1,0 +1,158 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true"%>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+	<section class="content">
+		<div >
+			<h1 style="margin: 1vh;">학생출결관리</h1>
+		</div>
+		<div>
+
+
+			<div id="attbody" class="row" style="max-width: 97%;">
+				<div id="attsearch1"  class="col-12" style="margin-left:2vh; border: 0.25px solid rgba(0, 0, 0, 0.1); /* background-color:rgba(0, 0, 0, 0.2); */ /* border: 1px solid black; */ height: 8vh;">
+					
+						<div class="col-2 custom-control custom-radio" style="float: left; margin: 17px; 5px;">
+							<input id="one" class="custom-control-input" type="radio" name="radio" value="yyy" checked> 
+								<label for="one" class="custom-control-label">일자별 입력</label>
+						</div>
+						
+						<div class="col-2 custom-control custom-radio" style="float: left; margin: 17px; 5px;" >
+							<input id="two" class="custom-control-input" type="radio" name="radio" value="yyy" > 
+								<label for="two"class="custom-control-label">월전체 입력</label>
+						</div>
+					
+					<div class="col-4 form-group" style="float: left; margin-top: 10px;">
+						<label>수강반</label> 
+						<select class="col-8 form-control" style="display: inline; ">
+							<option>405- 특별 진학반</option>
+							<option>404- 특별 진학반</option>
+							<option>403- 특별 진학반</option>
+							<option>402- 특별 진학반</option>
+							<option>401- 특별 진학반</option>
+						</select>
+					</div>
+					
+					<div class="col-3 form-group" style="float: left; margin-top: 10px;">
+						<label>담임</label> 
+						<select class="col-6 form-control" style="display: inline; ">
+							<option>정현아</option>
+							<option>김선정</option>
+						</select>
+					</div>
+				</div>
+			
+					<div id="attsearch2" class="col-12" style="border: 0.25px solid rgba(0, 0, 0, 0.1); /* background-color:rgba(0, 0, 0, 0.2); */ margin-left: 2vh; /* border: 1px solid black; */ height: 8vh;">
+						<div class="col-2 form-group" style="float: left; margin-top: 15px;">
+							<label>이름</label>
+							<input type="text" style="border-color: rgba(0, 0, 0, 0.1); width: 10vh; margin-left: 1vh;">
+							
+						</div>
+						
+						<div class="col-1 form-group" style="float: left; margin-top: 10px;">
+							<button type="submit" class="btn btn-primary">검색</button>
+						</div>
+						
+						<label style="float: left; margin-right:  3vh; margin-left: 2vh; margin-top: 17px;">일자</label>
+						<div class="col-3" style="float: left; margin-top: 10px;">
+							<div class=" input-group" >
+								<div class="input-group-prepend">
+									<span class="input-group-text">
+										<i class="far fa-calendar-alt"></i>
+									</span>
+								</div>
+									<input type	="date" class="form-control float-right" id="reservation">
+							</div>
+						</div>
+					</div>
+						
+			</div>
+		</div>
+			<div style="padding-right: 4px;" >
+				<div id="attnum" class="col-12" style="max-width: 99%;   /* border: 1px solid black; */ height: 65vh;">
+					<div class="col-12" style="border: 0.25px solid rgba(0, 0, 0, 0.1); /* background-color:rgba(0, 0, 0, 0.1); */  height: 7vh;">
+						<div class="col-5 form-group"  style="float: left; margin-top: 10px;">
+							<label style="margin-right: 2vh;">출결상태</label> 
+							<select class="col-5 form-control" style="display: inline; ">
+								<option>출석</option>
+								<option>결석</option>
+							</select>
+							
+						</div>
+						
+							<div class="col-1" style="float: left;">
+								<div>전체</div>
+								<div>00</div>
+							</div>	
+							<div class="col-1" style="float: left;">
+								<div>전체</div>
+								<div>00</div>
+							</div>	
+							<div class="col-1" style="float: left;">
+								<div>전체</div>
+								<div>00</div>
+							</div>	
+							<div class="col-1" style="float: left;">
+								<div>전체</div>
+								<div>00</div>
+							</div>	
+							<div class="col-1" style="float: left;">
+								<div>전체</div>
+								<div>00</div>
+							</div>	
+							<div class="col-1" style="float: left;">
+								<div>전체</div>
+								<div>00</div>
+							</div>	
+							<div class="col-1" style="float: left;">
+								<div>전체</div>
+								<div>00</div>
+							</div>	
+					</div>
+					
+					<div id="attexcel" class="col-12" style=" /* border: 1px solid black; */ height: 7vh;">
+						<button type="button" class="col-1 btn btn-block btn-outline-success btn-sm" style="float: right; margin: 1vh;">엑셀</button>
+						<button type="button" class="col-1 btn btn-block btn-outline-secondary btn-sm" style="float: right; margin: 1vh;">저장</button>
+					</div>
+					
+					<div id="attlist" class="col-12 card-body" style="border: 0.25px solid rgba(0, 0, 0, 0.1);  /* background-color:rgba(0, 0, 0, 0.1);  */ /* border: 1px solid black; */ height: 50vh;">
+							<div class="jsgrid-grid-header jsgrid-header-scrollbar">
+								<table class="table table-bordered table-hover dataTable dtr-inline">
+									<tr class="jsgrid-header-row">
+										<th class="jsgrid-header-cell jsgrid-header-sortable">no</th>
+										<th class="jsgrid-header-cell jsgrid-header-sortable">일자</th>
+										<th class="jsgrid-header-cell jsgrid-header-sortable">이름</th>
+										<th class="jsgrid-header-cell jsgrid-header-sortable">수강반</th>
+										<th class="jsgrid-header-cell jsgrid-header-sortable">등원</th>
+										<th class="jsgrid-header-cell jsgrid-header-sortable">하원</th>
+										<th class="jsgrid-header-cell jsgrid-header-sortable">출결</th>
+										<th class="jsgrid-header-cell jsgrid-header-sortable">결석/지각 사유</th>
+										<tbody>
+										<tr class="jsgrid-row">
+											<td class="jsgrid-cell" >1</td>
+											<td class="jsgrid-cell" >03/29</td>
+											<td class="jsgrid-cell" >김종휘</td>
+											<td class="jsgrid-cell" >404-진학특진반</td>
+											<td class="jsgrid-cell" ></td>
+											<td class="jsgrid-cell" ></td>
+											<td class="jsgrid-cell" >
+												<button type="button" class="col-4 btn btn-block btn-outline-primary btn-sm" style=" float:left;  height:3vh; margin: 1vh;">출석</button>
+												<button type="button" class="col-4 btn btn-block btn-outline-danger btn-sm" style="float:left;  height:3vh;  margin:  1vh;">결석</button>
+											</td>
+											<td class="jsgrid-cell" ><input type="text" style="border-color: rgba(0, 0, 0, 0.1); " value="술많이 먹음"></td>
+										</tr>
+									</tr>
+								</table>	
+							</div>
+						
+					</div>
+				</div>
+			</div>
+	</section>
+</body>
+</html>

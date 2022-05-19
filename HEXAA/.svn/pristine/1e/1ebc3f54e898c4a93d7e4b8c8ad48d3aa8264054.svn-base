@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Student-Mapper">
+	
+	<resultMap type="student" id="studentMap">
+		<result property="id" column="student_id"/>
+		<result property="pw" column="student_pw"/>
+		<result property="name" column="STUDENT_NAME"/>
+		<result property="genderCode" column="STUDENT_GENDER_CODE"/>
+		<result property="email" column="STUDENT_EMAIL"/>
+		<result property="zipCode" column="STUDENT_ZIP_CODE"/>
+		<result property="address" column="STUDENT_ADDRESS"/>
+		<result property="address2" column="STUDENT_ADDRESS2"/>
+		<result property="studentPicture" column="STUDENT_STUDENT_PICTURE"/>
+		<result property="birthDate" column="STUDENT_BIRTH_DATE"/>
+		<result property="discountReason" column="STUDENT_DISCOUNT_REASON"/>
+		<result property="discountRate" column="STUDENT_DISCOUNT_RATE"/>
+		<result property="payDueDate" column="STUDENT_PAY_DUE_DATE"/>
+		<result property="academyRegDate" column="STUDENT_ACADEMY_REG_DATE"/>
+		<result property="stateCode" column="STUDENT_STATE_CODE"/>
+		<result property="sibling" column="STUDENT_SIBLING"/>
+		<result property="gradeCategoryCode" column="STUDENT_GRADE_CATEGORY_CODE"/>
+		<result property="grade" column="STUDENT_GRADE"/>
+		<result property="hp" column="STUDENT_HP"/>
+		<result property="parentId" column="PARENT_ID"/>
+		<result property="schoolNo" column="SCHOOL_NO"/>
+	</resultMap>
+	
+	<select id="selectStudentById" parameterType="str" resultMap="studentMap">
+		select
+		*
+		from student
+		where student_id=#{id}
+	</select>
+	
+	<select id="selectStudentList" resultType="student" resultMap="studentMap">
+		select
+		*
+		from student
+		order by STUDENT_ACADEMY_REG_DATE desc
+	</select>
+	
+	<select id="selectStudentIdList" resultType="student" resultMap="studentMap">
+		select
+		STUDENT_ID
+		from student
+		order by STUDENT_ACADEMY_REG_DATE desc
+	</select>
+	
+	
+</mapper>

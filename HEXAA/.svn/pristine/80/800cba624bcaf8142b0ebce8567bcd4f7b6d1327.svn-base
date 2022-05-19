@@ -1,0 +1,12 @@
+package com.lms.hexa.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.lms.hexa.dto.AcademyinfoVO;
+import com.lms.hexa.dto.SchoolVO;
+
+public interface AcademyinfoDAO {
+	
+	List<AcademyinfoVO> selectAcademyinfoList() throws SQLException;
+}

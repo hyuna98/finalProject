@@ -1,0 +1,119 @@
+package com.lms.hexa.controller;
+
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+
+import com.lms.hexa.command.AttandanceNum;
+import com.lms.hexa.dto.ManagerAttandanceVO;
+import com.lms.hexa.dto.StudentVO;
+import com.lms.hexa.service.ManagerAttandanceService;
+import com.lms.hexa.service.StudentService;
+
+@Controller
+@RequestMapping("/manager/membermanagement")
+public class ManagerMemberManagementController {
+	
+	@Autowired
+	private StudentService studentService;
+	
+	@Resource(name="managerAttandanceService")
+	private ManagerAttandanceService service;
+	
+	@RequestMapping("/IDApplyList")
+	public void idModifyList() throws Exception {}
+	
+	@RequestMapping("/attandance/reader")
+	public void reader() throws Exception {}
+	
+	@RequestMapping("/attandance/check")
+	public ModelAndView check(String id,ModelAndView mnv) throws Exception {
+		String url="manager/membermanagement/attandance/check";
+		service.modifyByQr(id);
+		mnv.addObject("id",id);
+		mnv.setViewName(url);
+		return mnv;
+	}
+	
+	@RequestMapping("/attandance/checkz")
+	public ModelAndView checkz(String id,ModelAndView mnv) throws Exception {
+		String url="manager/membermanagement/attandance/checkz";
+		service.modifyByQrz(id);
+		mnv.addObject("id",id);
+		mnv.setViewName(url);
+		return mnv;
+	}
+	
+	@RequestMapping("/attandance/inmodify")
+	public ModelAndView inmodify(ModelAndView mnv)throws Exception{
+		String url="manager/membermanagement/attandance/inmodify";
+		Map<String, Object> dataMap = service.getAttandanceStudentIdList();							
+		mnv.addObject("dataMap",dataMap);
+		mnv.setViewName(url);
+		return mnv;
+		
+	}
+	
+	@RequestMapping("/attandance/outmodify")
+	public void outmodify()throws Exception{}
+	
+	@RequestMapping("/attandance/list")
+	public ModelAndView list(AttandanceNum att, ModelAndView mnv)throws Exception{
+		String url="manager/membermanagement/attandance/list";
+		Map<String, Object> dataMap = service.getAttandanceList(att);
+		
+		mnv.addObject("dataMap",dataMap);
+		mnv.setViewName(url);
+		
+		return mnv;
+	}
+	
+
+	
+	@RequestMapping(value="/attandance/inmodify",method=RequestMethod.POST)
+	public String modifyPost(String studentId,HttpServletRequest request, //BoardModifyCommand modifyReq,
+							 RedirectAttributes rttr) throws Exception{
+		
+		String url = "redirect:/manager/membermanagement/attandance/inmodify.do";
+		
+		
+		
+		service.modify(studentId);
+		
+		/*
+		 * rttr.addFlashAttribute("from","modify"); Map<String, Object> dataMap =
+		 * service.getAttandanceStudentIdList(); List<ManagerAttandanceVO> IdList =
+		 * (List<ManagerAttandanceVO>) dataMap.get("IdList"); String studentId =
+		 * IdList.get(0).toString(); rttr.addAttribute("studentId",studentId);
+		 */
+		
+		
+		return url;
+	}
+	
+	@RequestMapping("/membermanagement/list")
+	public ModelAndView memberManagementList(ModelAndView mnv)throws Exception{
+		String url = "manager/membermanagement/membermanagement/list";
+		
+		List<StudentVO> studentList = null;
+		
+		studentList = studentService.selectStudentList();
+		
+		mnv.addObject("studentList", studentList);
+		mnv.setViewName(url);
+		
+		return mnv;
+	}
+	
+}

@@ -1,0 +1,14 @@
+package com.lms.hexa.dao;
+
+import org.apache.ibatis.session.SqlSession;
+
+public class TemplateDAOImpl implements TemplateDAO {
+		
+	private SqlSession session;
+	
+	public void setSession(SqlSession session) {
+		this.session = session;
+	}
+	
+	
+}

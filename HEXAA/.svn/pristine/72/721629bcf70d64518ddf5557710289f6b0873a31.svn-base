@@ -1,0 +1,15 @@
+package com.lms.hexa.dao;
+
+import java.util.List;
+
+import com.lms.hexa.command.Criteria;
+import com.lms.hexa.dto.LessonVO;
+
+public interface HomeworkDAO {
+
+	// 검색한 수업 list조회
+	List<LessonVO> selectLessonIntegratedSearchList(Criteria cri);
+	
+	
+	
+}

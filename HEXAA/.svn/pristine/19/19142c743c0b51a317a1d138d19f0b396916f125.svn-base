@@ -1,0 +1,68 @@
+package com.lms.hexa.service;
+
+import java.sql.SQLException;
+
+import com.lms.hexa.dao.StudyPlanDAO;
+import com.lms.hexa.dto.StudyPlanVO;
+
+
+public class StudyPlanServiceImpl implements StudyPlanService {
+
+	private StudyPlanDAO studyPlanDAO;
+	
+	public void setStudyPlanDAO(StudyPlanDAO studyPlanDAO) {
+		this.studyPlanDAO = studyPlanDAO;
+	}
+
+	
+//	@Override
+//	public StudyPlanVO getStudyPlan(int splanId) throws SQLException {
+//		StudyPlanVO studyPlan = studyPlanDAO.selectNoticeByNno(splanId);
+//		return studyPlan;
+//	}
+//	
+//	
+	
+//	@Override
+//	public Map<String, Object> getList(Criteria cri) throws SQLException {
+//
+//	
+//		Map<String, Object> dataMap = new HashMap<String, Object>();
+//		dataMap.put("noticeList", noticeList);
+//		
+//
+//		return dataMap;
+//	}
+//
+
+	  
+	  
+	  @Override
+	  public void regist(StudyPlanVO studyPlan) throws SQLException {
+		  
+		  int splanId = studyPlanDAO.getSeqNextValue();
+			
+		  studyPlan.setSplanId(splanId);
+		  
+		  studyPlanDAO.insertStudyPlan(studyPlan); 
+	  }
+	  
+	  @Override
+	  public void modify(StudyPlanVO studyPlan) throws SQLException {
+	  
+		  studyPlanDAO.updateStudyPlan(studyPlan);
+	  }
+	  
+	  @Override 
+	  public void remove(int splanId) throws SQLException {
+	  
+		  studyPlanDAO.deleteStudyPlan(splanId); 
+	  
+	  }
+
+
+
+
+	
+
+}

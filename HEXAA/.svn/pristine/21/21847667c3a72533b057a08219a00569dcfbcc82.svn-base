@@ -1,0 +1,30 @@
+package com.lms.hexa.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+
+import com.lms.hexa.dto.StudyPlanVO;
+
+
+public interface StudyPlanDAO {
+
+	
+	
+	
+	// list
+	List<StudyPlanVO> selectStudyPlanList(StudyPlanVO studyPlan) throws SQLException;
+	
+	/*
+	 * // notice_id에 따른 자료 List<StudyPlanVO> selectStudyPlanBySplanId(int splanId)
+	 * throws SQLException;
+	 */
+	
+	void insertStudyPlan(StudyPlanVO studyPlan) throws SQLException;
+	
+	void updateStudyPlan(StudyPlanVO studyPlan) throws SQLException;
+	
+	void deleteStudyPlan(int splanId) throws SQLException;
+	
+	int getSeqNextValue() throws SQLException;
+}

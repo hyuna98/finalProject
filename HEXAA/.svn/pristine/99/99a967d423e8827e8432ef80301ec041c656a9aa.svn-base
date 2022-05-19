@@ -1,0 +1,48 @@
+package com.lms.hexa.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.lms.hexa.dto.ConsultingVO;
+import com.lms.hexa.service.ConsultingService;
+
+@Controller
+public class ManagerConsultingController {
+	
+	
+	@Autowired
+	private ConsultingService consultingService;
+	
+	@RequestMapping("/manager/consulting/scheduleManagement")
+	public ModelAndView scheduleManagement(ModelAndView mnv,Authentication auth,ConsultingVO consulting)throws Exception {
+		String url = "manager/consulting/scheduleManagement";
+		
+		 String login_id = (String) auth.getPrincipal(); // 로그인 시도한 ID를 가져온다
+		 
+		 List<ConsultingVO> scheduleList = consultingService.getSchedule(consulting);
+		 
+		 
+		 ConsultingVO consultingVO = new ConsultingVO();
+		 consultingVO.setCnsltApplyer(login_id);
+		
+		 
+		 System.err.println("************************"+login_id);
+		 
+		 
+		 mnv.addObject("scheduleList",scheduleList);
+		 
+		 mnv.setViewName(url);
+			return mnv;
+	}
+	
+	@RequestMapping("/manager/consulting/list")
+	public String list() {
+		String url = "manager/consulting/list";
+		return url;
+	}
+}

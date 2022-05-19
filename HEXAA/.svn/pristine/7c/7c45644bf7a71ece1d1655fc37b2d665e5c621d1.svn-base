@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	
+					
+	<typeAliases>
+		<typeAlias type="java.lang.String" alias="str" />
+		<typeAlias type="java.lang.Integer" alias="int" />
+		
+		<typeAlias type="com.lms.hexa.dto.MenuVO" alias="menu" />
+		<typeAlias type="com.lms.hexa.dto.ManagerVO" alias="manager" />
+		<typeAlias type="com.lms.hexa.dto.ManagerAttandanceVO" alias="attandance" />
+		<typeAlias type="com.lms.hexa.dto.TimeTableSettingVO" alias="timetablesetting" />
+		<typeAlias type="com.lms.hexa.dto.StudentVO" alias="student" />
+		<typeAlias type="com.lms.hexa.dto.UserVO" alias="user" />
+		<typeAlias type="com.lms.hexa.dto.PdsVO" alias="pds" />
+		<typeAlias type="com.lms.hexa.dto.NoticeVO" alias="notice" />
+		<typeAlias type="com.lms.hexa.dto.ExamVO" alias="exam" />
+		<typeAlias type="com.lms.hexa.dto.QuestionVO" alias="question" />
+		<typeAlias type="com.lms.hexa.dto.NoteVO" alias="note" />
+		
+		<typeAlias type="com.lms.hexa.dto.TimeTableVO" alias="timetable" />
+		<typeAlias type="com.lms.hexa.dto.LessonVO" alias="lesson" />
+		<typeAlias type="com.lms.hexa.dto.StandardCodeVO" alias="standardCode" />
+		<typeAlias type="com.lms.hexa.dto.AttachVO" alias="attach"/>
+
+		<typeAlias type="com.lms.hexa.dto.StudyPlanVO" alias="studyPlan"/>
+
+		<typeAlias type="com.lms.hexa.dto.SchoolVO" alias="school"/>
+		<typeAlias type="com.lms.hexa.dto.LessonRoomVO" alias="lessonRoom"/>
+		<typeAlias type="com.lms.hexa.dto.ParentVO" alias="parent"/>
+		<typeAlias type="com.lms.hexa.dto.SubjectAttendanceVO" alias="subjectAttendance"/>
+		<typeAlias type="com.lms.hexa.dto.AcademyinfoVO" alias="academyinfo"/>
+
+
+	</typeAliases>
+	
+</configuration>
+
+
+
+
+
+
+
+

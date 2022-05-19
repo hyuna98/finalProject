@@ -1,0 +1,403 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<title>시험관리</title>
+
+<head>
+<style>
+	.form-group {
+		margin-bottom: 0.5em;
+	}
+	
+	.row {
+		margin-top: -5px;
+	}
+	
+	h3 .h3 {
+		margin-botton: 0;
+	}
+	
+	.content-header {
+		padding: 10px;
+	}
+	
+	th, td {
+		text-align: center;
+	}
+	#tb1 td, #td1 th {
+		padding:0;
+	}
+	.editable {
+		width: 100%;
+		border: 0;
+	}
+</style>
+</head>
+
+<body>
+	<div>
+		<section class="content-header">
+			<div class="container-fluid">
+				<div class="row md-2">
+					<div class="col-sm-6">
+						<h3>시험관리</h3>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="content">
+			<div class="card">
+				<div class="card-header">
+					<form>
+						<div class="form-group">
+							<div class="custom-control custom-radio" style="display: inline;">
+								<input class="custom-control-input" type="radio"
+									id="customRadio1" name="customRadio"> <label
+									for="customRadio1" class="custom-control-label">학교</label>
+							</div>
+							&nbsp;&nbsp;
+							<div class="custom-control custom-radio" style="display: inline;">
+								<input class="custom-control-input" type="radio"
+									id="customRadio2" name="customRadio"> <label
+									for="customRadio2" class="custom-control-label">학원</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-sm-3">
+								<label>시험일</label>
+								<div class="input-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text"> <i
+											class="far fa-calendar-alt"></i>
+										</span>
+									</div>
+									<input type="text" class="form-control float-right"
+										id="reservation">
+								</div>
+							</div>
+
+							<div class="form-group col-sm-1">
+								<label>학기</label> <select class="form-control">
+									<option>1학기</option>
+									<option>2학기</option>
+								</select>
+							</div>
+							<div class="form-group col-sm-2">
+								<label>구분</label> 
+								<select class="form-control">
+									<option>중간고사</option>
+									<option>기말고사</option>
+								</select>
+							</div>
+							<div class="form-group col-sm-1">
+								<label>학년</label> <select class="form-control">
+									<option>중1</option>
+									<option>중2</option>
+									<option>중3</option>
+								</select>
+							</div>
+							<div class="form-group col-sm-1">
+								<label>과목분류</label> <select class="form-control">
+									<option>국어</option>
+									<option>수학</option>
+									<option>사회</option>
+									<option>과학</option>
+									<option>영어</option>
+								</select>
+							</div>
+
+							<div class="form-group col-sm-4">
+								<label>시험명</label>
+								<div class="input-group mb-4">
+									<input type="text" class="form-control">
+									<div class="input-group-append">
+										<button class="btn btn-primary" type="button">검색</button>
+									</div>
+									&nbsp;&nbsp;
+									<button class="btn btn-info" type="button">Add</button>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="row">
+							<div class="input-group col-sm-6">
+								<input type="text" class="form-control" readonly>
+								&nbsp;&nbsp;
+								<button class="btn btn-primary" type="button">등록</button>
+								&nbsp;&nbsp;
+								<button class="btn btn-danger" type="button">삭제</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<!-- card header -->
+
+				<div class="card-body">
+					<div class="row">
+						<div class="col-sm-8">
+							<div class="card">
+								<div class="card-body table-responsive p-0">
+									<table
+										class="table table-head-fixed table-bordered text-nowrap"
+										style="height: 300px;">
+										<thead>
+											<tr>
+												<th>시험일</th>
+												<th>구분</th>
+												<th>학년</th>
+												<th>학기</th>
+												<th>분기</th>
+												<th>과목</th>
+												<th>시험명</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>2021.03.28</td>
+												<td>학교</td>
+												<td>중1</td>
+												<td>1학기</td>
+												<td>중간고사</td>
+												<td>국어</td>
+												<td>은어송 중1 국어</td>
+											</tr>
+											<tr>
+												<td>2021.03.28</td>
+												<td>학교</td>
+												<td>중1</td>
+												<td>1학기</td>
+												<td>중간고사</td>
+												<td>국어</td>
+												<td>은어송 중1 국어</td>
+											</tr>
+											<tr>
+												<td>2021.03.28</td>
+												<td>학교</td>
+												<td>중1</td>
+												<td>1학기</td>
+												<td>중간고사</td>
+												<td>국어</td>
+												<td>은어송 중1 국어</td>
+											</tr>
+											<tr>
+												<td>2021.03.28</td>
+												<td>학교</td>
+												<td>중1</td>
+												<td>1학기</td>
+												<td>중간고사</td>
+												<td>국어</td>
+												<td>은어송 중1 국어</td>
+											</tr>
+											<tr>
+												<td>2021.03.28</td>
+												<td>학교</td>
+												<td>중1</td>
+												<td>1학기</td>
+												<td>중간고사</td>
+												<td>국어</td>
+												<td>은어송 중1 국어</td>
+											</tr>
+											<tr>
+												<td>2021.03.28</td>
+												<td>학교</td>
+												<td>중1</td>
+												<td>1학기</td>
+												<td>중간고사</td>
+												<td>국어</td>
+												<td>은어송 중1 국어</td>
+											</tr>
+											<tr>
+												<td>2021.03.28</td>
+												<td>학교</td>
+												<td>중1</td>
+												<td>1학기</td>
+												<td>중간고사</td>
+												<td>국어</td>
+												<td>은어송 중1 국어</td>
+											</tr>
+											<tr>
+												<td>2021.03.28</td>
+												<td>학교</td>
+												<td>중1</td>
+												<td>1학기</td>
+												<td>중간고사</td>
+												<td>국어</td>
+												<td>은어송 중1 국어</td>
+											</tr>
+											<tr>
+												<td>2021.03.28</td>
+												<td>학교</td>
+												<td>중1</td>
+												<td>1학기</td>
+												<td>중간고사</td>
+												<td>국어</td>
+												<td>은어송 중1 국어</td>
+											</tr>
+
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-sm-4">
+							<div class="card">
+								<div class="card-header">
+									<h3 class="card-title">문항 추가</h3>
+									<div class="card-tools">
+										<div class="input-group input-group-sm">
+											<input type="text" name="table_search"
+												class="form-control float-right" placeholder="Search">
+											<div class="input-group-append">
+												<button type="submit" class="btn btn-default">
+													<i class="fas fa-search"></i>
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="card-body table-responsive p-0">
+									<table id="tb1"
+										class="table table-head-fixed table-bordered text-nowrap">
+										<thead>
+											<tr>
+												<th style="width:10%">번호</th>
+												<th style="width:10%">점수</th>
+												<th style="width:80%">문항 영역</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>1</td>
+												<td>
+													<input type="text" class="form-control editable">
+												</td>
+												<td>
+													<select class="form-control editable">
+														<option>영역1</option>
+														<option>영역2</option>
+														<option>영역3</option>
+														<option>영역4</option>
+														<option>영역5</option>
+													</select>
+												</td>
+											</tr>
+											<tr>
+												<td>2</td>
+												<td>
+													<input type="text" class="form-control editable">
+												</td>
+												<td>
+													<select class="form-control editable">
+														<option>영역1</option>
+														<option>영역2</option>
+														<option>영역3</option>
+														<option>영역4</option>
+														<option>영역5</option>
+													</select>
+												</td>
+											</tr>
+											<tr>
+												<td>3</td>
+												<td>
+													<input type="text" class="form-control editable">
+												</td>
+												<td>
+													<select class="form-control editable">
+														<option>영역1</option>
+														<option>영역2</option>
+														<option>영역3</option>
+														<option>영역4</option>
+														<option>영역5</option>
+													</select>
+												</td>
+											</tr>
+											<tr>
+												<td>4</td>
+												<td>
+													<input type="text" class="form-control editable">
+												</td>
+												<td>
+													<select class="form-control editable">
+														<option>영역1</option>
+														<option>영역2</option>
+														<option>영역3</option>
+														<option>영역4</option>
+														<option>영역5</option>
+													</select>
+												</td>
+											</tr>
+											<tr>
+												<td>5</td>
+												<td>
+													<input type="text" class="form-control editable">
+												</td>
+												<td>
+													<select class="form-control editable">
+														<option>영역1</option>
+														<option>영역2</option>
+														<option>영역3</option>
+														<option>영역4</option>
+														<option>영역5</option>
+													</select>
+												</td>
+											</tr>
+											<tr>
+												<td>6</td>
+												<td>
+													<input type="text" class="form-control editable">
+												</td>
+												<td>
+													<select class="form-control editable">
+														<option>영역1</option>
+														<option>영역2</option>
+														<option>영역3</option>
+														<option>영역4</option>
+														<option>영역5</option>
+													</select>
+												</td>
+											</tr>
+											<tr>
+												<td>7</td>
+												<td>
+													<input type="text" class="form-control editable">
+												</td>
+												<td>
+													<select class="form-control editable">
+														<option>영역1</option>
+														<option>영역2</option>
+														<option>영역3</option>
+														<option>영역4</option>
+														<option>영역5</option>
+													</select>
+												</td>
+											</tr>
+											<tr>
+												<td>8</td>
+												<td>
+													<input type="text" class="form-control editable">
+												</td>
+												<td>
+													<select class="form-control editable">
+														<option>영역1</option>
+														<option>영역2</option>
+														<option>영역3</option>
+														<option>영역4</option>
+														<option>영역5</option>
+													</select>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</body>

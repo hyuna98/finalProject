@@ -1,0 +1,46 @@
+package com.lms.hexa.command;
+
+public class AttandanceNumCommand {
+	
+	
+	private String totalNum;
+	private String ynNum;
+	private String ynnNum;
+	
+	
+	
+	public String getYnnNum() {
+		return ynnNum;
+	}
+	public void setYnnNum(String ynnNum) {
+		this.ynnNum = ynnNum;
+	}
+	public String getTotalNum() {
+		return totalNum;
+	}
+	public void setTotalNum(String totalNum) {
+		this.totalNum = totalNum;
+	}
+	public String getYnNum() {
+		return ynNum;
+	}
+	public void setYnNum(String ynNum) {
+		this.ynNum = ynNum;
+	}
+	
+	public AttandanceNum toAttandanceNum() {
+		AttandanceNum att = new AttandanceNum();
+		
+		if(totalNum !=null && !totalNum.isEmpty() ) {
+			att.setTotalNum(Integer.parseInt(totalNum));				
+		}				
+		if(ynNum !=null && !ynNum.isEmpty()) {
+			att.setYnNum(Integer.parseInt(ynNum));
+		}
+		if(ynnNum !=null && !ynnNum.isEmpty()) {
+			att.setYnNum(Integer.parseInt(ynnNum));
+		}
+		
+		return att;
+	}
+}

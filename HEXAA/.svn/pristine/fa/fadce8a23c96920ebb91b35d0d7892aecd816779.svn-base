@@ -1,0 +1,23 @@
+package com.lms.hexa.service;
+
+import java.util.List;
+
+import com.lms.hexa.command.Criteria;
+import com.lms.hexa.dao.HomeworkDAO;
+import com.lms.hexa.dto.LessonVO;
+
+public class HomeworkServiceImpl implements HomeworkService{
+	
+	private HomeworkDAO homeworkDAO;
+	
+	public void setHomeworkDAO(HomeworkDAO homeworkDAO) {
+		this.homeworkDAO = homeworkDAO;
+	}
+
+	@Override
+	public List<LessonVO> getLessonIntegratedSearchList(Criteria cri) {
+		List<LessonVO> lessonList = homeworkDAO.selectLessonIntegratedSearchList(cri);
+		return lessonList;
+	}
+
+}

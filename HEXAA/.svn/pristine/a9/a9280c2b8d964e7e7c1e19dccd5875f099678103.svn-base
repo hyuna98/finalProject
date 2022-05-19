@@ -1,0 +1,15 @@
+package com.lms.hexa.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/manager/score")
+public class ScoreController {
+	
+	@RequestMapping("/examMngm")
+	public void examManagement()throws Exception{}
+	
+	@RequestMapping("/examMark")
+	public void examMark()throws Exception{}
+}

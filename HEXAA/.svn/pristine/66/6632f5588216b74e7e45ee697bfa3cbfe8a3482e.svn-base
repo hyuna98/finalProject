@@ -1,0 +1,315 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Note</title>
+  <style>
+    .page-item.active .page-link {
+      z-index: 3;
+      color: #fff;
+      background-color: #3ab5eb;
+      border-color: #3ab5eb;
+    }
+
+    .page-link {
+      color: #8c8588;
+    }
+
+    #title {
+      font-size: 15px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row md-2">
+        <div class="col-sm-6">
+          <h1>쪽지함</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="card card-default card-outline card-outline-tabs">
+            <div class="card-header p-0 border-bottom-0">
+              <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill" href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home" aria-selected="true">받은쪽지함</a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill" href="#custom-tabs-four-profile" role="tab" aria-controls="custom-tabs-four-profile" aria-selected="false">보낸쪽지함</a>
+                </li>
+
+              </ul>
+            </div>
+
+            <div class="card-body">
+              <div class="tab-content" id="custom-tabs-four-tabContent">
+                <div class="tab-pane fade active show" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="row">
+                        <div class="col-sm-7">
+                          <button type="button" class="btn btn-default btn-sm" id="registBtn" onclick="OpenWindow('noteRegist.do','쪽지쓰기',800,800);">쪽지쓰기</button>
+                        </div>
+                        <div class="col-sm-5">
+                        <div id="keyword" class="card-tools" style="width:350px;">
+                          <div class="input-group row" style="margin-bottom: 10px;">
+                            <select class="form-control col-md-4" name="searchType" id="searchType">
+                              <option value="tcw">전 체</option>
+                              <option value="t">보낸사람</option>
+                              <option value="w">제목+내용</option>
+                            </select>
+                            <input class="form-control" type="text" name="keyword" placeholder="검색어를 입력하세요." value="">
+                            <span class="input-group-append">
+                              <button class="btn btn-default" type="button" onclick="list_go(1);" data-card-widget="search">
+                                <i class="fa fa-fw fa-search"></i>
+                              </button>
+                            </span>
+                          </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                      <table class="table table-hover table-bordered text-nowrap">
+                        <thead>
+                          <tr>
+                            <th>NO</th>
+                            <th>보낸이</th>
+                            <th>제목</th>
+                            <th>날짜</th>
+                            <th>열람여부</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr onclick="OpenWindow('noteDetail.do','상세보기',800,700);" style="cursor:pointer">
+                            <td>1</td>
+                            <td>문명진</td>
+                            <td>선생님 질문이 있는데요</td>
+                            <td><span class="tag tag-success">22-03-31</span></td>
+                            <td>열람</td>
+                          </tr>
+                          <tr>
+                            <td>2</td>
+                            <td>김종휘</td>
+                            <td>선생님 질문이 있는데요</td>
+                            <td><span class="tag tag-success">22-04-01</span></td>
+                            <td>미열람</td>
+                          </tr>
+                          <tr>
+                            <td>3</td>
+                            <td>김선정</td>
+                            <td>선생님 질문이 있는데요</td>
+                            <td><span class="tag tag-success">22-04-02</span></td>
+                            <td>열람</td>
+                          </tr>
+                          <tr>
+                            <td>4</td>
+                            <td>정유진</td>
+                            <td>선생님 질문이 있는데요</td>
+                            <td><span class="tag tag-success">22-04-03</span></td>
+                            <td>열람</td>
+                          </tr>
+                          <tr>
+                            <td>5</td>
+                            <td>정태형</td>
+                            <td>선생님 질문이 있는데요</td>
+                            <td><span class="tag tag-success">22-04-05</span></td>
+                            <td>열람</td>
+                          </tr>
+                          <tr>
+                            <td>6</td>
+                            <td>문명진</td>
+                            <td>선생님 질문이 있는데요</td>
+                            <td><span class="tag tag-success">22-05-05</span></td>
+                            <td>미열람</td>
+                          </tr>
+                          <tr>
+                            <td>7</td>
+                            <td>김종휘</td>
+                            <td>선생님 질문이 있는데요</td>
+                            <td><span class="tag tag-success">22-05-11</span></td>
+                            <td>열람</td>
+                          </tr>
+                          <tr>
+                            <td>8</td>
+                            <td>정현아</td>
+                            <td>선생님 질문이 있는데요</td>
+                            <td><span class="tag tag-success">22-05-15</span></td>
+                            <td>미열람</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tab-pane fade show" id="custom-tabs-four-profile" role="tabpanel" aria-labelledby="custom-tabs-four-profile">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="row">
+                        <div class="col-sm-7">
+                          <button type="button" class="btn btn-default btn-sm" id="registBtn" onclick="OpenWindow('noteRegist.do','쪽지쓰기',800,700);">쪽지쓰기</button>
+                        </div>
+                        <div class="col-sm-5">
+                          <div class="input-group row" style="margin-bottom: 10px;">
+                            <select class="form-control col-sm-4" name="searchType" id="searchType">
+                              <option value="tcw">전 체</option>
+                              <option value="t">보낸사람</option>
+                              <option value="w">제목+내용</option>
+                            </select>
+                            <input class="form-control" type="text" name="keyword" placeholder="검색어를 입력하세요." value="">
+                            <span class="input-group-append">
+                              <button class="btn btn-default" type="button" onclick="list_go(1);" data-card-widget="search">
+                                <i class="fa fa-fw fa-search"></i>
+                              </button>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                      <table class="table table-hover table-bordered text-nowrap">
+                        <thead>
+                          <tr>
+                            <th>NO</th>
+                            <th>보낸이</th>
+                            <th>제목</th>
+                            <th>날짜</th>
+                            <th>열람여부</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr onclick="OpenWindow('noteDetail.do','상세보기',800,700);" style="cursor:pointer">
+                            <td>11</td>
+                            <td>문명진</td>
+                            <td>선생님 질문이 있는데요</td>
+                            <td><span class="tag tag-success">22-03-31</span></td>
+                            <td>열람</td>
+                          </tr>
+                          <tr>
+                            <td>12</td>
+                            <td>김종휘</td>
+                            <td>선생님 질문이 있는데요</td>
+                            <td><span class="tag tag-success">22-04-01</span></td>
+                            <td>미열람</td>
+                          </tr>
+                          <tr>
+                            <td>13</td>
+                            <td>김선정</td>
+                            <td>선생님 질문이 있는데요</td>
+                            <td><span class="tag tag-success">22-04-02</span></td>
+                            <td>열람</td>
+                          </tr>
+                          <tr>
+                            <td>14</td>
+                            <td>정유진</td>
+                            <td>선생님 질문이 있는데요</td>
+                            <td><span class="tag tag-success">22-04-03</span></td>
+                            <td>열람</td>
+                          </tr>
+                          <tr>
+                            <td>15</td>
+                            <td>정태형</td>
+                            <td>선생님 질문이 있는데요</td>
+                            <td><span class="tag tag-success">22-04-05</span></td>
+                            <td>열람</td>
+                          </tr>
+                          <tr>
+                            <td>16</td>
+                            <td>문명진</td>
+                            <td>선생님 질문이 있는데요</td>
+                            <td><span class="tag tag-success">22-05-05</span></td>
+                            <td>미열람</td>
+                          </tr>
+                          <tr>
+                            <td>17</td>
+                            <td>김종휘</td>
+                            <td>선생님 질문이 있는데요</td>
+                            <td><span class="tag tag-success">22-05-11</span></td>
+                            <td>열람</td>
+                          </tr>
+                          <tr>
+                            <td>18</td>
+                            <td>정현아</td>
+                            <td>선생님 질문이 있는데요</td>
+                            <td><span class="tag tag-success">22-05-15</span></td>
+                            <td>미열람</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <!-- 		card body end -->
+
+            <!-- card footer start -->
+            <div class="card-footer">
+              <nav aria-label="Navigation">
+                <ul class="pagination justify-content-center m-0">
+                  <li class="page-item">
+                    <a class="page-link" href="javascript:list_go(1);">
+                      <i class="fas fa-angle-double-left"></i>
+                    </a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="javascript:list_go('1');">
+                      <i class="fas fa-angle-left"></i>
+                    </a>
+                  </li>
+                  <li class="page-item active">
+                    <a class="page-link" href="javascript:list_go('1');">1</a>
+                  </li>
+
+                  <li class="page-item ">
+                    <a class="page-link" href="javascript:list_go('2');">2</a>
+                  </li>
+
+                  <li class="page-item">
+                    <a class="page-link" href="javascript:list_go('1');">
+                      <i class="fas fa-angle-right"></i>
+                    </a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="javascript:list_go('2');">
+                      <i class="fas fa-angle-double-right"></i>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+
+              <form id="jobForm">
+                <input type="hidden" name="page" value="">
+                <input type="hidden" name="perPageNum" value="">
+                <input type="hidden" name="searchType" value="">
+                <input type="hidden" name="keyword" value="">
+              </form>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+package com.lms.hexa.dto;
+
+public class ScoreVO {
+	 private int scoreId;
+	 private String scored;
+	 private int subExamId;
+	 private String studentId;
+	 
+	 
+	public int getScoreId() {
+		return scoreId;
+	}
+	public void setScoreId(int scoreId) {
+		this.scoreId = scoreId;
+	}
+	public String getScored() {
+		return scored;
+	}
+	public void setScored(String scored) {
+		this.scored = scored;
+	}
+	public int getSubExamId() {
+		return subExamId;
+	}
+	public void setSubExamId(int subExamId) {
+		this.subExamId = subExamId;
+	}
+	public String getStudentId() {
+		return studentId;
+	}
+	public void setStudentId(String studentId) {
+		this.studentId = studentId;
+	}
+	 
+	 
+}

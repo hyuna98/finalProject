@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="Parent-Mapper">
+  
+  	<resultMap type="parent" id="parentMap">
+  		<result property="id" column="PARENT_ID" />
+  		<result property="parentAlarmMethodCode" column="PARENT_ALARM_METHOD_CODE" />
+  		<result property="parentName" column="PARENT_NAME" />
+  		<result property="parentEmail" column="PARENT_EMAIL" />
+  		<result property="pw" column="PARENT_PW" />
+  		<result property="parentAlarmYn" column="PARENT_ALARM_YN" />
+  		<result property="parentHp" column="PARENT_HP" />
+  		<result property="parentAlarmGo" column="PARENT_ALARM_GO" />
+  		<result property="parentAlarmOut" column="PARENT_ALARM_OUT" />
+  		<result property="parentAlarmGetOn" column="PARENT_ALARM_GET_ON" />
+  		<result property="parentAlarmGetOff" column="PARENT_ALARM_GET_OFF" />
+  		<result property="parentDivisionCode" column="PARENT_DIVISION_CODE" />
+  	</resultMap>
+  	
+  		<select id="selectParentById" parameterType="str" resultMap="parentMap">
+		select
+			PARENT_ID,
+			PARENT_ALARM_METHOD_CODE,
+			PARENT_NAME,
+			PARENT_EMAIL,
+			PARENT_PW,
+			PARENT_ALARM_YN,
+			PARENT_HP,
+			PARENT_ALARM_GO,
+			PARENT_ALARM_OUT,
+			PARENT_ALARM_GET_ON,
+			PARENT_ALARM_GET_OFF,
+			PARENT_DIVISION_CODE
+		from parent
+		where parent_id=#{parentId}
+		</select>
+  
+	  	<update id="updatePwd" parameterType="str">
+			UPDATE PARENT
+			SET PARENT_PW = #{emailAddress}
+				WHERE PARENT_ID = #{emailAddress}
+		</update>
+	  	
+	  	<update id="modifyPwd" parameterType="parent">
+			UPDATE PARENT
+			SET PARENT_PW = #{pw}
+				WHERE PARENT_ID = #{id}
+		</update>
+  
+  </mapper>

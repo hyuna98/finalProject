@@ -1,0 +1,16 @@
+package com.lms.hexa.service;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.lms.hexa.dto.StudentVO;
+
+public interface StudentService {
+	
+	public StudentVO getStudent(String id) throws Exception;
+	
+	List<StudentVO> selectStudentList() throws Exception;
+	
+	public void insertStudent(StudentVO student) throws SQLException;
+	
+}

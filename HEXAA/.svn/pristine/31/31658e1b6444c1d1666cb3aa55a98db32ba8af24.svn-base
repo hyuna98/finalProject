@@ -1,0 +1,36 @@
+package com.lms.hexa.service;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.lms.hexa.dao.ConsultingDAO;
+import com.lms.hexa.dto.ConsultingVO;
+
+
+public class ConsultingServiceImpl implements ConsultingService {
+
+	private ConsultingDAO consultingDAO;
+	
+	public void setConsultingDAO(ConsultingDAO consultingDAO) {
+		this.consultingDAO = consultingDAO;
+	}
+
+
+
+
+
+	@Override
+	public List<ConsultingVO> getDivision() {
+		List<ConsultingVO> division = null;
+		try {
+			division = consultingDAO.selectDivision();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return division;
+	}
+
+
+	
+
+}

@@ -1,0 +1,149 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true"%>
+
+<head>
+<style>
+.error_next_box {
+	color: red;
+}
+
+.success_next_box {
+	color: green;
+}
+</style>
+</head>
+<section class="content-header">
+	<div class="container-fluid">
+		<div class="row mb-2">
+			<div class="col-sm-6">
+				<h1>직원 정보 변경</h1>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-5">
+				<!-- 아이디 보여주기 및 변경 -->
+				<div class="card card-info" >
+					<div class="card-header">
+						<h3 class="card-title">ID 변경</h3>
+					</div>
+
+					<form class="form-horizontal">
+						<div class="card-body" style="height: 185px;">
+							<div class="form-group row">
+								<label for="memberId" class="col-sm-3 col-form-label">현재
+									ID</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="memberId"
+										value="01023456789" readonly="readonly">
+								</div>
+							</div>
+							<br><br>
+							<div class="form-group row">
+								<label for="modifyId" class="col-sm-3 col-form-label">변경
+									ID</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="modifyId"
+										placeholder="변경 예정 ID">
+								</div>
+							</div>
+						</div>
+
+						<div class="card-footer">
+							<button type="submit" class="btn btn-info" onclick="submitId();">변경 요청</button>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="col-md-7">
+				<!-- 비밀번호 보여주기 및 변경 -->
+				<div class="card card-primary">
+					<div class="card-header">
+						<h3 class="card-title">비밀번호 변경</h3>
+					</div>
+
+					<form>
+						<div class="card-body">
+							<div class="form-group">
+								<label for="modifyPassword1">새로운 비밀번호</label> <input
+									type="password" class="form-control" id="modifyPassword1"
+									placeholder="Password" onkeyup="checkPwd();"> <span
+									class="error_next_box" id="pswd1Msg" style="display: none">비밀번호를
+									입력해주세요.</span>
+							</div>
+							<div class="form-group">
+								<label for="modifyPassword2">새로운 비밀번호 확인</label> <input
+									type="password" class="form-control" id="modifyPassword2"
+									placeholder="PasswordCheck" onkeyup="checkPwd();">
+							</div>
+							<div>
+								<span class="error_next_box" id="pswd2Msg" style="display: none">비밀번호가
+									일치하지 않습니다.</span> <span class="success_next_box" id="pswd3Msg"
+									style="display: none">비밀번호가 일치합니다.</span>
+							</div>
+						</div>
+						<div class="card-footer">
+							<button type="submit" class="btn btn-primary" onclick="submitPwd();">변경</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</section>
+
+
+<script>
+	var pw = document.getElementById('modifyPassword1');
+	var pw2 = document.getElementById('modifyPassword2');
+	var oMsg = document.getElementById('pswd1Msg');
+	var oMsg2 = document.getElementById('pswd2Msg');
+	var oMsg3 = document.getElementById('pswd3Msg');
+
+	function checkPwd() {
+
+		if (pw.value!="" && pw2.value!="" && pw.value != pw2.value) {
+			oMsg.style.display = "none";
+			oMsg3.style.display = "none";
+			oMsg2.style.display = "";
+			return false;
+		}
+
+		if (pw.value!="" && pw2.value!="" && pw.value == pw2.value) {
+			oMsg.style.display = "none";
+			oMsg2.style.display = "none";
+			oMsg3.style.display = "";
+			return false;
+		}
+
+	}
+</script>
+<script>
+function goPage(){
+	
+}
+</script>
+<script>
+function submitId(){
+	alert('submitID click!');
+}
+
+function submitPwd(){
+	if (pw.value == "") {
+		oMsg2.style.display = "none";
+		oMsg3.style.display = "none";
+		oMsg.style.display = "";
+		return false;
+	}
+	
+	alert('submitPwd click!');
+}
+
+</script>

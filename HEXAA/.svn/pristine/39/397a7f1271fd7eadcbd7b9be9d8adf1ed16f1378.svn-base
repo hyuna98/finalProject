@@ -1,0 +1,35 @@
+package com.lms.hexa.service;
+
+import java.util.List;
+
+import com.lms.hexa.dao.ManagerDAO;
+import com.lms.hexa.dto.ManagerVO;
+
+public class ManagerServiceImpl implements ManagerService {
+	
+	protected ManagerDAO managerDAO;
+
+	public void setManagerDAO(ManagerDAO managerDAO) {
+		this.managerDAO = managerDAO;
+	}
+
+	@Override
+	public ManagerVO getManager(String id) throws Exception {
+		ManagerVO manager = managerDAO.selectManagerById(id);
+		return manager;
+	}
+	
+	@Override
+	public List<ManagerVO> getWorkingTeacherListSearchByName(String name) throws Exception {
+		List<ManagerVO> teacherList = managerDAO.selectWorkingTeacherListSearchByName(name);
+		return teacherList;
+	}
+
+	@Override
+	public ManagerVO getManagerDetailById(String id) throws Exception {
+		ManagerVO teacherInfo = managerDAO.selectManagerDetailById(id);
+		return teacherInfo;
+	}
+
+
+}

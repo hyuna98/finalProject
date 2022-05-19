@@ -1,0 +1,17 @@
+package com.lms.hexa.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.lms.hexa.dto.ConsultingVO;
+
+
+public interface ConsultingDAO {
+
+	
+
+	List<ConsultingVO> selectDivision() throws SQLException;
+	
+	
+
+}

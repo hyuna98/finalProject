@@ -1,0 +1,58 @@
+package com.lms.hexa.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class lessoncontroller {
+	
+	@RequestMapping("/common/lesson/detail")
+	public String lessonDetail()throws Exception{
+		String url = "/common/lesson/detail";
+		return url;
+	}
+	
+	@RequestMapping("/manager/lesson/list")
+	public String lessonList()throws Exception{
+		String url = "/manager/lesson/list";
+		return url;
+	}
+	
+	@RequestMapping("/manager/lesson/listByClassRoom")
+	public String listByClassRoom()throws Exception{
+		String url = "/manager/lesson/listByClassRoom";
+		return url;
+	}
+	
+	
+	@RequestMapping("/member/lesson/myLessonList")
+	public String showTimeTable()throws Exception{
+		String url = "/member/lesson/myLessonList";
+		return url;
+	}
+	@RequestMapping("/member/lesson/apply")
+	public String applyForm()throws Exception{
+		String url = "/member/lesson/apply";
+		return url;
+	}
+	@RequestMapping("/manager/homework/list")
+	public String HWKlist()throws Exception{
+		String url = "/manager/homework/list";
+		return url;
+	}
+	@RequestMapping("/member/homework/list")
+	public String memberHWKlist()throws Exception{
+		String url = "/member/homework/list";
+		return url;
+	}
+	@RequestMapping("/member/homework/registForm")
+	public String memberHWKRegist()throws Exception{
+		String url = "/member/homework/registForm";
+		return url;
+	}
+	
+	@RequestMapping("/manager/lesson/outmodify")
+	public void outmodify()throws Exception{}
+	
+
+}

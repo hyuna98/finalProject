@@ -1,0 +1,31 @@
+package com.lms.hexa.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.lms.hexa.command.Criteria;
+import com.lms.hexa.dto.ManagerVO;
+
+public interface ManagerDAO {
+
+	ManagerVO selectManagerById(String id) throws Exception;
+	
+	//이름으로 검색하여 교사 list가져옴
+	List<ManagerVO> selectWorkingTeacherListSearchByName(ManagerVO managerVO) throws Exception;
+	List<ManagerVO> selectWorkingTeacherList()throws Exception;
+	
+	//아이디로 검색한 직원 세부정보
+	ManagerVO selectManagerDetailById(String id) throws Exception;
+	
+	// managerList
+	List<ManagerVO> selectManagerList(Criteria cri) throws Exception;
+	
+	// 검색 자료 개수
+	int selectManagerListTotalCount(Criteria cri) throws Exception;
+	
+	// 비밀번호 초기화
+	public void updatePwd(String emailAddress) throws SQLException;
+	
+	// 직원 insert 및 update
+	public void insertManager(ManagerVO manager) throws SQLException;
+}

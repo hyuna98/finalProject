@@ -1,0 +1,10 @@
+package com.lms.hexa.dto;
+
+public class PdsVO {
+	private int pdsId;
+	private String pdsTitle;
+	private int empNo;
+	private String pdsContent;
+	private String pdsViews;
+	
+}

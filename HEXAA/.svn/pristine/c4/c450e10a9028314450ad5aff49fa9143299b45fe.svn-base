@@ -1,0 +1,18 @@
+package com.lms.hexa.service;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.lms.hexa.dto.MenuVO;
+
+public interface MenuService {
+	
+	// Member 1depth 메뉴 리스트 조회
+	List<MenuVO> getMemberMenuList() throws SQLException;
+	// Member 2depth 메뉴 리스트 조회
+	List<MenuVO> getMemberSubMenuList() throws SQLException;
+	// Manager 1depth 메뉴 리스트 조회
+	List<MenuVO> getManagerMenuList() throws SQLException;
+	// Manager 2depth 메뉴 리스트 조회
+	List<MenuVO> getManagerSubMenuList() throws SQLException;
+}

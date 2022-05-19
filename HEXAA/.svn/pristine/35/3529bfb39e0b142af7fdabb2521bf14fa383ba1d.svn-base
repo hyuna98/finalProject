@@ -1,0 +1,48 @@
+package com.lms.hexa.dao;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.session.SqlSession;
+
+import com.lms.hexa.command.Criteria;
+import com.lms.hexa.dto.HomeworkVO;
+import com.lms.hexa.dto.LessonVO;
+
+public class HomeworkDAOImpl implements HomeworkDAO{
+	
+	private SqlSession session;
+	
+	public void setSession(SqlSession session) {
+		this.session = session;
+	}
+	
+	@Override
+	public List<LessonVO> selectLessonIntegratedSearchList(Criteria cri) {
+		List<LessonVO> lessonList = session.selectList("Homework-Mapper.selectLessonIntegratedSearchList", cri);
+		return lessonList;
+	}
+
+	@Override
+	public void insertHomeWork(HomeworkVO homeworkVO) {
+		session.update("Homework-Mapper.insertHomeWork", homeworkVO);
+	}
+
+	@Override
+	public int selectHomeWorkSeqNextValue() {
+		int HwkId = session.selectOne("Homework-Mapper.selectHomeWorkSeqNextValue");
+		return HwkId;
+	}
+
+	@Override
+	public void insertGivenHomeWorkStudentList(Map<String, Object> insertHomeWorkMap) {
+		session.update("Homework-Mapper.insertGivenHomeWorkStudentList",insertHomeWorkMap);
+		
+	}
+	
+	@Override
+	public List<HomeworkVO> selectHomeWorkList(String lessonAssignmentId) {
+		List<HomeworkVO> homeworkList = session.selectList("Homework-Mapper.selectHomeWorkList",lessonAssignmentId);
+		return homeworkList;
+	}
+}

@@ -1,0 +1,67 @@
+package com.lms.hexa.dto;
+
+public class NoteVO {
+	
+	private int noteId;
+	private String noteContent;
+	private String noteReadDate;
+	private String noteSendDate;
+	private String noteReadYN;
+	private String studentId;
+	private String mngId;
+	private String noteTitle;
+	
+	
+	public int getNoteId() {
+		return noteId;
+	}
+	public void setNoteId(int noteId) {
+		this.noteId = noteId;
+	}
+	public String getNoteContent() {
+		return noteContent;
+	}
+	public void setNoteContent(String noteContent) {
+		this.noteContent = noteContent;
+	}
+	public String getNoteReadDate() {
+		return noteReadDate;
+	}
+	public void setNoteReadDate(String noteReadDate) {
+		this.noteReadDate = noteReadDate;
+	}
+	public String getNoteSendDate() {
+		return noteSendDate;
+	}
+	public void setNoteSendDate(String noteSendDate) {
+		this.noteSendDate = noteSendDate;
+	}
+	public String getNoteReadYN() {
+		return noteReadYN;
+	}
+	public void setNoteReadYN(String noteReadYN) {
+		this.noteReadYN = noteReadYN;
+	}
+	public String getStudentId() {
+		return studentId;
+	}
+	public void setStudentId(String studentId) {
+		this.studentId = studentId;
+	}
+	public String getMngId() {
+		return mngId;
+	}
+	public void setMngId(String mngId) {
+		this.mngId = mngId;
+	}
+	public String getNoteTitle() {
+		return noteTitle;
+	}
+	public void setNoteTitle(String noteTitle) {
+		this.noteTitle = noteTitle;
+	}
+
+	
+	
+	
+}

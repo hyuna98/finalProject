@@ -1,0 +1,19 @@
+package com.lms.hexa.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/member/attandance")
+public class MemberAttandanceController {
+	
+	@RequestMapping("/inmodify")
+	public void inmodify()throws Exception{}
+	
+	@RequestMapping("/outmodify")
+	public void outmodify()throws Exception{}
+	
+	@RequestMapping("/list")
+	public void list()throws Exception{}
+
+}

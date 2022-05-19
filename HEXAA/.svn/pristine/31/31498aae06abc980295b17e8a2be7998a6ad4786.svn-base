@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Student-Mapper">
+	
+	<resultMap type="student" id="studentMap">
+		<result property="id" column="student_id"/>
+		<result property="pw" column="student_pw"/>
+		<result property="name" column="STUDENT_NAME"/>
+		<result property="genderCode" column="STUDENT_GENDER_CODE"/>
+		<result property="email" column="STUDENT_EMAIL"/>
+		<result property="zipCode" column="STUDENT_ZIP_CODE"/>
+		<result property="address" column="STUDENT_ADDRESS"/>
+		<result property="address2" column="STUDENT_ADDRESS2"/>
+		<result property="studentPicture" column="STUDENT_STUDENT_PICTURE"/>
+		<result property="birthDate" column="STUDENT_BIRTH_DATE"/>
+		<result property="discountReason" column="STUDENT_DISCOUNT_REASON"/>
+		<result property="discountRate" column="STUDENT_DISCOUNT_RATE"/>
+		<result property="payDueDate" column="STUDENT_PAY_DUE_DATE"/>
+		<result property="academyRegDate" column="STUDENT_ACADEMY_REG_DATE"/>
+		<result property="stateCode" column="STUDENT_STATE_CODE"/>
+		<result property="sibling" column="STUDENT_SIBLING"/>
+		<result property="gradeCategoryCode" column="STUDENT_GRADE_CATEGORY_CODE"/>
+		<result property="grade" column="STUDENT_GRADE"/>
+		<result property="hp" column="STUDENT_HP"/>
+		<result property="parentId" column="PARENT_ID"/>
+		<result property="schoolNo" column="SCHOOL_NO"/>
+	</resultMap>
+	
+	<sql id="keyword">
+		<if test="keyword != null">
+			and (STUDENT_NAME like '%'||#{keyword}||'%'
+			or student_id like '%'||#{keyword}||'%'
+			or STUDENT_GENDER_CODE like '%'||#{keyword}||'%'
+			or SCHOOL_NO like '%'||#{keyword}||'%'
+			or STUDENT_GRADE_CATEGORY_CODE like '%'||#{keyword}||'%'
+			or STUDENT_GRADE like '%'||#{keyword}||'%'
+			or STUDENT_HP like '%'||#{keyword}||'%'
+			or STUDENT_ACADEMY_REG_DATE like '%'||#{keyword}||'%')
+		</if>	
+	</sql>
+	
+	<select id="selectStudentById" parameterType="str" resultMap="studentMap">
+		select
+		*
+		from student
+		where student_id=#{id}
+	</select>
+	
+	<select id="selectStudentList" parameterType="str" resultMap="studentMap">
+		select
+		*
+		from student
+		where student_id is not null
+		<include refid="keyword"/> 
+		order by STUDENT_NAME
+	</select>
+	
+	<select id="selectStudentListCount" resultType="int">
+		select count(*)
+		from student
+		where student_id is not null
+		<include refid="keyword"/> 
+	</select>
+
+	<update id="insertStudent" parameterType="student">
+		MERGE INTO student
+		USING dual
+		ON (student_id = #{id})
+ 		WHEN MATCHED THEN
+      		UPDATE SET STUDENT_NAME = #{name},
+      				   STUDENT_GENDER_CODE = #{genderCode}, 
+      				   STUDENT_EMAIL = #{email}, 
+      				   STUDENT_ZIP_CODE = #{zipCode}, 
+      				   STUDENT_ADDRESS = #{address}, 
+      				   STUDENT_ADDRESS2 = #{address2}, 
+      				   STUDENT_BIRTH_DATE =#{birthDate},
+        			   STUDENT_DISCOUNT_REASON = #{discountReason},
+        			   STUDENT_DISCOUNT_RATE = #{discountRate}, 
+        			   STUDENT_PAY_DUE_DATE = #{payDueDate}, 
+        			   STUDENT_ACADEMY_REG_DATE = #{academyRegDate}, 
+        			   STUDENT_STATE_CODE = #{stateCode}, 
+        			   STUDENT_SIBLING = #{sibling},
+        			   STUDENT_GRADE_CATEGORY_CODE = #{gradeCategoryCode}, 
+        			   STUDENT_GRADE = #{grade}, 
+        			   STUDENT_HP = #{hp}, 
+        			   PARENT_ID = #{parentId}, 
+        			   SCHOOL_NO = #{schoolNo}, 
+        			   STUDENT_STUDENT_PICTURE = #{studentPicture}     
+ 		WHEN NOT MATCHED THEN
+      		INSERT 
+      		(student_id, student_pw, STUDENT_NAME, STUDENT_GENDER_CODE, STUDENT_EMAIL, STUDENT_ZIP_CODE, STUDENT_ADDRESS, STUDENT_ADDRESS2, STUDENT_BIRTH_DATE, 
+			STUDENT_DISCOUNT_REASON, STUDENT_DISCOUNT_RATE, STUDENT_PAY_DUE_DATE, STUDENT_ACADEMY_REG_DATE, STUDENT_STATE_CODE, STUDENT_SIBLING, STUDENT_GRADE_CATEGORY_CODE, STUDENT_GRADE, STUDENT_HP, PARENT_ID, SCHOOL_NO, STUDENT_STUDENT_PICTURE)
+			
+			VALUES (#{id},#{pw},#{name},#{genderCode},#{email},#{zipCode},#{address},#{address2},#{birthDate},
+			#{discountReason},#{discountRate},#{payDueDate},#{academyRegDate},#{stateCode},#{sibling},#{gradeCategoryCode},#{grade},#{hp},#{parentId},#{schoolNo},#{studentPicture})
+	</update>
+	
+	<select id="selectStudentIdList" resultType="student" resultMap="studentMap">
+		select
+		STUDENT_ID
+		from student
+		order by STUDENT_ACADEMY_REG_DATE desc
+	</select>
+	
+	<update id="updatePwd" parameterType="str">
+		UPDATE STUDENT
+		SET STUDENT_PW = #{emailAddress}
+			WHERE STUDENT_ID = #{emailAddress}
+	</update>
+
+	<update id="modifyPwd" parameterType="student">
+		UPDATE STUDENT
+		SET STUDENT_PW = #{pw}
+			WHERE STUDENT_ID = #{id}
+	</update>
+	
+	<select id="selectStudentClassInfoList" resultType="student">
+		select B.class_name as className,
+		       C.student_name as name,
+		       D.mng_name as mngName,
+		       C.STUDENT_GRADE_CATEGORY_CODE || ' ' || C.STUDENT_GRADE as grade
+		  from belong A, class B, student C, manager D
+		 where A.class_id = B.class_id
+		   and A.student_id = C.student_id
+		   and B.mng_id = D.mng_id
+	</select>
+
+</mapper>

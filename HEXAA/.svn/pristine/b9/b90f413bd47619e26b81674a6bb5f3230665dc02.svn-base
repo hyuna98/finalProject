@@ -1,0 +1,315 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<head>
+	<style>
+		* {
+			font-size: 14px;
+		}
+		
+		label {
+			margin-bottom: 0;
+		}
+		
+		div.table1 {
+			max-height: 28vh;
+			overflow-y: auto;
+		}
+		
+		div.table2 {
+			max-height: 180px;
+			overflow-y: scroll;
+		}
+		
+		div.table3 {
+			max-height: 568px;
+			overflow-y: scroll;  
+		}
+		
+		.table-head-fixed th {
+			padding-top: 0.3em;
+			padding-bottom: 0.3em;
+		}
+		.table-head-fixed td {
+			padding-top: 0.3em;
+			padding-bottom: 0.3em;
+		}
+		
+ 		.card-body.p-0 .table thead>tr>th:first-of-type {
+			padding-left: 12px;
+		}
+ 		.card-body.p-0 .table tbody>tr>td:first-of-type {
+			padding-left: 12px;
+		}
+		.card-body.p-0 .table thead>tr>th:last-of-type {
+			padding-right: 12px;
+		}
+ 		.card-body.p-0 .table tbody>tr>td:last-of-type {
+			padding-right: 12px;
+		}
+		
+		
+		th, td {
+			text-align: center;
+		}
+		#tb1 td, #td1 th {
+			padding:0;
+		}
+		
+		
+		.alert {
+			text-align: center;
+		}
+		.alert {
+			font-size: 15px;
+		}
+		
+		.alert-dismissible {
+	    	padding-right: 0;
+	    	padding-left: 0;
+		}
+	</style>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row md-2">
+				<div class="col-sm-6">
+					<h1>결제</h1>
+				</div>
+				
+			</div>
+		</div>
+	</section>
+<section class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="card card-light card-outline">
+						<div class="card-header p-0 pt-1" >
+							<ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+								<li class="nav-item"><a class="nav-link active"
+									id="custom-tabs-one-home-tab" data-toggle="pill"
+									href="#custom-tabs-one-home" role="tab"
+									aria-controls="custom-tabs-one-home" aria-selected="true" >결제 현황</a></li>
+								<li class="nav-item"><a class="nav-link"
+									id="custom-tabs-one-profile-tab" data-toggle="pill"
+									href="#custom-tabs-one-profile" role="tab"
+									aria-controls="custom-tabs-one-profile" aria-selected="false">결제 내역</a>
+								</li>
+							</ul>
+						</div>
+						<div class="card-body" style="padding-top: 5px;">
+						<div class="row">
+						<div class="col-sm-10"></div>
+						<div class="col-sm-2">
+						<select id="pStudentList" class="form-control" style="margin: 10px;">
+									<option id="studentAll">전체</option>
+									<c:forEach items="${pStudentList}" var="payment">
+									<option id="${payment.studentId}" ${payment.studentId eq selectedStudentId ? 'selected':'' }>${payment.studentName}</option>
+									</c:forEach>
+								</select>
+						</div>
+						</div>
+							<div class="tab-content" id="custom-tabs-one-tabContent">
+								<div class="tab-pane fade active show table1" id="custom-tabs-one-home"
+								role="tabpanel" aria-labelledby="custom-tabs-one-home-tab" style="height: 28vh;">
+									<table class="table table-head-fixed table-bordered">
+										<thead>
+											<tr>
+												<th>학생명</th>
+												<th>수업명</th>
+												<th>마지막결제일
+													<a href="#" data-toggle="tooltip" title="마지막결제일 설명" style="color: black;">
+														  <i class="fa-solid fa-circle-question" id="lastpay" >
+														</i> 
+													</a>	
+												</th>
+												<th>결제예정일 
+													<a href="#" data-toggle="tooltip" title="결제 예정일 설명" style="color: black;">
+														<i class="fa-solid fa-circle-question" id="payexpect">
+														</i>
+													</a>
+												</th>
+												<th>강의가격</th>
+												<th>결제 개월수</th>
+												<th>결제</th>
+												
+											</tr>
+											
+											<%-- <c:forEach var="i" begin="1" end="25" step="1"> --%>
+											<c:if test="${not empty paymentList }">
+											<c:forEach items="${paymentList }" var="payment">
+											<tr>
+												<td>${payment.studentName}</td>
+												<td>${payment.lessonName}</td>
+											
+												
+								 				<td><fmt:formatDate value="${payment.paymentDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+												
+												<td>
+												<fmt:parseDate var="startDateString" value="${payment.paymentDuedate}" pattern="yyyyMMdd" />
+												<fmt:formatDate value="${startDateString }" pattern="yyyy-MM-dd" />
+												</td>
+												<%--  <td><fmt:formatDate value="${payment.paymentDuedate}" pattern="yyyy-MM-dd"/></td> --%> 
+												<td>${payment.lessonPrice}</td>
+												<td>	
+												<div class="row">
+												<div class="col-sm-7">
+												<select class="form-control" style="padding-right: 0px;">
+													<option>1</option>
+													<option>2</option>
+													<option>3</option>
+												</select>
+												</div>
+												<div class="col-sm-5" style="padding-left: 0px; padding-top: 7px;">
+											    	개월
+											    	</div> 
+											    	</div>
+												</td>
+												<td><button id="one" type="button" class="btn btn-block btn-outline-info btn-xs one" style="margin-top: 1vh;">결제</button></td>
+											</tr>
+											<%-- </c:forEach> --%>
+											</c:forEach>	
+								           </c:if>	
+								           <c:if test="${empty paymentList }" >	
+								           <tr>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+											</tr>
+											* 결제 예정 내역이 없습니다.
+								           </c:if>
+										</thead>
+									</table>		
+								</div>
+							
+							<div class="tab-pane fade table1" id="custom-tabs-one-profile"
+							role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab" style="height: 28vh;">
+								<table class="table table-head-fixed table-bordered">
+										<thead>
+											<tr>
+												<th style="background-color:rgb(32 73 105); color: white;">학생명</th>
+												<th style="background-color:rgb(32 73 105); color: white;">수업명</th>
+												<th style="background-color:rgb(32 73 105); color: white;">결제일</th>
+												<th style="background-color:rgb(32 73 105); color: white;">결제예정일
+													<a href="#" data-toggle="tooltip" title="결제 예정일 설명" style="color: white;">
+														<i class="fa-solid fa-circle-question" id="payexpect">
+														</i>
+													</a>
+												</th>
+												<th style="background-color:rgb(32 73 105); color: white;">강의가격</th>
+												<th style="background-color:rgb(32 73 105); color: white;">결제금액</th>
+												
+												
+											</tr>
+												<c:forEach var="i" begin="1" end="25" step="1">
+											<tr>
+												<td>정유진</td>
+												<td>중2 수학 내신  계획설계</td>
+												<td>2021-12-25</td>
+												<td>2022-04-26</td>
+												<td>50000</td>
+												<td>200000</td>
+											
+											</tr>
+											</c:forEach>
+										</thead>
+								</table>		
+							</div>
+						</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-12">
+		<section class="content">
+			<div class="card">
+				<div class="card-header" style="background-color: #55acf0; color:white;">
+					<div>	
+						
+						<h5 class="card-title">교습기간이 1개월 이내인 경우</h5>
+					</div>
+					
+					<div class="card-tools">
+						<button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+							<i class="fas fa-minus"></i>
+						</button>
+					</div>
+					
+				</div>
+				<div class="card-body" style="font-size: 90%">
+					▶ 총 교습시간의 1/3 경과 전  : 이미 납부한 교습비의 2/3에 해당하는 금액 <br>
+					▶ 총 교습시간의 2/3 경과 전  : 이미 납부한 교습비의 1/2에 해당하는 금액 <br>
+					▶ 총 교습시간의 1/3 경과 후  : 반환하지 않음
+				</div>
+			</div>
+		</section>
+		
+		
+	</div>
+	<div class="col-sm-12">
+		<section class="content">
+			<div class="card">
+				<div class="card-header" style="background-color: #55acf0; color:white;">
+					<h5 class="card-title">교습기간이 1개월 초과한 경우</h5>
+					<div class="card-tools">
+						<button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+							<i class="fas fa-minus"></i>
+						</button>
+					</div>
+				</div>
+				<div class="card-body" style="font-size: 90%">
+					▶ 교습 시작 전  : 이미 납부한 교습비의 전액 환불 <br>
+					▶ 교습시작 후   : 반환사유가 발생한 해당 월의 반환대상 교습비등 (교습기간이 1개월 이내인 경우의 기준에 따라 산출된 금액) 나머지 월의 교습비 등의 전액을 합산한 금액
+<!-- 					         &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; -->
+					                  
+				</div>
+			</div>
+		</section>
+	</div>
+</div>
+</div>
+
+</section>
+
+<script>
+	var button = document.querySelector("#lastpay");
+	button.addEventListener("mouseover", hovered, false);
+	function hovered(e) {
+	    console.log("Hovered!");
+	}
+	$(function () {
+		  $('[data-toggle="tooltip"]').tooltip()
+		})
+	
+</script>	
+
+
+<script>
+
+
+window.onload=function(){
+	
+	$("#pStudentList").on("change",function(){
+		var pStudentId =  $("#pStudentList option:selected").attr("id");
+		
+		
+		console.log(pStudentId);
+		
+		
+	window.location.href='/member/studyPlan/list.do?studentId='+pStudentId;
+	
+     
+	});
+
+
+</script>

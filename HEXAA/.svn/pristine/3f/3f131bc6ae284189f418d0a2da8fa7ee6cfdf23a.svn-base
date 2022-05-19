@@ -1,0 +1,190 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>학습자료실</title>
+  
+  <style>
+  	#form{
+  		
+  	}
+  </style>
+  
+</head>
+
+<body>
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row md-2">
+        <div class="col-sm-6">
+          <h2>학습자료실</h2>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item">
+              <a href="list.do">
+                <i class="fa fa-dashboard"></i>학습자료실
+              </a>
+            </li>
+            <li class="breadcrumb-item active">
+            	  자료
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="col-12 col-sm-12">
+      <div class="card card-default card-outline" id="form">
+      
+        <div class="card">
+          <div class="card-header with-border">
+            <button type="button" class="btn btn-light btn-sm" id="registBtn" onclick="OpenWindow('/manager/pds/Regist.do','자료등록',800,700);">자료등록</button>
+            <div id="keyword" class="card-tools" style="width:350px;">
+              <div class="input-group row">
+                <select class="form-control col-md-4" name="searchType" id="searchType">
+                  <option value="tcw">구분</option>
+                  <option value="t">시험지</option>
+                  <option value="w">학습자료</option>
+                </select>
+                <input class="form-control" type="text" name="keyword" placeholder="검색어를 입력하세요." value="">
+                <span class="input-group-append">
+                  <button class="btn btn-default" type="button" onclick="list_go(1);" data-card-widget="search">
+                    <i class="fa fa-fw fa-search"></i>
+                  </button>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-body table-responsive p-0">
+              <table class="table table-hover text-nowrap">
+                <thead>
+                  <tr>
+                    <th>NO</th>
+                    <th>보낸이</th>
+                    <th>제목</th>
+                    <th>날짜</th>
+                    <th>열람여부</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr onclick="OpenWindow('/manager/pds/Detail.do','상세보기',800,700);" style="cursor:pointer">
+                    <td>183</td>
+                    <td>John Doe</td>
+                    <td>11-7-2014</td>
+                    <td><span class="tag tag-success">Approved</span></td>
+                    <td>doner.</td>
+                  </tr>
+                  <tr>
+                    <td>219</td>
+                    <td>Alexander Pierce</td>
+                    <td>11-7-2014</td>
+                    <td><span class="tag tag-warning">Pending</span></td>
+                    <td> doner.</td>
+                  </tr>
+                  <tr>
+                    <td>657</td>
+                    <td>Bob Doe</td>
+                    <td>11-7-2014</td>
+                    <td><span class="tag tag-primary">Approved</span></td>
+                    <td>oner.</td>
+                  </tr>
+                  <tr>
+                    <td>175</td>
+                    <td>Mike Doe</td>
+                    <td>11-7-2014</td>
+                    <td><span class="tag tag-danger">Denied</span></td>
+                    <td>oner.</td>
+                  </tr>
+                  <tr>
+                    <td>134</td>
+                    <td>Jim Doe</td>
+                    <td>11-7-2014</td>
+                    <td><span class="tag tag-success">Approved</span></td>
+                    <td>doner.</td>
+                  </tr>
+                  <tr>
+                    <td>494</td>
+                    <td>Victoria Doe</td>
+                    <td>11-7-2014</td>
+                    <td><span class="tag tag-warning">Pending</span></td>
+                    <td>doner.</td>
+                  </tr>
+                  <tr>
+                    <td>832</td>
+                    <td>Michael Doe</td>
+                    <td>11-7-2014</td>
+                    <td><span class="tag tag-primary">Approved</span></td>
+                    <td>doner.</td>
+                  </tr>
+                  <tr>
+                    <td>982</td>
+                    <td>Rocky Doe</td>
+                    <td>11-7-2014</td>
+                    <td><span class="tag tag-danger">Denied</span></td>
+                    <td>doner.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+          <div class="card-footer">
+            <nav aria-label="Navigation">
+              <ul class="pagination justify-content-center m-0">
+                <li class="page-item">
+                  <a class="page-link" href="javascript:list_go(1);">
+                    <i class="fas fa-angle-double-left"></i>
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="javascript:list_go('1');">
+                    <i class="fas fa-angle-left"></i>
+                  </a>
+                </li>
+                <li class="page-item active">
+                  <a class="page-link" href="javascript:list_go('1');">1</a>
+                </li>
+
+                <li class="page-item ">
+                  <a class="page-link" href="javascript:list_go('2');">2</a>
+                </li>
+
+                <li class="page-item">
+                  <a class="page-link" href="javascript:list_go('1');">
+                    <i class="fas fa-angle-right"></i>
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="javascript:list_go('2');">
+                    <i class="fas fa-angle-double-right"></i>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+
+            <form id="jobForm">
+              <input type="hidden" name="page" value="">
+              <input type="hidden" name="perPageNum" value="">
+              <input type="hidden" name="searchType" value="">
+              <input type="hidden" name="keyword" value="">
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+</body>
+
+</html>

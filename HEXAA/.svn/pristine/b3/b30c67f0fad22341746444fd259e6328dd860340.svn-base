@@ -1,0 +1,32 @@
+package com.lms.hexa.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class ScoreController {
+	
+	@RequestMapping("/manager/score/examMngm")
+	public void examManagement()throws Exception{}
+	
+	@RequestMapping("/manager/score/examMark")
+	public void examMark()throws Exception{}
+	
+	@RequestMapping("/manager/score/gradeCheck")
+	public void managerGradeCheck()throws Exception{}
+	
+	@RequestMapping("/manager/score/gradeDetail")
+	public void managerGradeDetail()throws Exception{}
+	
+	@RequestMapping("/manager/score/gradeFeedback")
+	public void managerGradeFeedback()throws Exception{}
+	
+	@RequestMapping("/member/score/gradeCheck")
+	public void memberGradeCheck()throws Exception{}
+	
+	@RequestMapping("/member/score/gradeDetail")
+	public void memberGradeDetail()throws Exception{}
+	
+	@RequestMapping("/member/score/gradeFeedback")
+	public void memberGradeFeedback()throws Exception{}
+}

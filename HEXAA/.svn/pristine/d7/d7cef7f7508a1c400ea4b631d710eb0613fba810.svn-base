@@ -1,0 +1,20 @@
+package com.lms.hexa.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/manager/lesson")
+public class lessoncontroller {
+	
+	@RequestMapping("/list")
+	public String list()throws Exception{
+		String url = "/manager/lesson/list";
+		return url;
+	}
+	
+	@RequestMapping("/outmodify")
+	public void outmodify()throws Exception{}
+	
+
+}

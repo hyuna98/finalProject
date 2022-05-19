@@ -1,0 +1,74 @@
+package com.lms.hexa.controller;
+
+import java.sql.SQLException;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.lms.hexa.command.CriteriaCommand;
+import com.lms.hexa.command.StudyPlanRegistCommand;
+import com.lms.hexa.dto.StudyPlanVO;
+import com.lms.hexa.service.StudyPlanService;
+
+
+@Controller
+public class StudyPlanController {
+
+	@Autowired
+	private StudyPlanService studyPlanService;
+
+
+	   @RequestMapping("/manager/studyPlan/list") 
+	   public ModelAndView studyPlanManagerList(CriteriaCommand cricmd,HttpServletRequest request,							
+				 ModelAndView mnv) throws SQLException { 
+	    String url = "manager/studyPlan/list"; 
+	    System.out.println("abdf");
+	    return mnv;
+	  }
+	  
+	   
+	   
+	  @RequestMapping("/member/studyPlan/list")
+	  public String studyPlanMemberList() { 
+		  String url = "member/studyPlan/list";
+		  return url; 
+		  }
+	  
+	  
+	  
+	  @RequestMapping("/member/studyPlan/registForm") 
+	  public String studyPlanRegist() { 
+		  String url = "member/studyPlan/registForm"; 
+		  return url;
+		  }
+	  
+	  
+
+	  
+	  @RequestMapping(value="/member/studyPlan/regist", method = RequestMethod.POST,produces="text/plain;charset=utf-8") 
+	  public String regist(StudyPlanRegistCommand registReq, HttpServletRequest request, RedirectAttributes rttr) throws Exception {
+	  
+	  String url = "member/studyPlan/registForm"; 
+	  System.out.println(registReq);
+	  System.out.println(registReq.getSplanWeek());
+	  System.out.println(registReq.getSsplanDetail());
+	  System.out.println(registReq.getMngSubject()); 
+	  StudyPlanVO studyPlan = registReq.toStudyPlanVO();
+	  
+	  //pds.setPdsTitle((String)request.getAttribute("XSStitle"));
+	  studyPlanService.regist(studyPlan);
+	  
+	  rttr.addFlashAttribute("from", "regist"); 
+	  return url; 
+	  }
+	  
+		
+
+     
+}    

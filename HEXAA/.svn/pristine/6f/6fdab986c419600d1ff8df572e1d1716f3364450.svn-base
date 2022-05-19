@@ -1,0 +1,29 @@
+package com.lms.hexa.service;
+
+import java.util.HashMap;
+import java.util.List;
+
+import com.lms.hexa.dao.KakaoSendDAO;
+import com.lms.hexa.dto.KakaoSendVO;
+
+public class KakaoSendServiceImpl implements KakaoSendService {
+		
+	private KakaoSendDAO kakaoSendDAO;
+
+	public void setKakaoSendDAO(KakaoSendDAO kakaoSendDAO) {
+		this.kakaoSendDAO = kakaoSendDAO;
+	}
+
+	@Override
+	public int registKakaoSendList(HashMap<String, Object> params) throws Exception {
+		int result = kakaoSendDAO.insertKakaoSendList(params);
+		return result;
+	}
+
+	@Override
+	public List<KakaoSendVO> getKakaoSendList() throws Exception {
+		List<KakaoSendVO> kakaoSendList = kakaoSendDAO.selectKakaoSendList();
+		return kakaoSendList;
+	}
+	
+}

@@ -1,0 +1,16 @@
+package com.lms.hexa.dao;
+
+import java.sql.SQLException;
+
+import com.lms.hexa.dto.ClassVO;
+
+public interface ClassDAO {
+	
+	ClassVO selectClassById(String classId) throws SQLException;
+	
+	ClassVO selectBelongById(String studnetId) throws SQLException;
+
+	ClassVO selectClassInfoByStudentId(String studentId);
+	
+	
+}

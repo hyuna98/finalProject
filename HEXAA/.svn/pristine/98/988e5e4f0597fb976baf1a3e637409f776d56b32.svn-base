@@ -1,0 +1,17 @@
+package com.lms.hexa.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/manager/academyinfo")
+public class AcademyinfoController {
+	
+	@RequestMapping("/main")
+	public void main()throws Exception{}
+	
+	
+	
+	@RequestMapping("/uselog")
+	public void uselog()throws Exception{}
+}

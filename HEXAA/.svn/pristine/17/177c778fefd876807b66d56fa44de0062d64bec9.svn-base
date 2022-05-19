@@ -1,0 +1,507 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+	div.table1 {
+		max-height: 150px;
+		overflow-y: scroll;
+	}
+	div.table2 {
+		max-height: 200px;
+		overflow-y: scroll;
+	}
+</style>
+</head>
+<body>
+<section class="content-header">
+   <div class="container-fluid">
+        <div class="row md-2">
+           <div class="col-sm-6">
+              <h1>과제관리</h1>              
+           </div>
+           <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                 <li class="breadcrumb-item">
+                 </li>
+               </ol>
+           </div>
+        </div>
+   </div>
+</section>
+<section class="content">
+   <div class="card-header">
+    <div class="card card-dark card-outline card-outline-tabs">
+		<div class="card-header p-0 border-bottom-0">
+			<ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill" href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home" aria-selected="true">과제등록</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill" href="#custom-tabs-four-profile" role="tab" aria-controls="custom-tabs-four-profile" aria-selected="false">제출과제확인</a>
+				</li>
+			</ul>
+		</div>
+		<div class="card-body">
+			<div class="tab-content" id="custom-tabs-four-tabContent">
+				<div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="card card-outline card-dark">
+								<div class="card-header">
+									<h3 class="card-title">
+									<i class="fas fa-list" aria-hidden="true"></i>
+										&nbsp;
+										수업선택
+									</h3>
+									 <div class="card-tools">
+					                  <div class="row">
+										<div class="input-group" style="padding: 5px;">
+											<select class="form-control">
+												<option>교사명</option>
+												<option>강의실명</option>
+												<option>과목명</option>
+											</select>
+											<input type="text" class="form-control">
+											<div class="input-group-append">
+												<button type="submit" class="btn btn-dark">
+													<i class="fas fa-search"></i>
+												</button>
+											</div>
+										</div>
+									  </div>
+					               </div>
+								</div>
+								
+								<div class="card-body">
+									<div class="row table1">
+										<div class="card-body p-0">
+											<table class="table table-head-fixed table-bordered">
+												<thead>
+													<tr>
+														<th style="width: 13%">과목</th>
+														<th style="width: 35%">수업명</th>
+														<th style="width: 17%">강의실</th>
+														<th style="width: 17%">선생님</th>
+														<th style="width: 18%">상세</th>
+													</tr>
+												</thead>
+												<tbody>
+													<c:forEach var="i" begin="1" end="25" step="1">
+													<tr>
+														<td>수학</td>
+														<td>중2 수학 내신 설계</td>
+														<td>404호</td>
+														<td>정현아T</td>
+														<td>
+															<button type="button" class="btn btn-sm btn-dark" onclick="OpenWindow('/common/lesson/detail.do','강의 상세정보',800,700);">상세</button>
+														</td>
+													</tr>
+													</c:forEach>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="card card-outline card-dark">
+								<div class="card-header">
+									<h3 class="card-title">
+									<i class="fas fa-list" aria-hidden="true"></i>
+										&nbsp;
+										과제선택
+									</h3>
+									 <div class="card-tools">
+					               </div>
+								</div>
+								
+								<div class="card-body">
+									<div class="row table1">
+										<div class="card-body p-0">
+											<table class="table table-head-fixed table-bordered">
+												<thead>
+													<tr>
+														<th style="width: 13%">과목</th>
+														<th style="width: 51%">과제명</th>
+														<th style="width: 18%">요청일</th>
+														<th style="width: 18%">마감일</th>
+													</tr>
+												</thead>
+												<tbody>
+													<c:forEach var="i" begin="1" end="25" step="1">
+													<tr>
+														<td>수학</td>
+														<td>쎈수학 102~107페이지 풀기</td>
+														<td>2022.03.24</td>
+														<td>2022.03.25</td>
+													</tr>
+													</c:forEach>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="row">
+							<div class="col-sm-5">
+								<div class="card card-outline card-dark">
+									<div class="card-header">
+										<h3 class="card-title">
+										<i class="fas fa-list" aria-hidden="true"></i>
+											&nbsp;
+											수강원생목록
+										</h3>
+										 <div class="card-tools">
+						               </div>
+									</div>
+									
+									<div class="card-body">
+										<div class="row table2">
+											<div class="card-body p-0">
+												<table class="table table-head-fixed table-bordered">
+													<thead>
+														<tr>
+															<th style="width: 50%">반</th>
+															<th style="width: 50%">학생명</th>
+														</tr>
+													</thead>
+													<tbody>
+														<c:forEach var="i" begin="1" end="25" step="1">
+														<tr>
+															<td>중2B</td>
+															<td>정유진</td>
+														</tr>
+														</c:forEach>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-2" style="vertical-align: center;">
+							<br><br><br>
+								<button class="btn btn-block btn-dark btn-flat"><i class="fa-solid fa-angles-left"></i></button>
+								<button class="btn btn-block btn-dark btn-flat"><i class="fa-solid fa-angle-left"></i></button>
+								<button class="btn btn-block btn-dark btn-flat"><i class="fa-solid fa-angle-right"></i></button>
+								<button class="btn btn-block btn-dark btn-flat"><i class="fa-solid fa-angles-right"></i></button>
+							</div>
+							<div class="col-sm-5">
+								<div class="card card-outline card-dark">
+									<div class="card-header">
+										<h3 class="card-title">
+										<i class="fas fa-list" aria-hidden="true"></i>
+											&nbsp;
+											과제요청목록
+										</h3>
+										 <div class="card-tools">
+						               </div>
+									</div>
+									
+									<div class="card-body">
+										<div class="row table2">
+											<div class="card-body p-0">
+												<table class="table table-head-fixed table-bordered">
+													<thead>
+														<tr>
+															<th style="width: 50%">반</th>
+															<th style="width: 50%">학생명</th>
+														</tr>
+													</thead>
+													<tbody>
+														<c:forEach var="i" begin="1" end="25" step="1">
+														<tr>
+															<td>중2B</td>
+															<td>정유진</td>
+														</tr>
+														</c:forEach>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="card card-outline card-dark">
+							<div class="card-header">
+								<h3 class="card-title">
+								<i class="fas fa-list" aria-hidden="true"></i>
+									&nbsp;
+									과제등록
+								</h3>
+								 <div class="card-tools">
+							 		<div class="input-group" style="padding: 5px;">
+										<button type="submit" class="btn btn-dark">
+											저장
+										</button>
+										<div class="input-group-append">
+											<button type="submit" class="btn btn-dark">
+											삭제
+											</button>
+										</div>
+									</div>
+				               </div>
+							</div>
+							
+							<div class="card-body">
+								<table id="example1" class="table table-bordered dataTable dtr-inline" style="text-align : center">
+									<tr>
+										<td style="width: 20%">과제명</td>
+										<td colspan="3"><input class="form-control" type="text" value="쎈수학 102~107페이지 풀기"></td>
+									</tr>
+									<tr>
+										<td style="width: 25%">과제내용</td>
+										<td style="width: 25%"></td>
+										<td style="width: 25%">마감일</td>
+										<td style="width: 25%"><input class="form-control" type="date" value="2022-04-03"></td>
+									</tr>
+									<tr>
+										<td colspan="4">
+											<textarea class="form-control" rows="3" cols="">
+쎈수학 102~107페이지
+연습문제만 풀어오세요
+
+제출은 이미지 업로드로 해주세요												
+											</textarea>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				</div>
+				<div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel" aria-labelledby="custom-tabs-four-profile-tab">
+				<div class="row">
+						<div class="col-sm-6">
+							<div class="card card-outline card-dark">
+								<div class="card-header">
+									<h3 class="card-title">
+									<i class="fas fa-list" aria-hidden="true"></i>
+										&nbsp;
+										수업선택
+									</h3>
+									 <div class="card-tools">
+					                  <div class="row">
+										<div class="input-group" style="padding: 5px;">
+											<select class="form-control">
+												<option>교사명</option>
+												<option>강의실명</option>
+												<option>과목명</option>
+											</select>
+											<input type="text" class="form-control">
+											<div class="input-group-append">
+												<button type="submit" class="btn btn-dark">
+													<i class="fas fa-search"></i>
+												</button>
+											</div>
+										</div>
+									  </div>
+					               </div>
+								</div>
+								
+								<div class="card-body">
+									<div class="row table1">
+										<div class="card-body p-0">
+											<table class="table table-head-fixed table-bordered">
+												<thead>
+													<tr>
+														<th style="width: 13%">과목</th>
+														<th style="width: 35%">수업명</th>
+														<th style="width: 17%">강의실</th>
+														<th style="width: 17%">선생님</th>
+														<th style="width: 18%">상세</th>
+													</tr>
+												</thead>
+												<tbody>
+													<c:forEach var="i" begin="1" end="25" step="1">
+													<tr>
+														<td>수학</td>
+														<td>중2 수학 내신 설계</td>
+														<td>404호</td>
+														<td>정현아T</td>
+														<td>
+															<button type="button" class="btn btn-sm btn-dark" onclick="OpenWindow('/common/lesson/detail.do','강의 상세정보',800,700);">상세</button>
+														</td>
+													</tr>
+													</c:forEach>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="card card-outline card-dark">
+								<div class="card-header">
+									<h3 class="card-title">
+									<i class="fas fa-list" aria-hidden="true"></i>
+										&nbsp;
+										과제선택
+									</h3>
+									 <div class="card-tools">
+					               </div>
+								</div>
+								
+								<div class="card-body">
+									<div class="row table1">
+										<div class="card-body p-0">
+											<table class="table table-head-fixed table-bordered">
+												<thead>
+													<tr>
+														<th style="width: 13%">과목</th>
+														<th style="width: 51%">과제명</th>
+														<th style="width: 18%">요청일</th>
+														<th style="width: 18%">마감일</th>
+													</tr>
+												</thead>
+												<tbody>
+													<c:forEach var="i" begin="1" end="25" step="1">
+													<tr>
+														<td>수학</td>
+														<td>쎈수학 102~107페이지 풀기</td>
+														<td>2022.03.24</td>
+														<td>2022.03.25</td>
+													</tr>
+													</c:forEach>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="card card-outline card-dark">
+							<div class="card-header">
+								<h3 class="card-title">
+								<i class="fas fa-list" aria-hidden="true"></i>
+									&nbsp;
+									과제요청목록
+								</h3>
+								 <div class="card-tools">
+				               </div>
+							</div>
+							
+							<div class="card-body">
+								<div class="row table2">
+									<div class="card-body p-0">
+										<table class="table table-head-fixed table-bordered">
+											<thead>
+												<tr>
+													<th style="width: 33%">반</th>
+													<th style="width: 33%">학생명</th>
+													<th style="width: 33%">상태</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:forEach var="i" begin="1" end="5" step="1">
+												<tr>
+													<td>중2B</td>
+													<td>정유진</td>
+													<td>
+														<button class="btn btn-block btn-danger btn-xs">미제출</button>
+													</td>
+												</tr>
+												<tr>
+													<td>중2B</td>
+													<td>정유진</td>
+													<td>
+														<button class="btn btn-block btn-success btn-xs">제출</button>
+													</td>
+												</tr>
+												</c:forEach>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-8">
+						<div class="card card-outline card-dark">
+							<div class="card-header">
+								<h3 class="card-title">
+								<i class="fas fa-list" aria-hidden="true"></i>
+									&nbsp;
+									과제확인상세
+								</h3>
+								 <div class="card-tools">
+							 		<div class="input-group" style="padding: 5px;">
+										<button type="submit" class="btn btn-dark">
+											완료
+										</button>
+										<div class="input-group-append">
+											<button type="submit" class="btn btn-dark">
+											미완료
+											</button>
+										</div>
+									</div>
+				               </div>
+							</div>
+							
+							<div class="card-body">
+								<div class="row table2">
+									<div class="card-body p-0">
+										<table class="table table-head-fixed table-bordered">
+											<thead>
+												<tr>
+													<th style="width: 30%">과제명</th>
+													<th style="width: 70%">쎈수학 102~107페이지 풀기</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td colspan="2">과제상세</td>
+												</tr>
+												<tr>
+													<td colspan="2">
+														쌤 과제<br>
+														다 플었어요...<br>
+														...<br>
+														...<br>
+														...<br>
+													</td>
+												</tr>
+												<tr>
+												</tr>
+											</tbody>
+										</table>
+										<a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i>이미지 1.jpg</a><br>
+										<a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i>이미지 2.jpg</a><br>
+										<a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i>이미지 3.jpg</a><br>
+										<a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i>이미지 4.jpg</a><br>
+										<a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i>이미지 5.jpg</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+   </div>
+   </div>
+</section>
+   
+   
+   
+</body>
+</html>

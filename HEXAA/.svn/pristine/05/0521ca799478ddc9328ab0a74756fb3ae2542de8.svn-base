@@ -1,0 +1,107 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true"%>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+	<section class="content">
+		<div class="card-header">
+			<h1>학생출결관리</h1>
+		</div>
+		<div class="card-body">
+
+
+			<div class="row" style="max-width: 98%;">
+				<div class="col-12" style="border: 1px solid black; height: 10vh;">
+					
+						<div class="col-1 custom-control custom-radio" style="float: left; margin: 17px; 5px;">
+							<input id="one" class="custom-control-input" type="radio" name="radio" value="yyy" checked> 
+								<label for="one" class="custom-control-label">일자별 입력</label>
+						</div>
+						
+						<div class="col-1 custom-control custom-radio" style="float: left; margin: 17px; 5px;" >
+							<input id="two" class="custom-control-input" type="radio" name="radio" value="yyy" > 
+								<label for="two"class="custom-control-label">월전체 입력</label>
+						</div>
+					
+					<div class="col-2 form-group" style="float: left; margin-top: 10px;">
+						<label>수강반</label> 
+						<select class="col-8 form-control" style="display: inline; ">
+							<option>405- 특별 진학반</option>
+							<option>404- 특별 진학반</option>
+							<option>403- 특별 진학반</option>
+							<option>402- 특별 진학반</option>
+							<option>401- 특별 진학반</option>
+						</select>
+					</div>
+					
+					<div class="col-2 form-group" style="float: left; margin-top: 10px;">
+						<label>담임</label> 
+						<select class="col-5 form-control" style="display: inline; ">
+							<option>정현아</option>
+							<option>김선정</option>
+						</select>
+					</div>
+					
+					<div class="col-2 form-group" style="float: left; margin-top: 12px;">
+						<label>이름</label>
+						<input type="text" >
+						
+					</div>
+					
+					<div class="col-1 form-group" style="float: left; margin-top: 5px;">
+						<button type="submit" class="btn btn-primary">검색</button>
+					</div>
+					
+					<label style="float: left; margin-right: 3vh; margin-top: 12px;">일자</label>
+					<div class="col-2" style="float: left; margin-top: 5px;">
+						<div class=" input-group" >
+							<div class="input-group-prepend">
+								<span class="input-group-text">
+									<i class="far fa-calendar-alt"></i>
+								</span>
+							</div>
+								<input type	="date" class="form-control float-right" id="reservation">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+			<div class="card-footer">
+				<div class="col-12" style="max-width: 98%; border: 1px solid black; height: 70vh;">
+					<div class="col-12" style=" border: 1px solid black; height: 10vh;">
+						<div class="col-3 form-group" style="float: left; margin-top: 10px;">
+							<label>출결상태</label> 
+							<select class="col-5 form-control" style="display: inline; ">
+								<option>출석</option>
+								<option>결석</option>
+							</select>
+						</div>
+						<div class="col-1 view-group" style="float: left; margin-top: 10px;">
+							<label>출결상태</label> 
+						</div>	
+						<div class="col-1 view-group" style="float: left; margin-top: 10px;">
+							<label>출결상태</label> 
+						</div>	
+						<div class="col-1 view-group" style="float: left; margin-top: 10px;">
+							<label>출결상태</label> 
+						</div>	
+						<div class="col-1 view-group" style="float: left; margin-top: 10px;">
+							<label>출결상태</label> 
+						</div>	
+						<div class="col-1 view-group" style="float: left; margin-top: 10px;">
+							<label>출결상태</label> 
+						</div>	
+					</div>
+					
+					<div class="col-12" style=" border: 1px solid black; height: 60vh;">
+					
+					</div>
+				</div>
+			</div>
+	</section>
+</body>
+</html>

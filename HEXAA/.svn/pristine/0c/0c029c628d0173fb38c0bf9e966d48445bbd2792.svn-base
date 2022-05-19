@@ -1,0 +1,234 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>학습자료실</title>
+  
+  <style>
+  	.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #3ab5eb;
+    border-color: #3ab5eb;
+}
+	.page-link{
+		color: #8c8588;
+}
+	#title{
+		font-size: 15px;
+		text-align: center;
+	}
+  </style>
+  
+</head>
+
+<body>
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row md-2">
+        <div class="col-sm-6">
+          <h2>학습자료실</h2>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <section class="content">
+  <div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-sm-12">
+      <div class="card card-default card-outline" id="form">
+       
+          <div class="card-header">
+<!--           	<div class="row"> -->
+<!--           		<div class="col-sm-6"> -->
+          			<h3 class="card-title">
+                <i class="fas fa-search" aria-hidden="true"></i>
+                		자료리스트
+              		</h3>
+<!--           		</div> -->
+<!--           		<div class="col-sm-6"> -->
+<!--           			<div class="row"> -->
+          			
+<!--           				</div> -->
+<!--           			</div> -->
+          			
+<!--           		</div> -->
+          	</div>
+              
+              
+<!--               header end -->
+              
+             
+            
+          <div class="card-body">
+             <div class="row">
+             	<div class="col-sm-12" style="margin-bottom: 10px;">
+             	<div class="row">
+             			<div class="col-sm-7">
+          					<button type="button" class="btn btn-light btn-md" id="registBtn" onclick="OpenWindow('/manager/pds/Regist.do','자료등록',800,800);">자료등록</button>
+             			
+             			</div>
+             			
+             			<div class="col-sm-5">
+             				<div id="keyword" class="card-tools" style="width:350px;">
+					              <div class="input-group row">
+					                <select class="form-control col-md-4" name="searchType" id="searchType">
+					                  <option value="tcw">구분</option>
+					                  <option value="t">시험지</option>
+					                  <option value="w">학습자료</option>
+					                </select>
+					                <input class="form-control" type="text" name="keyword" placeholder="검색어를 입력하세요." value="">
+					                <span class="input-group-append">
+					                  <button class="btn btn-default" type="button" onclick="list_go(1);" data-card-widget="search">
+					                    <i class="fa fa-fw fa-search"></i>
+					                  </button>
+					                </span>
+					              </div>
+					            </div>
+        
+             			</div>
+             		
+             	
+             	</div>
+             	</div>
+             	
+             	<div class="col-sm-12">
+            <div class="card-body p-0">
+              <table class="table table-hover table-bordered text-nowrap">
+                <thead>
+                  <tr>
+                    <th>NO</th>
+                    <th>보낸이</th>
+                    <th>제목</th>
+                    <th>날짜</th>
+                    <th>열람여부</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr onclick="OpenWindow('pdsDetail.do','상세보기',800,700);" style="cursor:pointer">
+                    <td>1</td>
+                    <td>문명진</td>
+                    <td>중1 수학 자료 관련</td>
+                    <td><span class="tag tag-success">2022-03-31</span></td>
+                    <td>열람</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>김종휘</td>
+                    <td>중1 수학 자료 관련</td>
+                    <td><span class="tag tag-success">2022-04-01</span></td>
+                    <td>열람</td>
+                  </tr>
+                  <tr>
+                   <td>3</td>
+                    <td>정유진</td>
+                    <td>중1 영어 자료 관련</td>
+                    <td><span class="tag tag-success">2022-04-05</span></td>
+                    <td>열람</td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>정태형</td>
+                    <td>문정중 1학기 기말고사 영어</td>
+                    <td><span class="tag tag-success">2022-04-08</span></td>
+                    <td>열람</td>
+                  </tr>
+                  <tr>
+                   <td>5</td>
+                    <td>김선정</td>
+                    <td>동대전중 1학기 기말고사 수학</td>
+                    <td><span class="tag tag-success">2022-05-19</span></td>
+                    <td>열람</td>
+                  </tr>
+                  <tr>
+                    <td>6</td>
+                   <td>정현아</td>
+                    <td>중3 영어 수업 자료</td>
+                    <td><span class="tag tag-success">2022-03-31</span></td>
+                    <td>열람</td>
+                  </tr>
+                  <tr>
+                    <td>7</td>
+                   <td>문명진</td>
+                    <td>은어송중 2학년 2학기 중간고사 과학</td>
+                    <td><span class="tag tag-success">2022-03-31</span></td>
+                    <td>열람</td>
+                  </tr>
+                  <tr>
+                    <td>8</td>
+                    <td>김종휘</td>
+                    <td>은어송중 1학년 1학기 중간고사 사회</td>
+                    <td><span class="tag tag-success">2022-03-31</span></td>
+                    <td>열람</td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+            </div>
+             	
+             	</div>
+             </div>
+
+          </div>
+          
+          
+          <div class="card-footer">
+            <nav aria-label="Navigation">
+              <ul class="pagination justify-content-center m-0">
+                <li class="page-item">
+                  <a class="page-link" href="javascript:list_go(1);">
+                    <i class="fas fa-angle-double-left"></i>
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="javascript:list_go('1');">
+                    <i class="fas fa-angle-left"></i>
+                  </a>
+                </li>
+                <li class="page-item active">
+                  <a class="page-link" href="javascript:list_go('1');">1</a>
+                </li>
+
+                <li class="page-item ">
+                  <a class="page-link" href="javascript:list_go('2');">2</a>
+                </li>
+
+                <li class="page-item">
+                  <a class="page-link" href="javascript:list_go('1');">
+                    <i class="fas fa-angle-right"></i>
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="javascript:list_go('2');">
+                    <i class="fas fa-angle-double-right"></i>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+
+            <form id="jobForm">
+              <input type="hidden" name="page" value="">
+              <input type="hidden" name="perPageNum" value="">
+              <input type="hidden" name="searchType" value="">
+              <input type="hidden" name="keyword" value="">
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+  </section>
+
+</body>
+
+</html>

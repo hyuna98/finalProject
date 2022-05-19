@@ -1,0 +1,43 @@
+package com.lms.hexa.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.lms.hexa.dto.ConsultingVO;
+import com.lms.hexa.service.ConsultingService;
+
+@Controller
+public class MemberConsultingController {
+	
+	
+	@Autowired
+	private ConsultingService consultingService;
+	
+	@RequestMapping("/member/consulting/request")
+	public ModelAndView consultationRequest(ModelAndView mnv)throws Exception {
+		String url="/member/consulting/request";
+		
+
+		
+		
+		List<ConsultingVO> divisionList = consultingService.getDivision();
+		
+		System.err.println(divisionList);
+		
+		mnv.addObject("divisionList",divisionList);
+		
+		mnv.setViewName(url);
+		return mnv;
+	}
+	
+	@RequestMapping("/member/consulting/history")
+	public String consultationHistory() {
+		String url="/member/consulting/history";
+		return url;
+	}
+	
+}

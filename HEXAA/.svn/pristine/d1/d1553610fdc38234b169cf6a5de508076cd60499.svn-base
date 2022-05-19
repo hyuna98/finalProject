@@ -1,0 +1,31 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+
+<title>HEXA System</title>
+
+<head></head>
+
+<body>
+	<iframe name="ifr" src="" frameborder="0" style="width:100%;height:85vh;"></iframe>
+	
+	<script>	
+		function goPage(url){
+			$('iframe[name="ifr"]').attr("src",url);
+		}
+	</script>
+	
+	<script>
+		window.onload=function(){
+			goPage('<%=request.getContextPath()%>/manager/main.do');
+		}
+	</script>
+</body>
+
+
+
+
+
+
+
+

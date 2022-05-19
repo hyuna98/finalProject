@@ -1,0 +1,433 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<head>
+	<style>
+		* {
+			font-size: 14px;
+		}
+		
+		label {
+			margin-bottom: 0;
+		}
+		div {
+    display: block;
+}
+		
+		.table-head-fixed th {
+			padding-top: 0.3em;
+			padding-bottom: 0.3em;
+		}
+		.table-head-fixed td {
+			padding-top: 0.3em;
+			padding-bottom: 0.3em;
+		}
+		
+ 		.card-body.p-0 .table thead>tr>th:first-of-type {
+			padding-left: 12px;
+		}
+ 		.card-body.p-0 .table tbody>tr>td:first-of-type {
+			padding-left: 12px;
+		}
+		.card-body.p-0 .table thead>tr>th:last-of-type {
+			padding-right: 12px;
+		}
+ 		.card-body.p-0 .table tbody>tr>td:last-of-type {
+			padding-right: 12px;
+		}
+		
+		
+		th, td {
+			text-align: center;
+		}
+		#tb1 td, #td1 th {
+			padding:0;
+		}
+		
+		
+		.alert {
+			text-align: center;
+		}
+		.alert {
+			font-size: 15px;
+		}
+		
+		.alert-dismissible {
+	    	padding-right: 0;
+	    	padding-left: 0;
+		}
+	</style>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row md-2">
+				<div class="col-sm-6">
+					<h1>학습계획표</h1>
+				</div>
+				
+			</div>
+		</div>
+	</section>
+<section class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="card card-light card-outline">
+						<div class="card-header p-0 pt-1" >
+							<div class="row">
+			            	<div class="col-md-10">
+							<ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+								<li class="nav-item"><a class="nav-link active"
+									id="custom-tabs-one-home-tab" data-toggle="pill"
+									href="#custom-tabs-one-home" role="tab"
+									aria-controls="custom-tabs-one-home" aria-selected="true" >전주</a></li>
+								
+								<li class="nav-item"><a class="nav-link"
+									id="custom-tabs-one-profile-tab" data-toggle="pill"
+									href="#custom-tabs-one-profile" role="tab"
+									aria-controls="custom-tabs-one-profile" aria-selected="false">금주</a>
+								</li>
+							</ul>
+							</div>
+		              		<div class="form-group col-sm-2"  style="padding-right: 20px;">
+								<select class="form-control">
+									<option>김첫째</option>
+									<option>김둘째</option>
+									
+								</select>
+							</div>
+				</div>
+						</div>
+						
+						<div class="card-body" style="padding-top: 10px; height: 670px;">
+							<div class="tab-content" id="custom-tabs-one-tabContent">
+								<div class="tab-pane fade active show table1" id="custom-tabs-one-home"
+								role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+							    
+							        	<table class="table table-head-fixed table-bordered">
+		<thead>
+			<tr>
+				<th style="width: 30%;;"><input type="week" name="week_year"></th>
+				<th style="font-size:14px; width: 20%; vertical-align:center; text-align: center;">이주의 목표 공부 시간</th>
+				<th><input class="col-sm-6" type="text" name="text" size="10" style="width:100%; border: 0;"><label class="col-sm-6">시간</label></th> 
+				<th style="font-size:14px; width: 20%; vertical-align:center; text-align: center;">실제 공부 시간</th>
+				<th><input class="col-sm-6" type="text" name="text" size="10" style="width:100%; border: 0;"><label class="col-sm-6">시간</label></th> 
+			</tr>
+		</thead>
+	</table>
+	
+	
+	<div class="row">
+
+	
+	<div class="col-sm-6">
+						<table class="table table-head-fixed table-bordered">
+							<thead>
+								<tr>
+									<th style="width: 10%">과목</th>
+									<th style="width: 25%">구체적 계획과 방법</th>
+									<th style="width: 10%">완성도</th>
+							</thead>
+							<tbody>
+						
+								<tr>
+									<td><input type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"></td>
+									<td><textarea name="content" rows="10" style="width:100%; height:40px; border: 0; resize: none;"></textarea></td>
+									<td><input class="col-sm-9" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-3">%</label></td>
+								</tr>
+									<tr>
+									<td><input type="text" name="text" size="20" style="width:100%; border: 0;"></td>
+									<td><textarea name="content" rows="10" style="width:100%; height:40px; border: 0; resize: none;"></textarea></td>
+									<td><input class="col-sm-9" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-3">%</label></td>
+								</tr>
+									<tr>
+									<td><input type="text" name="text" size="20" style="width:100%; border: 0;"></td>
+									<td><textarea name="content" rows="10" style="width:100%; height:40px; border: 0; resize: none;"></textarea></td>
+									<td><input class="col-sm-9" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-3">%</label></td>
+								</tr>
+									<tr>
+									<td><input type="text" name="text" size="20" style="width:100%; border: 0;"></td>
+									<td><textarea name="content" rows="10" style="width:100%; height:40px; border: 0; resize: none;"></textarea></td>
+									<td><input class="col-sm-9" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-3">%</label></td>
+								</tr>
+									<tr>
+									<td><input type="text" name="text" size="20" style="width:100%; border: 0;"></td>
+									<td><textarea name="content" rows="10" style="width:100%; height:40px; border: 0; resize: none;"></textarea></td>
+									<td><input class="col-sm-9" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-3">%</label></td>
+								</tr>
+									<tr>
+									<td><input type="text" name="text" size="20" style="width:100%; border: 0;"></td>
+									<td><textarea name="content" rows="10" style="width:100%; height:40px; border: 0; resize: none;"></textarea></td>
+									<td><input class="col-sm-9" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-3">%</label></td>
+								</tr>
+									<tr>
+									<td><input type="text" name="text" size="20" style="width:100%; border: 0;"></td>
+									<td><textarea name="content" rows="10" style="width:100%; height:40px; border: 0; resize: none;"></textarea></td>
+									<td><input class="col-sm-9" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-3">%</label></td>
+								</tr>
+								
+							</tbody>
+						</table>
+						
+								</div>
+								
+								
+					
+	                    <div class="col-sm-6">
+						<table class="table table-head-fixed table-bordered">
+							<thead>
+								<tr>
+									<th style="width: 10%">Date</th>
+									<th style="width: 25%">학습내용</th>
+									<th style="width: 10%">완성도</th>
+							</thead>
+							<tbody>
+						
+								<tr>
+									<td><input class="col-sm-4" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-8">일/SUN</label></td>
+									<td><textarea name="content" rows="10" style="width:100%; height:40px; border: 0; resize: none;"></textarea></td>
+									<td><input class="col-sm-9" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-3">%</label></td>
+								</tr>
+								<tr>
+									<td><input class="col-sm-4" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-8">일/MON</label></td>
+									<td><textarea name="content" rows="10" style="width:100%; height:40px; border: 0; resize: none;"></textarea></td>
+									<td><input class="col-sm-9" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-3">%</label></td>
+								</tr>
+								<tr>
+									<td><input class="col-sm-4" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-8">일/TUE</label></td>
+									<td><textarea name="content" rows="10" style="width:100%; height:40px; border: 0; resize: none;"></textarea></td>
+									<td><input class="col-sm-9" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-3">%</label></td>
+								</tr>
+								<tr>
+									<td><input class="col-sm-4" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-8">일/WED</label></td>
+									<td><textarea name="content" rows="10" style="width:100%; height:40px; border: 0; resize: none;"></textarea></td>
+									<td><input class="col-sm-9" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-3">%</label></td>
+								</tr>
+								<tr>
+									<td><input class="col-sm-4" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-8">일/THU</label></td>
+									<td><textarea name="content" rows="10" style="width:100%; height:40px; border: 0; resize: none;"></textarea></td>
+									<td><input class="col-sm-9" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-3">%</label></td>
+								</tr>
+								<tr>
+									<td><input class="col-sm-4" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-8">일/FRI</label></td>
+									<td><textarea name="content" rows="10" style="width:100%; height:40px; border: 0; resize: none;"></textarea></td>
+									<td><input class="col-sm-9" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-3">%</label></td>
+								</tr>
+								<tr>
+									<td><input class="col-sm-4" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-8">일/SAT</label></td>
+									<td><textarea name="content" rows="10" style="width:100%; height:40px; border: 0; resize: none;"></textarea></td>
+									<td><input class="col-sm-9" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-3">%</label></td>
+								</tr>
+								
+								
+							</tbody>
+						</table>
+						
+								</div>
+								</div>		
+								
+									<div class="card card-light card-outline">
+							
+								<div class="card-header">
+									<h3 class="card-title">
+										<i class="fas fa-comment"></i>
+										&nbsp;
+										선생님 피드백
+									</h3>
+								</div>
+								
+								<div class="card-body" style="padding: 0;">
+									<div class="direct-chat-messages" style="height: 50%;">
+										<div class="direct-chat-msg">
+											<div class="direct-chat-infos clearfix">
+												<span class="direct-chat-name float-left">정현아T</span>
+												<span class="direct-chat-timestamp float-right">2022-03-30</span>
+											</div>
+											<img class="direct-chat-img" src="<%=request.getContextPath() %>/resources/bootstrap/dist/img/ddabong.jpeg" alt="message user image">
+											<div class="direct-chat-text">
+												전주 수학 완성도가 부진했네요. 이번주는 사회 대신 수학에 공부 비중을 높이는게 좋을 것 같아요.
+											</div>
+										</div>
+									</div>
+								</div>
+								
+							</div>
+									</div>
+							
+							
+							
+						<!-- 	금주 -->
+							
+							
+							<div class="tab-pane fade table1" id="custom-tabs-one-profile"
+							role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab" style="height: 28vh;">
+							
+							   	<table class="table table-head-fixed table-bordered">
+		<thead>
+			<tr>
+				<th style="width: 30%;;"><input type="week" name="week_year"></th>
+				<th style="font-size:14px; width: 20%; vertical-align:center; text-align: center;">이주의 목표 공부 시간</th>
+				<th><input class="col-sm-6" type="text" name="text" size="10" style="width:100%; border: 0;"><label class="col-sm-6">시간</label></th> 
+				<th style="font-size:14px; width: 20%; vertical-align:center; text-align: center;">실제 공부 시간</th>
+				<th><input class="col-sm-6" type="text" name="text" size="10" style="width:100%; border: 0;"><label class="col-sm-6">시간</label></th> 
+			</tr>
+		</thead>
+	</table>
+	
+	
+	<div class="row">
+
+	
+	<div class="col-sm-6">
+						<table class="table table-head-fixed table-bordered">
+							<thead>
+								<tr>
+									<th style="width: 10%">과목</th>
+									<th style="width: 25%">구체적 계획과 방법</th>
+									<th style="width: 10%">완성도</th>
+							</thead>
+							<tbody>
+						
+								<tr>
+									<td><input type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"></td>
+									<td><textarea name="content" rows="10" style="width:100%; height:40px; border: 0; resize: none;"></textarea></td>
+									<td><input class="col-sm-9" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-3">%</label></td>
+								</tr>
+									<tr>
+									<td><input type="text" name="text" size="20" style="width:100%; border: 0;"></td>
+									<td><textarea name="content" rows="10" style="width:100%; height:40px; border: 0; resize: none;"></textarea></td>
+									<td><input class="col-sm-9" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-3">%</label></td>
+								</tr>
+									<tr>
+									<td><input type="text" name="text" size="20" style="width:100%; border: 0;"></td>
+									<td><textarea name="content" rows="10" style="width:100%; height:40px; border: 0; resize: none;"></textarea></td>
+									<td><input class="col-sm-9" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-3">%</label></td>
+								</tr>
+									<tr>
+									<td><input type="text" name="text" size="20" style="width:100%; border: 0;"></td>
+									<td><textarea name="content" rows="10" style="width:100%; height:40px; border: 0; resize: none;"></textarea></td>
+									<td><input class="col-sm-9" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-3">%</label></td>
+								</tr>
+									<tr>
+									<td><input type="text" name="text" size="20" style="width:100%; border: 0;"></td>
+									<td><textarea name="content" rows="10" style="width:100%; height:40px; border: 0; resize: none;"></textarea></td>
+									<td><input class="col-sm-9" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-3">%</label></td>
+								</tr>
+									<tr>
+									<td><input type="text" name="text" size="20" style="width:100%; border: 0;"></td>
+									<td><textarea name="content" rows="10" style="width:100%; height:40px; border: 0; resize: none;"></textarea></td>
+									<td><input class="col-sm-9" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-3">%</label></td>
+								</tr>
+									<tr>
+									<td><input type="text" name="text" size="20" style="width:100%; border: 0;"></td>
+									<td><textarea name="content" rows="10" style="width:100%; height:40px; border: 0; resize: none;"></textarea></td>
+									<td><input class="col-sm-9" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-3">%</label></td>
+								</tr>
+								
+							</tbody>
+						</table>
+						
+								</div>
+								
+								
+					
+	                    <div class="col-sm-6">
+						<table class="table table-head-fixed table-bordered">
+							<thead>
+								<tr>
+									<th style="width: 10%">Date</th>
+									<th style="width: 25%">학습내용</th>
+									<th style="width: 10%">완성도</th>
+							</thead>
+							<tbody>
+						
+								<tr>
+									<td><input class="col-sm-4" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-8">일/SUN</label></td>
+									<td><textarea name="content" rows="10" style="width:100%; height:40px; border: 0; resize: none;"></textarea></td>
+									<td><input class="col-sm-9" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-3">%</label></td>
+								</tr>
+								<tr>
+									<td><input class="col-sm-4" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-8">일/MON</label></td>
+									<td><textarea name="content" rows="10" style="width:100%; height:40px; border: 0; resize: none;"></textarea></td>
+									<td><input class="col-sm-9" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-3">%</label></td>
+								</tr>
+								<tr>
+									<td><input class="col-sm-4" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-8">일/TUE</label></td>
+									<td><textarea name="content" rows="10" style="width:100%; height:40px; border: 0; resize: none;"></textarea></td>
+									<td><input class="col-sm-9" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-3">%</label></td>
+								</tr>
+								<tr>
+									<td><input class="col-sm-4" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-8">일/WED</label></td>
+									<td><textarea name="content" rows="10" style="width:100%; height:40px; border: 0; resize: none;"></textarea></td>
+									<td><input class="col-sm-9" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-3">%</label></td>
+								</tr>
+								<tr>
+									<td><input class="col-sm-4" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-8">일/THU</label></td>
+									<td><textarea name="content" rows="10" style="width:100%; height:40px; border: 0; resize: none;"></textarea></td>
+									<td><input class="col-sm-9" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-3">%</label></td>
+								</tr>
+								<tr>
+									<td><input class="col-sm-4" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-8">일/FRI</label></td>
+									<td><textarea name="content" rows="10" style="width:100%; height:40px; border: 0; resize: none;"></textarea></td>
+									<td><input class="col-sm-9" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-3">%</label></td>
+								</tr>
+								<tr>
+									<td><input class="col-sm-4" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-8">일/SAT</label></td>
+									<td><textarea name="content" rows="10" style="width:100%; height:40px; border: 0; resize: none;"></textarea></td>
+									<td><input class="col-sm-9" type="text" name="text" size="20" style="width:100%; height:100%; border: 0;"><label class="col-sm-3">%</label></td>
+								</tr>
+								
+								
+							</tbody>
+						</table>
+						
+								</div>
+								</div>		
+								
+									<div class="card card-light card-outline">
+							
+								<div class="card-header">
+									<h3 class="card-title">
+										<i class="fas fa-comment"></i>
+										&nbsp;
+										선생님 피드백
+									</h3>
+								</div>
+								
+								<div class="card-body" style="padding: 0;">
+									<div class="direct-chat-messages" style="height: 50%;">
+										<div class="direct-chat-msg">
+											<div class="direct-chat-infos clearfix">
+												<span class="direct-chat-name float-left">정현아T</span>
+												<span class="direct-chat-timestamp float-right">2022-03-30</span>
+											</div>
+											<img class="direct-chat-img" src="<%=request.getContextPath() %>/resources/bootstrap/dist/img/ddabong.jpeg" alt="message user image">
+											<div class="direct-chat-text">
+												전주 수학 완성도가 부진했네요. 이번주는 사회 대신 수학에 공부 비중을 높이는게 좋을 것 같아요.
+											</div>
+										</div>
+									</div>
+								</div>
+								
+							</div>
+									</div>
+								
+							</div>
+						</div>
+					
+					</div>
+				</div>
+</div>
+
+</div>
+
+
+</section>
+
+
+

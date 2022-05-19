@@ -1,0 +1,13 @@
+package com.lms.hexa.service;
+
+import java.util.List;
+
+import com.lms.hexa.dto.ExamVO;
+
+public interface ScoreService {
+	
+	// 시험 등록
+	public void examRegist(ExamVO exam) throws Exception;
+	
+	public List<ExamVO> getExamList() throws Exception;
+}

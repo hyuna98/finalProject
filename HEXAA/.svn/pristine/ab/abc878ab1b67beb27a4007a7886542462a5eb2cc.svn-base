@@ -1,0 +1,12 @@
+package com.lms.hexa.dao;
+
+import java.sql.SQLException;
+
+import com.lms.hexa.dto.UserVO;
+
+public interface UserDAO {
+	
+	UserVO selectUserById(String id) throws Exception;
+	
+	public void insertUser(UserVO user) throws SQLException;
+}

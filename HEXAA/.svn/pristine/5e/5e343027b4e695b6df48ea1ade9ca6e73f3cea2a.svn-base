@@ -1,0 +1,56 @@
+package com.lms.hexa.service;
+
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.lms.hexa.command.Criteria;
+import com.lms.hexa.command.CriteriaCommand;
+import com.lms.hexa.command.SearchHelper;
+import com.lms.hexa.dto.LessonVO;
+import com.lms.hexa.dto.StandardCodeVO;
+
+public interface LessonService {
+	
+	// 직원 일정조회
+	List<String> getManagerScheduleListById(String Id) throws SQLException;
+	
+	// select option으로 뿌릴 공통코드 가져오기
+	Map<String,Object> getScodeValues() throws SQLException;
+	
+	// 수업 등록
+	int registNewLesson(LessonVO lessonVO) throws SQLException;
+	
+	// 수업 list 조회
+	List<LessonVO> getLessonListByTeacherName(CriteriaCommand cri) throws SQLException;
+	
+	// 수업상태 list 조회
+	List<StandardCodeVO> getLessonStateCodeList() throws SQLException;
+	
+	// 수업ID로 조회한 회원 list
+	Map<String, Object> getStudentListByLessonId(String lessonId);
+	
+	// 해당수업을 듣는 회원list 등록
+	int registTakeLessonValues(HashMap<String, Object> params);
+	
+	// 해당수업 듣는 회원검색list 
+	Map<String, Object> getSearchIncludeStudentList(Criteria cri);
+
+	// 해당수업 듣지않는 회원검색list 
+	Map<String, Object> getSearchNotIncludeStudentList(Criteria cri);
+	
+	// 수업 생성
+	int registLesson(LessonVO lessonVO);
+	
+	// 수업기본정보List
+	List<LessonVO> getModuleLessonListByTeacherName(SearchHelper sh) throws SQLException;
+	
+	// 기간에 따른 직원 일정조회
+	List<String> getManagerScheduleListByPeriod(HashMap<String, Object> params);
+	
+	// 기간에 따른 가능 강의실 조회
+	List<String> getAvailableLessonRoomList(HashMap<String, Object> params);
+	
+	
+}

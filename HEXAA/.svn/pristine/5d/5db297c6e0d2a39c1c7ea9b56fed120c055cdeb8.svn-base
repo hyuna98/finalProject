@@ -1,0 +1,15 @@
+package com.lms.hexa.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.lms.hexa.dto.ExamVO;
+
+public interface ScoreDAO {
+
+	// 시험등록
+	public void insertExam(ExamVO exam) throws SQLException;
+	
+	// 시험리스트 조회
+	public List<ExamVO> selectExamList() throws SQLException;
+}

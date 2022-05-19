@@ -1,0 +1,216 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.getElementsByTagName("html")[0].className += " js";</script>
+<title></title>
+<style>
+table {
+	border: 2px solid #d2d2d2;
+	border-collapse: collapse;
+	font-size: 0.9em;
+	display: inline-block;
+	text-align: center;
+}
+
+th, td {
+	border: 1px solid #d2d2d2;
+	border-collapse: collapse;
+}
+
+th {
+	height: 5px;
+}
+
+td {
+	width: 500px;
+	height: 80px;
+}
+</style>
+</head>
+<body>
+<section class="content-header">
+   <div class="container-fluid">
+        <div class="row md-2">
+           <div class="col-sm-6">
+              <h1>수강신청</h1>              
+           </div>
+           <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                 <li class="breadcrumb-item">
+                    <a href="list.do">
+                       <i class="fa fa-dashboard"></i>수강신청
+                    </a>
+                 </li>
+               </ol>
+           </div>
+        </div>
+   </div>
+</section>
+<section class="content">
+   <div class="card-header" style="height: 400px; overflow: scroll; overflow-x: hidden;">
+   	 <div class="row">
+      	<div class="col-sm-12">
+				<div class="card card-outline card-light">
+					<div class="card-header">
+						<h3 class="card-title">현재 시간표</h3>
+						 <div class="card-tools">
+		               </div>
+					</div>
+					
+					<div class="card-body">
+						<table style="color: #121212; text-align: center;">
+							<tr>
+								<th style="width: 200px;">요일<br>
+									시간
+									</th>
+								<th>월</th>
+								<th>화</th>
+								<th>수</th>
+								<th>목</th>
+								<th>금</th>
+								<th>토</th>
+							</tr>
+							<tr>
+								<th>1</th>
+								<td></td>
+								<td rowspan="2" style="background-color: #ecc369">
+									국어</td>
+								<td rowspan="2" style="background-color: #f08676">사회</td>
+								<td rowspan="2" style="background-color: #70a5e9">
+									과학</td>
+								<td rowspan="2" style="background-color: #75ca87">영어</td>
+								<td rowspan="4" style="background-color: #70a5e9">특강</td>
+							</tr>
+							<tr>
+								<th>2</th>
+								<td></td>
+							</tr>
+							<tr>
+								<th>3</th>
+								<td rowspan="2" style="background-color: #f08676">수학</td>
+								<td></td>
+								<td rowspan="2" style="background-color: #75ca87">영어</td>
+								<td></td>
+								<td rowspan="2" style="background-color: #d397ed">국어</td>
+							</tr>
+							<tr>
+								<th>4</th>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+   </div>
+   <div class="card-body">
+   	<div class="card card-light card-tabs card-outline">
+		<div class="card-header p-0 pt-1">
+			<ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+			<li class="nav-item">
+				<a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">현재수업목록</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">수강신청목록</a>
+			</li>
+			</ul>
+		</div>
+		<div class="card-body">
+			<div class="tab-content" id="custom-tabs-one-tabContent">
+				<div class="tab-pane fade active show" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+					<div class="row table1">
+						<div class="card-body p-0">
+					<table class="table table-head-fixed table-bordered">
+							<thead>
+								<tr>
+									<th style="width: 10%">과목</th>
+									<th style="width: 25%">수업명</th>
+									<th style="width: 10%">강의실</th>
+									<th style="width: 10%">선생님</th>
+									<th style="width: 20%">강의기간</th>
+									<th style="width: 10%">금액</th>
+									<th style="width: 15%">수강신청</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="i" begin="1" end="25" step="1">
+								<tr>
+									<td>수학</td>
+									<td>중2 수학 내신 설계</td>
+									<td>404호</td>
+									<td>정현아T</td>
+									<td>2022.03.05~2022.05.05</td>
+									<td>250,000</td>
+									<td>
+										<button type="button" class="btn btn-sm btn-light" onclick="OpenWindow('/common/lesson/detail.do','강의 상세정보',800,700);">수강신청</button>
+									</td>
+								</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
+				<div class="row table1">
+						<div class="card-body p-0">
+					<table class="table table-head-fixed table-bordered">
+							<thead>
+								<tr>
+									<th style="width: 10%">과목</th>
+									<th style="width: 25%">수업명</th>
+									<th style="width: 10%">강의실</th>
+									<th style="width: 10%">선생님</th>
+									<th style="width: 20%">강의기간</th>
+									<th style="width: 10%">금액</th>
+									<th style="width: 15%">수강신청</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="i" begin="1" end="25" step="1">
+								<tr>
+									<td>수학</td>
+									<td>중2 수학 내신 설계</td>
+									<td>404호</td>
+									<td>정현아T</td>
+									<td>2022.03.05~2022.05.05</td>
+									<td>250,000</td>
+									<td>
+										<button type="button" class="btn btn-sm btn-light" onclick="OpenWindow('/common/lesson/detail.do','강의 상세정보',800,700);">수강신청</button>
+									</td>
+								</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+						</div>
+					</div>
+			</div>
+		</div>
+			
+		</div>	
+	</div>
+   </div>
+    
+</section>
+   
+<script src="<%=request.getContextPath() %>/resources/bootstrap/assets/js/util.js"></script> 
+<script src="<%=request.getContextPath() %>/resources/bootstrap/assets/js/main.js"></script>
+
+<div class="demo-avd demo-avd-cf demo-avd--dark js-demo-avd" style="top: 30px; right: 30px; left: auto; bottom: auto;"></div>
+<script src="../../assets/js/demo-avd.js?v=6"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-48014931-1', 'codyhouse.co');
+    ga('set', 'anonymizeIp', true);
+    ga('send', 'pageview');
+</script>

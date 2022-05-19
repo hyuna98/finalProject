@@ -1,0 +1,84 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<title>회원상세정보</title>
+</head>
+<body>
+
+<div class="card card-dark card-outline col-sm-12">
+	      	<div class="card-header">
+	      	회원상세정보
+	      	</div>
+	      	<div class="card-body">
+	      		<div class="row" style="padding:0px; margin:0px; ">
+		      <div class="col-sm-6" style="padding:0px; margin:0px; border: 1px solid white; border-radius:15px; height:220px;">
+		      	<div class="col-sm-12" style="border: 1px solid white; height: 20vh;  text-align: center;">
+		      		<div id="profile" style="border-radius: 100%; height: 50vh; width: 50vh; background-image: url(&quot;/manager/mamagermanagement/getManagerPicture.do?id=qwxqe152@gmail.com&quot;); background-position: center center; background-size: cover; background-repeat: no-repeat;"></div>
+		      	</div>
+		      </div>
+		      <div class="col-sm-6" style="padding:5px; margin-top:25px; border: 1px solid white; border-radius:15px; height:220px;">
+		      	<div class="row">
+		      		<div class="col-sm-12" style="height: 28vh; border: 1px solid white;">
+			      		<div class="col-sm-12">
+					      	이름 : <span style="margin-left: 1vh;">방진호</span>	      		
+			      		</div>
+			      		<div class="col-sm-12">
+					      	전화번호 : <span style="margin-left: 1vh;">010-4569-5874</span>	      		
+			      		</div>
+				      	<div class="col-sm-12">
+				      		반 : 
+				      		<span style="margin-left: 1vh;">중3_A</span>			      		
+				      	</div>
+				      	<div class="col-sm-12">
+				      		학교 : 
+				      		<span style="margin-left: 1vh;">대전 탄방중학교</span>
+				      	</div>
+				      	<div class="col-sm-12">
+				      		학년 : 
+				      		<span style="margin-left: 1vh;">중3</span>
+				      	</div>
+				      	<div class="col-sm-12">
+				      		학부모 : 
+				      		<span style="margin-left: 1vh;">이민우</span>
+				      	</div>
+				      	<div class="col-sm-12">
+				      		학부모 전화번호 : 
+				      		<span style="margin-left: 1vh;">010-5896-4587</span>
+				      	</div>
+			      	</div>
+<!-- 		      		<div class="col-sm-12" style="height: 5vh; border: 1px solid white;"> -->
+<!-- 		      			<div class="row"> -->
+<!-- 		      				<div class="col-sm-6" style="text-align: center;"> -->
+<!-- 		      					<div class="row"> -->
+<!-- 		      						<div class="col-sm-2"> -->
+<!-- 		      						</div> -->
+<!-- 		      						<div class="col-sm-8"> -->
+<!-- 		      							<button id="one" type="button" class="btn btn-block btn-outline-info btn-xs one go " onclick="update_go_work();">출근</button> -->
+<!-- 		      						</div> -->
+<!-- 		      						<div class="col-sm-2"> -->
+<!-- 		      						</div> -->
+<!-- 		      					</div> -->
+		      					
+<!-- 		      				</div> -->
+<!-- 		      				<div class="col-sm-6"> -->
+<!-- 		      					<div class="row"> -->
+<!-- 		      						<div class="col-sm-2"> -->
+<!-- 		      						</div> -->
+<!-- 		      						<div class="col-sm-8"> -->
+<!-- 		      							<button id="two" type="button" class="btn btn-block btn-outline-danger btn-xs two out" onclick="update_go_work_out();">퇴근</button>		 -->
+<!-- 		      						</div> -->
+<!-- 		      						<div class="col-sm-2"> -->
+<!-- 		      						</div> -->
+<!-- 		      					</div> -->
+			      				
+<!-- 		      				</div> -->
+<!-- 		      			</div> -->
+<!-- 			      	</div> -->
+		      	</div>
+		      </div>
+		      </div>
+	      	</div>
+	      </div>
+</body>

@@ -1,0 +1,69 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+
+<head>
+<meta charset="UTF-8">
+<title>등원</title>
+</head>
+<body>
+<section class="content">
+ <div class="card-header">
+
+	<h1>등원페이지</h1>
+	</div>
+	<div class="card-body table-responsive p-0">
+	<div id="attandance big" class="row" style="max-width: 98%;">
+		
+		<div class="col-sm-6" style=" background-image: url('../../../../resources/images/dreameater.jpg'); background-repeat:no-repeat; background-position: center; background-size: 80% 80%; height: 80vh;">
+		</div>
+		<div class="col-sm-6" style=" height: 80vh;">
+			<h3 style="text-align: center; margin-top: 10vh">문명진</h3>
+			
+					<table class="table table-hover text-nowrap">	
+						<tbody>
+							<tr>
+								<td>학교명</td>
+								<td>작전고등학교</td>
+							</tr>
+							<tr>
+								<td>학년</td>
+								<td>3학년</td>
+							</tr>
+							<tr>
+								<td>반</td>
+								<td>404- 특별 진학반</td>
+							</tr>
+							<tr>
+								<td>담임선생님</td>
+								<td>정현아</td>
+							</tr>
+							<tr>
+								<td>출석시간</td>
+								<td>2022-03-28-15:15</td>
+							</tr>
+						</tbody>
+						</table>
+				
+		<!-- 		<ul class="list-group list-group-unbordered mb-3" >
+				
+					<li class="list-group-item"><b>학교명</b><a class="float-right" style="color: black;">작전고등학교</a></li>
+					<li class="list-group-item"><b>학년:</b><a class="float-right" style="color: black;">3학년</a></li>
+					<li class="list-group-item"><b>반:</b><a class="float-right" style="color: black;">404- 특별 진학반</a></li>
+					<li class="list-group-item"><b>단임선생님:</b><a class="float-right" style="color: black;">정현아</a></li>
+					<li class="list-group-item"><b>시간:</b><a class="float-right" style="color: black;">2022-03-28-15:15</a></li>
+				</ul> -->
+			
+			<div class="col-12" style="text-align: center; margin-top: 5vh;">
+				<button type="submit" class="btn btn-block btn-outline-primary btn-lg" style="display:inline; width:15vh; height:15vh; margin: 5vh;">출석</button>
+				<button type="submit" class="btn btn-block btn-outline-danger btn-lg" style="display:inline; width:15vh; height:15vh; margin: 5vh;">취소</button> 
+			</div>
+		</div>
+	</div>
+	</div>
+	<div class="card-footer">
+   </div>
+	
+</section>
+</body>
+</html>

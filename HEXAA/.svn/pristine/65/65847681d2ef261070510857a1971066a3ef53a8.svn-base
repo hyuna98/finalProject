@@ -1,0 +1,15 @@
+package com.lms.hexa.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/manager/unpaid")
+public class UnpaidController {
+
+	@RequestMapping("/form")
+	public String unpaidForm() {
+		String url = "manager/unpaid/unpaidForm";
+		return url;
+	}
+}

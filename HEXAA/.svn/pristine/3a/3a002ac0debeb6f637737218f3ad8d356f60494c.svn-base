@@ -1,0 +1,98 @@
+package com.lms.hexa.dto;
+
+public class FeedBackVO {
+	private int FEED_ID;
+	private String FEED_SEG;
+	private String FEED_CONTENT;
+	private int EXAM_ID;
+	private int SUB_EXAM_ID;
+	private String EXAM_DATE;
+	private String EXAM_GROUP;
+	private String EXAM_GRADE;
+	private String EXAM_SEMESTER;
+	private String EXAM_QUARTER;
+	private String STUDENT_ID;
+    private String MNG_ID;
+    private String MNG_NAME;
+    
+    
+    
+	public int getFEED_ID() {
+		return FEED_ID;
+	}
+	public void setFEED_ID(int fEED_ID) {
+		FEED_ID = fEED_ID;
+	}
+	public String getFEED_SEG() {
+		return FEED_SEG;
+	}
+	public void setFEED_SEG(String fEED_SEG) {
+		FEED_SEG = fEED_SEG;
+	}
+	public String getFEED_CONTENT() {
+		return FEED_CONTENT;
+	}
+	public void setFEED_CONTENT(String fEED_CONTENT) {
+		FEED_CONTENT = fEED_CONTENT;
+	}
+	public int getEXAM_ID() {
+		return EXAM_ID;
+	}
+	public void setEXAM_ID(int eXAM_ID) {
+		EXAM_ID = eXAM_ID;
+	}
+	public int getSUB_EXAM_ID() {
+		return SUB_EXAM_ID;
+	}
+	public void setSUB_EXAM_ID(int sUB_EXAM_ID) {
+		SUB_EXAM_ID = sUB_EXAM_ID;
+	}
+	public String getEXAM_DATE() {
+		return EXAM_DATE;
+	}
+	public void setEXAM_DATE(String eXAM_DATE) {
+		EXAM_DATE = eXAM_DATE;
+	}
+	public String getEXAM_GROUP() {
+		return EXAM_GROUP;
+	}
+	public void setEXAM_GROUP(String eXAM_GROUP) {
+		EXAM_GROUP = eXAM_GROUP;
+	}
+	public String getEXAM_GRADE() {
+		return EXAM_GRADE;
+	}
+	public void setEXAM_GRADE(String eXAM_GRADE) {
+		EXAM_GRADE = eXAM_GRADE;
+	}
+	public String getEXAM_SEMESTER() {
+		return EXAM_SEMESTER;
+	}
+	public void setEXAM_SEMESTER(String eXAM_SEMESTER) {
+		EXAM_SEMESTER = eXAM_SEMESTER;
+	}
+	public String getEXAM_QUARTER() {
+		return EXAM_QUARTER;
+	}
+	public void setEXAM_QUARTER(String eXAM_QUARTER) {
+		EXAM_QUARTER = eXAM_QUARTER;
+	}
+	public String getSTUDENT_ID() {
+		return STUDENT_ID;
+	}
+	public void setSTUDENT_ID(String sTUDENT_ID) {
+		STUDENT_ID = sTUDENT_ID;
+	}
+	public String getMNG_ID() {
+		return MNG_ID;
+	}
+	public void setMNG_ID(String mNG_ID) {
+		MNG_ID = mNG_ID;
+	}
+	public String getMNG_NAME() {
+		return MNG_NAME;
+	}
+	public void setMNG_NAME(String mNG_NAME) {
+		MNG_NAME = mNG_NAME;
+	}
+}

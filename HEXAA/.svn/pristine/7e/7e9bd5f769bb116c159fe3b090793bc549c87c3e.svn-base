@@ -1,0 +1,27 @@
+package com.lms.hexa.service;
+
+import java.sql.SQLException;
+import java.util.Map;
+
+
+
+import com.lms.hexa.command.Criteria;
+import com.lms.hexa.dto.StudyPlanVO;
+
+
+
+public interface StudyPlanService {
+	
+	//리스트 조회
+	//Map<String, Object> getList(Criteria cri) throws SQLException;
+//	
+//	// 글 조회
+//	StudyPlanVO getStudyPlan(int splanId) throws SQLException;
+	 
+	 void regist(StudyPlanVO studyPlan) throws SQLException;
+	
+	 void modify(StudyPlanVO studyPlan) throws SQLException;
+	 
+	 void  remove(int splanId) throws SQLException;
+
+}

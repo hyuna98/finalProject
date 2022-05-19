@@ -1,0 +1,12 @@
+package com.lms.hexa.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/manager/academymanagement")
+public class AcademyManagementController {
+	
+	@RequestMapping("/kakao/regist")
+	public void regist()throws Exception{}
+}

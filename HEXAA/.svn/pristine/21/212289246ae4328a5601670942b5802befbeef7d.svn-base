@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Lesson-Mapper">
+	
+	<select id="selectManagerScheduleById" parameterType="str" resultType="str">
+	
+	 SELECT TIMETABLE_ID as timetableId
+	   FROM LESSONTIME
+	  WHERE LESSONASSIGNMENT_ID IN (SELECT LESSONASSIGNMENT_ID
+	                                  FROM LESSONASSIGNMENT
+	                                 WHERE MNG_ID = #{value}
+	                                   AND LA_STATE_CODE IN('WAIT','NOSYL','GOING'))
+	                         
+	</select>
+	
+	<select id="selectManagerScheduleListByPeriod" parameterType="java.util.Map" resultType="str">
+	
+	 SELECT TIMETABLE_ID as timetableId
+	   FROM LESSONTIME
+	  WHERE LESSONASSIGNMENT_ID IN (SELECT LESSONASSIGNMENT_ID
+			                          FROM LESSONASSIGNMENT
+			                         WHERE MNG_ID = #{managerId}
+			                           AND LA_STATE_CODE IN('WAIT','NOSYL','GOING')
+		                               AND ((LA_START_DATE BETWEEN TO_DATE(#{startDate},'YYYY-MM-DD') AND TO_DATE(#{endDate},'YYYY-MM-DD'))
+		                               OR (LA_END_DATE BETWEEN TO_DATE(#{startDate},'YYYY-MM-DD') AND TO_DATE(#{endDate},'YYYY-MM-DD')))
+		                               )
+	</select>
+	
+	<select id="selectLessonRoomList" resultType="lessonRoom">
+		
+		 SELECT LROOM_ID AS lRoomId,
+		        LROOM_MAXNO AS lRoomMaxNo
+		   FROM LESSON_ROOM
+		
+	</select>
+	
+	<select id="selectStudentGradeCategoryCodeList" resultType="standardCode">
+		
+		SELECT SCODE_KEY AS scodeKey,
+		       SCODE_VALUE AS scodeValue,
+		       SCODE_CATEGORY AS scodeCategory
+		  FROM STANDARDCODE
+		 WHERE SCODE_CATEGORY = 'STUDENT_GRADE_CATEGORY_CODE'
+		 ORDER BY 2 DESC
+	</select>
+	
+	<select id="selectSubjectList" resultType="standardCode">
+		
+		SELECT SCODE_KEY AS scodeKey,
+		       SCODE_VALUE AS scodeValue,
+		       SCODE_CATEGORY AS scodeCategory
+		  FROM STANDARDCODE
+		 WHERE SCODE_CATEGORY = 'MNG_SUBJECT'
+	</select>
+	
+	<select id="selectLessonStateList" resultType="standardCode">
+		
+		SELECT SCODE_KEY AS scodeKey,
+		       SCODE_VALUE AS scodeValue,
+		       SCODE_CATEGORY AS scodeCategory
+		  FROM STANDARDCODE
+		 WHERE SCODE_CATEGORY = 'LA_STATE_CODE'
+	</select>
+	
+	<select id="selectLessonAssignmentSeqNext" resultType="int">
+		SELECT LESSONASSIGNMENT_SEQ.NEXTVAL AS LESSONASSIGNMENTID FROM DUAL
+	</select>
+	
+	<insert id="InsertNewLessonInfo" parameterType="lesson">
+	
+		INSERT INTO LESSONASSIGNMENT(
+					LESSONASSIGNMENT_ID
+		           ,MNG_ID
+		           ,LROOM_ID
+		           ,LA_START_DATE
+		           ,LA_END_DATE
+		           ,LA_STATE_CODE
+		           ,LA_TIME_INFO
+		           ,LESSON_ID
+		            )
+		    VALUES (
+		            #{lessonAssignmentId}
+		           ,#{mngId}
+		           ,#{lessonRoom}
+		           ,#{lessonStartDate}
+		           ,#{lessonEndDate}
+		           ,'NOSYL'
+		           ,#{lessonDetail}
+		           ,#{lessonId}
+		    		)
+		    		
+	</insert>
+	
+	<insert id="InsertNewLessonTimeValues" parameterType="java.util.Map">
+		<foreach collection="lessonTimeInfoList" item="item" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+			INTO LESSONTIME(LESSONASSIGNMENT_ID, TIMETABLE_ID)
+			VALUES (#{item.timetablePeriod}, #{item.timetableId})
+		</foreach>
+	</insert>
+	
+	<sql id="search">
+		<if test="searchType == 't'.toString()">
+		    AND B.MNG_NAME LIKE '%'||#{keyword}||'%'			
+		</if>
+		<if test="searchType == 'r'.toString()">
+		    AND A.LROOM_ID LIKE '%'||#{keyword}||'%'			
+		</if>
+		<if test="searchType == 's'.toString()">
+			AND E.SCODE_VALUE like '%'||#{keyword}||'%'	
+		</if>
+		<if test="page != null and !page.equals('')">
+			AND D.SCODE_KEY LIKE '%'||#{page}||'%'
+		</if>
+	</sql>
+	
+	<select id="selectLessonSearchList" resultType="lesson">
+	
+		 SELECT A.LESSONASSIGNMENT_ID AS lessonId
+		      ,A.LROOM_ID AS lessonRoom
+		      ,B.MNG_NAME AS mngId
+		      ,A.LA_START_DATE AS lessonStartDate
+		      ,A.LA_END_DATE AS lessonEndDate
+              ,A.LA_SYLLABUS AS lessonSyllabus
+              ,G.LROOM_MAXNO AS lessonMaxNo
+		      ,F.LESSON_PRICE AS lessonPrice
+		      ,E.SCODE_VALUE AS lessonSubjectType
+		      ,F.LESSON_GRADE AS lessonGrade
+              ,A.LA_TIME_INFO AS lessonTimeTarget
+		      ,C.SCODE_VALUE AS lessonGradeCategoryCode
+		      ,D.SCODE_VALUE AS lessonStateCode
+              ,F.LESSON_NAME AS lessonName
+              ,F.LESSON_GRADE AS lessonGrade
+              ,F.LESSON_GRADE_INTEGRATE AS lessonGradeInteGrate
+              ,F.LESSON_HOURS AS lessonHours
+		  FROM LESSONASSIGNMENT A,MANAGER B,
+		     (SELECT *
+		        FROM STANDARDCODE
+		       WHERE SCODE_CATEGORY = 'STUDENT_GRADE_CATEGORY_CODE'
+		     )C,
+		     (SELECT *
+		        FROM STANDARDCODE
+		       WHERE SCODE_CATEGORY = 'LA_STATE_CODE'
+		     )D,
+		     (SELECT *
+		        FROM STANDARDCODE
+		       WHERE SCODE_CATEGORY = 'MNG_SUBJECT'
+		     )E, LESSON F, LESSON_ROOM G
+		 WHERE A.MNG_ID = B.MNG_ID
+		   AND F.LESSON_GRADE_CATEGORY_CODE = C.SCODE_KEY
+		   AND A.LA_STATE_CODE = D.SCODE_KEY
+		   AND F.LESSON_SUBJECT_TYPE = E.SCODE_KEY
+           AND A.LESSON_ID = F.LESSON_ID
+           AND G.LROOM_ID = A.LROOM_ID
+           <include refid="search" /> 
+		 ORDER BY 1 DESC
+	</select>
+	
+	<sql id="search3">
+		<if test="Search1!=null and !Search1.equals('')">
+			AND A.LESSON_SUBJECT_TYPE = #{Search1}
+		</if>
+		<if test="Search2!=null and !Search2.equals('')">
+			AND A.LESSON_GRADE_CATEGORY_CODE = #{Search2}
+		</if>
+		<if test="Search3!=null and !Search3.equals('')">
+		    AND A.LESSON_NAME LIKE '%'||#{Search3}||'%'			
+		</if>
+	</sql>
+	
+	<select id="selectModuleLessonList" resultType="lesson">
+	
+		SELECT A.LESSON_ID AS lessonId
+		      ,A.LESSON_NAME AS lessonName
+		      ,A.LESSON_PRICE AS lessonPrice
+		      ,D.SCODE_VALUE AS lessonSubjectTypeName
+		      ,A.LESSON_SUBJECT_TYPE AS lessonSubjectType
+		      ,A.LESSON_GRADE AS lessonGrade
+		      ,C.SCODE_VALUE AS lessonGradeCategoryCode
+		      ,A.LESSON_GRADE_INTEGRATE as lessonGradeInteGrate
+		      ,A.LESSON_HOURS as lessonHours
+		      ,A.LESSON_SUBJECT_TYPE as lessonHours
+		  FROM LESSON A,
+		     (SELECT *
+		        FROM STANDARDCODE
+		       WHERE SCODE_CATEGORY = 'STUDENT_GRADE_CATEGORY_CODE'
+		     )C,
+		     (SELECT *
+		        FROM STANDARDCODE
+		       WHERE SCODE_CATEGORY = 'MNG_SUBJECT'
+		     )D
+		 WHERE A.LESSON_GRADE_CATEGORY_CODE = C.SCODE_KEY
+		   AND A.LESSON_SUBJECT_TYPE = D.SCODE_KEY
+		   <include refid="search3" />    
+		 ORDER BY 1 DESC
+	</select>
+	
+	<select id="selectLessonStateCodeList" resultType="standardCode">
+		SELECT SCODE_KEY as scodeKey
+		      ,SCODE_VALUE as scodeValue
+		      ,SCODE_CATEGORY as scodeCategory
+		  FROM STANDARDCODE
+		 WHERE SCODE_CATEGORY = 'LA_STATE_CODE'
+	</select>
+	
+	<resultMap type="student" id="studentMap">
+		<result property="id" column="student_id"/>
+		<result property="pw" column="student_pw"/>
+		<result property="name" column="STUDENT_NAME"/>
+		<result property="genderCode" column="STUDENT_GENDER_CODE"/>
+		<result property="email" column="STUDENT_EMAIL"/>
+		<result property="zipCode" column="STUDENT_ZIP_CODE"/>
+		<result property="address" column="STUDENT_ADDRESS"/>
+		<result property="address2" column="STUDENT_ADDRESS2"/>
+		<result property="studentPicture" column="STUDENT_STUDENT_PICTURE"/>
+		<result property="birthDate" column="STUDENT_BIRTH_DATE"/>
+		<result property="discountReason" column="STUDENT_DISCOUNT_REASON"/>
+		<result property="discountRate" column="STUDENT_DISCOUNT_RATE"/>
+		<result property="payDueDate" column="STUDENT_PAY_DUE_DATE"/>
+		<result property="academyRegDate" column="STUDENT_ACADEMY_REG_DATE"/>
+		<result property="stateCode" column="STUDENT_STATE_CODE"/>
+		<result property="sibling" column="STUDENT_SIBLING"/>
+		<result property="gradeCategoryCode" column="SCODE_VALUE"/>
+		<result property="grade" column="STUDENT_GRADE"/>
+		<result property="hp" column="STUDENT_HP"/>
+		<result property="parentId" column="PARENT_ID"/>
+		<result property="schoolNo" column="SCHOOL_NO"/>
+	</resultMap>
+	
+	<select id="selectIncludeStudentListByLessonID" parameterType="str" resultType="student" resultMap="studentMap">
+	  SELECT A.*,
+             B.SCODE_VALUE
+	    FROM STUDENT A,
+             (SELECT *
+		        FROM STANDARDCODE
+		       WHERE SCODE_CATEGORY = 'STUDENT_GRADE_CATEGORY_CODE'
+		     )B
+	   WHERE STUDENT_ID IN (SELECT STUDENT_ID
+	                          FROM TAKE_LESSON
+	                         WHERE LESSONASSIGNMENT_ID = #{value})
+         AND A.STUDENT_GRADE_CATEGORY_CODE = B.SCODE_KEY                     
+	   ORDER BY STUDENT_ACADEMY_REG_DATE desc
+	</select>
+	
+	<select id="selectNotIncludeStudentListByLessonID" parameterType="str" resultType="student" resultMap="studentMap">
+	  SELECT A.*,
+             B.SCODE_VALUE
+	    FROM STUDENT A,
+             (SELECT *
+		        FROM STANDARDCODE
+		       WHERE SCODE_CATEGORY = 'STUDENT_GRADE_CATEGORY_CODE'
+		     )B
+	   WHERE STUDENT_ID NOT IN (SELECT STUDENT_ID
+	                          FROM TAKE_LESSON
+	                         WHERE LESSONASSIGNMENT_ID = #{value})
+         AND A.STUDENT_GRADE_CATEGORY_CODE = B.SCODE_KEY                     
+	   ORDER BY STUDENT_ACADEMY_REG_DATE desc
+	</select>
+	
+	<delete id="deleteoldInfo" parameterType="java.util.Map">
+	  DELETE FROM TAKE_LESSON
+       WHERE LESSONASSIGNMENT_ID = TO_NUMBER(#{lessonId})
+	</delete>
+	
+	<insert id="insertTakeLessonValues" parameterType="java.util.Map">
+		<foreach collection="includeList" item="item" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+			INTO TAKE_LESSON(LESSONASSIGNMENT_ID, STUDENT_ID)
+			VALUES (TO_NUMBER(#{lessonId}),#{item})
+		</foreach>
+	</insert>
+	
+	<sql id="search2">
+		<if test="searchType == 'sName'.toString()">
+		    AND A.STUDENT_NAME LIKE '%'||#{keyword}||'%'			
+		</if>
+		<if test="searchType == 'class'.toString()">
+		
+		</if>
+		<if test="searchType == 'grade'.toString()">
+			AND A.STUDENT_GRADE like '%'||#{keyword}||'%'	
+		</if>
+	</sql>
+	
+	<select id="selectSearchIncludeStudentList" parameterType="com.lms.hexa.command.Criteria" resultType="student" resultMap="studentMap">
+	  SELECT A.*,
+             B.SCODE_VALUE
+	    FROM STUDENT A,
+             (SELECT *
+		        FROM STANDARDCODE
+		       WHERE SCODE_CATEGORY = 'STUDENT_GRADE_CATEGORY_CODE'
+		     )B
+	   WHERE STUDENT_ID IN (SELECT STUDENT_ID
+	                          FROM TAKE_LESSON
+	                         WHERE LESSONASSIGNMENT_ID = #{page})
+         AND A.STUDENT_GRADE_CATEGORY_CODE = B.SCODE_KEY
+         <include refid="search2" />                     
+	   ORDER BY STUDENT_ACADEMY_REG_DATE desc
+	</select>
+	
+	<select id="selectSearchNotIncludeStudentList" parameterType="com.lms.hexa.command.Criteria" resultType="student" resultMap="studentMap">
+	  SELECT A.*,
+             B.SCODE_VALUE
+	    FROM STUDENT A,
+             (SELECT *
+		        FROM STANDARDCODE
+		       WHERE SCODE_CATEGORY = 'STUDENT_GRADE_CATEGORY_CODE'
+		     )B
+	   WHERE STUDENT_ID NOT IN (SELECT STUDENT_ID
+	                          FROM TAKE_LESSON
+	                         WHERE LESSONASSIGNMENT_ID = #{page})
+         AND A.STUDENT_GRADE_CATEGORY_CODE = B.SCODE_KEY
+         <include refid="search2" />                     
+	   ORDER BY STUDENT_ACADEMY_REG_DATE desc
+	</select>
+	
+	<insert id="insertLesson" parameterType="lesson">
+	
+		INSERT INTO LESSON(
+		            LESSON_ID
+		           ,LESSON_NAME
+		           ,LESSON_PRICE
+		           ,LESSON_SUBJECT_TYPE
+		           ,LESSON_GRADE
+		           ,LESSON_GRADE_CATEGORY_CODE
+		           ,LESSON_GRADE_INTEGRATE
+		           ,LESSON_HOURS
+		            )
+		    VALUES (
+		            LESSON_SEQ.nextval
+		           ,#{lessonName}
+		           ,#{lessonPrice}
+		           ,#{lessonSubjectType}
+		           ,#{lessonGrade}
+		           ,#{lessonGradeCategoryCode}
+		           ,#{lessonGradeInteGrate}
+		           ,#{lessonHours}
+		           )
+		           
+<!-- 		           ,'NOSYL' -->
+	</insert>
+
+	
+	
+	<select id="selectByMngLessonAssignmentIdList" parameterType="str" resultType="lesson" >
+	  	select LESSONASSIGNMENT_ID AS lessonAssignmentId,
+	  			LESSON_ID AS lessonId
+			from LESSONASSIGNMENT
+			where MNG_ID = #{mngId}
+	
+	</select>
+	
+	<select id="selectTakeLesson"  resultType="lesson" >
+	  	select LESSONASSIGNMENT_ID AS lessonAssignmentId,
+	  			STUDENT_ID AS studentId
+			from TAKE_LESSON
+			
+			order by LESSONASSIGNMENT_ID desc
+			
+	</select>
+	
+	<select id="selectLessonName" parameterType="str" resultType="lesson">
+		select LESSON_NAME as lessonName
+			from LESSON 
+			where LESSON_ID = #{lessonId} 
+	</select>
+	
+	<select id="selectLessonId" parameterType="str" resultType="lesson">
+		select LESSON_ID as lessonId
+			from LESSONASSIGNMENT
+			where LESSONASSIGNMENT_ID = #{lessonAssignmentId}
+	</select>
+	
+
+	
+	<select id="selectAvailableLessonRoomList" parameterType="java.util.Map" resultType="lessonRoom">
+	
+        SELECT LROOM_ID as lRoomId,
+               LROOM_MAXNO as lRoomMaxNo
+          FROM LESSON_ROOM
+         WHERE LROOM_ID NOT IN(SELECT LROOM_ID
+	                             FROM LESSONASSIGNMENT
+		                        WHERE MNG_ID = #{managerId}
+		                          AND LA_STATE_CODE IN('WAIT','NOSYL','GOING')
+	                              AND ((LA_START_DATE BETWEEN TO_DATE(#{startDate},'YYYY-MM-DD') AND TO_DATE(#{endDate},'YYYY-MM-DD'))
+	                              OR (LA_END_DATE BETWEEN TO_DATE(#{startDate},'YYYY-MM-DD') AND TO_DATE(#{endDate},'YYYY-MM-DD')))
+                               )
+        ORDER BY 1
+                               
+	</select>
+	
+	<select id="selectLessonInfoByLessonAssignmentId" parameterType="str" resultType="lesson">
+	
+		SELECT A.LESSONASSIGNMENT_ID AS lessonId
+		      ,A.LROOM_ID AS lessonRoom
+		      ,B.MNG_NAME AS mngId
+		      ,A.LA_START_DATE AS lessonStartDate
+		      ,A.LA_END_DATE AS lessonEndDate
+              ,A.LA_SYLLABUS AS lessonSyllabus
+              ,G.LROOM_MAXNO AS lessonMaxNo
+		      ,F.LESSON_PRICE AS lessonPrice
+		      ,E.SCODE_VALUE AS lessonSubjectType
+              ,A.LA_TIME_INFO AS lessonTimeTarget
+		      ,C.SCODE_VALUE AS lessonGradeCategoryCode
+		      ,D.SCODE_VALUE AS lessonStateCode
+              ,F.LESSON_NAME AS lessonName
+              ,F.LESSON_GRADE AS lessonGrade
+              ,F.LESSON_GRADE_INTEGRATE AS lessonGradeInteGrate
+              ,F.LESSON_HOURS AS lessonHours
+		  FROM LESSONASSIGNMENT A,MANAGER B,
+		     (SELECT *
+		        FROM STANDARDCODE
+		       WHERE SCODE_CATEGORY = 'STUDENT_GRADE_CATEGORY_CODE'
+		     )C,
+		     (SELECT *
+		        FROM STANDARDCODE
+		       WHERE SCODE_CATEGORY = 'LA_STATE_CODE'
+		     )D,
+		     (SELECT *
+		        FROM STANDARDCODE
+		       WHERE SCODE_CATEGORY = 'MNG_SUBJECT'
+		     )E, LESSON F, LESSON_ROOM G
+		 WHERE A.MNG_ID = B.MNG_ID
+		   AND F.LESSON_GRADE_CATEGORY_CODE = C.SCODE_KEY
+		   AND A.LA_STATE_CODE = D.SCODE_KEY
+		   AND F.LESSON_SUBJECT_TYPE = E.SCODE_KEY
+           AND A.LESSON_ID = F.LESSON_ID
+           AND G.LROOM_ID = A.LROOM_ID
+           AND A.LESSONASSIGNMENT_ID = #{LessonAssignmentId}
+		 ORDER BY 1 DESC
+	
+	</select>
+	
+	<select id="selectLessonScheduleListByLessonAssignmentId" resultType="str">
+		
+		SELECT TIMETABLE_ID AS timetableId
+		  FROM LESSONTIME
+		 WHERE LESSONASSIGNMENT_ID = #{LessonAssignmentId}
+		 
+	</select>
+	
+</mapper>

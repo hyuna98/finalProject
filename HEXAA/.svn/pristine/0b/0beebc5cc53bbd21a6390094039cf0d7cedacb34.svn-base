@@ -1,0 +1,113 @@
+package com.lms.hexa.service;
+
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+
+import com.lms.hexa.dao.ConsultingDAO;
+import com.lms.hexa.dto.ConsultingVO;
+
+
+public class ConsultingServiceImpl implements ConsultingService {
+
+	private ConsultingDAO consultingDAO;
+	
+	public void setConsultingDAO(ConsultingDAO consultingDAO) {
+		this.consultingDAO = consultingDAO;
+	}
+
+
+
+
+
+	@Override
+	public List<ConsultingVO> getDivision() {
+		List<ConsultingVO> division = null;
+		try {
+			division = consultingDAO.selectDivision();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return division;
+	}
+
+	@Override
+	public List<ConsultingVO> getTeacher() {
+		List<ConsultingVO> teacher = null;
+		try {
+			teacher = consultingDAO.selectTeacher();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return teacher;
+	}
+
+
+
+
+
+	@Override
+	public List<ConsultingVO> getStudent(String parentId) {
+		List<ConsultingVO> student = null;
+		try {
+			student = consultingDAO.selectStudent(parentId);
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return student;
+	}
+	
+	
+	@Override
+	public List<ConsultingVO> getSchedule(String mngId) {
+		System.out.println("consultingServiceImpl -> getSchedule에 왔다");
+		List<ConsultingVO> schedule = null;
+		try {
+			schedule = consultingDAO.selectSchedule(mngId);
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return schedule;
+	}
+
+
+
+
+
+	@Override
+	public int insertRequest(ConsultingVO consulting) throws SQLException {
+		int result = consultingDAO.insertRequest(consulting);
+		return result;
+	}
+
+	@Override
+	public List<ConsultingVO> getManagerSchedule(HashMap<String, Object> params) {
+		List<ConsultingVO> managerScheduleList = consultingDAO.selectManagerSchedule(params);
+		return managerScheduleList;
+	}
+
+
+
+
+
+	@Override
+	public ConsultingVO getScheduleDetailParentVer(String cnsltId) {
+		ConsultingVO scheduleDetailParentVer = null;
+		try {
+			scheduleDetailParentVer = consultingDAO.selectScheduleDetailParentVer(cnsltId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("--------------------------서비스-----------------------");
+		System.out.println(scheduleDetailParentVer.getCnsltSchDate());
+		return scheduleDetailParentVer;
+	}
+
+
+
+
+
+
+
+}

@@ -1,0 +1,36 @@
+package com.lms.hexa.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+
+import com.lms.hexa.dto.ExamVO;
+import com.lms.hexa.dto.QuestionVO;
+
+public class ScoreDAOImpl implements ScoreDAO {
+	
+	private SqlSession session;
+	
+	public void setSession(SqlSession session) {
+		this.session = session;
+	}
+
+	@Override // 시험 등록
+	public void insertExam(ExamVO exam) throws SQLException {
+		session.update("Score-Mapper.insertExam", exam);
+	}
+
+	@Override // 시험리스트 조회
+	public List<ExamVO> selectExamList() throws SQLException {
+		List<ExamVO> examList = session.selectList("Score-Mapper.selectExamList");
+		return examList;
+	}
+
+	@Override
+	public List<QuestionVO> selectQuestionList(int examId) throws SQLException {
+		List<QuestionVO> questionList = session.selectList("Score-Mapper.selectQuestionList", examId);
+		return questionList;
+	}
+
+}

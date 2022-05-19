@@ -1,0 +1,211 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true"%>
+
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+
+	<style>
+		* {
+			font-size: 14px;
+		}
+		
+		#example1 {
+			max-height: 180px;
+			overflow-y: scroll;
+		}
+		
+		</style>
+
+
+</head>
+<body>
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row md-2">
+				<div class="col-sm-6">
+					<h1>상담 내역</h1>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="content">
+	 <div class="row">
+	 <div class="col-sm-12">
+	 
+		<div class="card card-light card-outline">
+
+			<div class="card-header">
+				<h3 class="card-title">
+					<i class="fas fa-check"></i> &nbsp;&nbsp;  상담 신청
+				</h3>
+			</div>
+
+               <div class="card-tools">
+				</div>
+			
+			<div class="card-body">
+			<div class="card-body">
+				<div>
+					<table
+						class="table table-bordered table-hover dataTable dtr-inline">
+						<tr class="jsgrid-header-row">
+							<th class="jsgrid-header-cell jsgrid-header-sortable"
+								style="background-color: #55acf0;">예약일</th>
+							<th class="jsgrid-header-cell jsgrid-header-sortable"
+								style="background-color: #55acf0;">예약시간</th>
+							<th class="jsgrid-header-cell jsgrid-header-sortable"
+								style="background-color: #55acf0;">상담 선생님</th>
+							<th class="jsgrid-header-cell jsgrid-header-sortable"
+								style="background-color: #55acf0;">상담 구분</th>
+							<th class="jsgrid-header-cell jsgrid-header-sortable"
+								style="background-color: #55acf0;">신청대상자</th>
+							<th class="jsgrid-header-cell jsgrid-header-sortable"
+								style="background-color: #55acf0;">신청 현황</th>
+						</tr>
+						<tr class="jsgrid-row">
+							<td class="jsgrid-cell">2022-03-30</td>
+							<td class="jsgrid-cell">15:00</td>
+							<td class="jsgrid-cell">김종휘</td>
+							<td class="jsgrid-cell">수업</td>
+							<td class="jsgrid-cell">김첫째</td>
+							<td class="jsgrid-cell"><button class="btn btn-light" style="height: 30px; font-size: 15px;">신청중</button>  </td>
+						</tr>
+						
+						
+						<tr class="jsgrid-row">
+						<td class="jsgrid-header-cell jsgrid-header-sortable" colspan="5"
+								style="background-color: #55acf0;">상담 신청 내용</td>
+						<td class="jsgrid-header-cell jsgrid-header-sortable"
+								style="background-color: #55acf0;">신청 취소</td>		
+						</tr>
+						
+						<tr class="jsgrid-row">
+						<td class="jsgrid-cell" colspan="5" style="height: 100px;">첫째가 수업 내용이 어렵다고 합니다...</td>
+						<td><button class="btn btn-light">삭제</button><td>
+						</tr>
+						
+						
+					</table>
+	                	<div style="height: 3vh; float: right;">
+						    <div class="col-12 form-group float-right" style="float: right; margin: 0px; padding:0px; font-size:11px; text-align: right; ">
+							<label>* [신청완료]후 취소를 원하실경우, 상담선생님에게 문의 바람</label>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+			
+			
+			
+			
+			
+			
+
+
+
+         <div class="col-sm-12">
+		<div class="card card-light card-outline">
+			
+			<div class="card-header">
+				<h3 class="card-title">
+					<i class="fas fa-check"></i> &nbsp;&nbsp;  상담 내역
+				</h3>
+			</div>
+
+			<div class="card-body" style="padding-top: 5px">
+				<div style="margin: 15px;">
+					<div style="height: 40px;">
+					<div class="row">
+					   <div class="col-8">
+					   </div>
+						<div class="col-2 form-group" style="text-align: right;">
+							<label>상담대상자 선택</label>
+							</div>
+							<select class="col-2 form-control" style="display: inline; float: left;">
+								<option>김요셉</option>
+								<option>방진호</option>
+							</select>
+				     </div>
+					</div>
+					<table
+						class="table table-bordered table-hover dataTable dtr-inline">
+						<tr class="jsgrid-header-row">
+							<th class="jsgrid-header-cell jsgrid-header-sortable"
+								style="background-color: #55acf0;">NO.</th>
+							<th class="jsgrid-header-cell jsgrid-header-sortable"
+								style="background-color: #55acf0;">상담일</th>
+							<th class="jsgrid-header-cell jsgrid-header-sortable"
+								style="background-color: #55acf0;">상담 시간</th>
+							<th class="jsgrid-header-cell jsgrid-header-sortable"
+								style="background-color: #55acf0;">상담 대상자</th>
+							<th class="jsgrid-header-cell jsgrid-header-sortable"
+								style="background-color: #55acf0;">상담 선생님</th>
+							<th class="jsgrid-header-cell jsgrid-header-sortable"
+								style="background-color: #55acf0;">구분</th>
+							<th class="jsgrid-header-cell jsgrid-header-sortable"
+								style="background-color: #55acf0;">상담 완료 여부</th>
+						</tr>
+						
+						
+						<tr class="jsgrid-row">
+							<td class="jsgrid-cell">1</td>
+							<td class="jsgrid-cell">2021-10-16</td>
+							<td class="jsgrid-cell">09:00</td>
+							<td class="jsgrid-cell">김요셉</td>
+							<td class="jsgrid-cell">문명진T</td>
+							<td class="jsgrid-cell">진로</td>
+							<td class="jsgrid-cell">완료</td>
+						</tr>
+							<tr class="jsgrid-row">
+							<td class="jsgrid-cell">2</td>
+							<td class="jsgrid-cell">2021-10-16</td>
+							<td class="jsgrid-cell">09:00</td>
+							<td class="jsgrid-cell">김요셉</td>
+							<td class="jsgrid-cell">문명진T</td>
+							<td class="jsgrid-cell">진로</td>
+							<td class="jsgrid-cell">완료</td>
+						</tr>
+							<tr class="jsgrid-row">
+							<td class="jsgrid-cell">3</td>
+							<td class="jsgrid-cell">2021-10-16</td>
+							<td class="jsgrid-cell">09:00</td>
+							<td class="jsgrid-cell">김요셉</td>
+							<td class="jsgrid-cell">문명진T</td>
+							<td class="jsgrid-cell">진로</td>
+							<td class="jsgrid-cell">완료</td>
+						</tr>
+							<tr class="jsgrid-row">
+							<td class="jsgrid-cell">4</td>
+							<td class="jsgrid-cell">2021-10-16</td>
+							<td class="jsgrid-cell">09:00</td>
+							<td class="jsgrid-cell">김요셉</td>
+							<td class="jsgrid-cell">문명진T</td>
+							<td class="jsgrid-cell">진로</td>
+							<td class="jsgrid-cell">완료</td>
+						</tr>
+							<tr class="jsgrid-row">
+							<td class="jsgrid-cell">5</td>
+							<td class="jsgrid-cell">2021-10-16</td>
+							<td class="jsgrid-cell">09:00</td>
+							<td class="jsgrid-cell">김요셉</td>
+							<td class="jsgrid-cell">문명진T</td>
+							<td class="jsgrid-cell">진로</td>
+							<td class="jsgrid-cell">완료</td>
+						</tr>
+					</table>
+                  </div>
+				</div>
+			</div>
+	 </div>
+			</div>
+	</section>
+
+
+
+</body>
+</html>

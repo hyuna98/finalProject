@@ -1,0 +1,49 @@
+package com.lms.hexa.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+
+import com.lms.hexa.dto.ManagerVO;
+
+public class ManagerDAOImpl implements ManagerDAO {
+	
+	private SqlSession session;
+	
+	public void setSession(SqlSession session) {
+		this.session = session;
+	}
+	
+	@Override
+	public ManagerVO selectManagerById(String id) throws SQLException {
+		ManagerVO manager = session.selectOne("Manager-Mapper.selectManagerById", id);
+		return manager;
+	}
+
+	@Override
+	public List<ManagerVO> selectWorkingTeacherListSearchByName(ManagerVO managerVO) throws Exception {
+		List<ManagerVO> teacherList = session.selectList("Manager-Mapper.selectWorkingTeacherListSearchByName", managerVO);
+		return teacherList;
+	}
+	
+	@Override
+	public List<ManagerVO> selectWorkingTeacherList() throws Exception {
+		List<ManagerVO> teacherList = session.selectList("Manager-Mapper.selectWorkingTeacherList");
+		return teacherList;
+	}
+
+	@Override
+	public ManagerVO selectManagerDetailById(String id) throws Exception {
+		ManagerVO manager = session.selectOne("Manager-Mapper.selectManagerDetailById", id);
+		return manager;
+	}
+
+	@Override
+	public void updatePwd(String emailAddress) throws SQLException {
+		session.update("Manager-Mapper.updatePwd", emailAddress);
+		
+	}
+
+
+}

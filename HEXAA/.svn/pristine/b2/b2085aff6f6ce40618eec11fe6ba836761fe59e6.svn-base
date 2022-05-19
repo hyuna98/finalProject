@@ -1,0 +1,279 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<title>시험관리</title>
+
+<head>
+<style>
+
+	* {
+		font-size: 14px;
+	}
+	.table-head-fixed th {
+		padding-top: 0.3em;
+		padding-bottom: 0.3em;
+	}
+	.table-head-fixed td {
+		padding-top: 0.3em;
+		padding-bottom: 0.3em;
+	}
+	.card-body.p-0 .table thead>tr>th:first-of-type {
+		padding-left: 12px;
+	}
+		.card-body.p-0 .table tbody>tr>td:first-of-type {
+		padding-left: 12px;
+	}
+	.card-body.p-0 .table thead>tr>th:last-of-type {
+		padding-right: 12px;
+	}
+		.card-body.p-0 .table tbody>tr>td:last-of-type {
+		padding-right: 12px;
+	}
+	th, td {
+		text-align: center;
+	}
+	#tb1 td, #td1 th {
+		padding:0;
+	}
+	div.table1 {
+		max-height: 320px;
+		overflow-y: scroll;
+	}
+	div.table2 {
+		max-height: 320px;
+		overflow-y: scroll;
+	}
+	.editable {
+		width: 100%;
+		border: 0;
+    	/* padding: 0px 0.75rem; */
+    	height: 2em;
+	}
+</style>
+</head>
+
+<body>
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1>시험 관리</h1>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="card card-dark card-outline" >
+					
+						<div class="card-header">
+							<h3 class="card-title">
+								<i class="fas fa-plus"></i>
+								&nbsp;
+								시험 검색 및 등록
+							</h3>
+						</div>
+						
+						<div class="card-body" style="padding-top: 5px">
+							<div class="row"> 
+								<div class="form-group" style="margin-bottom: 3px; margin-left: 6px;">
+									<div class="custom-control custom-radio col-xs-3" style="display: inline;">
+										<input class="custom-control-input" type="radio" id="customRadio1" name="customRadio" checked> 
+										<label for="customRadio1" class="custom-control-label">학교</label>
+									</div>
+									&nbsp;&nbsp;
+									<div class="custom-control custom-radio" style="display: inline;">
+										<input class="custom-control-input" type="radio" id="customRadio2" name="customRadio"> 
+										<label for="customRadio2" class="custom-control-label">학원</label>
+									</div>
+								</div>
+							</div> <!-- row1 -->
+							
+							<div class="row">
+								<div class="form-group col-sm-3">
+									<label>시험일</label>
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<button type="submit" class="btn btn-dark"> 
+												<i class="far fa-calendar-alt"></i>
+											</button>
+										</div>
+										<input type="text" class="form-control float-right" id="reservation">
+									</div>
+								</div>
+								<div class="form-group col-xs-2">
+									<label>학년</label> <select class="form-control">
+										<option>중1</option>
+										<option>중2</option>
+										<option>중3</option>
+									</select>
+								</div>
+								<div class="form-group col-xs">
+									<label>학기</label> <select class="form-control">
+										<option>1학기</option>
+										<option>2학기</option>
+									</select>
+								</div>
+								<div class="form-group col-xs">
+									<label>구분</label> 
+									<select class="form-control">
+										<option>중간고사</option>
+										<option>기말고사</option>
+									</select>
+								</div>
+								<div class="form-group col-xs">
+									<label>과목분류</label> <select class="form-control">
+										<option>국어</option>
+										<option>수학</option>
+										<option>사회</option>
+										<option>과학</option>
+										<option>영어</option>
+									</select>
+								</div>
+								<div class="form-group col-sm">
+									<label>시험명</label>
+									<div class="input-group">
+										<input type="text" class="form-control">
+										<div class="input-group-append">
+											<button class="btn btn-dark" type="submit">검색</button>
+										</div>
+										&nbsp;&nbsp;
+										<button class="btn btn-info" type="button">Add</button>
+									</div>
+								</div>
+							</div> <!-- row2 -->
+							
+							<div class="row">
+								<div class="input-group col-sm-6">
+									<input type="text" class="form-control" readonly>
+									&nbsp;&nbsp;
+									<button class="btn btn-dark" type="button">등록</button>
+									&nbsp;&nbsp;
+									<button class="btn btn-danger" type="button">삭제</button>
+								</div>
+							</div>
+							
+						</div> <!-- card-body -->
+						
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-sm-8">
+					<div class="card card-dark card-outline" style="height: 100%;">
+						<div class="card-header">
+							<h3 class="card-title">
+								<i class="fas fa-list"></i>
+								&nbsp;
+								Exam List
+							</h3>
+						</div>
+						<div class="card-body">
+							<div class="row table1">
+								<div class="card-body p-0">
+									<table class="table table-head-fixed table-bordered">
+										<thead>
+											<tr>
+												<th>시험일</th>
+												<th>구분</th>
+												<th>학년</th>
+												<th>학기</th>
+												<th>분기</th>
+												<th>과목</th>
+												<th>시험명</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach var="i" begin="1" end="25" step="1">
+											<tr>
+												<td>2021.03.28</td>
+												<td>학교</td>
+												<td>중1</td>
+												<td>1학기</td>
+												<td>중간고사</td>
+												<td>국어</td>
+												<td>은어송 중1 국어${i }</td>
+											</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="card card-dark card-outline" style="height: 100%;">
+						<div class="card-header">
+							<h3 class="card-title">
+								<i class="fas fa-plus"></i>
+								&nbsp;
+								문항 추가
+							</h3>
+							<div class="card-tools">
+								<div class="input-group input-group-sm">
+									<input type="text" class="form-control float-right" placeholder="문항 갯수 입력" style="width: 100px;">
+									<div class="input-group-append">
+										<button type="submit" class="btn btn-dark">
+											<!-- <i class="fas fa-plus"></i> -->
+											Add
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="card-body" style="padding-bottom: 0;">
+							<div class="row table2">
+								<div class="card-body p-0">
+									<table id="tb1" class="table table-head-fixed table-bordered text-nowrap">
+										<thead>
+											<tr>
+												<th style="width:10%">번호</th>
+												<th style="width:10%">점수</th>
+												<th style="width:80%">문항 영역</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach var="i" begin="1" end="25" step="1">
+												<tr>
+													<td>${i }</td>
+													<td>
+														<input type="text" class="form-control editable">
+													</td>
+													<td>
+														<select class="form-control editable">
+															<option>영역1</option>
+															<option>영역2</option>
+															<option>영역3</option>
+															<option>영역4</option>
+															<option>영역5</option>
+														</select>
+													</td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="row" style="margin-top: 1em;">
+								<div class="col-sm-4"></div>
+								<div class="col-sm-4">
+									<button type="submit" class="btn btn-dark">
+									저장
+									</button>
+								</div>
+								<div class="col-sm-4"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+</body>

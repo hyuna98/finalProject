@@ -1,0 +1,236 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true"%>
+
+<head>
+<style>
+		* {
+			font-size: 14px;
+		}
+		
+		label {
+			margin-bottom: 0;
+		}
+		
+		div.table1 {
+			max-height: 180px;
+			
+		}
+		
+		div.table2 {
+			max-height: 180px;
+			overflow-y: scroll;
+		}
+		
+		div.table3 {
+			max-height: 568px;
+			overflow-y: scroll;  
+		}
+		
+		.table-head-fixed th {
+			padding-top: 0.3em;
+			padding-bottom: 0.3em;
+		}
+		.table-head-fixed td {
+			padding-top: 0.3em;
+			padding-bottom: 0.3em;
+		}
+		
+ 		.card-body.p-0 .table thead>tr>th:first-of-type {
+			padding-left: 12px;
+		}
+ 		.card-body.p-0 .table tbody>tr>td:first-of-type {
+			padding-left: 12px;
+		}
+		.card-body.p-0 .table thead>tr>th:last-of-type {
+			padding-right: 12px;
+		}
+ 		.card-body.p-0 .table tbody>tr>td:last-of-type {
+			padding-right: 12px;
+		}
+		
+		
+		th, td {
+			text-align: center;
+		}
+		#tb1 td, #td1 th {
+			padding:0;
+		}
+		
+		
+		.alert {
+			text-align: center;
+		}
+		.alert {
+			font-size: 15px;
+		}
+		
+		.alert-dismissible {
+	    	padding-right: 0;
+	    	padding-left: 0;
+		}
+	</style>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+<section class="content-header">
+   <div class="container-fluid">
+        <div class="row md-2">
+           <div class="col-sm-6">
+              <h1>학생출결관리</h1>              
+           </div>
+           <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                 <li class="breadcrumb-item">
+                    <a href="list.do">
+                       <i class="fa fa-dashboard"></i>학생출결관리
+                    </a>
+                 </li>
+               </ol>
+           </div>
+        </div>
+   </div>
+</section>
+<section class="content">
+		<div class="container-fluid">
+			<div class="row">
+				
+				<!-- 좌측 영역 -->
+				<div class="col-sm-12">
+					<div class="card card-dark card-outline">
+						
+							<div class="card-header">
+								<h3 class="card-title">
+									<i class="fas fa-check"></i>
+									&nbsp;&nbsp;
+									시험 선택
+								</h3>
+							</div>
+							
+							<div class="card-body" style="padding-top: 5px; ">
+								
+								<div class="row">
+									<div class="form-group" style="margin-bottom: 3px; margin-left: 6px;">
+										<div class="custom-control custom-radio col-xs-3" style="display: inline;">
+											<input class="custom-control-input" type="radio" id="customRadio1" name="customRadio" checked> 
+											<label for="customRadio1" class="custom-control-label">학교</label>
+										</div>
+										&nbsp;&nbsp;
+										<div class="custom-control custom-radio" style="display: inline;">
+											<input class="custom-control-input" type="radio" id="customRadio2" name="customRadio"> 
+											<label for="customRadio2" class="custom-control-label">학원</label>
+										</div>
+									</div>
+								</div>
+								
+								<div class="row">
+									<div class="input-group" style="padding: 5px;">
+										<div class="input-group-prepend">
+											<button type="submit" class="btn btn-dark">
+												<i class="far fa-calendar-alt"></i>
+											</button>
+										</div>
+										<input type="text" class="form-control" id="reservation" placeholder="날짜 선택">
+										<select class="form-control">
+											<option>학년</option>
+											<option>중1</option>
+											<option>중2</option>
+											<option>중3</option>
+										</select>
+										<select class="form-control">
+											<option>학기</option>
+											<option>1학기</option>
+											<option>2학기</option>
+										</select>
+										<select class="form-control">
+											<option>분기</option>
+											<option>중간고사</option>
+											<option>기말고사</option>
+										</select>
+										<select class="form-control">
+											<option>과목</option>
+											<option>국어</option>
+											<option>수학</option>
+											<option>사회</option>
+											<option>과학</option>
+											<option>영어</option>
+										</select>
+										<input type="text" class="form-control">
+										<div class="input-group-append">
+											<button type="submit" class="btn btn-dark">
+												<i class="fas fa-search"></i>
+											</button>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-4 input-group" style="padding: 5px;">
+										<select class="form-control">
+											<option>일자</option>
+											<option>국어</option>
+											<option>수학</option>
+											<option>사회</option>
+											<option>과학</option>
+											<option>영어</option>
+										</select>
+									</div>
+								</div>
+							</div> <!-- card body -->	
+						</div> <!-- card-outline -->
+								<br/>
+									<div class="card card-dark card-outline">
+								
+										<div class="card-header">
+											<h3 class="card-title">
+												<i class="fas fa-check"></i>
+												&nbsp;&nbsp;
+												시험 선택
+											</h3>
+										</div>
+										<div class="card-body" style="padding-top: 5px; ">
+											<div class="row table1">
+									<div class="card-body table p-0">
+										<table class="table table-head-fixed table-bordered">
+											<thead>
+												<tr>
+													<th>시험일</th>
+													<th>구분</th>
+													<th>학년</th>
+													<th>학기</th>
+													<th>분기</th>
+													<th>과목</th>
+													<th>시험명</th>
+												</tr>
+											</thead>
+											<tbody>
+												
+													<tr>
+														<td>2021.03.28</td>
+														<td>학교</td>
+														<td>중1</td>
+														<td>1학기</td>
+														<td>중간고사</td>
+														<td>국어</td>
+														<td>은어송 중1 국어${i }</td>
+													</tr>
+												
+											</tbody>
+										</table>
+									</div>
+								</div>
+										</div>
+									</div>
+					
+								
+								
+						
+							
+					
+				
+				</div>
+			</div>
+		</div>
+</section>								
+</body>
+</html>

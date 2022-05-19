@@ -1,0 +1,100 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title><decorator:title default="HEXA System"/></title>
+
+	<!-- Google Font: Source Sans Pro -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+	<!-- Font Awesome Icons -->
+	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/fontawesome-free/css/all.min.css">
+	<!-- Theme style -->
+	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/dist/css/adminlte.min.css">
+  	<!-- sweetalert -->
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  	<decorator:head />
+  	<style>
+  		[class*=sidebar-dark-] {
+		    background-color: rgb(32 73 105);
+		}
+		[class*=sidebar-dark-] .sidebar a {
+		    color: rgb(253 251 216);
+		}
+		/* [class*=sidebar-dark-] {
+		    background-color: rgb(168 210 168);
+		}
+		[class*=sidebar-dark-] .sidebar a {
+		    color: #011d4e;
+		}
+		[class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link {
+		    color: #011d4e;
+		} */
+		[class*=sidebar-dark] .brand-link {
+		    border-bottom: rgb(32 73 105);
+		}
+		
+  	</style>
+  	
+</head>
+
+<body>
+
+	<div class="wrapper">
+		<%@ include file="/WEB-INF/include/header.jsp" %>
+		
+		<%@ include file="/WEB-INF/include/manager_aside.jsp" %>
+			
+			<div class="content-wrapper">
+				<decorator:body />
+			</div>
+		
+		<%@ include file="/WEB-INF/include/footer.jsp" %>
+	</div>
+
+
+	<!-- jQuery -->
+	<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/jquery/jquery.min.js"></script>
+	<!-- Bootstrap 4 -->
+	<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<!-- AdminLTE App -->
+	<script src="<%=request.getContextPath() %>/resources/bootstrap/dist/js/adminlte.min.js"></script>
+	
+	<script>
+	$('div.wrapper').css({
+		"max-width":"1280px",
+		"margin":"0 auto"		
+	});
+	</script>
+	<script>
+function testclick() {
+		
+	Swal.fire({
+		  title: 'Login Form',
+		  html: `<input type="text" id="login" class="swal2-input" placeholder="Username" style="height: 3vh;">
+		  <input type="text" id="password" class="swal2-input" placeholder="Password" style="height: 3vh;">`,
+		  confirmButtonText: 'Sign in',
+		  focusConfirm: false,
+		  preConfirm: () => {
+		    const login = Swal.getPopup().querySelector('#login').value
+		    const password = Swal.getPopup().querySelector('#password').value
+		    if (!login || !password) {
+		      Swal.showValidationMessage(`Please enter login and password`)
+		    }
+		    return { login: login, password: password }
+		  }
+		}).then((result) => {
+		  Swal.fire(`
+		    Login: ${result.value.login}
+		    Password: ${result.value.password}
+		  `.trim())
+		}) 
+};
+	
+	</script>  
+</body>
+</html>

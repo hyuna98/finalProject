@@ -1,0 +1,699 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true"%>
+
+<head>
+
+
+<style>
+#header{
+background-color: white;
+font-size:30px !important;
+color: black !important;
+}
+
+#headerright{
+font-size:15px !important;
+color: black !important;
+}
+
+
+.content-wrapper{
+overflow: hidden !important;
+}
+
+#bo_w{
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+</style>
+
+<html lang="ko">
+
+<meta charset="utf-8">
+<title></title>
+<link rel="shortcut icon"
+	href="https://www.ddit.or.kr/theme/ddit/img/favicon.ico">
+<link type="text/css"
+	href="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/base/jquery-ui.css"
+	rel="stylesheet">
+<link type="text/css"
+	href="https://www.ddit.or.kr/plugin/jquery-ui/style.css?ver=191202">
+<link rel="stylesheet"
+	href="https://www.ddit.or.kr/theme/ddit/css/default.css?ver=191202">
+<link rel="stylesheet"
+	href="https://www.ddit.or.kr/theme/ddit/css/base.css">
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/css/swiper.min.css"> -->
+<!-- <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" /> -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.8.4/swiper-bundle.css">
+
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"> -->
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/v4-shims.css"> -->
+<!--[if lte IE 8]>
+<script src="https://www.ddit.or.kr/js/html5.js"></script>
+<![endif]-->
+<script>
+	// 자바스크립트에서 사용하는 전역변수 선언
+	var g5_url = "https://www.ddit.or.kr";
+	var g5_bbs_url = "https://www.ddit.or.kr/bbs";
+	var g5_is_member = "";
+	var g5_is_admin = "";
+	var g5_is_mobile = "";
+	var g5_bo_table = "consult_book";
+	var g5_sca = "";
+	var g5_editor = "";
+	var g5_cookie_domain = "";
+</script>
+
+<script src="https://www.ddit.or.kr/js/placeholders.min.js?ver=191202"></script>
+
+</head>
+
+
+
+<body>
+
+<section id="header" class="content-header">
+	<div class="container-fluid">
+		<div class="row mb-2">
+			<div class="col-sm-6" style="size: 50px !important;">
+				<div>상담 예약 신청</div>
+			</div>
+			<div id="headerright" class="col-sm-6">
+				<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item"><a
+						href="javascript:goPage()" style="color: blue;">상담 신청</a></li>
+					<li class="breadcrumb-item active">상담</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</section>
+
+	<!-- 콘텐츠 시작 { -->
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        // 서브 메뉴
+        $(".sub-head .slide_down > a").click(function(e){
+            e.preventDefault();
+            
+            $(this).closest('.nav').find('.slide_down').not($(this).parent()).removeClass('active');
+           
+            if ($(this).parent().hasClass('active') == false) {
+            	$(this).parent().addClass('active');
+            } else {
+	            $(this).parent().removeClass('active');
+            }
+
+			$('html').click(function(e){ if($(e.target).parents('.slide_down').length < 1){
+				//console.log('팝업 외 부분이 맞습니다')
+				$('.slide_down').removeClass('active');
+			} });
+        });
+    });
+</script>
+
+	<script type="text/javascript">
+		$(function() {
+			/*
+			var toogleClass = 'checked';
+
+			$('input.input_btn').on('change', function(e){
+				e.preventDefault();
+				$(this).closest('div.chk_box').find('label').removeClass(toogleClass);
+				$(this).closest('label').addClass(toogleClass);
+			});
+			$('input.input_btn:checked').each(function(){
+				$(this).closest('label').addClass(toogleClass);
+			});
+			 */
+		});
+	</script>
+	<!-- skin : theme/reservation -->
+	<script type="text/javascript"
+		src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+	<script>
+		jQuery(function($) {
+			$.datepicker.regional["ko"] = {
+				closeText : "닫기",
+				prevText : "이전달",
+				nextText : "다음달",
+				currentText : "오늘",
+				monthNames : [ "1월(JAN)", "2월(FEB)", "3월(MAR)", "4월(APR)",
+						"5월(MAY)", "6월(JUN)", "7월(JUL)", "8월(AUG)", "9월(SEP)",
+						"10월(OCT)", "11월(NOV)", "12월(DEC)" ],
+				monthNamesShort : [ "1월", "2월", "3월", "4월", "5월", "6월", "7월",
+						"8월", "9월", "10월", "11월", "12월" ],
+				dayNames : [ "일", "월", "화", "수", "목", "금", "토" ],
+				dayNamesShort : [ "일", "월", "화", "수", "목", "금", "토" ],
+				dayNamesMin : [ "일", "월", "화", "수", "목", "금", "토" ],
+				weekHeader : "Wk",
+				dateFormat : "yymmdd",
+				firstDay : 0,
+				isRTL : false,
+				showMonthAfterYear : true,
+				yearSuffix : ""
+			};
+			$.datepicker.setDefaults($.datepicker.regional["ko"]);
+		});
+	</script>
+	<link rel="stylesheet"
+		href="https://www.ddit.or.kr/theme/ddit/skin/board/reservation/style.css">
+
+
+
+
+	<section id="bo_w" class="container clearfix" style="padding-top: 10px; padding-bottom:0px; margin: 0px; -ms-overflow-style: none; scrollbar-width: none;">
+		<!-- <p class="sub_msg">방문상담예약</p> -->
+
+		<!-- 게시물 작성/수정 시작 { -->
+		<form name="fwrite" id="fwrite"
+			action="https://www.ddit.or.kr/bbs/write_update.php"
+			onsubmit="return fwrite_submit(this);" method="post"
+			enctype="multipart/form-data" autocomplete="off" style="width: 100%">
+			
+			<input type="hidden" name="uid" value="2022032914112312"> <input
+				type="hidden" name="w" value=""> <input type="hidden"
+				name="bo_table" value="consult_book"> <input type="hidden"
+				name="wr_id" value="0"> <input type="hidden" name="sca"
+				value=""> <input type="hidden" name="sfl" value="">
+			<input type="hidden" name="stx" value=""> <input
+				type="hidden" name="spt" value=""> <input type="hidden"
+				name="sst" value=""> <input type="hidden" name="sod"
+				value=""> <input type="hidden" name="page" value="">
+			<input type="hidden" name="wr_subject" value="-" id="wr_subject"
+				required="" class="frm_input" size="50" maxlength="255"> <input
+				type="hidden" name="secret" value="secret">
+			
+
+				<div id="input-box" class="form_typeDY">
+					<table>
+						<tbody>
+
+							<!--
+			<tr>
+				<td>
+<input type="checkbox" id="html" name="html" onclick="html_auto_br(this);" value="" >
+<label for="html">html</label></td>
+			</tr>
+			-->
+							<tr>
+								<td class="first_td"><label for="ca_name"
+									class="important tit_label">상담 구분</label> <select name="ca_name"
+									id="ca_name" required="" class="">
+										<option value="">선택하세요</option>
+										<option value="진로">진로</option>
+										<option value="성적">성적</option>
+										<option value="수업">수업</option>
+										<option value="기타">기타</option>
+								</select></td>
+								
+									<td class="first_td"><label for="ca_name"
+									class="important tit_label">상담 강사</label> <select name="ca_name"
+									id="ca_name" required="" class="">
+										<option value="">선택하세요</option>
+										<option value="">문명진</option>
+										<option value="">김종휘</option>
+										<option value="">정현아</option>
+										<option value="">정태형</option>
+								</select></td>
+								
+		
+							</tr>
+							<tr>
+								<td class="first_td"><label for="wr_2"
+									class="important tit_label">신청자::afteraa</label> <input type="text"
+									name="wr_2" value="문명진" id="wr_2" required=""
+									class="frm_input hasDatepicker" size="8" maxlength="8"
+									placeholder="이름" readonly=""> 
+								<td class="first_td"><label for="ca_name"
+									class="important tit_label">상담대상자</label> <select name="ca_name"
+									id="ca_name" required="" class="">
+										<option value="">김첫째</option>
+										<option value="">김둘째</option>
+								</select></td>
+							</tr>
+
+							<tr>
+								<td colspan="2" class="wr_res"><label for="wr_2"
+									class="important tit_label">예약일시</label> <input type="text"
+									name="wr_2" value="20220330" id="wr_2" required=""
+									class="frm_input hasDatepicker" size="8" maxlength="8"
+									placeholder="예약일" readonly=""> <label for="wr_3"
+									style="display: none">예약시간<strong class="sound_only">필수</strong></label>
+									<input type="text" name="wr_3" value="" id="wr_3" required=""
+									class="frm_input" size="8" maxlength="8" placeholder="예약시간"
+									readonly=""></td>
+							</tr>
+
+							<tr>
+								<td colspan="2" class="wr_content"><label for="wr_content"
+									class="important tit_label">내용</label> <span class="sound_only">웹에디터
+										시작</span> <textarea id="wr_content" name="wr_content" class=""
+										maxlength="6553ㅁ6" style="width: 100%; height: 300px" placeholder="원하시는 상담 내용을 간략하게 적어주세요."></textarea>
+									<span class="sound_only">웹 에디터 끝</span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+		
+			
+			
+			
+			
+			
+			<div class="consult clearfix">
+				<div id="reservation-selector" class="clearfix">
+					<h3>예약 시간 선택</h3>
+					<div class="datepicker_selector">
+						<div id="wr_2_datepicker" class="hasDatepicker">
+							<div
+								class="ui-datepicker-inline ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"
+								style="display: block;">
+								<div
+									class="ui-datepicker-header ui-widget-header ui-helper-clearfix ui-corner-all">
+									<a class="ui-datepicker-prev ui-corner-all" data-handler="prev"
+										data-event="click" title="이전달"><span
+										class="ui-icon ui-icon-circle-triangle-w">이전달</span></a><a
+										class="ui-datepicker-next ui-corner-all" data-handler="next"
+										data-event="click" title="다음달"><span
+										class="ui-icon ui-icon-circle-triangle-e">다음달</span></a>
+									<div class="ui-datepicker-title">
+										<select class="ui-datepicker-year" data-handler="selectYear"
+											data-event="change"><option value="2012">2012</option>
+											<option value="2013">2013</option>
+											<option value="2014">2014</option>
+											<option value="2015">2015</option>
+											<option value="2016">2016</option>
+											<option value="2017">2017</option>
+											<option value="2018">2018</option>
+											<option value="2019">2019</option>
+											<option value="2020">2020</option>
+											<option value="2021">2021</option>
+											<option value="2022" selected="selected">2022</option>
+											<option value="2023">2023</option>
+											<option value="2024">2024</option>
+											<option value="2025">2025</option>
+											<option value="2026">2026</option>
+											<option value="2027">2027</option>
+											<option value="2028">2028</option>
+											<option value="2029">2029</option>
+											<option value="2030">2030</option>
+											<option value="2031">2031</option>
+											<option value="2032">2032</option></select><select
+											class="ui-datepicker-month" data-handler="selectMonth"
+											data-event="change"><option value="0">1월</option>
+											<option value="1">2월</option>
+											<option value="2" selected="selected">3월</option>
+											<option value="3">4월</option>
+											<option value="4">5월</option>
+											<option value="5">6월</option>
+											<option value="6">7월</option>
+											<option value="7">8월</option>
+											<option value="8">9월</option>
+											<option value="9">10월</option>
+											<option value="10">11월</option>
+											<option value="11">12월</option></select>
+									</div>
+								</div>
+								<table class="ui-datepicker-calendar">
+									<thead>
+										<tr>
+											<th class="ui-datepicker-week-end"><span title="일">일</span></th>
+											<th><span title="월">월</span></th>
+											<th><span title="화">화</span></th>
+											<th><span title="수">수</span></th>
+											<th><span title="목">목</span></th>
+											<th><span title="금">금</span></th>
+											<th class="ui-datepicker-week-end"><span title="토">토</span></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td
+												class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td>
+											<td
+												class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td>
+											<td class=" " data-handler="selectDay" data-event="click"
+												data-month="2" data-year="2022"><a
+												class="ui-state-default" href="#">1</a></td>
+											<td class=" " data-handler="selectDay" data-event="click"
+												data-month="2" data-year="2022"><a
+												class="ui-state-default" href="#">2</a></td>
+											<td class=" " data-handler="selectDay" data-event="click"
+												data-month="2" data-year="2022"><a
+												class="ui-state-default" href="#">3</a></td>
+											<td class=" " data-handler="selectDay" data-event="click"
+												data-month="2" data-year="2022"><a
+												class="ui-state-default" href="#">4</a></td>
+											<td class=" ui-datepicker-week-end " data-handler="selectDay"
+												data-event="click" data-month="2" data-year="2022"><a
+												class="ui-state-default" href="#">5</a></td>
+										</tr>
+										<tr>
+											<td class=" ui-datepicker-week-end " data-handler="selectDay"
+												data-event="click" data-month="2" data-year="2022"><a
+												class="ui-state-default" href="#">6</a></td>
+											<td class=" " data-handler="selectDay" data-event="click"
+												data-month="2" data-year="2022"><a
+												class="ui-state-default" href="#">7</a></td>
+											<td class=" " data-handler="selectDay" data-event="click"
+												data-month="2" data-year="2022"><a
+												class="ui-state-default" href="#">8</a></td>
+											<td class=" " data-handler="selectDay" data-event="click"
+												data-month="2" data-year="2022"><a
+												class="ui-state-default" href="#">9</a></td>
+											<td class=" " data-handler="selectDay" data-event="click"
+												data-month="2" data-year="2022"><a
+												class="ui-state-default" href="#">10</a></td>
+											<td class=" " data-handler="selectDay" data-event="click"
+												data-month="2" data-year="2022"><a
+												class="ui-state-default" href="#">11</a></td>
+											<td class=" ui-datepicker-week-end " data-handler="selectDay"
+												data-event="click" data-month="2" data-year="2022"><a
+												class="ui-state-default" href="#">12</a></td>
+										</tr>
+										<tr>
+											<td class=" ui-datepicker-week-end " data-handler="selectDay"
+												data-event="click" data-month="2" data-year="2022"><a
+												class="ui-state-default" href="#">13</a></td>
+											<td class=" " data-handler="selectDay" data-event="click"
+												data-month="2" data-year="2022"><a
+												class="ui-state-default" href="#">14</a></td>
+											<td class=" " data-handler="selectDay" data-event="click"
+												data-month="2" data-year="2022"><a
+												class="ui-state-default" href="#">15</a></td>
+											<td class=" " data-handler="selectDay" data-event="click"
+												data-month="2" data-year="2022"><a
+												class="ui-state-default" href="#">16</a></td>
+											<td class=" " data-handler="selectDay" data-event="click"
+												data-month="2" data-year="2022"><a
+												class="ui-state-default" href="#">17</a></td>
+											<td class=" " data-handler="selectDay" data-event="click"
+												data-month="2" data-year="2022"><a
+												class="ui-state-default" href="#">18</a></td>
+											<td class=" ui-datepicker-week-end " data-handler="selectDay"
+												data-event="click" data-month="2" data-year="2022"><a
+												class="ui-state-default" href="#">19</a></td>
+										</tr>
+										<tr>
+											<td class=" ui-datepicker-week-end " data-handler="selectDay"
+												data-event="click" data-month="2" data-year="2022"><a
+												class="ui-state-default" href="#">20</a></td>
+											<td class=" " data-handler="selectDay" data-event="click"
+												data-month="2" data-year="2022"><a
+												class="ui-state-default" href="#">21</a></td>
+											<td class=" " data-handler="selectDay" data-event="click"
+												data-month="2" data-year="2022"><a
+												class="ui-state-default" href="#">22</a></td>
+											<td class=" " data-handler="selectDay" data-event="click"
+												data-month="2" data-year="2022"><a
+												class="ui-state-default" href="#">23</a></td>
+											<td class=" " data-handler="selectDay" data-event="click"
+												data-month="2" data-year="2022"><a
+												class="ui-state-default" href="#">24</a></td>
+											<td class=" " data-handler="selectDay" data-event="click"
+												data-month="2" data-year="2022"><a
+												class="ui-state-default" href="#">25</a></td>
+											<td class=" ui-datepicker-week-end " data-handler="selectDay"
+												data-event="click" data-month="2" data-year="2022"><a
+												class="ui-state-default" href="#">26</a></td>
+										</tr>
+										<tr>
+											<td class=" ui-datepicker-week-end " data-handler="selectDay"
+												data-event="click" data-month="2" data-year="2022"><a
+												class="ui-state-default" href="#">27</a></td>
+											<td class=" " data-handler="selectDay" data-event="click"
+												data-month="2" data-year="2022"><a
+												class="ui-state-default" href="#">28</a></td>
+											<td class="  ui-datepicker-today" data-handler="selectDay"
+												data-event="click" data-month="2" data-year="2022"><a
+												class="ui-state-default ui-state-highlight" href="#">29</a></td>
+											<td class=" " data-handler="selectDay" data-event="click"
+												data-month="2" data-year="2022"><a
+												class="ui-state-default" href="#">30</a></td>
+											<td class="  ui-datepicker-current-day"
+												data-handler="selectDay" data-event="click" data-month="2"
+												data-year="2022"><a
+												class="ui-state-default ui-state-active" href="#">31</a></td>
+											<td
+												class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td>
+											<td
+												class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+					<div class="timepicker_selector">
+						<div id="wr_3_timepicker" class="tbl_frm01 tbl_wrap">
+							<ul class="select_time">
+								<li class=""><span class="time">10:00</span> <span
+									class="btn"><a href="#input-box" data-time="10:00"
+										class="time_selector select" style="color:rgb(32 73 105); background-color: rgb(233,218,203);">예약선택</a></span></li>
+								<li class=""><span class="time">11:00</span> <span
+									class="btn"><a href="#input-box" data-time="11:00"
+										class="time_selector select" style="color:rgb(32 73 105); background-color: rgb(233,218,203);">예약선택</a></span></li>
+								<li class=""><span class="time">14:00</span> <span
+									class="btn"><a href="#input-box" data-time="14:00"
+										class="time_selector select" style="color:rgb(32 73 105); background-color: rgb(233,218,203);">예약선택</a></span></li>
+								<li class=""><span class="time">15:00</span> <span
+									class="btn"><a href="#input-box" data-time="15:00"
+										class="time_selector select" style="color:rgb(32 73 105); background-color: rgb(233,218,203);">예약선택</a></span></li>
+								<li class=""><span class="time">16:00</span> <span
+									class="btn"><a href="#input-box" data-time="16:00"
+										class="time_selector select" style="color:rgb(32 73 105); background-color: rgb(233,218,203);">예약선택</a></span></li>
+								<li class=""><span class="time">17:00</span> <span
+									class="btn"><a href="#input-box" data-time="17:00"
+										class="time_selector select" style="color:rgb(32 73 105); background-color: rgb(233,218,203);">예약선택</a></span></li>
+								<li class=""><span class="time">19:00</span> <span
+									class="btn"><a href="#input-box" data-time="19:00"
+										class="time_selector select" style="color:rgb(32 73 105); background-color: rgb(233,218,203);">예약선택</a></span></li>
+								<li class=""><span class="time">20:00</span> <span
+									class="btn"><a href="#input-box" data-time="20:00"
+										class="time_selector select" style="color:rgb(32 73 105); background-color: rgb(233,218,203);">예약선택</a></span></li>
+							
+										
+    						<!-- 	<li class="complete">
+	 								<span class="time">15:00</span>
+									<span class="btn"><a href="#" onclick="return false;" class="time_selector complate">예약완료</a></span>
+								</li>
+									
+							 -->
+							</ul>
+						</div>
+					</div>
+
+				</div>
+			
+			
+			
+			
+
+			
+			
+			
+			
+			
+			</div>
+			
+			
+
+			<div class="btn_wrap txt_c" style="margin: 15px !important;">
+				<input type="submit" style="color:rgb(32 73 105); background-color: rgb(233,218,203);" value="확인" id="btn_submit" accesskey="s"
+					class="btn_submit"> <a
+					href="https://www.ddit.or.kr/consult_book" class="btn_cancel">취소</a>
+			</div>
+		</form>
+
+		<script>
+			$(function() { // 날짜 입력
+				// $("#wr_1, #wr_2").datepicker({ changeMonth: true, changeYear: true, dateFormat: "yymmdd", showButtonPanel: true }); 
+				function datepickerSelect(date) {
+					$
+							.get(
+									'https://www.ddit.or.kr/theme/ddit/skin/board/reservation/time_selector.ajax.php',
+									{
+										'bo_table' : 'consult_book',
+										'date' : date
+									}, function(data) {
+										$('#wr_2').val(date);
+										$('#wr_3_timepicker').html(data);
+									});
+				}
+				$('#wr_2_datepicker').datepicker({
+					changeMonth : true,
+					changeYear : true,
+					dateFormat : "yymmdd",
+					onSelect : datepickerSelect
+				});
+				$('#wr_2').datepicker({
+					changeMonth : true,
+					changeYear : true,
+					dateFormat : "yymmdd",
+					onSelect : datepickerSelect
+				});
+
+				$(document).on(
+						'click',
+						'a.time_selector:not(.complate)',
+						function(e) {
+							e.preventDefault();
+							var time_select = $(this).attr('data-time');
+							$('#wr_3').val(time_select);
+							$("body, html").animate(
+									{
+										scrollTop : $($(this).attr('href'))
+												.offset().top
+									}, 600);
+						});
+				datepickerSelect('20220330');
+
+			});
+
+			function html_auto_br(obj) {
+				if (obj.checked) {
+					result = confirm("자동 줄바꿈을 하시겠습니까?\n\n자동 줄바꿈은 게시물 내용중 줄바뀐 곳을<br>태그로 변환하는 기능입니다.");
+					if (result)
+						obj.value = "html2";
+					else
+						obj.value = "html1";
+				} else
+					obj.value = "";
+			}
+
+			function fwrite_submit(f) {
+				var wr_content_editor = document.getElementById('wr_content');
+				if (!wr_content_editor.value) {
+					alert("내용을 입력해 주십시오.");
+					wr_content_editor.focus();
+					return false;
+				}
+
+				var subject = "";
+				var content = "";
+				$.ajax({
+					url : g5_bbs_url + "/ajax.filter.php",
+					type : "POST",
+					data : {
+						"subject" : f.wr_subject.value,
+						"content" : f.wr_content.value
+					},
+					dataType : "json",
+					async : false,
+					cache : false,
+					success : function(data, textStatus) {
+						subject = data.subject;
+						content = data.content;
+					}
+				});
+
+				if (subject) {
+					alert("제목에 금지단어('" + subject + "')가 포함되어있습니다");
+					f.wr_subject.focus();
+					return false;
+				}
+
+				if (content) {
+					alert("내용에 금지단어('" + content + "')가 포함되어있습니다");
+					if (typeof (ed_wr_content) != "undefined")
+						ed_wr_content.returnFalse();
+					else
+						f.wr_content.focus();
+					return false;
+				}
+
+				if (document.getElementById("char_count")) {
+					if (char_min > 0 || char_max > 0) {
+						var cnt = parseInt(check_byte("wr_content",
+								"char_count"));
+						if (char_min > 0 && char_min > cnt) {
+							alert("내용은 " + char_min + "글자 이상 쓰셔야 합니다.");
+							return false;
+						} else if (char_max > 0 && char_max < cnt) {
+							alert("내용은 " + char_max + "글자 이하로 쓰셔야 합니다.");
+							return false;
+						}
+					}
+				}
+
+				if (!chk_captcha())
+					return false;
+
+				document.getElementById("btn_submit").disabled = "disabled";
+
+				return true;
+			}
+		</script>
+	</section>
+	<!-- } 게시물 작성/수정 끝 -->
+
+
+	<script>
+		$(document)
+				.ready(
+						function() {
+							var text = $('#quickMenu .close_side .txt').text();
+							$('#quickMenu')
+									.on(
+											'click',
+											'.close_side',
+											function(e) {
+												if ($(this).hasClass('active') == false) {
+													$(this).addClass('active');
+													$('#quickMenu').addClass(
+															'active');
+													$(
+															'#quickMenu .close_side .txt')
+															.text('닫기');
+													$(
+															'#quickMenu .close_side i')
+															.addClass(
+																	'fa-chevron-circle-right')
+															.removeClass(
+																	'fa-chevron-circle-left');
+													set_cookie('ck_quick',
+															'active');
+												} else {
+													$(this).removeClass(
+															'active');
+													$('#quickMenu')
+															.removeClass(
+																	'active');
+													$(
+															'#quickMenu .close_side .txt')
+															.text('열기');
+													$(
+															'#quickMenu .close_side i')
+															.addClass(
+																	'fa-chevron-circle-left')
+															.removeClass(
+																	'fa-chevron-circle-right');
+													set_cookie('ck_quick', '');
+												}
+												e.preventDefault();
+											});
+						});
+		$.each($('.plus_img'), function(i, v) {
+			$(this).href = 'javascript:void(0);';
+			$(this).on('click', function(e) {
+				window.open($('img', this).attr('src'));
+			});
+		});
+	</script>
+	<!-- // Quick menu -->
+
+	<!-- } 콘텐츠 끝 -->
+
+
+	<!-- 하단 시작 { -->
+
+
+
+</body>
+</html>

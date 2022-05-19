@@ -1,0 +1,132 @@
+package com.lms.hexa.command;
+
+import com.lms.hexa.dto.LessonVO;
+
+public class LessonRegistCommand {
+	
+	private String lessonName;
+	private String lessonRoom;
+	private String lessonStartDate;
+	private String lessonEndDate;
+	private String lessonPrice;
+	private String lessonSubjectType;
+	private String lessonMaxNo;
+	private String lessonGrade;
+	private String lessonDetail;
+	private String mngId;
+	private String lessonGradeCategoryCode;
+	private String lessonStateCode;
+	private String lessonSyllabus;
+	private String timetableId;
+	private String lessonTimeTarget;
+	public String getLessonName() {
+		return lessonName;
+	}
+	public void setLessonName(String lessonName) {
+		this.lessonName = lessonName;
+	}
+	public String getLessonRoom() {
+		return lessonRoom;
+	}
+	public void setLessonRoom(String lessonRoom) {
+		this.lessonRoom = lessonRoom;
+	}
+	public String getLessonStartDate() {
+		return lessonStartDate;
+	}
+	public void setLessonStartDate(String lessonStartDate) {
+		this.lessonStartDate = lessonStartDate;
+	}
+	public String getLessonEndDate() {
+		return lessonEndDate;
+	}
+	public void setLessonEndDate(String lessonEndDate) {
+		this.lessonEndDate = lessonEndDate;
+	}
+	public String getLessonPrice() {
+		return lessonPrice;
+	}
+	public void setLessonPrice(String lessonPrice) {
+		this.lessonPrice = lessonPrice;
+	}
+	public String getLessonSubjectType() {
+		return lessonSubjectType;
+	}
+	public void setLessonSubjectType(String lessonSubjectType) {
+		this.lessonSubjectType = lessonSubjectType;
+	}
+	public String getLessonMaxNo() {
+		return lessonMaxNo;
+	}
+	public void setLessonMaxNo(String lessonMaxNo) {
+		this.lessonMaxNo = lessonMaxNo;
+	}
+	public String getLessonGrade() {
+		return lessonGrade;
+	}
+	public void setLessonGrade(String lessonGrade) {
+		this.lessonGrade = lessonGrade;
+	}
+	public String getLessonDetail() {
+		return lessonDetail;
+	}
+	public void setLessonDetail(String lessonDetail) {
+		this.lessonDetail = lessonDetail;
+	}
+	public String getMngId() {
+		return mngId;
+	}
+	public void setMngId(String mngId) {
+		this.mngId = mngId;
+	}
+	public String getLessonGradeCategoryCode() {
+		return lessonGradeCategoryCode;
+	}
+	public void setLessonGradeCategoryCode(String lessonGradeCategoryCode) {
+		this.lessonGradeCategoryCode = lessonGradeCategoryCode;
+	}
+	public String getLessonStateCode() {
+		return lessonStateCode;
+	}
+	public void setLessonStateCode(String lessonStateCode) {
+		this.lessonStateCode = lessonStateCode;
+	}
+	public String getLessonSyllabus() {
+		return lessonSyllabus;
+	}
+	public void setLessonSyllabus(String lessonSyllabus) {
+		this.lessonSyllabus = lessonSyllabus;
+	}
+	public String getTimetableId() {
+		return timetableId;
+	}
+	public void setTimetableId(String timetableId) {
+		this.timetableId = timetableId;
+	}
+	public String getLessonTimeTarget() {
+		return lessonTimeTarget;
+	}
+	public void setLessonTimeTarget(String lessonTimeTarget) {
+		this.lessonTimeTarget = lessonTimeTarget;
+	}
+	
+	public LessonVO toLessonVO(){
+		LessonVO lesson = new LessonVO();
+		lesson.setLessonName(this.lessonName);
+		lesson.setLessonRoom(this.lessonRoom);
+		lesson.setLessonStartDate(this.lessonStartDate.replace("-",""));
+		lesson.setLessonEndDate(this.lessonEndDate.replace("-",""));
+		lesson.setLessonPrice(Integer.parseInt(this.lessonPrice));
+		lesson.setLessonSubjectType(this.lessonSubjectType);
+		lesson.setLessonMaxNo(Integer.parseInt(this.lessonMaxNo));
+		lesson.setLessonGrade(this.lessonGrade);
+		lesson.setLessonDetail(this.lessonDetail);
+		lesson.setMngId(this.mngId);
+		lesson.setLessonGradeCategoryCode(this.lessonGradeCategoryCode);
+		lesson.setLessonStateCode(this.lessonStateCode);
+		lesson.setLessonSyllabus(this.lessonSyllabus);
+		lesson.setTimetableId(this.timetableId);
+		lesson.setLessonTimeTarget(this.lessonTimeTarget);
+		return lesson;
+	}
+}

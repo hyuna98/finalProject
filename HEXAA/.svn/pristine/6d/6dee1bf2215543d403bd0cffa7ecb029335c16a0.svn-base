@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="Note-Mapper">
+  	
+  	<resultMap type="note" id="noteMap">
+  		<result property="noteId" column="NOTE_ID" />
+  		<result property="noteContent" column="NOTE_CONTENT" />
+  		<result property="noteReadDate" column="NOTE_READ_DATE" />
+  		<result property="noteSendDate" column="NOTE_SEND_DATE" />
+  		<result property="noteReadYN" column="NOTE_READ_YN" />
+  		<result property="noteSendUserId" column="NOTE_SEND_USER_ID" />
+  		<result property="noteReceivedUserId" column="NOTE_RECEIVED_USER_ID" />
+  		<result property="noteTitle" column="NOTE_TITLE" />
+  		<result property="noteDeleteKey" column="NOTE_DELETE_KEY" />
+  	</resultMap>
+  	
+  	
+  	<resultMap type="user" id="userMap">
+		<result property="id" column="user_id"/>
+		<result property="pw" column="user_pw"/>
+		<result property="category" column="user_category"/>
+		<result property="isFirstLogin" column="user_is_first_login"/>
+	</resultMap>
+  	
+	<select id="selectUserList"  resultMap="userMap">
+		select A.USER_ID
+		      ,A.USER_CATEGORY
+		      ,B.PARENT_NAME
+		from "USER" A,PARENT B
+		where user_category = 'p'
+		  AND A.USER_ID = B.PARENT_ID
+<!-- 		  AND B.PARENT_NAME LIKE '%'||'이'||'%' -->
+	</select>
+
+
+
+  	
+  	<select id="selectNoteReceiveList" parameterType="str" resultMap="noteMap">
+  		SELECT NOTE_ID,
+  			   NOTE_SEND_USER_ID,
+  			   NOTE_TITLE,
+  			   NOTE_SEND_DATE,
+  			   NOTE_READ_YN,
+  			   NOTE_READ_DATE 
+  		FROM NOTE
+		WHERE NOTE_RECEIVED_USER_ID = #{loginUser.id}
+			AND NOTE_DELETE_KEY = 'N'
+<!-- 		<include refid="search" /> -->
+		ORDER BY NOTE_ID DESC
+	</select>
+  	
+  	<select id="selectNoteSendList" parameterType="str" resultMap="noteMap">
+  		SELECT NOTE_ID,
+  			   NOTE_RECEIVED_USER_ID,
+  			   NOTE_TITLE,
+  			   NOTE_SEND_DATE,
+  			   NOTE_READ_YN,
+  			   NOTE_READ_DATE 
+  		FROM NOTE
+  		WHERE NOTE_SEND_USER_ID =  #{loginUser.id}
+  			AND NOTE_DELETE_KEY = 'N'
+<!--   		<include refid="search" /> -->
+		ORDER BY NOTE_ID DESC
+  	</select>
+  	
+  	<select id="selectSearchNoteListCountReceive" resultType="int">
+  		SELECT COUNT(*)
+  		FROM NOTE
+	WHERE NOTE_ID IS NOT NULL 
+    	AND NOTE_RECEIVED_USER_ID = #{loginUser.id}
+    		AND NOTE_DELETE_KEY = 'N'
+  	</select>
+
+	<select id="selectSearchNoteListCountSend" resultType="int">
+  		SELECT COUNT(*)
+  		FROM NOTE
+			WHERE NOTE_ID IS NOT NULL 
+    			AND NOTE_SEND_USER_ID = #{loginUser.id}
+    				AND NOTE_DELETE_KEY = 'N'
+  	</select>
+  	
+  	<select id="selectNoteByNoteId" parameterType="note" resultMap="noteMap">
+  		SELECT NOTE_ID,
+  			   NOTE_SEND_DATE, 
+  			   NOTE_SEND_USER_ID, 
+  			   NOTE_RECEIVED_USER_ID,
+  			   NOTE_TITLE, 
+  			   NOTE_CONTENT
+		FROM NOTE
+		WHERE NOTE_ID = #{noteId}
+  	</select>
+  	
+  	<select id="selectNoteSeqNext" resultType="int">
+  		SELECT NOTE_SEQ.NEXTVAL AS NOTE_ID FROM DUAL		
+  	</select>
+  	
+  	<update id="deleteNote" parameterType="int">
+  		UPDATE NOTE
+		  SET NOTE_DELETE_KEY = 'Y'
+			WHERE NOTE_ID = #{noteId}
+  	</update>
+  	
+  	<update id="updateNote" parameterType="int">
+  		UPDATE NOTE
+			SET NOTE_READ_DATE = SYSDATE,
+			    NOTE_READ_YN = '읽음'
+			WHERE NOTE_ID = #{noteId}
+	</update>
+
+  </mapper>

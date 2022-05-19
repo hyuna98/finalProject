@@ -1,0 +1,21 @@
+package com.lms.hexa.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class CommonController {
+	
+	@RequestMapping("/member/index")
+	public String memberIndex() {
+		String url = "common/memberIndexPage";
+		return url;
+	}
+	
+	@RequestMapping("/manager/index")
+	public String managerIndex() {
+		String url = "common/managerIndexPage";
+		return url;
+	}
+	
+}

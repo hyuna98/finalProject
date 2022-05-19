@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="Consulting-Mapper">
+
+  <resultMap type="consulting" id="consultingMap">
+       <result property="cnsltId" column="CNSLT_ID"/>
+       <result property="cnsltSchDate" column="CNSLT_SCH_DATE"/>
+       <result property="cnsltConfirmYn" column="CNSLT_CONFIRM_YN"/>
+       <result property="cnsltCompletionYn" column="CNSLT_COMPLETION_YN"/>
+       <result property="cnsltApplyContent" column="CNSLT_APPLY_CONTENT"/>
+       <result property="cnsltContent" column="CNSLT_CONTENT"/>
+       <result property="cnsltApplyer" column="CNSLT_APPLYER"/>
+       <result property="cnsltTarget" column="CNSLT_TARGET"/>
+       <result property="cnsltType" column="CNSLT_TYPE"/>
+       <result property="studentId" column="STUDENT_ID"/>
+       <result property="mngId" column="MNG_ID"/>
+       <result property="scodeKey" column="SCODE_KEY"/>
+       <result property="scodeValue" column="SCODE_VALUE"/>
+       <result property="scodeCategory" column="SCODE_CATEGORY"/>
+       <result property="cnslttId" column="CNSLTT_ID"/>
+       <result property="scheduleId" column="SCHEDULE_ID"/>
+  </resultMap>
+  
+
+	<select id="selectDivision" resultMap="consultingMap">
+			SELECT SCODE_VALUE
+ 			  FROM standardcode
+ 		     WHERE SCODE_CATEGORY = 'CNSLT_TYPE'
+    </select>
+  		      
+  		      
+  	
+   
+</mapper>

@@ -1,0 +1,642 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+	div.table1 {
+		max-height: 550px;
+		overflow-y: auto;
+	}
+	div.table2 {
+		max-height: 510px;
+		overflow-y: auto;
+	}
+	.disabledTd{
+		background-color: gray;
+	}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"  ></script>
+ <script type="text/javascript">
+        
+        // 헬퍼함수 만들기
+        // 헬퍼함수는 Handlebars.registerHelper()를 사용해서 등록할 수 있다.
+        // 헬퍼함수는 스크립트 상단에 선언하자 (호이스팅)
+        // Handlebars.registerHelper("선언함수명", function(args..., option){ ... }
+        // args 매개변수 인자보다.. 그냥 this.변수명 으로 접근은 편하다.
+ 
+        Handlebars.registerHelper("isSchudule", function(targetStr, valueStr1, valueStr2) {
+//             console.log(this); // this == jQuery에서 el과 같다. (반복문에서 현재 컨텐스트)
+//             console.log(targetStr);
+            var valueStr = valueStr1+valueStr2;
+//             console.log(valueStr);
+            
+            if(targetStr.indexOf(valueStr)>0){
+ 	           return "disabledTd";
+            } else {
+ 	           return "clickableTd";
+            }
+        });
+ 
+</script>
+</head>
+<body>
+<section class="content-header">
+   <div class="container-fluid">
+        <div class="row md-2">
+           <div class="col-sm-6">
+              <h1>수업배정</h1>              
+           </div>
+           <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                 <li class="breadcrumb-item">
+                 </li>
+               </ol>
+           </div>
+        </div>
+   </div>
+</section>
+<section class="content">
+   <div class="card-header">
+   <div class="card card-dark card-outline card-outline-tabs">
+		<div class="card-header p-0 border-bottom-0">
+			<ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill" href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home" aria-selected="true">선생님선택</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill" href="#custom-tabs-four-profile" role="tab" aria-controls="custom-tabs-four-profile" aria-selected="false">수업시간선택</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill" href="#custom-tabs-four-info" role="tab" aria-controls="custom-tabs-four-info" aria-selected="false">수업정보 입력</a>
+				</li>
+			</ul>
+		</div>
+		<div class="card-body">
+			<div class="tab-content" id="custom-tabs-four-tabContent">
+				<div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
+					<div class="row">
+						<div class="col-sm-3">
+						</div>
+						<div class="col-sm-6">
+						</div>
+						<div class="col-sm-3">
+							<button class="btn btn-block btn-dark btn-lg">다음</button>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4">
+				   			<div class="card card-outline card-dark">
+				   			
+				   			<div class="card-header" style="vertical-align: center;display: flex;align-items: center;justify-content: space-between;padding: 0.47rem 1.25rem;">
+    						   <div class="row">
+				               <h3 class="card-title">
+									<i class="fa-solid fa-person-chalkboard"></i>
+				<!-- 					<i class="fa-solid fa-1"></i> -->
+									&nbsp;
+									선생님 선택&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							   </h3>
+    						   </div>
+				               <div class="card-tools" style="margin: 0;">
+				                  <div class="row">
+				                  	<div class="input-group input-group-sm" style="padding: 0.25rem 0.5rem; font-size: .875rem; line-height: 1.5;">
+										<input id="searchTeacherInput" type="text" class="form-control float-right" placeholder="교사명 검색" style="width: 100px; padding: 0.25rem 0.5rem; font-size: .875rem; line-height: 1.5;">
+										<div class="input-group-append">
+											<button id="searchTeacherBtn" type="submit" class="btn btn-dark" style="padding: 0.25rem 0.5rem; font-size: .875rem; line-height: 1.5;">
+												<i class="fas fa-search" aria-hidden="true"></i>
+											</button>
+										</div>
+									</div>
+								  </div>
+				               </div>
+				            </div>
+				   			
+<!-- 				            <div class="card-header" style="vertical-align: center;"> -->
+<!-- 				               <h3 class="card-title"> -->
+<!-- 									<i class="fa-solid fa-person-chalkboard"></i> -->
+<!-- 									<i class="fa-solid fa-1"></i> -->
+<!-- 									&nbsp; -->
+<!-- 									선생님 선택 -->
+<!-- 							   </h3> -->
+<!-- 				               <h3 class="card-title"></h3> -->
+<!-- 				               <div class="card-tools"> -->
+<!-- 				                  <div class="row"> -->
+<!-- 				                  	<div class="input-group input-group-sm" style="padding: 0.25rem 0.5rem; font-size: .875rem; line-height: 1.5;"> -->
+<!-- 										<input id="searchTeacherInput" type="text" class="form-control float-right" placeholder="교사명 검색" style="width: 100px; padding: 0.25rem 0.5rem; font-size: .875rem; line-height: 1.5;"> -->
+<!-- 										<div class="input-group-append"> -->
+<!-- 											<button id="searchTeacherBtn" type="submit" class="btn btn-dark" style="padding: 0.25rem 0.5rem; font-size: .875rem; line-height: 1.5;"> -->
+<!-- 												<i class="fas fa-search"></i> -->
+<!-- 											</button> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								  </div> -->
+<!-- 				               </div> -->
+<!-- 				            </div> -->
+				            <div class="card-body">
+				            	<div class="row table1">
+									<div class="card-body p-0">
+										<table class="table table-head-fixed table-bordered">
+											<thead>
+												<tr>
+													<th style="width: 30%">과목</th>
+													<th style="width: 40%">선생님</th>
+													<th style="width: 30%">선택</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:forEach items="${teacherList }" var="teacher">
+												<tr>
+													<td>${teacher.mngSubjectKor }</td>
+													<td>${teacher.mngName }T</td>
+													<td>
+														<button id="selectTeacherBtn" data-id="${teacher.id }" type="button" class="btn btn-sm btn-dark selBtn">선택</button>
+													</td>
+													
+												</tr>
+												</c:forEach>
+											</tbody>
+										</table>
+									</div>
+								</div>
+				            </div>
+				         </div>
+							
+				   		</div>
+				   		
+				   		<div class="col-sm-8">
+				   			<div class="card card-outline card-dark">
+				            <div class="card-header">
+				               <h3 class="card-title">
+									<i class="fa-solid fa-person-chalkboard"></i>
+				<!-- 					<i class="fa-solid fa-1"></i> -->
+									&nbsp;
+									선생님 상세정보
+							   </h3>
+				               <h3 class="card-title"></h3>
+				               <div class="card-tools">
+				                  <div class="row">
+								  </div>
+				               </div>
+				            </div>
+				            <div class="card-body">
+				            	<div id="teacherInfoDiv" class="row">
+				            		<table id="teacherInfoTable" class="table table-bordered">
+				            			<tr>
+				            				<td style="width: 20%">이름</td>
+				            				<td style="width: 30%"></td>
+				            				<td style="width: 20%">과목</td>
+			            					<td style="width: 30%"></td>
+				            			</tr>
+				            			<tr>
+				            				<td>전공</td>
+				            				<td></td>
+				            				<td>졸업일</td>
+			            					<td></td>
+				            			</tr>
+				            			<tr>
+				            				<td>경력년수</td>
+				            				<td></td>
+				            				<td>근무년수</td>
+			            					<td></td>
+				            			</tr>
+				            			<tr>
+				            				<td colspan="4">자격증</td>
+				            			</tr>
+				            			<tr>
+				            				<td colspan="4"></td>
+				            			</tr>
+				            		</table>
+								</div>
+				            </div>
+				         </div>
+							
+				   		</div>
+					</div>
+							
+				</div>
+				<div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel" aria-labelledby="custom-tabs-four-profile-tab">
+					<div class="row">
+						<div class="col-sm-3">
+							<button class="btn btn-block btn-dark btn-lg">이전</button>
+						</div>
+						<div class="col-sm-6">
+						</div>
+						<div class="col-sm-3">
+							<button class="btn btn-block btn-dark btn-lg">다음</button>
+						</div>
+					</div>
+					<div class="row">
+					  <div class="col-sm-8">
+						<div class="card card-outline card-dark">
+				           <div class="card-header">
+				               <h3 class="card-title">
+									<i class="fas fa-list" aria-hidden="true"></i>
+				<!-- 					<i class="fa-solid fa-2"></i> -->
+									&nbsp;
+									수업 시간선택(주중)
+							   </h3>
+				               <h3 class="card-title"></h3>
+				               <div class="card-tools">
+				               </div>
+				            </div>
+				            <div class="card-body">
+				            	<div id="lessonTimeRegistWeekDayForm" class="row table2">
+				            	<table id="lessonTimeRegistWeekDayFormTable" class="table table-bordered">
+											<tbody><tr>
+												<th style="width: 100px;">요일<br>
+													시간
+													</th>
+												<th>월</th>
+												<th>화</th>
+												<th>수</th>
+												<th>목</th>
+												<th>금</th>
+											</tr>
+											<c:forEach items="${ttMap.weekDayList}" var="wdList">
+												<tr>
+													<td>
+														${wdList.timetablePeriod}교시<br>
+														${wdList.timetableStartTime }~ ${wdList.timetableEndTime }
+													</td>
+													<td id="mon${wdList.timetablePeriod }"></td>
+													<td id="tue${wdList.timetablePeriod }"></td>
+													<td id="wed${wdList.timetablePeriod }"></td>
+													<td id="thu${wdList.timetablePeriod }"></td>
+													<td id="fri${wdList.timetablePeriod }"></td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+				            	</div>
+				            </div>
+				         </div>
+				         <div class="col-sm-12">
+				         	원하는 수업시간을 선택해주세요<br>
+				         	회색 : 선택불가<br>
+				         	파란색 : 선택한거
+				         </div>
+					  </div>
+					  <div class="col-sm-4">
+				   			<div class="card card-outline card-dark">
+								<div class="card-header">
+								<h3 class="card-title">수업시간선택(주말)</h3>
+									<div class="card-tools">
+									<div class="input-group input-group-sm">
+									</div>
+								</div>
+							</div>
+								<div id="lessonTimeRegistWeekEndForm" class="card-body">
+									<table id="lessonTimeRegistWeekEndFormTable" class="table table-bordered">
+											<tbody><tr>
+												<th style="width: 25%;"></th>
+												<th style="width: 40%;">시간</th>
+												<th style="width: 35%;">토</th>
+											</tr>
+											<c:forEach items="${ttMap.weekEndList}" var="weList">
+												<tr>
+													<td>
+														${weList.timetablePeriod}교시
+													</td>
+													<td>
+														${weList.timetableStartTime }~ ${weList.timetableEndTime }
+													</td>
+													<td id="sat${weList.timetablePeriod}"></td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
+							</div>
+				   		</div>
+					</div>
+				</div>
+				<div class="tab-pane fade" id="custom-tabs-four-info" role="tabpanel" aria-labelledby="custom-tabs-four-info-tab">
+				<div class="row">
+					<div class="col-sm-3">
+						<button class="btn btn-block btn-dark btn-lg">이전</button>
+					</div>
+					<div class="col-sm-6">
+					</div>
+					<div class="col-sm-3">
+						<input class="btn btn-block btn-dark btn-lg" type="button" onclick="lessonformSubmit()" value="수업개설">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+			          <div class="card card-outline card-dark">
+			          	 <div class="card-header">
+			               <h3 class="card-title">
+								<i class="fa-solid fa-pen-to-square"></i>
+			<!-- 					<i class="fa-solid fa-3"></i> -->
+								&nbsp;
+								수업정보 입력
+						   </h3>
+			               <h3 class="card-title"></h3>
+			               <div class="card-tools">
+			               		<div class="input-group input-group-sm">
+									<!-- <button type="submit" class="btn btn-dark">
+										수업개설
+									</button> -->
+								</div>
+			               </div>
+			            </div>
+			            <div class="card-body">
+			            	<div class="row">
+			            		<div class="col-sm-12">
+					            	<div id="lessonRegistFormDiv" class="col-sm-12">
+						            	<form id="lessonRegistForm" action="/manager/lesson/realRegist.do" method="post" name="lessonRegistForm">
+							            	<table id="lessonRegistFormTable" class="table table-bordered">
+												<tr>
+													<td>수업명</td>
+													<td colspan="5"><input required class="form-control" type="text"></td>
+													<td>강의금액</td>
+													<td><input required class="form-control" type="number" min="0"></td>
+												</tr>
+												<tr>
+													<td style="width: 10%">과목</td>
+													<td style="width: 10%"></td>
+													<td style="width: 10%">선생님</td>
+													<td style="width: 10%"></td>
+													<td style="width: 20%" colspan="2"></td>
+													<td style="width: 10%">시작일</td>
+													<td style="width: 10%">
+														<input required class="form-control" type="date">
+													</td>
+												</tr>
+												<tr>
+													<td>강의시간</td>
+													<td colspan="3"></td>
+													<td>최대인원</td>
+													<td><input required class="form-control" type="number" min="0" max="15"></td>
+													<td>종료일</td>
+													<td>
+														<input required class="form-control" type="date">
+													</td>
+												</tr>
+												<tr>
+													<td>강의실</td>
+													<td colspan="3">
+														<select required class="form-control">
+															<c:forEach items="${ScodeValues.lessonRoomList}" var="LR">
+																<option value="${LR.lRoomId }">${LR.lRoomId }</option>
+															</c:forEach>
+														</select>
+													</td>
+													<td>대상</td>
+													<td>
+														<select required class="form-control">
+															<c:forEach items="${ScodeValues.StudentGradeCategoryCodeList}" var="SG">
+																<option value="${SG.scodeKey }">${SG.scodeValue }</option>
+															</c:forEach>
+														</select>
+													</td>
+													<td>학년</td>
+													<td>
+														<input required class="form-control" type="number" min="1" max="6" placeholder="1~6 숫자입력">
+													</td>
+												</tr>	
+												<tr>
+													<td>강의소개</td>
+													<td colspan="9"><textarea required rows="4" class="form-control"></textarea></td>
+												</tr>
+											</table>
+						            	</form>
+					            	</div>
+			            		</div>
+			            	</div>
+			            </div>
+			         </div>
+					</div>  
+				</div>
+			</div>
+		</div>
+		</div>
+	</div>
+   </div>
+</section>
+
+<script>
+	window.onload=function(){
+		
+		let timeKorArr = [];
+		let timeArr = [];
+		
+		$(document).on("click",".clickableTd",function(){
+			$(this).css("background-color","blue");
+			$(this).attr("class","selectedTd");
+			
+			var timeKor = $(this).attr("id").replace('mon','월').replace('tue','화').replace('wed','수').replace('thu','목').replace('fri','금').replace('sat','토');
+			var time = $(this).attr("id");
+			
+			timeKorArr.push(timeKor);
+			timeArr.push(time)
+			
+			$("#lessonTime").text(timeKorArr);
+			$("#lessonTimeTarget").attr("value",timeArr);
+			console.log(timeArr);
+		});
+		
+		$(document).on("click",".selectedTd",function(){
+			$(this).css("background-color","white");
+			$(this).attr("class","clickableTd");
+			
+			var timeKor = $(this).attr("id").replace('mon','월').replace('tue','화').replace('wed','수').replace('thu','목').replace('fri','금').replace('sat','토');
+			var time = $(this).attr("id");
+			
+			timeKorArr.splice(timeArr.indexOf(timeKor),1);
+			timeArr.splice(timeArr.indexOf(time),1);
+			
+			$("#lessonTime").text(timeKorArr);
+			$("#lessonTimeTarget").attr("value",timeArr);
+			console.log(timeArr);
+		});
+		
+		$("#searchTeacherBtn").on("click",function(){
+			let name = $("#searchTeacherInput").val();
+			location.href = '/manager/lesson/regist.do?name='+name;
+		});
+		
+		$(".selBtn").on("click",function(){
+			let managerId = $(this).attr('data-id');
+			
+			$.ajax({
+		        type: "post"
+		       ,url : "/manager/lesson/getInfo.do"
+		       ,data : {"managerId" : managerId}
+		       ,success : function (data){
+// 		    	   console.log(data.teacherSchedule);
+		    	   data.teacherSchedule = data.teacherSchedule.toString();
+// 		    	   console.log(data.teacherSchedule);
+		    	   printData(data,$('#teacherInfoTable'),$('#teacherInfoDiv'),$('#teacherInfo-template'));
+		    	   printData(data,$('#lessonRegistForm'),$('#lessonRegistFormDiv'),$('#lessonRegistForm-template'));
+		    	   printData(data,$('#lessonTimeRegistWeekDayFormTable'),$('#lessonTimeRegistWeekDayForm'),$('#lessonTimeWeekDayRegistForm-template'));
+		    	   printData(data,$('#lessonTimeRegistWeekEndFormTable'),$('#lessonTimeRegistWeekEndForm'),$('#lessonTimeWeekEndRegistForm-template'));
+		        }
+		       ,error : function(e){
+		        }
+			});
+		});
+		
+		
+	}
+</script>
+<script>
+	function lessonformSubmit(){
+		console.log(document.forms["lessonRegistForm"]);
+		document.forms["lessonRegistForm"].submit();
+	}
+</script>
+<script>
+function printData(data,delArea,target,templateObject){
+	var template=Handlebars.compile(templateObject.html());
+	var html = template(data);	
+	delArea.remove();
+	target.after(html);
+}
+</script>
+<script type="text/x-handlebars-template"  id="teacherInfo-template" >
+<table id="teacherInfoTable" class="table table-bordered">
+<tr>
+	<td style="width: 20%">이름</td>
+	<td style="width: 30%">{{teacherInfo.mngName}}</td>
+	<td style="width: 20%">과목</td>
+	<td style="width: 30%">{{teacherInfo.mngSubjectKor}}</td>
+</tr>
+<tr>
+	<td>전공</td>
+	<td>{{teacherInfo.mngMajor}}</td>
+	<td>졸업일</td>
+	<td>{{teacherInfo.mngGraduatedYear}}</td>
+</tr>
+<tr>
+	<td>경력년수</td>
+	<td>{{teacherInfo.mngCarrerYear}}</td>
+	<td>입사일</td>
+	<td>{{teacherInfo.mngDeleteDate}}</td>
+</tr>
+<tr>
+	<td colspan="4">자격증</td>
+</tr>
+<tr>
+	<td colspan="4">{{teacherInfo.mngCertificate}}</td>
+</tr>
+</table>
+</script>
+
+<script type="text/x-handlebars-template"  id="lessonRegistForm-template" >
+<form id="lessonRegistForm" action="/manager/lesson/realRegist.do" method="post" name="lessonRegistForm">
+<table id="lessonRegistFormTable" class="table table-bordered">
+<tr>
+	<td>수업명</td>
+	<td colspan="5"><input required id="lessonName" name="lessonName" class="form-control" type="text"></td>
+	<td>강의금액</td>
+	<td><input required id="lessonPrice" name="lessonPrice" class="form-control" type="number" min="0"></td>
+</tr>
+<tr>
+	<td style="width: 10%">과목</td>
+	<td style="width: 10%">{{teacherInfo.mngSubjectKor}}</td>
+		<input required type="hidden" id="lessonSubjectType" name="lessonSubjectType" value="{{teacherInfo.mngSubject}}">
+	<td style="width: 10%">선생님</td>
+	<td style="width: 10%">{{teacherInfo.mngName}}</td>
+		<input required type="hidden" id="mngId" name="mngId" value="{{teacherInfo.id}}">
+	<td style="width: 20%" colspan="2"></td>
+	<td style="width: 10%">시작일</td>
+	<td style="width: 10%">
+		<input required id="lessonStartDate" name="lessonStartDate" class="form-control" type="date">
+	</td>
+</tr>
+<tr>
+	<td>강의시간</td>
+	<td id="lessonTime" colspan="3"></td>
+	<input id="lessonTimeTarget" name="lessonTimeTarget" type="hidden">
+	<td>최대인원</td>
+	<td><input required id="lessonMaxNo" name="lessonMaxNo" class="form-control" type="number" min="0" max="15"></td>
+	<td>종료일</td>
+	<td>
+		<input required id="lessonEndDate" name="lessonEndDate" class="form-control" type="date">
+	</td>
+</tr>
+<tr>
+	<td>강의실</td>
+	<td colspan="3">
+		<select required id="lessonRoom" name="lessonRoom" class="form-control">
+			<c:forEach items="${ScodeValues.lessonRoomList}" var="LR">
+				<option value="${LR.lRoomId }">${LR.lRoomId }</option>
+			</c:forEach>
+		</select>
+	</td>
+	<td>대상</td>
+	<td>
+		<select required id="lessonGradeCategoryCode" name="lessonGradeCategoryCode" class="form-control">
+			<c:forEach items="${ScodeValues.StudentGradeCategoryCodeList}" var="SG">
+				<option value="${SG.scodeKey }">${SG.scodeValue }</option>
+			</c:forEach>
+		</select>
+	</td>
+	<td>학년</td>
+	<td>
+		<input required id="lessonGrade" name="lessonGrade" class="form-control" type="number" min="1" max="6" placeholder="1~6 숫자입력">
+	</td>
+</tr>	
+<tr>
+	<td>강의소개</td>
+	<td colspan="9"><textarea required id="lessonDetail" name="lessonDetail" rows="4" class="form-control"></textarea></td>
+</tr>
+</table>
+</form>
+</script>
+<script type="text/x-handlebars-template"  id="lessonTimeWeekDayRegistForm-template" >
+<table id="lessonTimeRegistWeekDayFormTable" class="table table-bordered">
+<tbody><tr>
+	<th style="width: 100px;">요일<br>
+		시간
+		</th>
+	<th>월</th>
+	<th>화</th>
+	<th>수</th>
+	<th>목</th>
+	<th>금</th>
+</tr>
+<c:forEach items="${ttMap.weekDayList}" var="wdList">
+	<tr>
+		<td>
+			${wdList.timetablePeriod}교시<br>
+			${wdList.timetableStartTime }~ ${wdList.timetableEndTime }
+		</td>
+		<td id="mon${wdList.timetablePeriod }" class="{{isSchudule teacherSchedule 'mon' ${wdList.timetablePeriod}}}" ></td>
+		<td id="tue${wdList.timetablePeriod }" class="{{isSchudule teacherSchedule 'tue' ${wdList.timetablePeriod}}}" ></td>
+		<td id="wed${wdList.timetablePeriod }" class="{{isSchudule teacherSchedule 'wed' ${wdList.timetablePeriod}}}" ></td>
+		<td id="thu${wdList.timetablePeriod }" class="{{isSchudule teacherSchedule 'thu' ${wdList.timetablePeriod}}}" ></td>
+		<td id="fri${wdList.timetablePeriod }" class="{{isSchudule teacherSchedule 'fri' ${wdList.timetablePeriod}}}" ></td>
+	</tr>
+</c:forEach>
+</tbody>
+</table>
+</script>
+<script type="text/x-handlebars-template"  id="lessonTimeWeekEndRegistForm-template" >
+<table id="lessonTimeRegistWeekEndFormTable" class="table table-bordered">
+	<tbody><tr>
+		<th style="width: 25%;"></th>
+		<th style="width: 40%;">시간</th>
+		<th style="width: 35%;">토</th>
+	</tr>
+	<c:forEach items="${ttMap.weekEndList}" var="weList">
+		<tr>
+			<td>
+				${weList.timetablePeriod}교시
+			</td>
+			<td>
+				${weList.timetableStartTime }~ ${weList.timetableEndTime }
+			</td>
+			<td id="sat${weList.timetablePeriod}" class="{{isSchudule teacherSchedule 'sat' ${weList.timetablePeriod}}}"></td>
+		</tr>
+	</c:forEach>
+	</tbody>
+</table>
+</script>
+</body>
+</html>

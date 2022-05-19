@@ -1,0 +1,57 @@
+package com.lms.hexa.dto;
+
+public class ParentVO {
+	 private String parentId;
+	 private String parentAlarmMethodCode;
+	 private String parentName;
+	 private String parentEmail;
+	 private String parentPw;
+	 private String parentAlarmYn;
+	 private String parentHp;
+	 
+	 
+	public String getParentId() {
+		return parentId;
+	}
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
+	}
+	public String getParentAlarmMethodCode() {
+		return parentAlarmMethodCode;
+	}
+	public void setParentAlarmMethodCode(String parentAlarmMethodCode) {
+		this.parentAlarmMethodCode = parentAlarmMethodCode;
+	}
+	public String getParentName() {
+		return parentName;
+	}
+	public void setParentName(String parentName) {
+		this.parentName = parentName;
+	}
+	public String getParentEmail() {
+		return parentEmail;
+	}
+	public void setParentEmail(String parentEmail) {
+		this.parentEmail = parentEmail;
+	}
+	public String getParentPw() {
+		return parentPw;
+	}
+	public void setParentPw(String parentPw) {
+		this.parentPw = parentPw;
+	}
+	public String getParentAlarmYn() {
+		return parentAlarmYn;
+	}
+	public void setParentAlarmYn(String parentAlarmYn) {
+		this.parentAlarmYn = parentAlarmYn;
+	}
+	public String getParentHp() {
+		return parentHp;
+	}
+	public void setParentHp(String parentHp) {
+		this.parentHp = parentHp;
+	}
+	 
+	 
+}

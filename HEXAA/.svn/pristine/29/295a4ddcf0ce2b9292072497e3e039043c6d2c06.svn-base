@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+
+ <mapper namespace="SubjectAttendance-Mapper">
+ 	
+ 	<resultMap type="subjectAttendance" id="subjectAttendanceMap">
+ 		<result property="sattId" column="SATT_ID" />
+ 		<result property="lessonAssignmentId" column="LESSONASSIGNMENT_ID" />
+ 		<result property="studentId" column="STUDENT_ID" />
+ 		<result property="sattTime" column="SATT_TIME" />
+ 		<result property="sattYN" column="SATT_YN" />
+ 		
+ 		
+ 	</resultMap>
+ 
+ 
+ 	<select id="selectBySubjectList" resultMap="subjectAttendanceMap">
+ 		SELECT SATT_ID,
+ 				LESSONASSIGNMENT_ID,
+ 				STUDENT_ID,
+ 				SATT_TIME,
+ 				SATT_YN
+ 				
+ 		FROM SUBJECTATTENDANCE
+ 		WHERE LESSONASSIGNMENT_ID = #{lessonAssignmentId}
+ 		and (TO_CHAR(TO_DATE(SATT_TIME),'YY/MM/DD')) = (SELECT TO_CHAR(SYSDATE, 'YY/MM/DD') FROM DUAL)
+ 		order by SATT_ID desc
+ 		
+ 	</select>
+ 	
+ 	<insert id="inserSubjectAttList" parameterType="java.util.Map">
+		<foreach collection="subjectAttendanceList" item="item" index="index" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+			INTO SUBJECTATTENDANCE(SATT_ID,LESSONASSIGNMENT_ID,STUDENT_ID,SATT_TIME,SATT_YN)
+			VALUES (SUBJECTATTENDANCE_SEQ.nextval+#{index}, #{item.lessonAssignmentId},#{item.studentId},sysdate,'N')
+		</foreach>
+	</insert>
+	
+	
+	<update id="updateSubjectAttandance" parameterType="subjectAttendance" >
+		  UPDATE SUBJECTATTENDANCE
+          SET SATT_YN = 'Y'
+          	
+          where STUDENT_ID = #{studentId}
+          and LESSONASSIGNMENT_ID =#{lessonAssignmentId}
+         and (TO_CHAR(TO_DATE(SATT_TIME),'YY/MM/DD')) = (SELECT TO_CHAR(SYSDATE, 'YY/MM/DD') FROM DUAL)
+	</update>
+	
+	<update id="updateSubjectOutAttandance" parameterType="str" >
+		  UPDATE SUBJECTATTENDANCE
+          SET SATT_YN = 'N'
+          	
+          where STUDENT_ID = #{studentId}
+           and LESSONASSIGNMENT_ID =#{lessonAssignmentId}
+         and (TO_CHAR(TO_DATE(SATT_TIME),'YY/MM/DD')) = (SELECT TO_CHAR(SYSDATE, 'YY/MM/DD') FROM DUAL)
+	</update>
+	
+	<update id="updateSubjectAll" parameterType="java.util.Map">
+ 			
+	  
+		  <foreach collection="schoolVOList" index="index" item="item2" separator=";" open="DECLARE BEGIN" close="; END;">
+		  		
+				UPDATE SUBJECTATTENDANCE 
+				SET
+				      SATT_YN = 'Y'    	
+				WHERE
+					STUDENT_ID = #{item2.schoolId}
+			  	 AND LESSONASSIGNMENT_ID = #{item2.lessonAssignmentId}
+				
+		   </foreach>
+	  
+	</update>
+	
+	<update id="updateSubjectAllCancle" parameterType="java.util.Map">
+ 			
+	  
+		  <foreach collection="schoolVOList" index="index" item="item2" separator=";" open="DECLARE BEGIN" close="; END;">
+		  		
+				UPDATE SUBJECTATTENDANCE 
+				SET
+				      SATT_YN = 'N'    	
+				WHERE
+					STUDENT_ID = #{item2.schoolId}
+			  	 AND LESSONASSIGNMENT_ID = #{item2.lessonAssignmentId}
+
+		   </foreach>
+	  
+	</update>
+ 	
+ 	
+ </mapper>

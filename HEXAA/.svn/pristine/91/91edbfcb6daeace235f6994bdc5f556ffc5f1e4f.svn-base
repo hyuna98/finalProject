@@ -1,0 +1,76 @@
+package com.lms.hexa.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.SqlSession;
+
+import com.lms.hexa.command.Criteria;
+import com.lms.hexa.dto.ManagerVO;
+
+public class ManagerDAOImpl implements ManagerDAO {
+	
+	private SqlSession session;
+	
+	public void setSession(SqlSession session) {
+		this.session = session;
+	}
+	
+	@Override
+	public ManagerVO selectManagerById(String id) throws SQLException {
+		ManagerVO manager = session.selectOne("Manager-Mapper.selectManagerById", id);
+		return manager;
+	}
+
+	@Override
+	public List<ManagerVO> selectWorkingTeacherListSearchByName(ManagerVO managerVO) throws Exception {
+		List<ManagerVO> teacherList = session.selectList("Manager-Mapper.selectWorkingTeacherListSearchByName", managerVO);
+		return teacherList;
+	}
+	
+	@Override
+	public List<ManagerVO> selectWorkingTeacherList() throws Exception {
+		List<ManagerVO> teacherList = session.selectList("Manager-Mapper.selectWorkingTeacherList");
+		return teacherList;
+	}
+
+	@Override
+	public ManagerVO selectManagerDetailById(String id) throws Exception {
+		ManagerVO manager = session.selectOne("Manager-Mapper.selectManagerDetailById", id);
+		return manager;
+	}
+
+	@Override
+	public void updatePwd(String emailAddress) throws SQLException {
+		session.update("Manager-Mapper.updatePwd", emailAddress);
+		
+	}
+
+	@Override
+	public List<ManagerVO> selectManagerList(Criteria cri) throws Exception {
+		int offset=cri.getStartRowNum();
+		int limit=cri.getPerPageNum();
+		RowBounds rowBounds=new RowBounds(offset,limit);
+		
+		List<ManagerVO> managerList = session.selectList("Manager-Mapper.selectManagerList",cri,rowBounds);
+		return managerList;
+	}
+
+	@Override
+	public int selectManagerListTotalCount(Criteria cri) throws Exception {
+		int count = session.selectOne("Manager-Mapper.selectManagerListCount",cri);
+		return count;
+	}
+
+	@Override
+	public void insertManager(ManagerVO manager) throws SQLException {
+		session.update("Manager-Mapper.insertManager", manager);
+	}
+
+	@Override
+	public void modifyPwd(ManagerVO manager) throws SQLException {
+		session.update("Manager-Mapper.modifyPwd",manager);
+	}
+
+}

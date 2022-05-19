@@ -1,0 +1,23 @@
+package com.lms.hexa.dao;
+
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+
+
+import com.lms.hexa.dto.SubjectAttendanceVO;
+
+public interface SubjectAttandanceDAO {
+	
+	public List<SubjectAttendanceVO> selectBySubjectList(String lessonAssignmentId) throws SQLException;
+	
+	void insert(List<SubjectAttendanceVO> subjectAttendanceList) throws SQLException;
+	
+	void update(SubjectAttendanceVO subject) throws SQLException;
+	
+	void updateOut(SubjectAttendanceVO subject) throws SQLException;
+	
+	void updateAll(HashMap<String, Object> params) throws SQLException;
+	
+	void updateAllCancle(HashMap<String, Object> params) throws SQLException;
+}

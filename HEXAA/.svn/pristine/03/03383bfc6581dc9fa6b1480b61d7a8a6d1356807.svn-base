@@ -1,0 +1,20 @@
+package com.lms.hexa.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.lms.hexa.dto.StudentVO;
+
+public interface StudentDAO {
+
+	StudentVO selectStudentById(String id) throws SQLException;
+	
+	StudentVO selectStudentByIdForAtt(String id) throws SQLException;
+	
+	List<StudentVO> selectStudentList() throws Exception;
+	
+	public void insertStudent(StudentVO student) throws SQLException;
+
+	List<StudentVO> selectStudentIdList() throws SQLException;
+
+}

@@ -1,0 +1,59 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+<c:set var="pageMaker" value="${dataMap.pageMaker }" />
+<c:set var="userList" value="${dataMap.userList}" />
+<c:set var="cri" value="${pageMaker.cri }" />
+
+<head>
+<!-- sweetAlert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<style>
+</style>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+<section class="content-header">
+   <div class="container-fluid">
+        <div class="row md-2">
+           <div class="col-sm-6" style="display: flex;">
+              <h1 data-userId="${loginUser.id }" >보낸메세지내역</h1>
+              <!--                즐겨찾기에 존재 -->
+               <c:if test="${fn:indexOf(favoriteMenuListStr, '보낸메세지내역') != -1}">
+                  <i id="star" class="fa-solid fa-star on fa-2x" ></i>
+               </c:if>
+               
+<!--                즐겨찾기에 존재하지 않음 -->
+               <c:if test="${fn:indexOf(favoriteMenuListStr, '보낸메세지내역') == -1}">
+                  <i id="star" class="fa-regular fa-star off fa-2x" ></i>
+               </c:if>
+                            
+           </div>
+         
+        </div>
+   </div>
+</section>
+<section class="content">
+  <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
+   <div class="card card-dark card-outline" >
+   		<div class="card-header">
+   			
+   		</div>
+		<div class="card-body">
+			
+		</div>
+	</div>
+   </div>
+</section>
+   
+<script>
+ window.onload=function(){
+
+ }
+</script>   
+</body>
+</html>

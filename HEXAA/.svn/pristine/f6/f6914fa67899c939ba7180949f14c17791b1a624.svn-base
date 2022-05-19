@@ -1,0 +1,145 @@
+package com.lms.hexa.controller;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.lms.hexa.command.Criteria;
+import com.lms.hexa.command.CriteriaCommand;
+import com.lms.hexa.service.ManagerService;
+import com.lms.hexa.service.MessageGroupService;
+import com.lms.hexa.service.ParentService;
+import com.lms.hexa.service.StudentService;
+import com.lms.hexa.service.UserService;
+
+@Controller
+@RequestMapping("/manager/academymanagement")
+public class AcademyManagementController {
+	
+//	@Autowired
+//	private StudentService studentService;
+//	
+//	@Resource(name="userService")
+//	private UserService userService;
+//	
+//	@Resource(name="parentService")
+//	private ParentService parentService;
+//	
+//	@Resource(name="managerService")
+//	private ManagerService managerService;
+//	
+//	@Resource(name="messageGroupService")
+//	private MessageGroupService messageGroupService;
+	
+	@RequestMapping("/kakao/regist")
+	public void regist()throws Exception{
+	}
+	
+	@RequestMapping("/message/userSearchList")
+	@ResponseBody
+	public ResponseEntity<Map<String,Object>> getUserSearchList(CriteriaCommand criCmd, ModelAndView mnv)throws Exception{
+		
+		ResponseEntity<Map<String,Object>> entity=null;
+		Map<String,Object> dataMap = new HashMap<String, Object>();
+		
+		Criteria cri =  criCmd.toCriteria();
+		cri.setPerPageNum(300);
+		try {
+			dataMap = userService.getUserList(cri);	
+			
+			entity  = new ResponseEntity<Map<String,Object>>(dataMap,HttpStatus.OK);
+		} catch (Exception e) {
+			entity = new ResponseEntity<Map<String,Object>>(HttpStatus.INTERNAL_SERVER_ERROR);
+			e.printStackTrace();			
+		}
+
+		return entity;
+	}
+	
+	@RequestMapping("/message/managerSearchList")
+	@ResponseBody
+	public ResponseEntity<Map<String,Object>> getManagerSearchList(CriteriaCommand criCmd, ModelAndView mnv)throws Exception{
+		
+		ResponseEntity<Map<String,Object>> entity=null;
+		Map<String,Object> dataMap1 = new HashMap<String, Object>();
+		
+		Criteria cri =  criCmd.toCriteria();
+		cri.setPerPageNum(300);
+		try {
+			dataMap1 =  managerService.getManagerList(cri);	
+			
+			entity  = new ResponseEntity<Map<String,Object>>(dataMap1,HttpStatus.OK);
+		} catch (Exception e) {
+			entity = new ResponseEntity<Map<String,Object>>(HttpStatus.INTERNAL_SERVER_ERROR);
+			e.printStackTrace();			
+		}
+
+		return entity;
+	}
+	
+	@RequestMapping("/message/studentSearchList")
+	@ResponseBody
+	public ResponseEntity<Map<String,Object>> getStudentSearchList(CriteriaCommand criCmd, ModelAndView mnv)throws Exception{
+		
+		ResponseEntity<Map<String,Object>> entity=null;
+		Map<String,Object> dataMap2 = new HashMap<String, Object>();
+		
+		Criteria cri =  criCmd.toCriteria();
+		cri.setPerPageNum(300);
+		try {
+			dataMap2 =  studentService.getStudentList(cri);	
+			
+			entity  = new ResponseEntity<Map<String,Object>>(dataMap2,HttpStatus.OK);
+		} catch (Exception e) {
+			entity = new ResponseEntity<Map<String,Object>>(HttpStatus.INTERNAL_SERVER_ERROR);
+			e.printStackTrace();			
+		}
+
+		return entity;
+	}
+	
+	@RequestMapping("/message/parentSearchList")
+	@ResponseBody
+	public ResponseEntity<Map<String,Object>> getParentSearchList(CriteriaCommand criCmd, ModelAndView mnv)throws Exception{
+		
+		ResponseEntity<Map<String,Object>> entity=null;
+		Map<String,Object> dataMap3 = new HashMap<String, Object>();
+		
+		Criteria cri =  criCmd.toCriteria();
+		cri.setPerPageNum(300);
+		try {
+			dataMap3 =  parentService.selectParentList(cri);	
+			
+			entity  = new ResponseEntity<Map<String,Object>>(dataMap3,HttpStatus.OK);
+		} catch (Exception e) {
+			entity = new ResponseEntity<Map<String,Object>>(HttpStatus.INTERNAL_SERVER_ERROR);
+			e.printStackTrace();			
+		}
+
+		return entity;
+	}
+	
+//	@RequestMapping(value = "/messageGroup/regist", method = RequestMethod.POST, consumes = "application/json")
+//	@ResponseBody
+//	public void registMessageGroup(@RequestBody HashMap<String, Object> params,RedirectAttributes rttr) throws Exception{
+//		int result = messageGroupService.registMessageGroup(params);
+//		
+//		if(result>0) {
+//			rttr.addFlashAttribute("msg", "ok");
+//		}
+//			rttr.addFlashAttribute("msg", "ng");
+//		}
+	
+}

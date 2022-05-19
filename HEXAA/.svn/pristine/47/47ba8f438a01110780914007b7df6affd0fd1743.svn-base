@@ -1,0 +1,683 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<head>
+<meta charset="UTF-8">
+<style>
+	th{
+		padding : 1px;
+		margin: : 1px;
+		font-size: 13px;
+	}
+	td{
+		padding : 0px;
+		margin: : 0px;
+		font-size: 12px;
+	}
+</style>
+<title></title>
+</head>
+<body>
+<section class="content-header">
+   <div class="container-fluid">
+        <div class="row md-2">
+           <div class="col-sm-6">
+              <h1>강의실 별 수업조회</h1>              
+           </div>
+           <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                 <li class="breadcrumb-item">
+                    <a href="list.do">
+                       <i class="fa fa-dashboard"></i>수업관리
+                    </a>
+                 </li>
+               </ol>
+           </div>
+        </div>
+   </div>
+</section>
+<section class="content">
+   <div class="card-header" style="">
+	<div class="card card-dark card-outline card-outline-tabs">
+		<div class="card-header p-0 border-bottom-0">
+			<div class="row">
+				<div class="col-md-9">
+					<ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+						<li class="nav-item">
+							<a class="nav-link" id="custom-tabs-four-home-tab" data-toggle="pill" href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-mon" aria-selected="true">Mon</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link active" id="custom-tabs-four-profile-tab" data-toggle="pill" href="#custom-tabs-four-profile" role="tab" aria-controls="custom-tabs-four-tue" aria-selected="false">Tue</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="custom-tabs-four-messages-tab" data-toggle="pill" href="#custom-tabs-four-messages" role="tab" aria-controls="custom-tabs-four-wed" aria-selected="false">Wed</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="custom-tabs-four-settings-tab" data-toggle="pill" href="#custom-tabs-four-settings" role="tab" aria-controls="custom-tabs-four-thu" aria-selected="false">Tue</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="custom-tabs-four-settings-tab" data-toggle="pill" href="#custom-tabs-four-settings" role="tab" aria-controls="custom-tabs-four-fri" aria-selected="false">Fri</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="custom-tabs-four-settings-tab" data-toggle="pill" href="#custom-tabs-four-settings" role="tab" aria-controls="custom-tabs-four-sat" aria-selected="false">Sat</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-md-3 float-right">
+					<div class="btn-group">
+						<button class="fc-prev-button btn btn-dark" type="button" aria-label="prev"><span class="fa fa-chevron-left"></span></button>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<span style="font-size: 25px;">2022.03.30</span>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<button class="fc-next-button btn btn-dark" type="button" aria-label="next"><span class="fa fa-chevron-right"></span></button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="card-body">
+			<div class="tab-content" id="custom-tabs-four-tabContent">
+				<div class="tab-pane fade" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-mon">
+					<table id="example1" class="table table-bordered table-striped dataTable dtr-inline" style="text-align : center">
+						<thead style="background-color:rgb(32 73 105); color: white;">
+							<tr>
+								<th>교시</th>
+								<th>301</th>
+								<th>302</th>
+								<th>303</th>
+								<th>304</th>
+								<th>305</th>
+								<th>교시</th>
+								<th>401</th>
+								<th>402</th>
+								<th>403</th>
+								<th>404</th>
+								<th>405</th>
+								<th>406</th>
+								<th>407</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td style="background-color:rgb(32 73 105); color: white;">1</td>
+								<td rowspan="3">수학 <br> 정현아</td>
+								<td rowspan="3">수학 <br> 정현아</td>
+								<td rowspan="3">수학 <br> 정현아</td>
+								<td rowspan="3">수학 <br> 정현아</td>
+								<td rowspan="3">수학 <br> 정현아</td>
+								<td style="background-color:rgb(32 73 105); color: white;">1</td>
+								<td rowspan="3">수학 <br> 정현아</td>
+								<td rowspan="3">수학 <br> 정현아</td>
+								<td rowspan="3">수학 <br> 정현아</td>
+								<td rowspan="3">수학 <br> 정현아</td>
+								<td rowspan="3">수학 <br> 정현아</td>
+								<td rowspan="3">수학 <br> 정현아</td>
+								<td rowspan="3">수학 <br> 정현아</td>
+							</tr>
+							<tr>
+								<td style="background-color:rgb(32 73 105); color: white;">2</td>
+								<td style="background-color:rgb(32 73 105); color: white;">2</td>
+							</tr>
+							<tr>
+								<td style="background-color:rgb(32 73 105); color: white;">3</td>
+								<td style="background-color:rgb(32 73 105); color: white;">3</td>
+							</tr>
+							<tr>
+								<td style="background-color:rgb(32 73 105); color: white;">4</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td style="background-color:rgb(32 73 105); color: white;">4</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="tab-pane fade active show" id="custom-tabs-four-profile" role="tabpanel" aria-labelledby="custom-tabs-four-tue">
+					<table id="example1" class="table table-bordered table-striped dataTable dtr-inline" style="text-align : center">
+						<thead style="background-color:rgb(32 73 105); color: white;">
+							<tr>
+								<th>교시</th>
+								<th>301</th>
+								<th>302</th>
+								<th>303</th>
+								<th>304</th>
+								<th>305</th>
+								<th>교시</th>
+								<th>401</th>
+								<th>402</th>
+								<th>403</th>
+								<th>404</th>
+								<th>405</th>
+								<th>406</th>
+								<th>407</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td style="background-color:rgb(32 73 105); color: white;">1</td>
+								<td rowspan="3" style="vertical-align: middle;">수학 <br> 정현아</td>
+								<td rowspan="3" style="vertical-align: middle;">수학 <br> 정현아</td>
+								<td rowspan="3" style="vertical-align: middle;">수학 <br> 정현아</td>
+								<td rowspan="3" style="vertical-align: middle;">수학 <br> 정현아</td>
+								<td rowspan="3" style="vertical-align: middle;">수학 <br> 정현아</td>
+								<td style="background-color:rgb(32 73 105); color: white;">1</td>
+								<td rowspan="3" style="vertical-align: middle;">수학 <br> 정현아</td>
+								<td rowspan="3" style="vertical-align: middle;">수학 <br> 정현아</td>
+								<td rowspan="3" style="vertical-align: middle;">수학 <br> 정현아</td>
+								<td rowspan="3" style="vertical-align: middle;">수학 <br> 정현아</td>
+								<td rowspan="3" style="vertical-align: middle;">수학 <br> 정현아</td>
+								<td rowspan="3" style="vertical-align: middle;">수학 <br> 정현아</td>
+								<td rowspan="3" style="vertical-align: middle;">수학 <br> 정현아</td>
+							</tr>
+							<tr>
+								<td style="background-color:rgb(32 73 105); color: white;">2</td>
+								<td style="background-color:rgb(32 73 105); color: white;">2</td>
+							</tr>
+							<tr>
+								<td style="background-color:rgb(32 73 105); color: white;">3</td>
+								<td style="background-color:rgb(32 73 105); color: white;">3</td>
+							</tr>
+							<tr>
+								<td style="background-color:rgb(32 73 105); color: white;">4</td>
+								<td>과학<br>김종휘</td>
+								<td>과학<br>김종휘</td>
+								<td>과학<br>김종휘</td>
+								<td>과학<br>김종휘</td>
+								<td>과학<br>김종휘</td>
+								<td style="background-color:rgb(32 73 105); color: white;">4</td>
+								<td>과학<br>김종휘</td>
+								<td>과학<br>김종휘</td>
+								<td>과학<br>김종휘</td>
+								<td>과학<br>김종휘</td>
+								<td>과학<br>김종휘</td>
+								<td>과학<br>김종휘</td>
+								<td>과학<br>김종휘</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="tab-pane fade" id="custom-tabs-four-messages" role="tabpanel" aria-labelledby="custom-tabs-four-wed">
+					<table id="example1" class="table table-bordered table-striped dataTable dtr-inline" style="text-align : center">
+						<thead style="background-color:rgb(32 73 105); color: white;">
+							<tr>
+								<th>교시</th>
+								<th>301</th>
+								<th>302</th>
+								<th>303</th>
+								<th>304</th>
+								<th>305</th>
+								<th>교시</th>
+								<th>401</th>
+								<th>402</th>
+								<th>403</th>
+								<th>404</th>
+								<th>405</th>
+								<th>406</th>
+								<th>407</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td style="background-color:rgb(32 73 105); color: white;">1</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td style="background-color:rgb(32 73 105); color: white;">1</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td style="background-color:rgb(32 73 105); color: white;">2</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td style="background-color:rgb(32 73 105); color: white;">2</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td style="background-color:rgb(32 73 105); color: white;">3</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td style="background-color:rgb(32 73 105); color: white;">3</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td style="background-color:rgb(32 73 105); color: white;">4</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td style="background-color:rgb(32 73 105); color: white;">4</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="tab-pane fade" id="custom-tabs-four-settings" role="tabpanel" aria-labelledby="custom-tabs-four-thu">
+					<table id="example1" class="table table-bordered table-striped dataTable dtr-inline" style="text-align : center">
+						<thead style="background-color:rgb(32 73 105); color: white;">
+							<tr>
+								<th>교시</th>
+								<th>301</th>
+								<th>302</th>
+								<th>303</th>
+								<th>304</th>
+								<th>305</th>
+								<th>교시</th>
+								<th>401</th>
+								<th>402</th>
+								<th>403</th>
+								<th>404</th>
+								<th>405</th>
+								<th>406</th>
+								<th>407</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td style="background-color:rgb(32 73 105); color: white;">1</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td style="background-color:rgb(32 73 105); color: white;">1</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td style="background-color:rgb(32 73 105); color: white;">2</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td style="background-color:rgb(32 73 105); color: white;">2</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td style="background-color:rgb(32 73 105); color: white;">3</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td style="background-color:rgb(32 73 105); color: white;">3</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td style="background-color:rgb(32 73 105); color: white;">4</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td style="background-color:rgb(32 73 105); color: white;">4</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="tab-pane fade" id="custom-tabs-four-settings" role="tabpanel" aria-labelledby="custom-tabs-four-fri">
+					<table id="example1" class="table table-bordered table-striped dataTable dtr-inline" style="text-align : center">
+						<thead style="background-color:rgb(32 73 105); color: white;">
+							<tr>
+								<th>교시</th>
+								<th>301</th>
+								<th>302</th>
+								<th>303</th>
+								<th>304</th>
+								<th>305</th>
+								<th>교시</th>
+								<th>401</th>
+								<th>402</th>
+								<th>403</th>
+								<th>404</th>
+								<th>405</th>
+								<th>406</th>
+								<th>407</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td style="background-color:rgb(32 73 105); color: white;">1</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td style="background-color:rgb(32 73 105); color: white;">1</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td style="background-color:rgb(32 73 105); color: white;">2</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td style="background-color:rgb(32 73 105); color: white;">2</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td style="background-color:rgb(32 73 105); color: white;">3</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td style="background-color:rgb(32 73 105); color: white;">3</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td style="background-color:rgb(32 73 105); color: white;">4</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td style="background-color:rgb(32 73 105); color: white;">4</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="tab-pane fade" id="custom-tabs-four-settings" role="tabpanel" aria-labelledby="custom-tabs-four-sat">
+					<table id="example1" class="table table-bordered table-striped dataTable dtr-inline" style="text-align : center">
+						<thead style="background-color:rgb(32 73 105); color: white;">
+							<tr>
+								<th>교시</th>
+								<th>301</th>
+								<th>302</th>
+								<th>303</th>
+								<th>304</th>
+								<th>305</th>
+								<th>교시</th>
+								<th>401</th>
+								<th>402</th>
+								<th>403</th>
+								<th>404</th>
+								<th>405</th>
+								<th>406</th>
+								<th>407</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td style="background-color:rgb(32 73 105); color: white;">1</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td style="background-color:rgb(32 73 105); color: white;">1</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td style="background-color:rgb(32 73 105); color: white;">2</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td style="background-color:rgb(32 73 105); color: white;">2</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td style="background-color:rgb(32 73 105); color: white;">3</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td style="background-color:rgb(32 73 105); color: white;">3</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td style="background-color:rgb(32 73 105); color: white;">4</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td style="background-color:rgb(32 73 105); color: white;">4</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	 </div>
+   </div>
+   <div class="card-body" style="">
+   	<div class="row">
+   		<div class="col-sm-5">
+	   		<div class="card card-outline card-dark">
+				<div class="card-header"style="padding:3px; margin:3px;">
+				<h3 class="card-title">수강중인 학생목록</h3>
+				<div class="card-tools">
+				</div>
+   			</div>
+			<div class="card-body" style="padding:0px; margin:0px; height:300px; overflow: auto;">
+				<table id="example1" class="table table-bordered table-striped dataTable dtr-inline" style="text-align : center">
+					<thead style="background-color:rgb(32 73 105); color: rgb(253 251 216);">
+						<tr>
+							<th>학생명</th>
+							<th>HP</th>
+							<th>생년월일</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="i" begin="0" end="5" step="1">
+							<tr>
+								<td>김종휘${i}</td>
+								<td>010-0000-0000</td>
+								<td>1990.00.00</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+			</div>
+		
+		</div>
+   		<div class="col-sm-7">
+   			<div class="card card-outline card-dark">
+			<div class="card-header"style="padding:3px; margin:3px;">
+				<h3 class="card-title">수업 상세보기</h3>
+				<div class="card-tools">
+				</div>
+			</div>
+			<div class="card-body" style="padding:0px; margin:0px;">
+			<table id="example1" class="table table-bordered table-striped dataTable dtr-inline" style="text-align : center">
+				<tr>
+					<td style="background-color:rgb(32 73 105); color: rgb(253 251 216);">수업명</td>
+					<td colspan="4">중3 수학 내신강의</td>
+					<td colspan="3"><button type="button" class="btn btn-block btn-outline-dark btn-xs">강의계획서</button></td>
+				</tr>
+				
+				<tr>
+					<td style="background-color:rgb(32 73 105); color: rgb(253 251 216);">강의실</td>
+					<td>
+						<select>
+							<option>401호</option>
+							<option>402호</option>
+							<option>403호</option>
+							<option>404호</option>
+							<option>405호</option>
+						</select>
+					</td>
+					<td style="background-color:rgb(32 73 105); color: rgb(253 251 216);">시작일</td>
+					<td colspan="2">2022.03.22</td>
+					<td style="background-color:rgb(32 73 105); color: rgb(253 251 216);">종료일</td>
+					<td colspan="2">2022.04.15</td>
+				</tr>
+				<tr>
+					<td style="vertical-align:center; width:12.5%; background-color:rgb(32 73 105); color: rgb(253 251 216);">과목</td>
+					<td style="width:12.5%;">
+						<select>
+							<option>국어</option>
+							<option>영어</option>
+							<option>수학</option>
+							<option>사회</option>
+							<option>과학</option>
+						</select>
+					</td>
+					<td style="vertical-align:center; width:12.5%; background-color:rgb(32 73 105); color: rgb(253 251 216);">구분</td>
+					<td style="width:12.5%;">
+						<select>
+							<option>대기</option>
+							<option>진행</option>
+							<option>완료</option>
+							<option>미작성</option>
+						</select>
+					</td>
+					<td style="vertical-align:center; width:12.5%; background-color:rgb(32 73 105); color: rgb(253 251 216);">학년</td>
+					<td style="width:12.5%;">
+						<select>
+							<option>중1</option>
+							<option>중2</option>
+							<option>중3</option>
+						</select>
+					</td>
+					<td style="width:12.5%; background-color:rgb(32 73 105); color: rgb(253 251 216);">수강<br>인원</td>
+					<td style="width:12.5%;">8/10</td>
+				</tr>
+				<tr>
+					<td style="background-color:rgb(32 73 105); color: rgb(253 251 216);" colspan="8">수업상세</td>
+				</tr>
+				<tr>
+					<td colspan="8">
+<pre>이 강의는 영국에서 시작되어 그 저기되고
+asdfasdfasdfasdfasdfas
+asdfasdfasdfasdfsadfas
+asdfasdfasdfasfdsadfasdf
+</pre>
+					</td>
+				</tr>
+			</table>
+			</div>
+			
+			</div>
+   		</div>
+   	</div>
+   </div>
+</section>
+   
+   
+   
+</body>
+</html>

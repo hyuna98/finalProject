@@ -1,0 +1,20 @@
+package com.lms.hexa.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class ManagerConsultingController {
+	
+	@RequestMapping("/manager/consulting/scheduleManagement")
+	public String scheduleManagement() {
+		String url = "manager/consulting/scheduleManagement";
+		return url;
+	}
+	
+	@RequestMapping("/manager/consulting/list")
+	public String list() {
+		String url = "manager/consulting/list";
+		return url;
+	}
+}

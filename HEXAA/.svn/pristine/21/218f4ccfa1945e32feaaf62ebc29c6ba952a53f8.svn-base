@@ -1,0 +1,94 @@
+package com.lms.hexa.dao;
+
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.session.SqlSession;
+
+import com.lms.hexa.dto.ExamVO;
+import com.lms.hexa.dto.MarkVO;
+import com.lms.hexa.dto.QuestionVO;
+
+public class ScoreDAOImpl implements ScoreDAO {
+	
+	private SqlSession session;
+	
+	public void setSession(SqlSession session) {
+		this.session = session;
+	}
+
+	@Override // 시험 등록
+	public void insertExam(ExamVO exam) throws SQLException {
+		session.update("Score-Mapper.insertExam", exam);
+	}
+	
+	@Override // 시험 조회
+	public ExamVO selectExam(int examId) throws SQLException {
+		ExamVO exam = session.selectOne("Score-Mapper.selectExam", examId);
+		return exam;
+	}
+
+	@Override // 시험리스트 조회
+	public List<ExamVO> selectExamList() throws SQLException {
+		List<ExamVO> examList = session.selectList("Score-Mapper.selectExamList");
+		return examList;
+	}
+
+	@Override
+	public List<QuestionVO> selectQuestionList(int examId) throws SQLException {
+		List<QuestionVO> questionList = session.selectList("Score-Mapper.selectQuestionList", examId);
+		return questionList;
+	}
+
+	@Override
+	public List<QuestionVO> selectQuesAreaList(int examId) throws SQLException {
+		List<QuestionVO> quesAreaList = session.selectList("Score-Mapper.selectQuesAreaList",examId);
+		return quesAreaList;
+	}
+
+	@Override
+	public int insertQuestionList(HashMap<String, Object> params) throws SQLException {
+		int result = 0;
+		
+		result = session.insert("Score-Mapper.insertQuestionList", params);
+		
+		return result;
+	}
+
+	@Override
+	public int deleteQuestionList(int examId) throws SQLException {
+		int result = 0;
+		
+		result = session.delete("Score-Mapper.deleteQuestionList", examId);
+		
+		return result;
+	}
+
+	@Override
+	public List<ExamVO> searchExamList(String value) throws SQLException {
+		List<ExamVO> examList = session.selectList("Score-Mapper.searchExam", value);
+		return examList;
+	}
+
+	@Override
+	public List<MarkVO> selectMarkList(MarkVO mark) throws SQLException {
+		List<MarkVO> markList = session.selectList("Score-Mapper.selectMarkList", mark);
+		return markList;
+	}
+
+	@Override
+	public List<ExamVO> selectExamByStudent(String studentId) throws SQLException {
+		System.out.println("dao : " + studentId);
+		List<ExamVO> examByStudent = session.selectList("Score-Mapper.examCheckByStudent", studentId);
+		return examByStudent;
+	}
+
+	@Override
+	public List<ExamVO> selectOverallScore(HashMap<String, Object> params) throws SQLException {
+		List<ExamVO> overallScore = session.selectList("Score-Mapper.selectOverall", params);
+		return overallScore;
+	}
+
+}

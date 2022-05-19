@@ -1,0 +1,204 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.getElementsByTagName("html")[0].className += " js";</script>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/assets/css/style.css">
+<title></title>
+</head>
+<body>
+<section class="content-header">
+   <div class="container-fluid">
+        <div class="row md-2">
+           <div class="col-sm-6">
+              <h1>시간표</h1>              
+           </div>
+           <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                 <li class="breadcrumb-item">
+                    <a href="list.do" style="font-size: 1rem; font-weight: 400; line-height: 1.5; color: #212529;">
+                       <i class="fa fa-dashboard"></i>시간표
+                    </a>
+                 </li>
+               </ol>
+           </div>
+        </div>
+   </div>
+</section>
+<section class="content">
+   <div class="card-header" style="height: 800px; overflow: hidden;">
+   	<div class="card card-primary card-tabs card-outline">
+		<div class="card-header p-0 pt-1">
+			<ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+			<li class="nav-item">
+				<a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">시간표</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">수업목록</a>
+			</li>
+			</ul>
+		</div>
+		<div class="card-body">
+			<div class="tab-content" id="custom-tabs-one-tabContent">
+				<div class="tab-pane fade active show" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+					<div class="cd-schedule cd-schedule--loading margin-top-xs margin-bottom-lg js-cd-schedule">
+						<div class="cd-schedule__timeline">
+						<ul>
+						<li><span>16:00</span></li>
+						<li><span>16:30</span></li>
+						<li><span>17:00</span></li>
+						<li><span>17:30</span></li>
+						<li><span>18:00</span></li>
+						<li><span>18:30</span></li>
+						<li><span>19:00</span></li>
+						<li><span>19:30</span></li>
+						<li><span>20:00</span></li>
+						<li><span>20:30</span></li>
+						<li><span>21:00</span></li>
+						<li><span>21:30</span></li>
+						<li><span>22:00</span></li>
+						</ul>
+						</div> 
+						<div class="cd-schedule__events">
+						<ul>
+						<li class="cd-schedule__group">
+						<div class="cd-schedule__top-info"><span>Monday</span></div>
+						<ul>
+						<li class="cd-schedule__event">
+						<a data-start="16:30" data-end="17:30" data-content="event-abs-circuit" data-event="event-1" href="#0">
+						<em class="cd-schedule__name">Abs Circuit</em>
+						</a>
+						</li>
+						<li class="cd-schedule__event">
+						<a data-start="18:00" data-end="19:30" data-content="event-rowing-workout" data-event="event-2" href="#0">
+						<em class="cd-schedule__name">Rowing Workout</em>
+						</a>
+						</li>
+						<li class="cd-schedule__event">
+						<a data-start="20:00" data-end="21:15" data-content="event-yoga-1" data-event="event-3" href="#0">
+						<em class="cd-schedule__name">Yoga Level 1</em>
+						</a>
+						</li>
+						</ul>
+						</li>
+						<li class="cd-schedule__group">
+						<div class="cd-schedule__top-info"><span>Tuesday</span></div>
+						<ul>
+						<li class="cd-schedule__event">
+						<a data-start="16:45" data-end="18:45" data-content="event-yoga-1" data-event="event-3" href="#0">
+						<em class="cd-schedule__name">Yoga Level 1</em>
+						</a>
+						</li>
+						<li class="cd-schedule__event">
+						<a data-start="19:30" data-end="21:00" data-content="event-restorative-yoga" data-event="event-4" href="#0">
+						<em class="cd-schedule__name">Restorative Yoga</em>
+						</a>
+						</li>
+						</ul>
+						</li>
+						<li class="cd-schedule__group">
+						<div class="cd-schedule__top-info"><span>Wednesday</span></div>
+						<ul>
+						<li class="cd-schedule__event">
+						<a data-start="21:00" data-end="22:00" data-content="event-restorative-yoga" data-event="event-4" href="#0">
+						<em class="cd-schedule__name">Restorative Yoga</em>
+						</a>
+						</li>
+						<li class="cd-schedule__event">
+						<a data-start="17:00" data-end="19:00" data-content="event-yoga-5" data-event="event-3" href="#0">
+						<em class="cd-schedule__name">Yoga Level 1</em>
+						</a>
+						</li>
+						</ul>
+						</li>
+						<li class="cd-schedule__group">
+						<div class="cd-schedule__top-info"><span>Thursday</span></div>
+						<ul>
+						<li class="cd-schedule__event">
+						<a data-start="20:00" data-end="21:30" data-content="event-abs-circuit" data-event="event-1" href="#0">
+						<em class="cd-schedule__name">Abs Circuit</em>
+						</a>
+						</li>
+						<li class="cd-schedule__event">
+						<a data-start="17:00" data-end="18:30" data-content="event-rowing-workout" data-event="event-2" href="#0">
+						<em class="cd-schedule__name">Rowing Workout</em>
+						</a>
+						</li>
+						</ul>
+						</li>
+						<li class="cd-schedule__group">
+						<div class="cd-schedule__top-info"><span>Friday</span></div>
+						<ul>
+						<li class="cd-schedule__event">
+						<a data-start="17:00" data-end="18:30" data-content="event-restorative-yoga" data-event="event-4" href="#0">
+						<em class="cd-schedule__name">Restorative Yoga</em>
+						</a>
+						</li>
+						<li class="cd-schedule__event">
+						<a data-start="19:30" data-end="21:30" data-content="event-abs-circuit" data-event="event-1" href="#0">
+						<em class="cd-schedule__name">Abs Circuit</em>
+						</a>
+						</li>
+						</ul>
+						</li>
+						<li class="cd-schedule__group">
+						<div class="cd-schedule__top-info"><span>Saturday</span></div>
+						<ul>
+						<li class="cd-schedule__event">
+						<a data-start="19:00" data-end="20:00" data-content="event-rowing-workout" data-event="event-2" href="#0">
+						<em class="cd-schedule__name">Rowing Workout</em>
+						</a>
+						</li>
+						<li class="cd-schedule__event">
+						<a data-start="20:45" data-end="22:00" data-content="event-yoga-1" data-event="event-3" href="#0">
+						<em class="cd-schedule__name">Yoga Level 1</em>
+						</a>
+						</li>
+						</ul>
+						</li>
+						</ul>
+						</div>
+						<div class="cd-schedule-modal">
+						<header class="cd-schedule-modal__header">
+						<div class="cd-schedule-modal__content">
+						<span class="cd-schedule-modal__date"></span>
+						<h3 class="cd-schedule-modal__name"></h3>
+						</div>
+						<div class="cd-schedule-modal__header-bg"></div>
+						</header>
+						<div class="cd-schedule-modal__body">
+						<div class="cd-schedule-modal__event-info"></div>
+						<div class="cd-schedule-modal__body-bg"></div>
+						</div>
+						<a href="#0" class="cd-schedule-modal__close text-replace">Close</a>
+						</div>
+						<div class="cd-schedule__cover-layer"></div>
+					</div> 
+				</div>
+				<div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
+				Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra purus ut ligula tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus interdum, nisl ligula placerat mi, quis posuere purus ligula eu lectus. Donec nunc tellus, elementum sit amet ultricies at, posuere nec nunc. Nunc euismod pellentesque diam.
+				</div>
+			</div>
+		</div>
+	</div>
+   </div>
+</section>
+   
+<script src="<%=request.getContextPath() %>/resources/bootstrap/assets/js/util.js"></script> 
+<script src="<%=request.getContextPath() %>/resources/bootstrap/assets/js/main.js"></script>
+
+<div class="demo-avd demo-avd-cf demo-avd--dark js-demo-avd" style="top: 30px; right: 30px; left: auto; bottom: auto;"></div>
+<script src="../../assets/js/demo-avd.js?v=6"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-48014931-1', 'codyhouse.co');
+    ga('set', 'anonymizeIp', true);
+    ga('send', 'pageview');
+</script>

@@ -1,0 +1,33 @@
+package com.lms.hexa.service;
+
+import java.sql.SQLException;
+
+import com.lms.hexa.dao.ClassDAO;
+import com.lms.hexa.dto.ClassVO;
+
+public class ClassServiceImpl implements ClassService {
+	
+	protected ClassDAO classDAO;
+
+	public void setClassDAO(ClassDAO classDAO) {
+		this.classDAO = classDAO;
+	}
+	
+	
+	@Override
+	public ClassVO selectClassById(String classId) throws SQLException {
+		
+		ClassVO result = classDAO.selectClassById(classId);
+		return result;
+	}
+
+	@Override
+	public ClassVO getClassInfoByStudentId(String studentId) {
+		ClassVO classInfo = classDAO.selectClassInfoByStudentId(studentId);
+		return classInfo;
+	}
+
+
+	
+
+}

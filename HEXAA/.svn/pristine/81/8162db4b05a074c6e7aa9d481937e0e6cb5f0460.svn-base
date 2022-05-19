@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Menu-Mapper">
+
+	<select id="selectMemberMainMenu" resultType="menu">
+		SELECT MENU_ID as menuId,
+			   MENU_NAME as menuName,
+			   MENU_URL as menuUrl,
+			   MENU_ICON as menuIcon,
+			   MENU_UPCODE as menuUpcode,
+			   MENU_LEVEL as menuLevel,
+			   MENU_CATEGORY as menuCategory,
+			   MENU_HASCHILD as menuHaschild
+		  FROM MENU
+		 WHERE MENU_LEVEL = 1
+		   AND MENU_CATEGORY = 'MEMBER'
+		 ORDER BY MENU_ID
+	</select>
+	
+	<select id="selectMemberSubMenu" parameterType="str" resultType="menu">
+		SELECT MENU_ID as menuId,
+			   MENU_NAME as menuName,
+			   MENU_URL as menuUrl,
+			   MENU_ICON as menuIcon,
+			   MENU_UPCODE as menuUpcode,
+			   MENU_LEVEL as menuLevel,
+			   MENU_CATEGORY as menuCategory,
+			   MENU_HASCHILD as menuHaschild
+		  FROM MENU
+		 WHERE MENU_LEVEL = 2
+		   AND MENU_CATEGORY = 'MEMBER'
+UNION
+        SELECT A.MENU_ID as menuId,
+			   A.MENU_NAME as menuName,
+			   A.MENU_URL as menuUrl,
+			   A.MENU_ICON as menuIcon,
+			   C.MENU_ID as menuUpcode,
+			   A.MENU_LEVEL as menuLevel,
+			   A.MENU_CATEGORY as menuCategory,
+			   A.MENU_HASCHILD as menuHaschild
+		  FROM MENU A, FAVORITES B,
+               (SELECT MENU_ID
+                  FROM MENU
+                 WHERE MENU_NAME LIKE '%즐%'
+                   AND MENU_CATEGORY = 'MEMBER') C
+		 WHERE A.MENU_ID = B.MENU_ID
+		   AND A.MENU_CATEGORY = 'MEMBER'
+           AND B.USER_ID = #{value}
+		 ORDER BY 1
+	</select>
+	
+	<select id="selectMemberFavoriteMenuList" parameterType="str" resultType="menu">
+		SELECT A.MENU_ID as menuId,
+			   A.MENU_NAME as menuName,
+			   A.MENU_URL as menuUrl,
+			   A.MENU_ICON as menuIcon,
+			   C.MENU_ID as menuUpcode,
+			   A.MENU_LEVEL as menuLevel,
+			   A.MENU_CATEGORY as menuCategory,
+			   A.MENU_HASCHILD as menuHaschild
+		  FROM MENU A, FAVORITES B,
+               (SELECT MENU_ID
+                  FROM MENU
+                 WHERE MENU_NAME LIKE '%즐%'
+                   AND MENU_CATEGORY = 'MEMBER') C
+		 WHERE A.MENU_ID = B.MENU_ID
+		   AND A.MENU_CATEGORY = 'MEMBER'
+           AND B.USER_ID = #{value}
+		 ORDER BY 1
+	</select>
+	
+	<select id="selectManagerMainMenu" resultType="menu">
+		SELECT MENU_ID as menuId,
+			   MENU_NAME as menuName,
+			   MENU_URL as menuUrl,
+			   MENU_ICON as menuIcon,
+			   MENU_UPCODE as menuUpcode,
+			   MENU_LEVEL as menuLevel,
+			   MENU_CATEGORY as menuCategory,
+			   MENU_HASCHILD as menuHaschild
+		  FROM MENU
+		 WHERE MENU_LEVEL = 1
+		   AND MENU_CATEGORY = 'MANAGER'
+		 ORDER BY MENU_ID
+	</select>
+	
+	<select id="selectManagerSubMenu" parameterType="str" resultType="menu">
+		SELECT MENU_ID as menuId,
+			   MENU_NAME as menuName,
+			   MENU_URL as menuUrl,
+			   MENU_ICON as menuIcon,
+			   MENU_UPCODE as menuUpcode,
+			   MENU_LEVEL as menuLevel,
+			   MENU_CATEGORY as menuCategory,
+			   MENU_HASCHILD as menuHaschild
+		  FROM MENU
+		 WHERE MENU_LEVEL = 2
+		   AND MENU_CATEGORY = 'MANAGER'
+UNION
+        SELECT A.MENU_ID as menuId,
+			   A.MENU_NAME as menuName,
+			   A.MENU_URL as menuUrl,
+			   A.MENU_ICON as menuIcon,
+			   C.MENU_ID as menuUpcode,
+			   A.MENU_LEVEL as menuLevel,
+			   A.MENU_CATEGORY as menuCategory,
+			   A.MENU_HASCHILD as menuHaschild
+		  FROM MENU A, FAVORITES B,
+               (SELECT MENU_ID
+                  FROM MENU
+                 WHERE MENU_NAME LIKE '%즐%'
+                   AND MENU_CATEGORY = 'MANAGER') C
+		 WHERE A.MENU_ID = B.MENU_ID
+		   AND A.MENU_CATEGORY = 'MANAGER'
+           AND B.USER_ID = #{value}
+		 ORDER BY 1	
+	</select>
+	
+	<select id="selectManagerFavoriteMenuList" parameterType="str" resultType="menu">
+	
+		SELECT A.MENU_ID as menuId,
+			   A.MENU_NAME as menuName,
+			   A.MENU_URL as menuUrl,
+			   A.MENU_ICON as menuIcon,
+			   C.MENU_ID as menuUpcode,
+			   A.MENU_LEVEL as menuLevel,
+			   A.MENU_CATEGORY as menuCategory,
+			   A.MENU_HASCHILD as menuHaschild
+		  FROM MENU A, FAVORITES B,
+               (SELECT MENU_ID
+                  FROM MENU
+                 WHERE MENU_NAME LIKE '%즐%'
+                   AND MENU_CATEGORY = 'MANAGER') C
+		 WHERE A.MENU_ID = B.MENU_ID
+		   AND A.MENU_CATEGORY = 'MANAGER'
+           AND B.USER_ID = #{value}
+		 ORDER BY 1
+	</select>
+	
+	<select id="selectMenuId" parameterType="str" resultType="str">
+	
+	SELECT *
+	  FROM (
+	        SELECT MENU_ID
+	          FROM MENU
+	         WHERE MENU_NAME = #{menuName})
+	 WHERE ROWNUM =1
+		
+	</select>
+	
+</mapper>

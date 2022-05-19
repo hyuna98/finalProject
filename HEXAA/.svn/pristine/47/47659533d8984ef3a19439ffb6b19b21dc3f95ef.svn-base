@@ -1,0 +1,308 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<c:set var="attMaker" value="${dataMap.attMaker }" />
+<c:set var="att" value="${dataMap.attMaker.att }" />
+<c:set var="attandanceList" value="${dataMap.attandanceList }" />
+
+
+
+<head>
+	<style>
+		* {
+			font-size: 14px;
+		}
+		
+		label {
+			margin-bottom: 0;
+		}
+		
+		div.table1 {
+			max-height: 180px;
+			overflow-y: auto;
+		}
+		
+		div.table2 {
+			max-height: 180px;
+			overflow-y: scroll;
+		}
+		
+		div.table3 {
+			max-height: 568px;
+			overflow-y: scroll;  
+		}
+		
+		.table-head-fixed th {
+			padding-top: 0.3em;
+			padding-bottom: 0.3em;
+		}
+		.table-head-fixed td {
+			padding-top: 0.3em;
+			padding-bottom: 0.3em;
+		}
+		
+ 		.card-body.p-0 .table thead>tr>th:first-of-type {
+			padding-left: 12px;
+		}
+ 		.card-body.p-0 .table tbody>tr>td:first-of-type {
+			padding-left: 12px;
+		}
+		.card-body.p-0 .table thead>tr>th:last-of-type {
+			padding-right: 12px;
+		}
+ 		.card-body.p-0 .table tbody>tr>td:last-of-type {
+			padding-right: 12px;
+		}
+		
+		
+		th, td {
+			text-align: center;
+		}
+		#tb1 td, #td1 th {
+			padding:0;
+		}
+		
+		
+		.alert {
+			text-align: center;
+		}
+		.alert {
+			font-size: 15px;
+		}
+		
+		.alert-dismissible {
+	    	padding-right: 0;
+	    	padding-left: 0;
+		}
+	</style>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row md-2">
+				<div class="col-sm-6">
+					<h1>학생출결관리</h1>
+				</div>
+				
+			</div>
+		</div>
+	</section>
+	<section class="content">
+		<div class="container-fluid">
+			<div class="row">
+
+				<!-- 좌측 영역 -->
+				<div class="col-sm-12">
+					<div class="card card-dark card-outline">
+
+						<div class="card-header">
+							<h3 class="card-title">
+								<i class="nav-icon fas fa-search"></i> &nbsp;&nbsp; 학생 출결 검색 옵션
+							</h3>
+						</div>
+
+						<div class="card-body" style="padding-top: 5px;">
+
+							<div class="row">
+								<div class="form-group"
+									style="margin-bottom: 3px; margin-left: 6px;">
+									<div class="custom-control custom-radio col-xs-3"
+										style="display: inline;">
+										<input class="custom-control-input" type="radio"
+											id="customRadio1" name="customRadio" checked> <label
+											for="customRadio1" class="custom-control-label">일자별
+											입력</label>
+									</div>
+									&nbsp;&nbsp;
+									<div class="custom-control custom-radio"
+										style="display: inline;">
+										<input class="custom-control-input" type="radio"
+											id="customRadio2" name="customRadio"> <label
+											for="customRadio2" class="custom-control-label">월전체
+											입력</label>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="input-group" style="padding: 5px;">
+
+									<div class="input-group-prepend">
+										<button type="submit" class="btn btn-dark">
+											<i class="far fa-calendar-alt"></i>
+										</button>
+									</div>
+									<input type="text" value="일자" class="form-control float-right"
+										id="reservation"> 
+									<select class="form-control">
+										<option>수강반</option>
+										<option>수학1반</option>
+										<option>수학2반</option>
+									</select> 
+									<select class="form-control">
+										<option>담임선생님</option>
+										<option>김종휘</option>
+										<option>정현아</option>
+										<option>정유진</option>
+									</select> <input type="text" class="form-control" placeholder="이름">
+									<div class="input-group-append">
+										<button type="submit" class="btn btn-dark"
+											style="height: 4vh;">
+											<i class="fas fa-search"></i>
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="row"></div>
+						</div>
+						<!-- card body -->
+					</div>
+					<!-- card-outline -->
+					<div class="card card-dark card-outline">
+						<div class="card-header">
+							<h3 class="card-title">
+								<i class="fa-solid fa-table-cells"></i> &nbsp;&nbsp; 학생 출결 상태 표
+							</h3>
+						</div>
+						<div class="card-body" style="padding-top: 5px;">
+							<div class="row">
+								<div class="col-sm-2">
+									<select class="form-control">
+												<option>출결상태</option>
+												<option>출석</option>
+												<option>결석</option>
+												
+									</select>
+								</div>
+								<div class="col-sm-12">
+								
+									<table class="table table-head-fixed table-bordered">
+										<thead>
+											<tr>
+												<th style="background-color:rgb(32 73 105); color: white;">전체</th>
+												<th style="background-color:rgb(32 73 105); color: white;">출석</th>
+												<th style="background-color:rgb(32 73 105); color: white;">결석</th>
+												<th style="background-color:rgb(32 73 105); color: white;">통보결석</th>
+												<th style="background-color:rgb(32 73 105); color: white;">지각</th>
+												<th style="background-color:rgb(32 73 105); color: white;">조퇴</th>
+												<th style="background-color:rgb(32 73 105); color: white;">미입력</th>
+												
+											</tr>
+											<tr>
+												<td>${attMaker.totalNum}</td>
+												<td>${attMaker.ynnNum}</td>
+												<td>${attMaker.ynNum}</td>
+												<td>123</td>
+												<td>23</td>
+												<td>44</td>
+												<td>3</td>
+											</tr>
+										</thead>
+									</table>		
+								</div>	
+							
+							</div>
+						</div>
+					</div>
+					
+					<br />
+					
+				
+					<div class="card card-dark card-outline">
+
+						<div class="card-header">
+							<div class="row">
+								<div class="col-sm-3">
+									<h3 class="card-title">
+										<i class="fas fa-list" aria-hidden="true"></i> &nbsp;&nbsp; 학생 출결 리스트
+									</h3>
+								</div>
+								<div class="col-sm-7">
+								
+								</div>
+								<div class="col-sm-1">
+									<button type="button" class="btn btn-block btn-outline-info btn-xs">저장</button>
+								</div>
+								<div class="col-sm-1">
+									<button type="button" class="btn btn-block btn-outline-info btn-xs">엑셀</button>
+								</div>	
+							</div>
+						</div>
+						<div class="card-body" >
+							
+								
+								
+								
+							
+							<div class="row table1" style="max-height: 32vh;">
+								<div class="card-body table p-0">
+									<table class="table table-head-fixed table-bordered" style="height: 30vh;" >
+										<thead >
+										
+											<tr>
+												<th style="background-color:rgb(32 73 105); color: white;">NO</th>
+												<th style="background-color:rgb(32 73 105); color: white;">일자</th>
+												<th style="background-color:rgb(32 73 105); color: white;">이름</th>
+												<th style="background-color:rgb(32 73 105); color: white;">수강 반</th>
+												<th style="background-color:rgb(32 73 105); color: white;">등원</th>
+												<th style="background-color:rgb(32 73 105); color: white;">하원</th>
+												<th style="background-color:rgb(32 73 105); color: white;">출결</th>
+												<th style="background-color:rgb(32 73 105); color: white;">결석/지각 /조퇴사유</th>
+											</tr>
+										</thead>
+										<tbody>
+										<c:forEach items="${attandanceList }" var="attandance">
+											<tr>
+												<td>${attandance.atnId }</td>
+												<td>${attandance.atnDate }</td>
+												<td>정유진</td>
+												<td>수학1반</td>
+												<td>09:00</td>
+												<td>18:00</td>
+												<td>
+													<button id="one" type="button" class="btn btn-block btn-outline-info btn-xs one">출석</button>
+													<button id="two" type="button" class="btn btn-block btn-outline-info btn-xs two">결석</button>
+												</td>
+												<td><input type="text" class="form-control" placeholder="사유"></td>
+											</tr>
+										</c:forEach>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+
+
+
+
+				</div>
+			</div>
+		</div>
+	</section>
+<script>
+	var mem_att_check = 'att';
+	 
+	if(mem_att_check ==='att'){
+		
+		for(var i =0; i<25; i++){
+			
+			document.getElementsByClassName("btn btn-block btn-outline-info btn-xs one")[i].style.borderColor ="#17a2b8";	
+			document.getElementsByClassName("btn btn-block btn-outline-info btn-xs one")[i].style.backgroundColor ="#17a2b8";	
+			document.getElementsByClassName("btn btn-block btn-outline-info btn-xs one")[i].style.color ="#fff";	
+		}	
+	}
+
+
+
+</script>	
+
+</body>
+</html>

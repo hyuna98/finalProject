@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+
+ <mapper namespace="Authority-Mapper">
+ 	<resultMap type="authority" id="authorityMap">
+ 		<result property="id" column="MNG_ID" />
+ 		<result property="menuId" column="MENU_ID" />
+ 	</resultMap>
+
+	<select id="selectAuthorityById" parameterType="str" resultMap="authorityMap">
+		select *
+		 from authority
+		where MNG_ID = #{id}
+	</select>
+	
+ </mapper>

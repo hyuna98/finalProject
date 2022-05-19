@@ -1,0 +1,18 @@
+package com.lms.hexa.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+@Controller
+public class SendMassageController {
+	
+	@RequestMapping("/manager/academymanagement/kakao/list")
+	public ModelAndView list(ModelAndView mnv)throws Exception{
+		
+		String url="/manager/academymanagement/kakao/list";
+		
+		mnv.setViewName(url);
+		return mnv;
+	}
+}

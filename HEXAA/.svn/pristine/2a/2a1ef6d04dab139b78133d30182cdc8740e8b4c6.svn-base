@@ -1,0 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+
+<body>
+<script>
+	Swal.fire({
+	  title: '저장 성공했습니다.',
+	  imageUrl: 'https://post-phinf.pstatic.net/MjAxODEyMTFfMTAw/MDAxNTQ0NTA0MDgyOTMz.bD3_qYAKhivyntOXUfWOxIDab4msHT-KNMDDwq3oMnIg.4tDkeh83lxHseQFLoy4c9JAXtfdy3iyPzGlN_2JWLqYg.GIF/cat-typing-furiously.gif?type=w1200',
+	  imageWidth: 400,
+	  imageHeight: 200,
+	  imageAlt: 'Custom image',
+	  animation: false
+	})
+	
+	//alert("저장 성공했습니다.");
+	setTimeout(function() {
+		window.location.href="<%=request.getContextPath()%>/manager/membermanagement/membermanagement/list.do";
+		}, 300);
+	
+</script>
+
+</body>

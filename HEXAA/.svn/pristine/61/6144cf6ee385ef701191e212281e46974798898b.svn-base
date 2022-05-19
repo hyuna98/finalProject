@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ManagerAttandance-Mapper">
+
+	<resultMap type="attandance" id="attandanceMap">
+		<result property="atnId" column="ATN_ID"/>
+		<result property="atnDate" column="ATN_DATE"/>
+		<result property="atnGoTime" column="ATN_GO_TIME"/>
+		<result property="atnOutTime" column="ATN_OUT_TIME"/>
+		<result property="atnStartDeadlineYn" column="ATN_START_DEADLINE_YN"/>
+		<result property="atnYn" column="ATN_YN"/>
+		<result property="atnYnManager" column="ATN_YN_MANAGER"/>
+		<result property="atnRandomTime" column="ATN_RANDOM_TIME"/>
+		<result property="atnReason" column="ATN_REASON"/>
+		<result property="studentId" column="STUDENT_ID"/>
+	</resultMap>
+		
+	<select id="selectAttandance" parameterType="str" resultMap="attandanceMap">
+		SELECT *
+		  FROM ATTENDANCE
+		
+	</select>
+	
+	<select id="selectAttandanceGetStudentId" parameterType="str" resultMap="attandanceMap">
+		SELECT STUDENT_ID
+		  FROM ATTENDANCE
+          where atn_yn ='Y'
+          AND ATN_YN_MANAGER = 'N'
+		
+	</select>
+	
+	<select id="selectAttandanceTotalCount" resultType="int">
+		select count(*) from attendance 
+		
+	</select>
+	
+	<select id="selectAttandanceYNCount" resultType="int">
+		select count(*) from attendance where ATN_YN_MANAGER = 'N' 
+		
+	</select>
+	
+	<update id="updateAttandance" parameterType="str" >
+		  UPDATE ATTENDANCE
+          SET ATN_YN_MANAGER = 'Y'
+          where STUDENT_ID = #{studentId}
+          AND atn_yn ='Y'
+          AND ATN_YN_MANAGER = 'N'
+	</update>
+	
+	<update id="updateAttandanceQr" parameterType="str" >
+		  UPDATE ATTENDANCE
+          SET atn_yn = 'Y'
+          where STUDENT_ID = #{studentId}
+          AND atn_yn ='N'
+          
+	</update>
+	
+	
+	
+	
+</mapper>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+
+ <mapper namespace="Attach-Mapper">
+ 	
+ 	<resultMap type="attach" id="attachMap">
+ 		<result property="pdsId" column="PDS_ID" />
+ 		<result property="attachId" column="ATTACH_ID" />
+ 		<result property="attachPath" column="ATTACH_PATH" />
+ 		<result property="attachName" column="ATTACH_NAME" />
+ 		<result property="attachType" column="ATTACH_TYPE" />
+ 		<result property="attachWriter" column="ATTACH_WRITER" />
+ 		<result property="attachDate" column="ATTACH_DATE" />
+ 	</resultMap>
+ 
+ 
+ 	<select id="selectAttachByPdsId" resultType="attach">
+ 		SELECT * 
+ 		FROM ATTACH
+ 		WHERE PDS_ID = #{pdsId}
+ 	</select>
+ 	
+ 	<select id="selectAttachByAttachId" resultType="attach">
+ 		select *
+ 		from attach
+ 		where attachId = #{attachId}
+ 	</select>
+ 	
+ 	<update id="insertAttach">
+ 		insert into
+ 		attach (attach_id, attach_path, attach_name, attach_type, pds_id, attach_writer, attach_date)
+ 		values (attach_sch_seq.nextval, #{attachPath}, #{attachName}, #{attachType}, #{pdsId}, #{attachWriter}, sysdate)
+ 	</update>
+ 	
+ 	<update id="deleteAttach">
+ 		delete from attach where attachId = #{attachId}
+ 	</update>
+ 	
+ 	<update id="deleteAllAttach">
+ 		delete from attach where pdsId = #{pdsId}
+ 	</update>
+ 	
+ </mapper>

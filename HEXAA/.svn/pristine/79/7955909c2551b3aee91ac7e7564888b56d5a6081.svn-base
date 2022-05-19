@@ -1,0 +1,14 @@
+package com.lms.hexa.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.lms.hexa.dto.AcademyHomepageUseVO;
+import com.lms.hexa.dto.AcademyinfoVO;
+import com.lms.hexa.dto.SchoolVO;
+
+public interface AcademyHomepageUseDAO {
+	
+	
+	int insert(AcademyHomepageUseVO acdemyHomepageUse) throws SQLException;
+}

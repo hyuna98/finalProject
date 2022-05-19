@@ -1,0 +1,41 @@
+package com.lms.hexa.command;
+
+import com.lms.hexa.dto.PdsVO;
+
+public class PdsModifyCommand  extends PdsRegistCommand{
+	
+	private int pdsId;
+	private String[] deleteFile;
+	
+
+	public int getPdsId() {
+		return pdsId;
+	}
+
+	public void setPdsId(int pdsId) {
+		this.pdsId = pdsId;
+	}
+
+	public String[] getDeleteFile() {
+		return deleteFile;
+	}
+
+	public void setDeleteFile(String[] deleteFile) {
+		this.deleteFile = deleteFile;
+	}
+
+
+	@Override
+	public PdsVO toPdsVO(){
+		PdsVO pds = super.toPdsVO();
+		pds.setPdsId(this.pdsId);	
+		
+		return pds;
+	}
+}
+
+
+
+
+
+

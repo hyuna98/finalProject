@@ -1,0 +1,48 @@
+package com.lms.hexa.dto;
+
+import java.util.Date;
+
+public class NoticeVO {
+	
+	private int noticeId;
+	private String noticeTitle;
+	private Date noticeRegdate;
+	private String noticeContent;
+	private String mngId;
+	
+	
+
+	public int getNoticeId() {
+		return noticeId;
+	}
+	public void setNoticeId(int noticeId) {
+		this.noticeId = noticeId;
+	}
+	public String getNoticeTitle() {
+		return noticeTitle;
+	}
+	public void setNoticeTitle(String noticeTitle) {
+		this.noticeTitle = noticeTitle;
+	}
+	public Date getNoticeRegdate() {
+		return noticeRegdate;
+	}
+	public void setNoticeRegdate(Date noticeRegdate) {
+		this.noticeRegdate = noticeRegdate;
+	}
+	public String getNoticeContent() {
+		return noticeContent;
+	}
+	public void setNoticeContent(String noticeContent) {
+		this.noticeContent = noticeContent;
+	}
+	public String getMngId() {
+		return mngId;
+	}
+	public void setMngId(String mngId) {
+		this.mngId = mngId;
+	}
+
+	
+
+}

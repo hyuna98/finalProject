@@ -1,0 +1,19 @@
+package com.lms.hexa.service;
+
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
+
+import com.lms.hexa.dto.SubjectAttendanceVO;
+
+public interface SubjectAttendanceService {
+	
+	
+	public Map<String, Object> getByTeacherAttList(String lessonAssignmentId) throws SQLException;
+	
+	public void insertSubjectList() throws SQLException;
+	
+	public void updateSubject(String id) throws SQLException;
+	
+	
+}

@@ -1,0 +1,42 @@
+package com.lms.hexa.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+
+import com.lms.hexa.dto.MenuVO;
+
+public class MenuDAOImpl implements MenuDAO{
+
+	private SqlSession session;
+	
+	public void setSession(SqlSession session) {
+		this.session = session;
+	}
+
+	@Override
+	public List<MenuVO> selectMemberMenuList() throws SQLException {
+		List<MenuVO> menuList= session.selectList("Menu-Mapper.selectMemberMainMenu");
+		return menuList;
+	}
+
+	@Override
+	public List<MenuVO> selectMemberSubMenuList() throws SQLException {
+		List<MenuVO> menuList= session.selectList("Menu-Mapper.selectMemberSubMenu");
+		return menuList;
+	}
+
+	@Override
+	public List<MenuVO> selectManagerMenuList() throws SQLException {
+		List<MenuVO> menuList= session.selectList("Menu-Mapper.selectManagerMainMenu");
+		return menuList;
+	}
+
+	@Override
+	public List<MenuVO> selectManagerSubMenuList() throws SQLException {
+		List<MenuVO> menuList= session.selectList("Menu-Mapper.selectManagerSubMenu");
+		return menuList;
+	}
+	
+}

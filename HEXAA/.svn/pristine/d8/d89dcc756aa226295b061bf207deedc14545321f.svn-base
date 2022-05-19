@@ -1,0 +1,16 @@
+package com.lms.hexa.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+
+import com.lms.hexa.dto.SubjectAttendanceVO;
+
+public interface SubjectAttandanceDAO {
+	
+	public List<SubjectAttendanceVO> selectBySubjectList(String lessonAssignmentId) throws SQLException;
+	
+	void insert(List<SubjectAttendanceVO> subjectAttendanceList) throws SQLException;
+	
+	void update(String id) throws SQLException;
+}

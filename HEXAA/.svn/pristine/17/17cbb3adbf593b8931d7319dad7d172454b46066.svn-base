@@ -1,0 +1,76 @@
+package com.lms.hexa.dao;
+
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.lms.hexa.dto.ChartVO;
+import com.lms.hexa.dto.ExamVO;
+import com.lms.hexa.dto.FeedBackVO;
+import com.lms.hexa.dto.MarkVO;
+import com.lms.hexa.dto.QuestionVO;
+
+public interface ScoreDAO {
+
+	// 시험등록
+	public void insertExam(ExamVO exam) throws SQLException;
+	
+	// 시험 정보 조회
+	public ExamVO selectExam(int examId) throws SQLException;
+	
+	// 시험리스트 조회
+	public List<ExamVO> selectExamList() throws SQLException;
+	
+	// 문항 리스트 조회
+	public List<QuestionVO> selectQuestionList(int examId) throws SQLException;
+	
+	public List<MarkVO> selectMarkList(MarkVO mark) throws SQLException;
+	
+	// 영역 리스트 가져오기
+	public List<QuestionVO> selectQuesAreaList(int examId) throws SQLException;
+	
+	public int insertQuestionList(HashMap<String, Object> params) throws SQLException;
+	
+	public int deleteQuestionList(int examId) throws SQLException;
+	
+	//검색
+	List<ExamVO> searchExamList(String value) throws SQLException;
+	
+	// 학생별 시험
+	List<ExamVO> selectExamByStudent(String studentId) throws SQLException;
+	
+	// 종합점수
+	List<ExamVO> selectOverallScore(HashMap<String, Object> params) throws SQLException;
+	
+	// 피드백 가져오기
+	List<FeedBackVO> selectFeedBack(HashMap<String, Object> params) throws SQLException;
+	
+	// 피드백 저장
+	int insertFeedback(HashMap<String, Object> params) throws SQLException;
+	
+	// 시험 검색
+	List<ExamVO> examSearch(HashMap<String, Object> params) throws SQLException;
+	
+	// chart1 
+	List<ExamVO> selectChart1(HashMap<String, Object> params) throws SQLException;
+
+	List<ExamVO> selectChart2(HashMap<String, Object> params) throws SQLException;
+	
+	// 차트3 
+	int selectTotalNum(int examId) throws SQLException;
+	int selectGetNum(int examId) throws SQLException;
+	
+	int selectGoodTotalNum(int examId) throws SQLException;
+	int selectGoodNum(int examId) throws SQLException;
+	
+	int selectFairTotalNum(int examId) throws SQLException;
+	int selectFairNum(int examId) throws SQLException;
+	
+	int selectPoorTotalNum(int examId) throws SQLException;
+	int selectPoorNum(int examId) throws SQLException;
+	
+	// 차트 4
+	List<ExamVO> selectChart4(int examId) throws SQLException;
+	
+}

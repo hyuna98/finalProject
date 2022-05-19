@@ -1,0 +1,74 @@
+package com.lms.hexa.service;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.lms.hexa.command.Criteria;
+import com.lms.hexa.dao.AttachDAO;
+import com.lms.hexa.dao.HomeworkDAO;
+import com.lms.hexa.dto.AttachVO;
+import com.lms.hexa.dto.HomeworkVO;
+import com.lms.hexa.dto.LessonVO;
+
+public class HomeworkServiceImpl implements HomeworkService{
+	
+	private HomeworkDAO homeworkDAO;
+	
+	public void setHomeworkDAO(HomeworkDAO homeworkDAO) {
+		this.homeworkDAO = homeworkDAO;
+	}
+	
+	private AttachDAO attachDAO;
+	
+	public void setAttachDAO(AttachDAO attachDAO) {
+		this.attachDAO = attachDAO;
+	}
+
+	@Override
+	public List<LessonVO> getLessonIntegratedSearchList(Criteria cri) {
+		List<LessonVO> lessonList = homeworkDAO.selectLessonIntegratedSearchList(cri);
+		return lessonList;
+	}
+
+	@Override
+	public void regist(HomeworkVO homeworkVO,ArrayList<String> studentIdlist) {
+		int attachGroupId = attachDAO.getAttachSeqNextValue();
+		
+		Map<String,Object> insertHomeWorkMap = new HashMap<String,Object>();
+		
+		if(homeworkVO.getAttachList() != null) {
+			int index = 1;
+			for (AttachVO attach : homeworkVO.getAttachList()) {
+				attach.setAttachGroupId(attachGroupId);
+				attach.setAttachWriter(homeworkVO.getManagerId());
+				attach.setAttachId(index);
+				attachDAO.insertAttach(attach);
+				index++;
+			}
+		}
+		int hwkId = homeworkDAO.selectHomeWorkSeqNextValue();
+		homeworkVO.setAttachGroupId(attachGroupId);
+		homeworkVO.setHwkId(hwkId);
+		
+		homeworkDAO.insertHomeWork(homeworkVO);
+		insertHomeWorkMap.put("hwkId",hwkId);
+		insertHomeWorkMap.put("studentIdlist",studentIdlist);
+		
+		homeworkDAO.insertGivenHomeWorkStudentList(insertHomeWorkMap);
+	}
+
+	@Override
+	public List<HomeworkVO> getHomeWorkList(String lessonAssignmentId) {
+		List<HomeworkVO> homeworkList = homeworkDAO.selectHomeWorkList(lessonAssignmentId);
+		return homeworkList;
+	}
+
+	@Override
+	public List<AttachVO> getAttachfileList(String attachGroupId) {
+		List<AttachVO> attachFileList = homeworkDAO.selectAttachfileList(attachGroupId);
+		return attachFileList;
+	}
+	
+}

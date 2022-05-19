@@ -1,0 +1,29 @@
+package com.lms.hexa.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/manager/pds")
+public class PdsController {
+	
+	@RequestMapping("/Regist")
+	public String pdsRegist() {
+		String url = "manager/pds/pdsRegist";
+		return url;
+	}
+	
+	
+//	@RequestMapping("/Detail")
+//	public String pdsDetail() {
+//		String url = "manager/pds/pdsDetail";
+//		return url;
+//	}
+	
+	@RequestMapping("/Modify")
+	public String pdsModify() {
+		String url = "manager/pds/pdsModify";
+		return url;
+	}
+	
+}

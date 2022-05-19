@@ -1,0 +1,256 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+
+</head>
+
+<body>
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row md-2">
+        <div class="col-sm-6">
+          <h1>미납관리</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="card card-dark card-outline">
+            <div class="card-header">
+              <h3 class="card-title">
+                <i class="fas fa-search" aria-hidden="true"></i>
+                검색
+              </h3>
+              <div class="card-tools"></div>
+            </div>
+            <div class="row">
+              <div class="card-body">
+                <div class="col-sm-6" style="display:flex;">
+
+                  <div class="col-sm-5">
+                    <div class="form-group">
+                      <input type="month" name="birthmoon">
+                    </div>
+                  </div>
+
+                  <div class="col-sm-7">
+                    <div class="form-group" style="display:flex;">
+
+                      <div class="custom-control custom-radio">
+                        <input class="custom-control-input" type="radio" id="customRadio2" name="customRadio" checked>
+                        <label for="customRadio2" class="custom-control-label">해당 월만</label>
+                      </div>
+
+                      <div style="width:10px;"></div>
+
+                      <div class="custom-control custom-radio">
+                        <input class="custom-control-input" type="radio" id="customRadio1" name="customRadio">
+                        <label for="customRadio1" class="custom-control-label">해당 월 까지</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-12">
+                  <div class="form-group">
+
+                    <label for="exampleInputEmail1" style="padding-right : 5px;">수업종류</label>
+                    <select name="class" id="class" style="width:100px; padding:2px; border:1px solid #999; margin-right: 15px;">
+                      <option value="">전체</option>
+                      <option value="">선택1</option>
+                      <option value="">선택2</option>
+                    </select>
+
+                    <label for="exampleInputEmail1" style="padding-right : 5px;">학년</label>
+                    <select name="class" id="class" style="width:100px; padding:2px; border:1px solid #999; margin-right: 25px;">
+                      <option value="">전체</option>
+                      <option value="">1학년</option>
+                      <option value="">2학년</option>
+                      <option value="">3학년</option>
+                    </select>
+
+                    <label for="exampleInputEmail1" style="padding-right : 5px;">담임선생님</label>
+                    <select name="class" id="class" style="width:100px; padding:2px; border:1px solid #999; margin-right: 15px;">
+                      <option value="">전체</option>
+                      <option value="">김종휘T</option>
+                      <option value="">문명진T</option>
+                      <option value="">정유진T</option>
+                      <option value="">정태형T</option>
+                      <option value="">김선정T</option>
+                    </select>
+
+                    <label for="exampleInputEmail1" style="padding-right : 5px;">학급</label>
+                    <select name="class" id="class" style="width:100px; padding:2px; border:1px solid #999; margin-right: 15px;">
+                      <option value="">전체</option>
+                      <option value="">중1</option>
+                      <option value="">중2</option>
+                      <option value="">중3</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+
+                    <label for="exampleInputEmail1" style="padding-right : 5px;">학생명</label>
+                    <select name="class" id="class" style="width:100px; padding:2px; border:1px solid #999; margin-right: 3px;">
+                      <option value="">전체</option>
+                      <option value="">000</option>
+                      <option value="">111</option>
+                      <option value="">222</option>
+                    </select>
+                    <input type="text" style="width:130px; margin-right: 63px;">
+
+                    <label for="exampleInputEmail1" style="padding-right : 5px;">결제예정일</label>
+                    <input type="date" id="start" name="trip-start" value="2022-03-29" min="2022-01-01" max="2022-12-31">
+
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12">
+          <div class="card card-dark card-outline">
+            <div class="card-header">
+              <h3 class="card-title">
+                <i class="fas fa-check" aria-hidden="true"></i>
+                미납자 리스트
+              </h3>
+              <div class="card-tools"></div>
+            </div>
+            <div class="card-body">
+              <div class="card-body p-0">
+                <table class="table table-hover table-bordered text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>번호</th>
+                      <th>회원명</th>
+                      <th>학년</th>
+                      <th>미납금액</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>183</td>
+                      <td>John Doe</td>
+                      <td>1학년</td>
+                      <td>200,000</td>
+                    </tr>
+                    <tr>
+                      <td>219</td>
+                      <td>Alexander Pierce</td>
+                      <td>2학년</td>
+                      <td>500,000</td>
+                    </tr>
+                    <tr>
+                      <td>657</td>
+                      <td>Bob Doe</td>
+                      <td>2학년</td>
+                      <td>300,000 </td>
+                    </tr>
+                    <tr>
+                      <td>175</td>
+                      <td>Mike Doe</td>
+                      <td>3학년</td>
+                      <td>200,000 </td>
+                    </tr>
+                  </tbody>
+                </table>
+                
+                <div class="row">
+                	<div class="col-sm-7"></div>
+                	<div class="col-sm-5">
+		                <table class="table table-hover table-bordered text-nowrap">
+					      	<thead>
+						      	<tr>
+						      		<th>미납 총액</th>
+						      		<th>1,500,000원</th>
+						      	</tr>
+					      	</thead>
+					      	
+					        <tbody>
+					<!--           <tr> -->
+					<!--                             <th>미납금액 계</th> -->
+					<!--                             <td colspan="3">1,500,000</td> -->
+					<!--             <td>2</td> -->
+					<!--             <td colspan="3">2</td> -->
+					
+									
+					
+					<!--           </tr> -->
+					       </tbody>
+					      </table>
+                	
+                	</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+    	<div class="col-sm-12">
+    	
+      <table class="table table-hover table-bordered text-nowrap">
+      	<thead>
+      	<tr>
+      		<th style="border-right: none; "></th>
+      		
+      		<th></th>
+      		<th>q</th>
+      		<th>q</th>
+      	</tr>
+      	</thead>
+      	
+        <tbody>
+<!--           <tr> -->
+<!--                             <th>미납금액 계</th> -->
+<!--                             <td colspan="3">1,500,000</td> -->
+<!--             <td>2</td> -->
+<!--             <td colspan="3">2</td> -->
+
+				
+
+<!--           </tr> -->
+       </tbody>
+      </table>
+     
+	</div>
+	
+	
+    </div>
+  </div>
+</section>
+
+        </div>
+
+        <!-- 	<div class="col-sm-12" style="display:flex; height:70px;"> -->
+        <!-- 		<div class="col-sm-4" style="background-color: rgb(32 73 105); text-align : center; line-height: 70px; font-size: 100%; "> -->
+        <!-- 				<span style=" text-align : center; line-height: 70px; font-size: 120%; color: white;" >미납금액</span> -->
+
+        <!-- 			</div> -->
+
+        <!-- 			<div class="col-sm-8" style="text-align : center; line-height: 70px; font-size: 110%;"> -->
+        <!-- 				1,500,000원 -->
+
+        <!-- 			</div> -->
+        <!-- 	</div> -->
+      </div>
+    </div>
+  </section>
+
+</body>
+
+</html>

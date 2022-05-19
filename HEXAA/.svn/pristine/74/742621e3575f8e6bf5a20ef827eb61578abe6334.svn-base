@@ -1,0 +1,57 @@
+package com.lms.hexa.service;
+
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.lms.hexa.command.Criteria;
+import com.lms.hexa.command.PageMaker;
+import com.lms.hexa.dao.NoteDAO;
+import com.lms.hexa.dto.NoteVO;
+
+public class NoteServiceImpl implements NoteService{
+	
+	private NoteDAO noteDAO;
+	public void setNoteDAO(NoteDAO noteDAO) {
+		this.noteDAO = noteDAO;
+	}
+
+	@Override
+	public Map<String, Object> getReceiveList() throws SQLException {
+		List<NoteVO> noteReceiveList = noteDAO.selectNoteReceiveList();
+		
+//		PageMaker pageMaker = new PageMaker();
+//		pageMaker.setCri(cri);
+//		pageMaker.setTotalCount(noteDAO.selectNoteCriteriaTotalCountReceive());
+		
+		Map<String, Object> dataMapRe = new HashMap<String, Object>();
+		dataMapRe.put("noteReceiveList", noteReceiveList);
+//		dataMapRe.put("pageMaker", pageMaker);
+		
+		return dataMapRe;
+	}
+
+	@Override
+	public Map<String, Object> getSendList() throws SQLException {
+		
+		List<NoteVO> noteSendList = noteDAO.selectNoteSendList();
+		
+//		PageMaker pageMaker = new PageMaker();
+//		pageMaker.setCri(cri);
+//		pageMaker.setTotalCount(noteDAO.selectNoteCriteriaTotalCountSend(cri));
+		
+		Map<String, Object> dataMapSe = new HashMap<String, Object>();
+		dataMapSe.put("noteSendList", noteSendList);
+//		dataMapSe.put("pageMaker", pageMaker);
+		
+		return dataMapSe;
+	}
+
+	@Override
+	public NoteVO getNote(int noteId) throws SQLException {
+		NoteVO note = noteDAO.selectNoteByNoteId(noteId);
+		return note;
+	}
+	
+}

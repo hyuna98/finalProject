@@ -1,0 +1,21 @@
+package com.lms.hexa.dao;
+
+import java.sql.SQLException;
+
+import org.apache.ibatis.session.SqlSession;
+
+public class ParentDAOImpl implements ParentDAO{
+
+	private SqlSession session;
+	
+	public void setSession(SqlSession session) {
+		this.session = session;
+	}
+	
+	@Override
+	public void updatePwd(String emailAddress) throws SQLException {
+		session.update("Parent-Mapper.updatePwd", emailAddress);
+		
+	}
+
+}

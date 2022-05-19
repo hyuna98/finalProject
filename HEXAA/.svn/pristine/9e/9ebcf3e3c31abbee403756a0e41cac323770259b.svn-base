@@ -1,0 +1,22 @@
+package com.lms.hexa.service;
+
+import java.sql.SQLException;
+import java.util.Map;
+
+import com.lms.hexa.command.Criteria;
+import com.lms.hexa.dto.NoteVO;
+
+public interface NoteService {
+	
+	// 받은 리스트 조회
+	Map<String, Object> getReceiveList() throws SQLException;
+	
+	// 보낸 리스트 조회
+	Map<String, Object> getSendList() throws SQLException;
+	
+	// 글 조회
+	NoteVO getNote(int noteId) throws SQLException;
+	
+	
+	
+}

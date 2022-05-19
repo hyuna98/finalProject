@@ -1,0 +1,88 @@
+package com.lms.hexa.dao;
+
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+
+
+import org.apache.ibatis.session.SqlSession;
+
+import com.lms.hexa.dto.ConsultingVO;
+
+
+
+
+
+public class ConsultingDAOImpl implements ConsultingDAO{
+
+	
+	private SqlSession session;
+	
+	
+	public void setSession(SqlSession session) {
+		this.session = session;
+	}
+
+	
+
+
+
+	@Override
+	public List<ConsultingVO> selectDivision() throws SQLException {
+		List<ConsultingVO> list = session.selectList("Consulting-Mapper.selectDivision");
+		return list;
+	}
+
+	@Override
+	public List<ConsultingVO> selectTeacher() throws SQLException {
+		List<ConsultingVO> list = session.selectList("Consulting-Mapper.selectTeacher");
+		return list;
+	}
+
+
+	@Override
+	public List<ConsultingVO> selectStudent(String parentId) throws SQLException {
+		List<ConsultingVO> list = session.selectList("Consulting-Mapper.selectStudent",parentId);
+		return list;
+	}
+
+
+
+	@Override
+	public List<ConsultingVO> selectSchedule(ConsultingVO consulting) throws SQLException {
+		List<ConsultingVO> list = session.selectList("Consulting-Mapper.selectSchedule",consulting);
+		return list;
+	}
+	
+
+
+	@Override
+	public int insertRequest(ConsultingVO consulting) throws SQLException {
+		int result = session.insert("Consulting-Mapper.insertRequest",consulting);
+		return result;
+	}
+
+
+	@Override
+	public List<ConsultingVO> selectManagerSchedule(HashMap<String, Object> params) {
+		List<ConsultingVO> managerScheduleList = session.selectList("Consulting-Mapper.getManagerSchedule", params);
+		return managerScheduleList;
+	}
+
+
+
+
+
+
+
+	
+	
+
+
+
+
+
+
+
+	
+}

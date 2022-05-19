@@ -1,0 +1,94 @@
+package com.lms.hexa.controller;
+
+import java.sql.SQLException;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.lms.hexa.command.PdsModifyCommand;
+import com.lms.hexa.command.PdsRegistCommand;
+import com.lms.hexa.dto.PdsVO;
+import com.lms.hexa.service.PdsService;
+
+@Controller
+@RequestMapping("/manager/pds")
+public class PdsController {
+	
+	@Autowired
+	private PdsService pdsService;
+	
+	@RequestMapping("/registForm")
+	public String pdsRegist() {
+		String url = "manager/pds/pdsRegist";
+		return url;
+	}
+	
+	@RequestMapping(value="/regist", method = RequestMethod.POST, produces="text/plain;charset=utf-8")
+	public String regist(PdsRegistCommand registReq, HttpServletRequest request, RedirectAttributes rttr) throws Exception {
+		
+		String url = "redirect:/common/pdsForm.do";
+		
+		PdsVO pds = registReq.toPdsVO();
+
+		//pds.setPdsTitle((String)request.getAttribute("XSStitle"));
+		pdsService.regist(pds);
+		
+		rttr.addFlashAttribute("from", "regist");
+		return url;
+	}
+	
+	
+	
+	@RequestMapping("/modifyForm")
+	public ModelAndView pdsModify(ModelAndView mnv, int pdsId) throws Exception {
+		String url = "manager/pds/pdsModify";
+		
+		PdsVO pds = pdsService.getPds(pdsId);
+		
+		mnv.addObject("pds",pds);
+		mnv.setViewName(url);
+		
+		return mnv;
+	}
+	
+	@RequestMapping("/modify")
+	public String modifyPOST(PdsModifyCommand modifyReq, HttpServletRequest request, RedirectAttributes rttr) throws Exception {
+		
+		String url = "redirect:/common/pdsDetail.do";
+		
+		PdsVO pds = modifyReq.toPdsVO();
+		pds.setPdsTitle(pds.getPdsTitle());
+
+//		pds.setPdsId(pds.getPdsId());
+		
+		pdsService.modify(pds);
+		
+		rttr.addFlashAttribute("from", "modify");
+		rttr.addAttribute("pdsId", pds.getPdsId());
+		
+		return url;
+		
+	}
+	
+	@RequestMapping("/remove")
+	public String remove(int pdsId, RedirectAttributes rttr) throws Exception {
+		String url = "redirect:/common/pdsForm.do";
+		
+		pdsService.remove(pdsId);
+		
+		rttr.addFlashAttribute("from", "remove");
+		rttr.addAttribute("pdsId", pdsId);
+		
+		return url;
+	}
+		
+	
+	
+}

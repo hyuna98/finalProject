@@ -1,0 +1,111 @@
+package com.lms.hexa.controller;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.josephoconnell.html.HTMLInputFilter;
+import com.lms.hexa.command.Criteria;
+import com.lms.hexa.command.CriteriaCommand;
+import com.lms.hexa.command.HomeworkRegistCommand;
+import com.lms.hexa.dto.AttachVO;
+import com.lms.hexa.dto.HomeworkVO;
+import com.lms.hexa.dto.LessonVO;
+import com.lms.hexa.dto.StudentVO;
+import com.lms.hexa.service.HomeworkService;
+import com.lms.hexa.service.LessonService;
+import com.lms.hexa.util.GetAttachesByMultipartFileAdapter;
+
+@Controller
+public class HomeworkController {
+	
+	@Autowired
+	private HomeworkService homeworkService;
+	
+	@Autowired
+	private LessonService lessonService;
+	
+	@RequestMapping("/manager/homework/list")
+	public ModelAndView HWKlist(ModelAndView mnv,CriteriaCommand criCmd)throws Exception{
+		String url = "/manager/homework/list";
+
+		System.out.println(criCmd.getKeyword());
+		Criteria cri = criCmd.toCriteria();		
+		List<LessonVO> lessonList = homeworkService.getLessonIntegratedSearchList(cri);
+		
+		mnv.addObject("cri",cri);
+		mnv.addObject("lessonList", lessonList);
+		mnv.setViewName(url);
+		
+		return mnv;
+	}
+	
+	@RequestMapping("/manager/homework/getIncludeStudentList")
+	public ResponseEntity<Map<String,Object>> lessonIncludeMemberlist(String lessonAssignmentId)throws Exception{
+		
+		ResponseEntity<Map<String,Object>> entity=null;
+		Map<String,Object> dataMap = new HashMap<String, Object>();
+		
+		List<StudentVO> includeList = lessonService.getIncludeStudentListByLessonAssignmentId(lessonAssignmentId);
+		dataMap.put("includeList", includeList);
+		
+		entity  = new ResponseEntity<Map<String,Object>>(dataMap,HttpStatus.OK);
+		
+		return entity;
+	}
+	
+	@Resource(name = "homeworkUploadPath")
+	public String homeworkUploadPath;
+	
+	@RequestMapping(value="/manager/homework/regist", method = RequestMethod.POST, produces="text/plain;charset=utf-8")
+	public String regist(HomeworkRegistCommand homeworkRegCmd, HttpServletRequest request, RedirectAttributes rttr) throws Exception {
+		
+		String url = "redirect:/manager/homework/list.do";
+		// file 저장
+		String savePath = this.homeworkUploadPath;
+		List<AttachVO> attachList = GetAttachesByMultipartFileAdapter.save(homeworkRegCmd.getUploadFile(), savePath);
+		
+		System.out.println("attachList : " + attachList);
+		
+		// DB
+		HomeworkVO homeworkVO = homeworkRegCmd.toHomeworkVO();
+		String studentInfoStr = homeworkRegCmd.getStudentInfoStr().split("\\[")[1];
+		studentInfoStr = studentInfoStr.replaceAll("\"","").replaceAll("\\]}","");
+		String[] studentInfoArr = studentInfoStr.split(",");
+		ArrayList<String> StudentIdlist = new ArrayList<String>(Arrays.asList(studentInfoArr));
+		homeworkVO.setAttachList(attachList);
+		homeworkVO.setHwkName(HTMLInputFilter.htmlSpecialChars(homeworkVO.getHwkName()));
+		homeworkVO.setHwkContent(HTMLInputFilter.htmlSpecialChars(homeworkVO.getHwkContent()));
+		homeworkService.regist(homeworkVO,StudentIdlist);
+		
+		rttr.addFlashAttribute("from", "regist");
+		
+		return url;
+	}
+	
+	
+	@RequestMapping("/member/homework/list")
+	public String memberHWKlist()throws Exception{
+		String url = "/member/homework/list";
+		return url;
+	}
+	@RequestMapping("/member/homework/registForm")
+	public String memberHWKRegist()throws Exception{
+		String url = "/member/homework/registForm";
+		return url;
+	}
+}

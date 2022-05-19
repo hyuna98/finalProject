@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Menu-Mapper">
+
+	<select id="selectMemberMainMenu" resultType="menu">
+		SELECT MENU_ID as menuId,
+			   MENU_NAME as menuName,
+			   MENU_URL as menuUrl,
+			   MENU_ICON as menuIcon,
+			   MENU_UPCODE as menuUpcode,
+			   MENU_LEVEL as menuLevel,
+			   MENU_CATEGORY as menuCategory,
+			   MENU_HASCHILD as menuHaschild
+		  FROM MENU
+		 WHERE MENU_LEVEL = 1
+		   AND MENU_CATEGORY = 'MEMBER'
+		 ORDER BY MENU_ID
+	</select>
+	
+	<select id="selectMemberSubMenu" resultType="menu">
+		SELECT MENU_ID as menuId,
+			   MENU_NAME as menuName,
+			   MENU_URL as menuUrl,
+			   MENU_ICON as menuIcon,
+			   MENU_UPCODE as menuUpcode,
+			   MENU_LEVEL as menuLevel,
+			   MENU_CATEGORY as menuCategory,
+			   MENU_HASCHILD as menuHaschild
+		  FROM MENU
+		 WHERE MENU_LEVEL = 2
+		   AND MENU_CATEGORY = 'MEMBER'
+		 ORDER BY MENU_ID
+	</select>
+	
+	<select id="selectManagerMainMenu" resultType="menu">
+		SELECT MENU_ID as menuId,
+			   MENU_NAME as menuName,
+			   MENU_URL as menuUrl,
+			   MENU_ICON as menuIcon,
+			   MENU_UPCODE as menuUpcode,
+			   MENU_LEVEL as menuLevel,
+			   MENU_CATEGORY as menuCategory,
+			   MENU_HASCHILD as menuHaschild
+		  FROM MENU
+		 WHERE MENU_LEVEL = 1
+		   AND MENU_CATEGORY = 'MANAGER'
+		 ORDER BY MENU_ID
+	</select>
+	
+	<select id="selectManagerSubMenu" resultType="menu">
+		SELECT MENU_ID as menuId,
+			   MENU_NAME as menuName,
+			   MENU_URL as menuUrl,
+			   MENU_ICON as menuIcon,
+			   MENU_UPCODE as menuUpcode,
+			   MENU_LEVEL as menuLevel,
+			   MENU_CATEGORY as menuCategory,
+			   MENU_HASCHILD as menuHaschild
+		  FROM MENU
+		 WHERE MENU_LEVEL = 2
+		   AND MENU_CATEGORY = 'MANAGER'
+		 ORDER BY MENU_ID
+	</select>
+</mapper>

@@ -1,0 +1,16 @@
+package com.lms.hexa.dao;
+
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+
+import com.lms.hexa.dto.SchoolVO;
+
+
+
+public interface SchoolDAO {
+	
+	List<SchoolVO> selectschoolList() throws SQLException;
+	
+	int insertSchool(HashMap<String, Object> params) throws SQLException;
+}

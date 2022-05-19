@@ -1,0 +1,23 @@
+package com.lms.hexa.service;
+
+import java.util.List;
+
+import com.lms.hexa.dto.ManagerVO;
+
+public interface ManagerService {
+	
+	public ManagerVO getManager(String id) throws Exception;
+	
+	//이름,과목 으로 검색한 재직교사list
+	public List<ManagerVO> getWorkingTeacherListSearchByName(ManagerVO managerVO) throws Exception;
+	
+	public List<ManagerVO> getWorkingTeacherList() throws Exception;
+	
+	
+	//id로 검색한 직원세부정보
+	public ManagerVO getManagerDetailById(String id) throws Exception;
+	
+	// 비밀번호 초기화
+	void updatePwd(String emailAddress) throws Exception;
+
+}

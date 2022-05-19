@@ -1,0 +1,128 @@
+package com.lms.hexa.service;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+
+import com.lms.hexa.command.AttandanceMaker;
+import com.lms.hexa.command.AttandanceNum;
+import com.lms.hexa.dao.ManagerAttandanceDAO;
+import com.lms.hexa.dao.ManagerAttandanceDAOImpl;
+import com.lms.hexa.dao.StudentDAO;
+import com.lms.hexa.dto.ManagerAttandanceVO;
+import com.lms.hexa.dto.StudentVO;
+
+import sun.invoke.empty.Empty;
+
+
+
+public class ManagerAttandanceServiceImpl implements ManagerAttandanceService{
+
+	private ManagerAttandanceDAO managerAttandanceDAO;
+	private StudentDAO studentDAO;
+	
+	public void setManagerAttandanceDAO(ManagerAttandanceDAO managerAttandanceDAO) {
+		this.managerAttandanceDAO = managerAttandanceDAO;
+	}
+	public void setStudentDAO(StudentDAO studentDAO) {
+		this.studentDAO = studentDAO;
+	}
+	
+	@Override
+	public Map<String, Object> getAttandanceList(AttandanceNum att) throws SQLException {
+		
+		AttandanceNum searchatt = (AttandanceNum)att;
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+
+		AttandanceMaker attMaker = new AttandanceMaker();
+		attMaker.setAtt(att);
+		
+		attMaker.setYnNum(managerAttandanceDAO.selectAttandanceListYNCount(searchatt));
+		attMaker.setTotalNum(managerAttandanceDAO.selectAttandanceListTotalCount(searchatt));
+		
+		List<ManagerAttandanceVO> attandanceList = managerAttandanceDAO.selectAttandanceList(searchatt);
+		
+		dataMap.put("attandanceList", attandanceList);
+		dataMap.put("attMaker", attMaker);
+
+		return dataMap;
+	}
+
+	@Override
+	public Map<String, Object> getAttandanceStudentIdList() throws SQLException {
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		
+		List<ManagerAttandanceVO> IdList = managerAttandanceDAO.selectAttandanceGetStudentIdList();
+		
+		if(IdList.size() != 0) {
+		ManagerAttandanceVO studentIdItem = IdList.get(0);
+		String studentId = studentIdItem.getStudentId();
+		
+		StudentVO studentById = studentDAO.selectStudentById(studentId);
+		dataMap.put("studentById",studentById);
+		dataMap.put("IdList", IdList);
+		}
+		
+		return dataMap;
+	}
+	
+	@Override
+	public Map<String, Object> selectOutGetStudentId() throws SQLException {
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		
+		List<ManagerAttandanceVO> IdList = managerAttandanceDAO.selectOutGetStudentId();
+		
+		if(IdList.size() != 0) {
+			ManagerAttandanceVO studentIdItem = IdList.get(0);
+			String studentId = studentIdItem.getStudentId();
+			
+			StudentVO studentById = studentDAO.selectStudentById(studentId);
+			dataMap.put("studentById",studentById);
+			dataMap.put("IdList", IdList);
+		}
+		
+		return dataMap;
+	}
+
+	@Override
+	public void modify(String studentId) throws Exception {
+		managerAttandanceDAO.updateAttandance(studentId);
+		
+	}
+	
+	@Override
+	public void modifyOut(String studentId) throws Exception {
+		managerAttandanceDAO.updateOut(studentId);
+		
+	}
+	@Override
+	public void modifyByQr(String studentId) throws Exception {
+		managerAttandanceDAO.updateAttandanceQr(studentId);
+		
+	}
+	
+	@Override
+	public void modifyByQrz(String studentId) throws Exception {
+		managerAttandanceDAO.updateAttandanceQrz(studentId);
+		
+	}
+	@Override
+	public void insertDayAtt() throws SQLException {
+		List<StudentVO> studentList = studentDAO.selectStudentIdList();
+		
+		
+		managerAttandanceDAO.insertDayAtt(studentList);
+	}
+	@Override
+	public String selectAtt(String id) throws SQLException {
+		ManagerAttandanceVO result = managerAttandanceDAO.selectAtt(id);
+		String str = result.getAtnYnManager();
+		return str;
+	}
+	
+	
+	
+}

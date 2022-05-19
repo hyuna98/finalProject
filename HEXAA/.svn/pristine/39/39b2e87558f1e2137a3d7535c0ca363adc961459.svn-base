@@ -1,0 +1,6 @@
+package com.lms.hexa.dao;
+
+public interface TemplateDAO {
+
+	
+}

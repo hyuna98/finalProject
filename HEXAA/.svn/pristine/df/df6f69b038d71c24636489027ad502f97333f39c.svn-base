@@ -1,0 +1,21 @@
+package com.lms.hexa.dao;
+
+import org.apache.ibatis.session.SqlSession;
+
+import com.lms.hexa.dto.UserVO;
+
+public class UserDAOImpl implements UserDAO {
+
+	private SqlSession session;
+
+	public void setSession(SqlSession session) {
+		this.session = session;
+	}
+
+	@Override
+	public UserVO selectUserById(String id) throws Exception {
+		UserVO user = session.selectOne("User-Mapper.selectUserById", id);
+		return user;
+	}
+
+}

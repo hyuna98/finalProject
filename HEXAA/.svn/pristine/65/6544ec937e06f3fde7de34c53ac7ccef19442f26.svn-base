@@ -1,0 +1,186 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+<section class="content-header">
+   <div class="container-fluid">
+        <div class="row md-2">
+           <div class="col-sm-6">
+              <h1>홈페이지관리</h1>              
+           </div>
+           <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                 <li class="breadcrumb-item">
+                    <a href="list.do">
+                       <i class="fa fa-dashboard"></i>홈페이지관리
+                    </a>
+                 </li>
+               </ol>
+           </div>
+        </div>
+   </div>
+</section>
+<section class="content">
+   <div class="card-header" style="border: 1px solid  rgba(0, 0, 0, 0.1); height: 40vh;">
+      <div  style=" height: 6vh; ">
+      	  <div class="col-4 " style="float: left;">
+	      	 <label style="margin-right: 6vh; ">기관명</label>
+		     <input type="text" style="border-color: rgba(0, 0, 0, 0.1); " value="(주)대덕인재개발원">
+      	  </div>
+      	  <div class="col-4" style="float: left;">
+	      	 <label style="margin-right: 2vh; margin-left: 2vh;">이사장</label>
+		     <input type="text" style="border-color: rgba(0, 0, 0, 0.1); " value="김형응">
+      	  </div>
+      	  <div class="col-4" style="float: left;">
+      	  	
+      	  </div>
+      </div>
+      <div style=" height: 6vh;">
+       	  <div class="col-4 " style="float: left;">
+       	  	<label style="margin-right: 2vh; ">사업자번호</label>
+	      	<input type="text" style="border-color: rgba(0, 0, 0, 0.1); " value="306-82-05291">
+       	  </div>
+       	  <div class="col-4 " style="float: left;">
+		      <label style="margin-right: 4vh; margin-left: 2vh;">전화</label>
+		      <input type="text" style="border-color: rgba(0, 0, 0, 0.1); " value="042-222-8202">
+       	  </div>
+       	  <div class="col-4 " style="float: left;">
+		      <label style="margin-right: 2vh; margin-left: 2vh;">팩스</label>
+		      <input type="text" style="border-color: rgba(0, 0, 0, 0.1); " value="070-8768-2972">
+       	  </div>
+	  </div>
+      <div style=" height: 6vh;">
+      	<div class="col-6 " style="float: left;">
+      	  <label style="margin-right: 2vh;">COPYRIGHT</label>
+	      <input type="text" style="border-color: rgba(0, 0, 0, 0.1); width: 45vh;" value="© 2020 (재)대덕인재개발원 ALL RIGHTS RESERVED">
+	    </div>
+      	<div class="col-6 " style="float: left;">
+      	 	<label style="margin-right: 2vh; margin-left: 2vh;">주소</label>
+	      	<input type="text" style="width:40vh; border-color: rgba(0, 0, 0, 0.1); " value="대전광역시 중구 계룡로 846, 3-4층">
+	    </div>
+      </div>
+      <div style="border: 1px solid rgba(0, 0, 0, 0.1); height: 20vh;">
+      	<div class="col-sm-2" style="float: left; background-image: url('../../../../resources/images/dreameater.jpg'); background-repeat:no-repeat; background-position: center; background-size: 90% 90%; height: 20vh;">
+		</div>
+		<div class="col-sm-3" style="float: left; margin-top: 2vh; margin-right: 20vh;">
+			<div>
+				<span>로고 이미지</span>
+			</div>
+			<div style="margin-top: 6vh;">
+				<span style="color: red;">크기는 10MB로 한정합니다. </span>
+			</div>
+			<div >
+			<input type="file" >
+			</div>
+		</div>
+     
+		<button type="button" class="col-1 btn btn-block btn-outline-success btn-sm" style="float: right; margin: 1vh; margin-top: 15vh; ">완료</button>
+      </div>
+   </div>
+   <div  style=" height: 5vh;">
+   </div>
+</section>
+
+	 
+   	<ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+			<li class="nav-item"><a class="nav-link active"
+				id="custom-tabs-one-home-tab" data-toggle="pill"
+				href="#custom-tabs-one-home" role="tab"
+				aria-controls="custom-tabs-one-home" aria-selected="true" >원생</a></li>
+			<li class="nav-item"><a class="nav-link"
+				id="custom-tabs-one-profile-tab" data-toggle="pill"
+				href="#custom-tabs-one-profile" role="tab"
+				aria-controls="custom-tabs-one-profile" aria-selected="false">부모</a>
+			</li>
+			<li class="nav-item"><a class="nav-link"
+				id="custom-tabs-one-profile-tab2" data-toggle="pill"
+				href="#custom-tabs-one-profile2" role="tab"
+				aria-controls="custom-tabs-one-profile2" aria-selected="false">관리자</a>
+			</li>
+		</ul>
+	
+
+   <div  class="tab-content" id="custom-tabs-one-tabContent" style="border: 1px solid rgba(0, 0, 0, 0.1); height: 35vh; overflow: hidden;">
+   		
+   			<div class="tab-pane fade active show" id="custom-tabs-one-home"
+				role="tabpanel" aria-labelledby="custom-tabs-one-home-tab" >
+						<div class="col-1" style="border: 1px solid rgba(0, 0, 0, 0.1);">
+   			 		<input type="text" value="출석">
+   			 	</div>
+   			 	<div class="col-1" style="border: 1px solid rgba(0, 0, 0, 0.1);">
+   			 		<input type="text" value="수업">
+   			 	</div>
+   			 	<div class="col-1" style="border: 1px solid rgba(0, 0, 0, 0.1);">
+   			 		<input type="text" value="성적조회">
+   			 	</div>
+   			 	<div class="col-1" style="border: 1px solid rgba(0, 0, 0, 0.1);">
+   			 		<input type="text" value="상담">
+   			 	</div>
+   			 	<div class="col-1" style="border: 1px solid rgba(0, 0, 0, 0.1);">
+   			 		<input type="text" value="결제">
+   			 	</div>
+   			 	<div class="col-1" style="border: 1px solid rgba(0, 0, 0, 0.1);">
+   			 		<input type="text" value="회원정보수정">
+   			 	</div>
+   			 	
+   			</div>
+   			<div class="tab-pane fade" id="custom-tabs-one-profile"
+				role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab" >
+   			 		<div class="col-1" >
+   			 		<input type="text" value="자녀-출석" style="color: 1px solid rgba(0, 0, 0, 0.1);">
+   			 	</div>
+   			 	<div class="col-1" >
+   			 		<input type="text" value="자녀-수업" style="color: 1px solid rgba(0, 0, 0, 0.1);">
+   			 	</div>
+   			 	<div class="col-1" >
+   			 		<input type="text" value="자녀-성적조회" style="color: 1px solid rgba(0, 0, 0, 0.1);">
+   			 	</div>
+   			 	<div class="col-1" >
+   			 		<input type="text" value="자녀-상담" style="color: 1px solid rgba(0, 0, 0, 0.1);">
+   			 	</div>
+   			 	<div class="col-1" >
+   			 		<input type="text" value="자녀-결제" style="color: 1px solid rgba(0, 0, 0, 0.1);">
+   			 	</div>
+   			 	<div class="col-1" >
+   			 		<input type="text" value="자녀-회원정보수정" style="color: 1px solid rgba(0, 0, 0, 0.1);">
+   			 	</div>
+   			</div>
+   			<div class="tab-pane fade" id="custom-tabs-one-profile2"
+				role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab2" >
+   			 	<div class="col-1" style="border: 1px solid rgba(0, 0, 0, 0.1);">
+   			 		<input type="text" value="즐겨찾기">
+   			 	</div>
+   			 	<div class="col-1" style="border: 1px solid rgba(0, 0, 0, 0.1);">
+   			 		<input type="text" value="학생관리">
+   			 	</div>
+   			 	<div class="col-1" style="border: 1px solid rgba(0, 0, 0, 0.1);">
+   			 		<input type="text" value="상담관리">
+   			 	</div>
+   			 	<div class="col-1" style="border: 1px solid rgba(0, 0, 0, 0.1);">
+   			 		<input type="text" value="직원관리">
+   			 	</div>
+   			 	<div class="col-1" style="border: 1px solid rgba(0, 0, 0, 0.1);">
+   			 		<input type="text" value="성적관리">
+   			 	</div>
+   			 	<div class="col-1" style="border: 1px solid rgba(0, 0, 0, 0.1);">
+   			 		<input type="text" value="홈페이지관리">
+   			 	</div>
+   			</div>
+   	
+   </div>
+   		<div class="col-12" style="height: 5vh;">
+   			<button type="button" class="col-1 btn btn-block btn-outline-success btn-sm" style="float:right;">완료</button>
+   		</div>
+   			
+   
+  
+
+   
+ 
+</body>
+</html>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="Note-Mapper">
+  	
+  	<resultMap type="note" id="noteMap">
+  		<result property="noteId" column="NOTE_ID" />
+  		<result property="noteContent" column="NOTE_CONTENT" />
+  		<result property="noteReadDate" column="NOTE_READ_DATE" />
+  		<result property="noteSendDate" column="NOTE_SEND_DATE" />
+  		<result property="noteReadYN" column="NOTE_READ_YN" />
+  		<result property="noteSendUserId" column="NOTE_SEND_USER_ID" />
+  		<result property="noteReceivedUserId" column="NOTE_RECEIVED_USER_ID" />
+  		<result property="noteTitle" column="NOTE_TITLE" />
+  		<result property="noteDeleteKey" column="NOTE_DELETE_KEY" />
+  	</resultMap>
+  	
+<!--   	<sql id="search"> -->
+<!-- 		<if test="searchType == 't'.toString()"> -->
+<!-- 			and NOTE_SEND_USER_ID like '%'||#{keyword}||'%'			 -->
+<!-- 		</if> -->
+<!-- 		<if test="searchType == 'c'.toString()"> -->
+<!-- 			and NOTE_RECEIVED_USER_ID like '%'||#{keyword}||'%'			 -->
+<!-- 		</if> -->
+<!-- 		<if test="searchType == 'w'.toString()"> -->
+<!-- 			and ( -->
+<!-- 			NOTE_CONTENT like '%'||#{keyword}||'%' -->
+<!-- 			or -->
+<!-- 			NOTE_TITLE like '%'||#{keyword}||'%'						 -->
+<!-- 			)		 -->
+<!-- 		</if> -->
+<!-- 		<if test="searchType == 'tcw'.toString()"> -->
+<!-- 			and ( -->
+<!-- 			NOTE_CONTENT like '%'||#{keyword}||'%' -->
+<!-- 			or -->
+<!-- 			NOTE_TITLE like '%'||#{keyword}||'%'		 -->
+<!-- 			or -->
+<!-- 			NOTE_SEND_USER_ID like '%'||#{keyword}||'%'	 -->
+<!-- 			or		 -->
+<!-- 			NOTE_RECEIVED_USER_ID like '%'||#{keyword}||'%'					 -->
+<!-- 			)				 -->
+<!-- 		</if> -->
+<!-- 	</sql> -->
+  	
+  	<select id="selectNoteReceiveList" parameterType="str" resultMap="noteMap">
+  		SELECT NOTE_ID,
+  			   NOTE_SEND_USER_ID,
+  			   NOTE_TITLE,
+  			   NOTE_SEND_DATE,
+  			   NOTE_READ_YN 
+  		FROM NOTE
+		WHERE NOTE_RECEIVED_USER_ID = #{loginManager.id}
+<!-- 		<include refid="search" /> -->
+		ORDER BY NOTE_ID DESC
+	</select>
+  	
+  	<select id="selectNoteSendList" parameterType="str" resultMap="noteMap">
+  		select * from note
+  		where note_send_user_id = #{loginManager.id}
+<!--   		<include refid="search" /> -->
+		ORDER BY NOTE_ID DESC
+  	</select>
+  	
+  	<select id="selectSearchNoteListCountReceive" resultType="int">
+  		select count(*)
+  		from note
+	where note_id is not null 
+    	and NOTE_RECEIVED_USER_ID = #{loginManager.id}
+    		and NOTE_DELETE_KEY = 'N'
+  	</select>
+
+	<select id="selectSearchNoteListCountSend" resultType="int">
+  		select count(*)
+  		from note
+	where note_id is not null 
+    	and NOTE_RECEIVED_USER_ID = #{loginManager.id}
+    		and NOTE_DELETE_KEY = 'N'
+  	</select>
+  	
+  	<select id="selectNoteByNoteId" parameterType="note" resultMap="noteMap">
+  		SELECT NOTE_SEND_DATE, 
+  			   NOTE_SEND_USER_ID, 
+  			   NOTE_TITLE, 
+  			   NOTE_CONTENT
+		FROM NOTE
+		WHERE NOTE_ID = #{noteId}
+  	</select>
+  	
+  	<select id="selectNoteSeqNext" resultType="int">
+  		select note_seq.nextval as note_id from dual		
+  	</select>
+
+  </mapper>

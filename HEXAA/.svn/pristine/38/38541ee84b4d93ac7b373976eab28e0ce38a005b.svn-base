@@ -1,0 +1,748 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<head>
+	<style>
+		* {
+			font-size: 14px;
+		}
+		
+		label {
+			margin-bottom: 0;
+		}
+		
+		div.table1 {
+			max-height: 300px;
+			overflow-y: auto;
+		}
+		
+		div.table2 {
+			max-height: 160px;
+			overflow-y: scroll;
+		}
+		
+		div.table3 {
+			max-height: 400px;
+			overflow-y: scroll;  
+		}
+		
+		.table-head-fixed th {
+			padding-top: 0.3em;
+			padding-bottom: 0.3em;
+		}
+		.table-head-fixed td {
+			padding-top: 0.3em;
+			padding-bottom: 0.3em;
+		}
+		
+ 		.card-body.p-0 .table thead>tr>th:first-of-type {
+			padding-left: 12px;
+		}
+ 		.card-body.p-0 .table tbody>tr>td:first-of-type {
+			padding-left: 12px;
+		}
+		.card-body.p-0 .table thead>tr>th:last-of-type {
+			padding-right: 12px;
+		}
+ 		.card-body.p-0 .table tbody>tr>td:last-of-type {
+			padding-right: 12px;
+		}
+		
+		
+		th, td {
+			text-align: center;
+		}
+		#tb1 td, #td1 th {
+			padding:0;
+		}
+		
+		.table-hover:hover tbody tr:hover td {
+   			 background: #395d83;
+   			 color: white;
+		}
+		
+		.alert {
+			text-align: center;
+		}
+		.alert {
+			font-size: 15px;
+		}
+		
+		.alert-dismissible {
+	    	padding-right: 0;
+	    	padding-left: 0;
+		}
+		
+		.stepper-wrapper {
+	  margin-top: auto;
+	  display: flex;
+	  justify-content: space-between;
+	  margin-bottom: 20px;
+	}
+	.stepper-item {
+	  position: relative;
+	  display: flex;
+	  flex-direction: column;
+	  align-items: center;
+	  flex: 1;
+	
+	  @media (max-width: 768px) {
+	    font-size: 12px;
+	  }
+	}
+	
+	.stepper-item::before {
+	  position: absolute;
+	  content: "";
+	  border-bottom: 2px solid #ccc;
+	  width: 100%;
+	  top: 20px;
+	  left: -50%;
+	  z-index: 2;
+	}
+	
+	.stepper-item::after {
+	  position: absolute;
+	  content: "";
+	  border-bottom: 2px solid #ccc;
+	  width: 100%;
+	  top: 20px;
+	  left: 50%;
+	  z-index: 2;
+	}
+	
+	.stepper-item .step-counter {
+	  position: relative;
+	  z-index: 5;
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  width: 40px;
+	  height: 40px;
+	  border-radius: 50%;
+	  background: #ccc;
+	  margin-bottom: 6px;
+	}
+	
+	.stepper-item.active {
+	  font-weight: bold;
+	}
+	
+	.stepper-item.completed .step-counter {
+	  background-color: #26ff7b;
+	  color : white;
+	}
+	
+	.stepper-item.completed::after {
+	  position: absolute;
+	  content: "";
+	  border-bottom: 2px solid #26ff7b;
+	  width: 100%;
+	  top: 20px;
+	  left: 50%;
+	  z-index: 3;
+	}
+	
+	.stepper-item:first-child::before {
+	  content: none;
+	}
+	.stepper-item:last-child::after {
+	  content: none;
+	}
+	</style>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+<section class="content-header">
+   <div class="container-fluid">
+        <div class="row md-2">
+           <div class="col-sm-6" style="display: flex;">
+              <h1 data-userId="${loginUser.id }" >메세지보내기</h1>
+              <!--                즐겨찾기에 존재 -->
+               <c:if test="${fn:indexOf(favoriteMenuListStr, '메세지보내기') != -1}">
+                  <i id="star" class="fa-solid fa-star on fa-2x" ></i>
+               </c:if>
+               
+<!--                즐겨찾기에 존재하지 않음 -->
+               <c:if test="${fn:indexOf(favoriteMenuListStr, '메세지보내기') == -1}">
+                  <i id="star" class="fa-regular fa-star off fa-2x" ></i>
+               </c:if>
+                            
+           </div>
+         
+        </div>
+   </div>
+</section>
+<section class="content">
+  <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
+   <div class="card card-dark card-outline" >
+		<div class="card-header p-0 border-bottom-0">
+		</div>
+		<div class="card-body" style="padding-top: 0px;">
+			<div class="tab-content" id="custom-tabs-four-tabContent" style="padding-top: 5px;">
+				<div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
+					<div class="row">
+						<div class="col-sm-1">
+						</div>
+						<div class="col-sm-10">
+							<div class="row">
+								<div class="col-sm-12" style="padding-top: 10px;">
+									<div class="stepper-wrapper">
+									  <div class="stepper-item completed">
+									    <div class="step-counter">
+									    	<i class="fa-solid fa-1"></i>
+									    </div>
+									    <div class="step-name">발송대상자선택</div>
+									  </div>
+									  <div id="" class="stepper-item second">
+									    <div class="step-counter">
+										    <i class="fa-solid fa-2"></i>
+									    </div>
+									    <div class="step-name">발송메세지선택</div>
+									  </div>
+									  <div id="" class="stepper-item third">
+									    <div class="step-counter">
+										    <i class="fa-solid fa-3"></i>
+									    </div>
+									    <div class="step-name">선택정보확인</div>
+									  </div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-1">
+<!-- 							<button id="firstNextBtn" class="btn btn-block btn-dark">다음</button> -->
+						</div>
+					</div>
+					<div class="row">
+					<div class="col-sm-12">
+				<div class="card card-dark card-outline">
+				<div class="card-header">
+				<div class="row" style="display: flex; align-items: center;">
+					<div class="col-sm-4">
+						<h3 class="card-title">
+							<i class="nav-icon fas fa-search"></i> &nbsp;&nbsp; 메세지보내기 검색 리스트
+						</h3>
+					</div>
+					<div class="col-sm-8">
+							<div class="input-group">
+									<select class="form-control form-control-sm">
+										<option>전송대상</option>
+										<option>원생</option>
+										<option>학부모</option>
+										<option>직원</option>
+									</select> 
+									<select class="form-control form-control-sm">
+										<option>학교</option>
+										<option>1학년</option>
+										<option>2학년</option>
+										<option>3학년</option>
+									</select> 
+									<select class="form-control form-control-sm">
+										<option>학년</option>
+										<option>1학년</option>
+										<option>2학년</option>
+										<option>3학년</option>
+									</select> 
+									<select class="form-control form-control-sm">
+										<option>수강반</option>
+										<option>수학1반</option>
+										<option>수학2반</option>
+									</select> 
+									<select class="form-control form-control-sm">
+										<option>저장그룹</option>
+										<option>1그룹</option>
+										<option>2그룹</option>
+										<option>3그룹</option>
+									</select> <input type="text" class="form-control form-control-sm" placeholder="이름">
+									<div class="input-group-append">
+										<button type="submit" class="btn btn-dark btn-sm">
+											<i class="fas fa-search"></i>
+										</button>
+									</div>
+								</div>
+						</div>
+					</div>
+				</div>
+				<div class="card-body" style="padding-top: 5px; height:23vh">
+						<div class="row table2">
+							<table id="tableSearchList" class="table table-hover table-bordered table-head-fixed text-center" >					
+									<thead>
+										<tr>
+											<th style="width:8%;">전송대상</th>
+											<th style="width:10%;">이름</th>
+											<th style="width:20%;">학교</th>
+											<th style="width:8%;">학년</th>
+											<th style="width:10%;">수강반</th>
+											<th style="width:10%;">저장그룹</th>
+											<th style="width:10%;">연락처</th>
+										</tr>
+									</thead>
+									<tbody>	
+									<c:forEach var="i" begin="0" end="4">
+									<tr>
+										<td class="">학생</td>
+										<td class="">김요셉${i}</td>
+										<td>대전탄방중학교</td>
+										<td>중1학년</td>
+										<td id="">중1-A</td>
+										<td>중1학생</td>
+										<td>01011112222</td>
+									</tr>
+									</c:forEach>
+			<!-- 						<tr> -->
+			<!-- 							<td colspan="8" style="background: white; color: black;">해당 내용이 없습니다.</td> -->
+			<!-- 						</tr> -->
+									</tbody>
+							</table>
+						</div>
+				</div>
+   			</div>
+						</div>
+					</div>
+					<!-- 여기가 첫번째 페이지 검색 창 아래 부분  -->
+					<div class="row" style="display: flex; justify-content: space-between;">
+							<div class="col-sm-2"></div>
+							<div class="col-sm-2" >
+								<button id="moveRight" class="btn btn-block btn-dark btn-flat"><i class="fa-solid fa-angle-down"></i></button>
+							</div>
+							<div class="col-sm-2" >
+								<button id="moveAllRight" class="btn btn-block btn-dark btn-flat"><i class="fa-solid fa-angles-down"></i></button>
+							</div>	
+							<div class="col-sm-2" >	
+								<button id="moveLeft" class="btn btn-block btn-dark btn-flat"><i class="fa-solid fa-angle-up"></i></button>
+							</div>	
+							<div class="col-sm-2" >	
+								<button id="moveAllLeft" class="btn btn-block btn-dark btn-flat"><i class="fa-solid fa-angles-up"></i></button>
+							</div>
+							<div class="col-sm-2"></div>
+					</div>
+					<div class="row" style="padding-top: 20px;">
+						<div class="col-sm-12" >
+								<div class="card card-outline card-dark">
+									<div class="card-header">
+									<div class="row" style="display: flex; align-items: center;">
+										<div class="col-sm-4">
+										<h3 class="card-title">
+										<i class="fas fa-solid fa-envelope"></i>
+											&nbsp;
+											메세지 전송 인원
+										</h3>
+										</div>
+										<div class="col-sm-4">
+										</div>
+										<div class="col-sm-4" style="text-align: right;">
+										<button type="button" class="btn btn-dark btn-sm" onclick="groupSave();">그룹 저장</button>
+										<button type="button" class="btn btn-dark btn-sm" onclick="flushList();">목록 비우기</button>
+										</div>
+									</div>
+									</div>
+									<div class="card-body" style="height:23vh">
+										<div id="AuthorityMenuListDiv" class="row table2" >
+													
+											<table id="tableSendList" class="table table-hover table-bordered table-head-fixed text-center" >					
+												<thead>
+													<tr>
+														<th style="width:8%;">전송대상</th>
+														<th style="width:10%;">이름</th>
+														<th style="width:20%;">학교</th>
+														<th style="width:8%;">학년</th>
+														<th style="width:10%;">수강반</th>
+														<th style="width:10%;">저장그룹</th>
+														<th style="width:10%;">연락처</th>
+													</tr>
+												</thead>
+												<tbody>	
+													<c:forEach var="i" begin="0" end="4">
+													<tr>
+														<td class="">학생</td>
+														<td class="">김요셉${i}</td>
+														<td>대전탄방중학교</td>
+														<td>중1학년</td>
+														<td id="">중1-A</td>
+														<td>중1학생</td>
+														<td>01011112222</td>
+													</tr>
+													</c:forEach>
+							<!-- 						<tr> -->
+							<!-- 							<td colspan="8" style="background: white; color: black;">해당 내용이 없습니다.</td> -->
+							<!-- 						</tr> -->
+												</tbody>
+											</table>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-1">
+						</div>
+						<div class="col-sm-10"></div>
+						<div class="col-sm-1">
+						<button id="firstNextBtn" class="btn btn-block btn-dark">다음</button>
+						</div>
+					</div>
+				</div>
+<!-- 첫번째 탭 끝 -->
+<!-- 두번째 탭 시작 -->
+				<div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel" aria-labelledby="custom-tabs-four-profile-tab">
+					<div class="row">
+						<div class="col-sm-1">
+						</div>
+						<div class="col-sm-10">
+							<div class="row">
+								<div class="col-sm-12" style="padding-top: 10px;">
+									<div class="stepper-wrapper">
+									  <div class="stepper-item completed">
+									    <div class="step-counter">
+									    	<i class="fa-solid fa-1"></i>
+									    </div>
+									    <div class="step-name">발송대상자선택</div>
+									  </div>
+									  <div id="" class="stepper-item second">
+									    <div class="step-counter">
+										    <i class="fa-solid fa-2"></i>
+									    </div>
+									    <div class="step-name">발송메세지선택</div>
+									  </div>
+									  <div id="" class="stepper-item third">
+									    <div class="step-counter">
+										    <i class="fa-solid fa-3"></i>
+									    </div>
+									    <div class="step-name">선택정보확인</div>
+									  </div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-1">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4">
+								<div class="card card-outline card-dark">
+						           <div class="card-header">
+						               <h3 class="card-title">
+											<i class="fas fa-solid fa-envelope-open-text"></i>
+											&nbsp;
+											저장 양식 내역
+									   </h3>
+						            </div>
+						            <div class="card-body">
+						            	<div id="" class="row table2">
+						            		<table id="" class="table table-hover table-bordered table-head-fixed text-center">
+						            		<thead>
+													<tr>
+														<th>저장양식제목</th>
+														<th>삭제</th>
+													</tr>
+												</thead>
+												<tbody>	
+													<c:forEach var="i" begin="0" end="4">
+													<tr>
+														<td class="">학원공지사항 ${i}</td>
+														<td class=""><button type="button" class="btn btn-danger btn-xs" onclick="daleteTemplate();">삭제</button></td>
+													</tr>
+													</c:forEach>
+							<!-- 						<tr> -->
+							<!-- 							<td colspan="8" style="background: white; color: black;">해당 내용이 없습니다.</td> -->
+							<!-- 						</tr> -->
+												</tbody>
+											</table>
+						            	</div>
+						            </div>
+						         </div>
+<!-- 						         발송 예정 인원  -->
+						         <div class="card card-outline card-dark" style="padding-top: 5px;">
+						           <div class="card-header">
+						               <h3 class="card-title">
+											<i class="fas fa-solid fa-envelope"></i>
+											&nbsp;
+											발송 예정 인원
+									   </h3>
+						            </div>
+						            <div class="card-body">
+						            	<div id="" class="row table2">
+						            		<table id="" class="table table-hover table-bordered table-head-fixed text-center">
+						            		<thead>
+													<tr>
+														<th>이름</th>
+														<th>연락처</th>
+													</tr>
+												</thead>
+												<tbody>	
+													<c:forEach var="i" begin="0" end="4">
+													<tr>
+														<td class="">김요셉 ${i}</td>
+														<td class="">0102222333${i}</td>
+													</tr>
+													</c:forEach>
+							<!-- 						<tr> -->
+							<!-- 							<td colspan="8" style="background: white; color: black;">해당 내용이 없습니다.</td> -->
+							<!-- 						</tr> -->
+												</tbody>
+											</table>
+						            	</div>
+						            </div>
+						         </div>
+				   		</div>
+					  <div id="lessonSelectArea" class="col-sm-8">
+						<div class="card card-outline card-dark">
+				           <div class="card-header">
+				           <div class="row" style="display: flex; align-items: center;">
+										<div class="col-sm-4">
+										<h3 class="card-title">
+										<i class="fas fa-solid fa-comment-sms"></i>
+											&nbsp;메세지 내용
+							  			</h3>
+										</div>
+										<div class="col-sm-4">
+										</div>
+										<div class="col-sm-4" style="text-align: right;">
+										<button type="button" class="btn btn-dark btn-sm" onclick="registDirect();">직접 입력</button>
+										<button type="button" class="btn btn-dark btn-sm" onclick="templateSave();">작성양식저장</button>
+										</div>
+									</div>
+				            </div>
+				            <div class="card-body" style="height: 54vh;">
+				            	<div id="lessonTimeRegistWeekDayForm" class="row" >
+				            		<table id="lessonRegistFormTable" class="table table-bordered">
+												<tr>
+													<th class="noHover" style="width: 10%; vertical-align: center;">양식 제목</th>
+													<td class="noHover" style="width: 30%; vertical-align: center;">
+														<input class="form-control" type="text" placeholder="저장 양식 제목 입력">
+													</td>
+												</tr>
+												<tr>
+													<th class="noHover" style="width: 10%; vertical-align: center; ">발송일</th>
+													<td>
+														<input required class="form-control" type="date">
+													</td>
+												</tr>
+												<tr>
+													<th class="noHover" style="vertical-align: center;" >내용</th>
+													<td class="noHover"><textarea required rows="11" class="form-control"></textarea></td>
+												</tr>
+									</table>
+				            	</div>
+				            </div>
+				         </div>
+					  </div>
+					</div>
+					<div class="row">
+						<div class="col-sm-1">
+						<button id="secondPrevBtn" class="btn btn-block btn-secondary">이전</button>
+						</div>
+						<div class="col-sm-10"></div>
+						<div class="col-sm-1">
+						<button id="secondNextBtn" class="btn btn-block btn-dark">다음</button>
+						</div>
+					</div>
+				</div>
+<!-- 				두번째 탭 끝 -->
+<!-- 				세번째 탭 시작 -->
+				<div class="tab-pane fade" id="custom-tabs-four-third" role="tabpanel" aria-labelledby="custom-tabs-four-info-tab">
+				<div class="row">
+					<div class="col-sm-1">
+					</div>
+					<div class="col-sm-10">
+						<div class="row">
+							<div class="col-sm-12" style="padding-top: 10px;">
+								<div class="stepper-wrapper">
+								  <div class="stepper-item completed">
+								    <div class="step-counter">
+								    	<i class="fa-solid fa-1"></i>
+								    </div>
+								    <div class="step-name">발송대상자선택</div>
+								  </div>
+								  <div id="" class="stepper-item second" >
+								    <div class="step-counter">
+									    <i class="fa-solid fa-2"></i>
+								    </div>
+								    <div class="step-name">발송메세지선택</div>
+								  </div>
+								  <div id="" class="stepper-item third">
+								    <div class="step-counter">
+									    <i class="fa-solid fa-3"></i>
+								    </div>
+								    <div class="step-name">선택정보확인</div>
+								  </div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-1">
+					</div>
+				</div>
+<!-- 				내용 확인 -->
+				<div class="row">
+						<div class="col-sm-4">
+<!-- 						         발송 예정 인원  -->
+						         <div class="card card-outline card-dark" style="padding-top: 5px; height: 59.5vh;">
+						           <div class="card-header">
+						               <h3 class="card-title">
+											<i class="fas fa-solid fa-envelope"></i>
+											&nbsp;
+											발송 예정 인원
+									   </h3>
+						            </div>
+						            <div class="card-body">
+						            	<div id="" class="row table3">
+						            		<table id="" class="table table-bordered table-head-fixed text-center">
+						            		<thead>
+													<tr>
+														<th>이름</th>
+														<th>연락처</th>
+													</tr>
+												</thead>
+												<tbody>	
+													<c:forEach var="i" begin="0" end="20">
+													<tr>
+														<td class="">김요셉 ${i}</td>
+														<td class="">0102222333${i}</td>
+													</tr>
+													</c:forEach>
+							<!-- 						<tr> -->
+							<!-- 							<td colspan="8" style="background: white; color: black;">해당 내용이 없습니다.</td> -->
+							<!-- 						</tr> -->
+												</tbody>
+											</table>
+						            	</div>
+						            </div>
+						         </div>
+				   		</div>
+					  <div id="lessonSelectArea" class="col-sm-8">
+						<div class="card card-outline card-dark">
+				           <div class="card-header">
+				           <div class="row" style="display: flex; align-items: center;">
+										<div class="col-sm-4">
+										<h3 class="card-title">
+										<i class="fas fa-solid fa-comment-sms"></i>
+											&nbsp;메세지 내용
+							  			</h3>
+										</div>
+										<div class="col-sm-4">
+										</div>
+										<div class="col-sm-4" >
+										</div>
+									</div>
+				            </div>
+				            <div class="card-body" style="height: 54vh;">
+				            	<div id="lessonTimeRegistWeekDayForm" class="row" >
+				            		<table id="lessonRegistFormTable" class="table table-bordered">
+												<tr>
+													<th class="noHover" style="width: 20%; vertical-align: center; ">발송일</th>
+													<td>
+													</td>
+												</tr>
+												<tr>
+													<th class="noHover" style="vertical-align: center;" >내용</th>
+													<td class="noHover" ></td>
+												</tr>
+									</table>
+				            	</div>
+				            </div>
+				         </div>
+					  </div>
+					</div>
+						<div class="row">
+						<div class="col-sm-1">
+						<button id="thirdPrevBtn" class="btn btn-block btn-secondary">이전</button>
+						</div>
+						<div class="col-sm-10"></div>
+						<div class="col-sm-1">
+						<input class="btn btn-block btn-dark" type="button" onclick="messageFormSubmit()" value="발송">
+						</div>
+						</div>
+			</div>
+		</div>
+		</div>
+	</div>
+   </div>
+</section>
+   
+ <script>
+ window.onload=function(){
+	 $("#firstNextBtn").on("click",function(){
+			
+// 			if(!managerId){
+// 				alert("선생님을 선택해주세요");
+// 				return;
+// 			}
+
+			$("#custom-tabs-four-home-tab").attr("class","nav-link");
+			$("#custom-tabs-four-profile-tab").attr("class","nav-link active");
+			$("#custom-tabs-four-home-tab").attr("aria-selected","false");
+			$("#custom-tabs-four-profile-tab").attr("aria-selected","true");
+			$("#custom-tabs-four-home").attr("class","tab-pane fade");
+			$("#custom-tabs-four-profile").attr("class","tab-pane fade active show");
+			
+			$(".second").attr("class","stepper-item second completed");
+		});
+		
+		$("#secondPrevBtn").on("click",function(){
+			$("#custom-tabs-four-profile-tab").attr("class","nav-link");
+			$("#custom-tabs-four-home-tab").attr("class","nav-link active");
+			$("#custom-tabs-four-profile-tab").attr("aria-selected","false");
+			$("#custom-tabs-four-home-tab").attr("aria-selected","true");
+			$("#custom-tabs-four-profile").attr("class","tab-pane fade");
+			$("#custom-tabs-four-home").attr("class","tab-pane fade active show");
+			$(".second").attr("class","stepper-item second");
+		});
+		
+		$("#secondNextBtn").on("click",function(){
+			
+			$("#custom-tabs-four-profile-tab").attr("class","nav-link");
+			$("#custom-tabs-four-third-tab").attr("class","nav-link active");
+			$("#custom-tabs-four-profile-tab").attr("aria-selected","false");
+			$("#custom-tabs-four-third-tab").attr("aria-selected","true");
+			$("#custom-tabs-four-profile").attr("class","tab-pane fade");
+			$("#custom-tabs-four-third").attr("class","tab-pane fade active show");
+			$(".third").attr("class","stepper-item third completed");
+			$(".second").attr("class","stepper-item second completed");
+			
+		});
+		
+		$("#thirdPrevBtn").on("click",function(){
+			$("#custom-tabs-four-third-tab").attr("class","nav-link");
+			$("#custom-tabs-four-profile-tab").attr("class","nav-link active");
+			$("#custom-tabs-four-third-tab").attr("aria-selected","false");
+			$("#custom-tabs-four-profile-tab").attr("aria-selected","true");
+			$("#custom-tabs-four-third").attr("class","tab-pane fade");
+			$("#custom-tabs-four-profile").attr("class","tab-pane fade active show");
+			$(".third").attr("class","stepper-item third");
+		});
+ }
+ </script>  
+ <script>
+ function messageFormSubmit(){
+	 alert('messageFormSubmit click!!!');
+ }
+ 
+ function registDirect(){
+	 alert('registDirect click!!!');
+ }
+ 
+ function templateSave(){
+	 alert('templateSave click!!!');
+ }
+ 
+ function daleteTemplate(){
+	 alert('daleteTemplate click!!!');
+ }
+ 
+ function groupSave(){
+	 alert('groupSave click!!!');
+ }
+ 
+ function flushList(){
+	 alert('flushList click!!!');
+ }
+ 
+ </script>
+</body>
+</html>

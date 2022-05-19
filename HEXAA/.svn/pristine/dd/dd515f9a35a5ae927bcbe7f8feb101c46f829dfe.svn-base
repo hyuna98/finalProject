@@ -1,0 +1,70 @@
+package com.lms.hexa.controller;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.lms.hexa.command.Criteria;
+import com.lms.hexa.command.CriteriaCommand;
+import com.lms.hexa.dto.LessonVO;
+import com.lms.hexa.dto.StudentVO;
+import com.lms.hexa.service.HomeworkService;
+import com.lms.hexa.service.LessonService;
+
+@Controller
+public class HomeworkController {
+	
+	@Autowired
+	private HomeworkService homeworkService;
+	
+	@Autowired
+	private LessonService lessonService;
+	
+	@RequestMapping("/manager/homework/list")
+	public ModelAndView HWKlist(ModelAndView mnv,CriteriaCommand criCmd)throws Exception{
+		String url = "/manager/homework/list";
+
+		System.out.println(criCmd.getKeyword());
+		Criteria cri = criCmd.toCriteria();		
+		List<LessonVO> lessonList = homeworkService.getLessonIntegratedSearchList(cri);
+		
+		mnv.addObject("cri",cri);
+		mnv.addObject("lessonList", lessonList);
+		mnv.setViewName(url);
+		
+		return mnv;
+	}
+	
+	@RequestMapping("/manager/homework/getIncludeStudentList")
+	public ResponseEntity<Map<String,Object>> lessonIncludeMemberlist(String lessonAssignmentId)throws Exception{
+		
+		ResponseEntity<Map<String,Object>> entity=null;
+		Map<String,Object> dataMap = new HashMap<String, Object>();
+		
+		List<StudentVO> includeList = lessonService.getIncludeStudentListByLessonAssignmentId(lessonAssignmentId);
+		dataMap.put("includeList", includeList);
+		
+		entity  = new ResponseEntity<Map<String,Object>>(dataMap,HttpStatus.OK);
+		
+		return entity;
+	}
+	
+	
+	@RequestMapping("/member/homework/list")
+	public String memberHWKlist()throws Exception{
+		String url = "/member/homework/list";
+		return url;
+	}
+	@RequestMapping("/member/homework/registForm")
+	public String memberHWKRegist()throws Exception{
+		String url = "/member/homework/registForm";
+		return url;
+	}
+}

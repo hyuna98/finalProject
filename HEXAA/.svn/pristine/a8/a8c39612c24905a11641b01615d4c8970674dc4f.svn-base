@@ -1,0 +1,54 @@
+package com.lms.hexa.service;
+
+import com.lms.hexa.dao.ManagerDAO;
+import com.lms.hexa.dao.StudentDAO;
+import com.lms.hexa.dao.UserDAO;
+import com.lms.hexa.dto.ManagerVO;
+import com.lms.hexa.dto.StudentVO;
+import com.lms.hexa.dto.UserVO;
+
+public class UserServiceImpl implements UserService {
+	
+	protected UserDAO userDAO;
+	public void setUserDAO(UserDAO userDAO) {
+		this.userDAO = userDAO;
+	}
+	
+	protected ManagerDAO managerDAO;
+	public void setManagerDAO(ManagerDAO managerDAO) {
+		this.managerDAO = managerDAO;
+	}
+	
+	protected StudentDAO studentDAO;
+	public void setStudentDAO(StudentDAO studentDAO) {
+		this.studentDAO = studentDAO;
+	}
+	
+	
+
+	@Override
+	public UserVO getUser(String id) throws Exception {
+		
+		UserVO user = userDAO.selectUserById(id);
+		
+		return user;
+		
+	}
+
+	@Override
+	public ManagerVO getManager(String id) throws Exception {
+		
+		ManagerVO manager = managerDAO.selectManagerById(id);
+		
+		return manager;
+	}
+
+	@Override
+	public StudentVO getStudent(String id) throws Exception {
+		
+		StudentVO student = studentDAO.selectStudentById(id);
+		
+		return student;
+	}
+
+}

@@ -1,0 +1,9 @@
+package com.lms.hexa.service;
+
+import java.sql.SQLException;
+import java.util.Map;
+
+public interface AcademyinfoService {
+
+	Map<String, Object> selectAcademyinfoList() throws SQLException;
+}

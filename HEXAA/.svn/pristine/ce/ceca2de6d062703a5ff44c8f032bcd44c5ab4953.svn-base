@@ -1,0 +1,30 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+
+<head>
+<meta charset="UTF-8">
+<title>등원</title>
+</head>
+<body>
+	<div id="attandance big" class="row" style="text-align: justify;">
+
+		<div id="attandance picture" class="col-md-6" style="display: inline-block; border: 1px solid black; height: 80%; width:45%; margin: 1%;">
+
+		</div>
+
+		<div id="attandance detail" class="col-md-6" style="vertical-align display: inline-block; border: 1px solid black; height: 80%; width:45%; margin: 1%;" > 
+ 
+			<div id="attandance name" class="col-md-6"  style="border: 1px solid black; height: 30%; width:90%; margin-left: 5%; margin-right: 5%;"  >
+				문명진
+			</div>
+
+
+		</div>
+
+
+
+	</div>
+
+</body>
+</html>

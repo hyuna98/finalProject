@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UnPayment-Mapper">
+
+  <resultMap type="unPayment" id="unPaymentMap">
+       <result property="paymentPrice" column="PAYMENT_PRICE"/>
+       <result property="paymentDuedate" column="PAYMENT_DUEDATE"/>
+       <result property="studentName" column="STUDENT_NAME"/>
+       <result property="studentGradeCategoryCode" column="STUDENT_GRADE_CATEGORY_CODE"/>
+       <result property="studentGrade" column="STUDENT_GRADE"/>
+       <result property="className" column="CLASS_NAME"/>
+       <result property="parentName" column="PARENT_NAME"/>
+       <result property="parentHp" column="PARENT_HP"/>
+       
+       
+  </resultMap>
+  
+
+
+
+
+
+  		      
+  		      
+
+
+	<select id="selectUnPaymentList" parameterType="str" resultMap="unPaymentMap">
+        SELECT *
+		FROM(
+		    select A.PAYMENT_PRICE,
+		       A.PAYMENT_DUEDATE,
+		       B.STUDENT_NAME,
+		       F.SCODE_VALUE||B.STUDENT_GRADE as STUDENT_GRADE,
+		       D.CLASS_NAME,
+		       DENSE_RANK() OVER (PARTITION BY STUDENT_NAME,E.LESSONASSIGNMENT_ID ORDER BY PAYMENT_DATE DESC) AS RANK,
+		       G.PARENT_NAME,
+               G.PARENT_HP
+ 				from payment A,
+		           STUDENT B,
+		           BELONG C,
+		           CLASS D,
+		           LESSONASSIGNMENT E,
+		           (SELECT *
+		              FROM STANDARDCODE
+		             WHERE SCODE_CATEGORY = 'STUDENT_GRADE_CATEGORY_CODE')F,
+                   parent g
+		      WHERE A.STUDENT_ID = B.STUDENT_ID
+		        AND A.STUDENT_ID = C.STUDENT_ID
+		        AND C.CLASS_ID = D.CLASS_ID
+		        AND A.LESSONASSIGNMENT_ID = E.LESSONASSIGNMENT_ID
+		        AND E.MNG_ID = D.MNG_ID
+		        AND B.STUDENT_GRADE_CATEGORY_CODE = F.SCODE_KEY
+                AND A.PARENT_ID = G.PARENT_ID
+		<if test="studentName!=null and !studentName.equals('')">
+		   AND (
+                 B.STUDENT_NAME LIKE '%'||#{studentName}||'%'
+              OR F.SCODE_VALUE LIKE '%'||#{studentName}||'%'
+              OR G.PARENT_NAME LIKE '%'||#{studentName}||'%'
+              OR G.PARENT_HP LIKE '%'||#{studentName}||'%'
+              OR D.CLASS_NAME LIKE '%'||#{studentName}||'%'
+               )
+		</if>
+		)
+		WHERE RANK= 1
+		  AND SYSDATE
+		  <if test="paymentDuedate!=null and !paymentDuedate.equals('')">
+		  	-#{paymentDuedate}
+		  </if>
+		   > TO_DATE(PAYMENT_DUEDATE, 'YYYYMMDD')  
+<!--        AND TO_DATE(PAYMENT_DUEDATE, 'YYYYMMDD') < SYSDATE -->
+    </select> 
+    
+    
+    
+   
+   
+   
+</mapper>

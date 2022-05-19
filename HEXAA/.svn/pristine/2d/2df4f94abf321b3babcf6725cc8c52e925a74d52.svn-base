@@ -1,0 +1,26 @@
+package com.lms.hexa.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+
+import com.lms.hexa.dto.AcademyHomepageUseVO;
+import com.lms.hexa.dto.AcademyinfoVO;
+import com.lms.hexa.dto.SchoolVO;
+
+public class AcademyHomepageUseDAOImpl implements AcademyHomepageUseDAO  {
+	
+	private SqlSession session;
+
+	public void setSession(SqlSession session) {
+		this.session = session;
+	}
+
+	@Override
+	public int insert(AcademyHomepageUseVO acdemyHomepageUse) throws SQLException {
+		int result= session.update("AcademyHomepageUse-Mapper.insertVisitor", acdemyHomepageUse);
+		return result;
+	}
+
+}

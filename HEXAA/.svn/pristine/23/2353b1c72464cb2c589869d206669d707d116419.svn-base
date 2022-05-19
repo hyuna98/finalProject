@@ -1,0 +1,122 @@
+package com.lms.hexa.dto;
+
+import java.util.Date;
+
+public class ConsultingVO {
+
+	
+	
+   private int cnsltId;
+   private Date cnsltSchDate;
+   private String cnsltConfirmYn;
+   private String cnsltCompletionYn;
+   private String cnsltApplyContent;
+   private String cnsltContent;
+   private String cnsltApplyer;
+   private String cnsltTarget;
+   private String cnsltType;
+   private String studentId;
+   private String mngId;
+        
+    	 
+   private String scodeKey;
+   private String scodeValue;
+   private String scodeCategory;
+   
+   private int cnslttId;
+   private int scheduleId;
+   
+   
+   
+public int getCnsltId() {
+	return cnsltId;
+}
+public void setCnsltId(int cnsltId) {
+	this.cnsltId = cnsltId;
+}
+public Date getCnsltSchDate() {
+	return cnsltSchDate;
+}
+public void setCnsltSchDate(Date cnsltSchDate) {
+	this.cnsltSchDate = cnsltSchDate;
+}
+public String getCnsltConfirmYn() {
+	return cnsltConfirmYn;
+}
+public void setCnsltConfirmYn(String cnsltConfirmYn) {
+	this.cnsltConfirmYn = cnsltConfirmYn;
+}
+public String getCnsltCompletionYn() {
+	return cnsltCompletionYn;
+}
+public void setCnsltCompletionYn(String cnsltCompletionYn) {
+	this.cnsltCompletionYn = cnsltCompletionYn;
+}
+public String getCnsltApplyContent() {
+	return cnsltApplyContent;
+}
+public void setCnsltApplyContent(String cnsltApplyContent) {
+	this.cnsltApplyContent = cnsltApplyContent;
+}
+public String getCnsltContent() {
+	return cnsltContent;
+}
+public void setCnsltContent(String cnsltContent) {
+	this.cnsltContent = cnsltContent;
+}
+public String getCnsltApplyer() {
+	return cnsltApplyer;
+}
+public void setCnsltApplyer(String cnsltApplyer) {
+	this.cnsltApplyer = cnsltApplyer;
+}
+public String getCnsltTarget() {
+	return cnsltTarget;
+}
+public void setCnsltTarget(String cnsltTarget) {
+	this.cnsltTarget = cnsltTarget;
+}
+public String getCnsltType() {
+	return cnsltType;
+}
+public void setCnsltType(String cnsltType) {
+	this.cnsltType = cnsltType;
+}
+public String getStudentId() {
+	return studentId;
+}
+public void setStudentId(String studentId) {
+	this.studentId = studentId;
+}
+public String getMngId() {
+	return mngId;
+}
+public void setMngId(String mngId) {
+	this.mngId = mngId;
+}
+public String getScodeKey() {
+	return scodeKey;
+}
+public void setScodeKey(String scodeKey) {
+	this.scodeKey = scodeKey;
+}
+public String getScodeValue() {
+	return scodeValue;
+}
+public void setScodeValue(String scodeValue) {
+	this.scodeValue = scodeValue;
+}
+public String getScodeCategory() {
+	return scodeCategory;
+}
+public void setScodeCategory(String scodeCategory) {
+	this.scodeCategory = scodeCategory;
+}
+ 	
+	
+	
+	
+	
+	
+
+}

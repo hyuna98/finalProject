@@ -1,0 +1,58 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true"%>
+
+<style>
+.att {
+	margin: 10px;
+}
+</style>
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+	<section class="content">
+		<div class="card-header">
+			<h1>학생출결관리</h1>
+		</div>
+		<div class="card-body">
+
+
+			<div class="row" style="max-width: 98%;">
+				<div class="col-12" style="border: 1px solid black; height: 20vh;">
+					
+						<div class="col-1 custom-control custom-radio att"
+							style="float: left; margin-top: 12px;">
+							<input class="custom-control-input" type="checkbox" name="일자별 입력"
+								value="yyy" checked> <label for="customRadio1"
+								class="custom-control-label">일자별 입력</label>
+						</div>
+						<div class="col-1 custom-control custom-radio att"
+							style="float: left; margin-top: 12px;" >
+							<input class="custom-control-input" type="checkbox" name="월전체 입력"
+								value="yyy" checked> <label for="customRadio1 "
+								class="custom-control-label">월전체 입력</label>
+						</div>
+					
+					<div class="col-3 form-group" style="float: left; margin-top: 5px;">
+						<label>수강반</label> 
+						<select class="col-3 form-control" style="display: inline;">
+							<option>405- 특별 진학반</option>
+							<option>404- 특별 진학반</option>
+							<option>403- 특별 진학반</option>
+							<option>402- 특별 진학반</option>
+							<option>401- 특별 진학반</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+			<div class="card-footer">
+				<div class="col-12" style="max-width: 98%; border: 1px solid black; height: 75vh;">
+
+				</div>
+			</div>
+	</section>
+</body>
+</html>

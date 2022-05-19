@@ -1,0 +1,31 @@
+package com.lms.hexa.dao;
+
+import java.util.HashMap;
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+
+import com.lms.hexa.dto.KakaoSendVO;
+
+public class KakaoSendDAOImpl implements KakaoSendDAO {
+		
+	private SqlSession session;
+
+	public void setSession(SqlSession session) {
+		this.session = session;
+	}
+
+	@Override
+	public int insertKakaoSendList(HashMap<String, Object> params) throws Exception {
+		int result = session.insert("KakaoSend-Mapper.insertSendList",params);
+		return result;
+	}
+
+	@Override
+	public List<KakaoSendVO> selectKakaoSendList() throws Exception {
+		List<KakaoSendVO> kakaoSendList = session.selectList("KakaoSend-Mapper.selectSendList");
+		return kakaoSendList;
+	}
+	
+	
+}

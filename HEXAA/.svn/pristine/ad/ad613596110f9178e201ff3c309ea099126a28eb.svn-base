@@ -1,0 +1,160 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+	<aside class="main-sidebar sidebar-dark-primary elevation-4">
+		
+		<!-- 시스템 로고, 시스템 명 -->
+		<a href="index3.html" class="brand-link"> <img
+			src="<%=request.getContextPath() %>/resources/bootstrap/dist/img/AdminLTELogo.png" alt="HEXA Logo"
+			class="brand-image img-circle elevation-3" style="opacity: .8">
+			<span class="brand-text font-weight-light">AdminLTE 3</span>
+		</a>
+	
+		<!-- 사이드바 -->
+		<div class="sidebar">
+			
+			<!-- 사이드바 유저정보 -->
+			<div class="user-panel mt-3 pb-3 mb-3 d-flex">
+				<div class="image">
+					<%-- <img src="<%=request.getContextPath() %>/member/getPicture.do?id=${loginUser.id }" 
+						class="img-circle elevation-2"
+						alt="User Image"> --%>
+				</div>
+				<div class="info">
+					<div class="row">
+						<%-- <a href="javascript:OpenWindow('<%=request.getContextPath() %>/member/detail.do?id=${loginUser.id }', '내정보', '800', '700');" class="d-block">${loginUser.name }</a>
+						<button onclick="location.href='<%=request.getContextPath() %>/common/logout.do';" class="btn btn-xs btn-primary col-xs-3" type="button">LOGOUT</button> --%>
+					</div>
+					<%-- <a href="tel:${loginUser.phone }">tel : ${loginUser.phone }</a><br/>
+					<a href="mailto:${loginUser.email }">email : ${loginUser.email }</a> --%>
+					<!-- <a href="#">tel</a><br/>
+					<a href="#">email</a> -->
+				</div>
+			</div>
+	
+			<!-- 사이드바 메뉴리스트 -->
+			<nav class="mt-2">
+				<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+					<!-- 상위메뉴 -->
+					<li class="nav-item">
+						<a href="#" class="nav-link">
+							<i class="nav-icon fas fa-search"></i>
+							<p>출석<i class="fas fa-angle-left right"></i></p>
+						</a>
+ 							<!-- 하위메뉴 -->
+							<ul class="nav nav-treeview subMenuList" style="display: none;">
+								<li class="nav-item">
+									<a href="javascript:goPage('/member/attandance/inmodify.do')" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>등원</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="javascript:goPage('/member/attandance/outmodify.do')" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>하원</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="javascript:goPage('/member/attandance/list.do')" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>출석내역</p>
+									</a>
+								</li>
+							</ul>
+					</li>
+					<!-- 상위메뉴 -->
+					<li class="nav-item">
+						<a href="#" class="nav-link">
+							<i class="nav-icon fas fa-search"></i>
+							<p>수업<i class="fas fa-angle-left right"></i></p>
+						</a>
+ 							<!-- 하위메뉴 -->
+							<ul class="nav nav-treeview subMenuList" style="display: none;">
+								<li class="nav-item">
+									<a href="javascript:goPage('/member/lesson/myLessonList.do')" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>시간표</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="#" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>과제</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="javascript:goPage('/member/lesson/apply.do')" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>수강신청</p>
+									</a>
+								</li>
+							</ul>
+					</li>
+					<!-- 상위메뉴 -->
+					<li class="nav-item">
+						<a href="#" class="nav-link">
+							<i class="nav-icon fas fa-search"></i>
+							<p>성적조회<i class="fas fa-angle-left right"></i></p>
+						</a>
+					</li>
+					<!-- 상위메뉴 -->
+					<li class="nav-item">
+						<a href="#" class="nav-link">
+							<i class="nav-icon fas fa-search"></i>
+							<p>상담<i class="fas fa-angle-left right"></i></p>
+						</a>
+ 							<!-- 하위메뉴 -->
+							<ul class="nav nav-treeview subMenuList" style="display: none;">
+								<li class="nav-item">
+									<a href="javascript:goPage('/member/consultation/consultationRequest.do')" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>상담신청</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="javascript:goPage('/member/consultation/consultationHistory.do')" class="nav-link">
+										<i class="far fa-circle nav-icon"></i>
+										<p>상담내역</p>
+									</a>
+								</li>
+							</ul>
+					</li>
+					<!-- 상위메뉴 -->
+					<li class="nav-item">
+						<a href="#" class="nav-link">
+							<i class="nav-icon fas fa-search"></i>
+							<p>결제<i class="fas fa-angle-left right"></i></p>
+						</a>
+					</li>
+					<!-- 상위메뉴 -->
+					<li class="nav-item">
+						<a href="javascript:goPage('/member/modify.do')" class="nav-link">
+							<i class="nav-icon fas fa-search"></i>
+							<p>회원정보수정<i class="fas fa-angle-left right"></i></p>
+						</a>
+					</li>
+					<!-- 상위메뉴 -->
+					<li class="nav-item">
+						<a href="javascript:goPage('/common/pdsForm.do')" class="nav-link">
+							<i class="nav-icon fas fa-search"></i>
+							<p>학습자료실<i class="fas fa-angle-left right"></i></p>
+						</a>
+					</li>
+					<!-- 상위메뉴 -->
+					<li class="nav-item">
+						<a href="#" class="nav-link">
+							<i class="nav-icon fas fa-search"></i>
+							<p>공지사항<i class="fas fa-angle-left right"></i></p>
+						</a>
+					</li>					
+					
+				</ul>
+				
+			</nav>
+			<!-- /.사이드바 메뉴리스트 -->
+		</div>
+		<!-- /.사이드바 -->
+	</aside>

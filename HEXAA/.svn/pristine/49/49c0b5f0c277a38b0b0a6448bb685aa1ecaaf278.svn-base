@@ -1,0 +1,41 @@
+package com.lms.hexa.dao;
+
+import java.sql.SQLException;
+
+import org.apache.ibatis.session.SqlSession;
+
+import com.lms.hexa.dto.ParentVO;
+
+public class ParentDAOImpl implements ParentDAO{
+
+	private SqlSession session;
+	
+	public void setSession(SqlSession session) {
+		this.session = session;
+	}
+	
+	@Override
+	public void updatePwd(String emailAddress) throws SQLException {
+		session.update("Parent-Mapper.updatePwd", emailAddress);
+		
+	}
+	
+	@Override
+	public ParentVO selectParentById(String id) throws SQLException {
+		System.out.println(id);
+		ParentVO parent = session.selectOne("Parent-Mapper.selectParentById", id);
+		System.out.println(parent);
+		return parent;
+	}
+
+	@Override
+	public void modifyPwd(ParentVO parent) throws SQLException {
+		session.update("Parent-Mapper.modifyPwd", parent);
+	}
+
+	@Override
+	public void insertParent(ParentVO parent) throws SQLException {
+		session.update("Parent-Mapper.insertParent", parent);
+	}
+
+}

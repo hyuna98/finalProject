@@ -1,0 +1,75 @@
+package com.lms.hexa.dao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.SqlSession;
+
+import com.lms.hexa.command.Criteria;
+import com.lms.hexa.dto.NoteVO;
+
+public class NoteDAOImpl implements NoteDAO{
+	
+	private SqlSession session;
+	
+	public void setSession(SqlSession session) {
+		this.session = session;
+	}
+
+	@Override
+	public List<NoteVO> selectNoteReceiveList(String loginUserId) throws SQLException {
+//		int offset = cri.getStartRowNum();
+//		int limit = cri.getPerPageNum();
+//		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		List<NoteVO> noteReceiveList = session.selectList("Note-Mapper.selectNoteReceiveList", loginUserId);
+		
+		return noteReceiveList;
+	}
+
+	@Override
+	public List<NoteVO> selectNoteSendList(String loginUserId) throws SQLException {
+//		int offset = cri.getStartRowNum();
+//		int limit = cri.getPerPageNum();
+//		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		List<NoteVO> noteSendList = session.selectList("Note-Mapper.selectNoteSendList", loginUserId);
+		
+		return noteSendList;
+	}
+
+	@Override
+	public int selectNoteCriteriaTotalCountReceive() throws SQLException {
+		int count = session.selectOne("Note-Mapper.selectSearchNoteListCountReceive");
+		return count;
+	}
+	
+	@Override
+	public int selectNoteCriteriaTotalCountSend() throws SQLException {
+		int count = session.selectOne("Note-Mapper.selectSearchNoteListCountSend");
+		return count;
+	}
+
+	@Override
+	public NoteVO selectNoteByNoteId(int noteId) throws SQLException {
+		NoteVO note = session.selectOne("Note-Mapper.selectNoteByNoteId", noteId);
+		return note;
+	}
+
+	@Override
+	public int getSeqNextValue() throws SQLException {
+		int noteId = session.selectOne("Note-Mapper.selectNoteSeqNext");
+		return noteId;
+	}
+
+	@Override
+	public void deleteNote(int noteId) throws SQLException {
+		session.update("Note-Mapper.deleteNote", noteId);
+		
+	}
+
+	
+	
+	
+}

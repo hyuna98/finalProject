@@ -1,0 +1,122 @@
+package com.lms.hexa.service;
+
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.lms.hexa.command.Criteria;
+import com.lms.hexa.command.CriteriaCommand;
+import com.lms.hexa.dao.LessonDAO;
+import com.lms.hexa.dto.LessonRoomVO;
+import com.lms.hexa.dto.LessonVO;
+import com.lms.hexa.dto.StandardCodeVO;
+import com.lms.hexa.dto.StudentVO;
+
+public class LessonServiceImpl implements LessonService{
+
+	private LessonDAO lessonDAO;
+		
+	public void setLessonDAO(LessonDAO lessonDAO) {
+		this.lessonDAO = lessonDAO;
+	}
+
+	@Override
+	public List<String> getManagerScheduleListById(String Id) throws SQLException {
+		List<String> scheduleList = lessonDAO.selectManagerScheduleById(Id);
+		return scheduleList;
+	}
+
+	@Override
+	public Map<String,Object> getScodeValues() throws SQLException {
+		Map<String,Object> scodeValues = new HashMap<String, Object>();
+		
+		List<StandardCodeVO> subjectList = lessonDAO.selectSubjectList();
+		List<StandardCodeVO> StudentGradeCategoryCodeList = lessonDAO.selectStudentGradeCategoryCodeList();
+		List<LessonRoomVO> lessonRoomList = lessonDAO.selectLessonRoomList();
+		
+		scodeValues.put("subjectList",subjectList);
+		scodeValues.put("StudentGradeCategoryCodeList",StudentGradeCategoryCodeList);
+		scodeValues.put("lessonRoomList",lessonRoomList);
+		
+		return scodeValues;
+	}
+
+	@Override
+	public int registNewLesson(LessonVO lessonVO) throws SQLException {
+		int result = 0;
+		
+		int lessonId = lessonDAO.selectLessonSeqNext();
+		lessonVO.setLessonId(lessonId);
+		
+		lessonDAO.InsertNewLessonInfo(lessonVO);
+		result = lessonDAO.InsertNewLessonTimeValues(lessonVO);
+		
+		return result;
+	}
+
+	@Override
+	public List<LessonVO> getLessonListByTeacherName(CriteriaCommand cri) throws SQLException {
+		List<LessonVO> lessonList = lessonDAO.selectLessonSearchList(cri);
+		return lessonList;
+	}
+
+	@Override
+	public List<StandardCodeVO> getLessonStateCodeList() throws SQLException {
+		List<StandardCodeVO> lessonStateCodeList = lessonDAO.selectLessonStateCodeList();
+		return lessonStateCodeList;
+	}
+
+	@Override
+	public Map<String, Object> getStudentListByLessonId(String lessonId) {
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		List<StudentVO> includeList = lessonDAO.selectIncludeStudentListByLessonID(lessonId);
+		List<StudentVO> notIncludeList = lessonDAO.selectNotIncludeStudentListByLessonID(lessonId);
+		
+		dataMap.put("includeList",includeList);
+		dataMap.put("notIncludeList",notIncludeList);
+		return dataMap;
+	}
+
+	@Override
+	public int registTakeLessonValues(HashMap<String, Object> params) {
+		lessonDAO.deleteOldInfo(params);
+		int result = lessonDAO.insertTakeLessonValues(params);
+		
+		return result;
+	}
+
+	@Override
+	public Map<String, Object> getSearchIncludeStudentList(Criteria cri) {
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		List<StudentVO> includeList = lessonDAO.selectSearchIncludeStudentList(cri);
+		
+		dataMap.put("cri",cri);
+		dataMap.put("includeList",includeList);
+		return dataMap;
+	}
+
+	@Override
+	public Map<String, Object> getSearchNotIncludeStudentList(Criteria cri) {
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		List<StudentVO> notIncludeList = lessonDAO.selectSearchNotIncludeStudentList(cri);
+		
+		dataMap.put("cri",cri);
+		dataMap.put("notIncludeList",notIncludeList);
+		return dataMap;
+	}
+
+	@Override
+	public int registLesson(LessonVO lessonVO) {
+		int result = lessonDAO.insertLesson(lessonVO);
+		
+		return result;
+	}
+
+	@Override
+	public List<LessonVO> getModuleLessonListByTeacherName(CriteriaCommand cri) throws SQLException{
+		List<LessonVO> lessonList = lessonDAO.selectModuleLessonList(cri);
+		return lessonList;
+	}
+
+}
